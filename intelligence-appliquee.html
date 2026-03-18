@@ -531,35 +531,122 @@ nav {
   color: var(--text-mid);
 }
 
-/* ─── N8N FLOW ─── */
-.flow-container {
-  background: var(--white);
-  border: 1px solid var(--card-border);
-  border-top: 2px solid var(--teal);
-  padding: 32px 24px 28px;
+/* ─── N8N FLOW (morning briefing) ─── */
+.flow-wrap {
+  background: #0a1a14;
+  border-radius: 16px;
+  padding: 36px 32px 40px;
+  position: relative;
 }
-
-.flow-label {
+.flow-section-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.52rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(0,166,166,0.5);
-  margin-bottom: 16px;
-  padding: 0 8px;
+  margin-bottom: 32px;
 }
-
-.flow-svg { width: 100%; height: auto; display: block; }
-
-/* Animated flow path lines */
-.flow-path {
-  fill: none;
-  stroke: var(--teal);
-  stroke-width: 1.5;
-  opacity: 0.2;
-  transition: opacity 0.4s ease;
+.flow-conn-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: visible;
 }
-.flow-path.active { opacity: 0.55; }
+.flow-wgrid {
+  display: grid;
+  grid-template-columns: 220px 1fr 220px;
+  align-items: center;
+  position: relative;
+}
+.flow-col-in, .flow-col-out { display: flex; flex-direction: column; gap: 14px; }
+.flow-col-mid { display: flex; align-items: center; justify-content: center; padding: 0 20px; }
+.fnode {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,166,166,0.25);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex; align-items: center; gap: 11px;
+  position: relative;
+  transition: border-color 0.3s, background 0.3s;
+  cursor: default;
+}
+.fnode:hover { border-color: rgba(0,166,166,0.6); background: rgba(0,166,166,0.07); }
+.fnode.fin::after {
+  content:''; position:absolute; right:-5px; top:50%;
+  transform:translateY(-50%); width:9px; height:9px;
+  border-radius:50%; background:#00A6A6; border:2px solid #0a1a14; z-index:2;
+}
+.fnode.fout::before {
+  content:''; position:absolute; left:-5px; top:50%;
+  transform:translateY(-50%); width:9px; height:9px;
+  border-radius:50%; background:#00A6A6; border:2px solid #0a1a14; z-index:2;
+}
+.fnode-icon {
+  width:38px; height:38px; border-radius:9px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; overflow:hidden;
+}
+.fnode-icon img { width:22px; height:22px; object-fit:contain; }
+.fnode-icon svg { width:22px; height:22px; }
+.fi-gmail    { background:rgba(234,67,53,0.15);  border:1px solid rgba(234,67,53,0.25); }
+.fi-whatsapp { background:rgba(37,211,102,0.15); border:1px solid rgba(37,211,102,0.25); }
+.fi-outlook  { background:rgba(0,120,212,0.15);  border:1px solid rgba(0,120,212,0.25); }
+.fi-feedly   { background:rgba(44,162,51,0.15);  border:1px solid rgba(44,162,51,0.25); }
+.fi-briefing { background:rgba(0,166,166,0.15);  border:1px solid rgba(0,166,166,0.35); }
+.fi-alert    { background:rgba(245,166,35,0.15); border:1px solid rgba(245,166,35,0.25); }
+.fi-agenda   { background:rgba(51,187,187,0.15); border:1px solid rgba(51,187,187,0.25); }
+.fnode-text { flex:1; min-width:0; }
+.fnode-title {
+  font-family:'Space Grotesk',sans-serif; font-size:0.8rem; font-weight:500;
+  color:#f7f2ea; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.fnode-desc {
+  font-family:'JetBrains Mono',monospace; font-size:0.6rem; font-weight:300;
+  color:rgba(247,242,234,0.38); line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.fnode-badge {
+  font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.15em;
+  text-transform:uppercase; padding:2px 6px; border-radius:20px; flex-shrink:0;
+}
+.fb-trigger { background:rgba(0,166,166,0.12); color:#00A6A6;  border:1px solid rgba(0,166,166,0.3); }
+.fb-output  { background:rgba(245,166,35,0.10); color:#F5A623; border:1px solid rgba(245,166,35,0.25); }
+.fcenter {
+  background:linear-gradient(135deg,rgba(0,80,80,0.6) 0%,rgba(0,45,26,0.8) 100%);
+  border:1.5px solid rgba(0,166,166,0.5); border-radius:16px;
+  padding:24px 20px; text-align:center; position:relative; min-width:180px;
+  box-shadow:0 0 40px rgba(0,166,166,0.1),inset 0 1px 0 rgba(0,166,166,0.15);
+}
+.fcenter::before {
+  content:''; position:absolute; inset:-8px; border-radius:22px;
+  border:1px solid rgba(0,166,166,0.2); animation:pulseRingF 2.8s ease-in-out infinite;
+}
+.fcenter::after {
+  content:''; position:absolute; inset:-16px; border-radius:28px;
+  border:1px solid rgba(0,166,166,0.08); animation:pulseRingF 2.8s ease-in-out infinite 0.6s;
+}
+@keyframes pulseRingF {
+  0%,100%{opacity:0.4;transform:scale(1);} 50%{opacity:1;transform:scale(1.01);}
+}
+.fcenter-name {
+  font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600;
+  color:#f7f2ea; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px;
+}
+.fcenter-sub {
+  font-family:'JetBrains Mono',monospace; font-size:0.58rem; font-weight:300;
+  color:#00A6A6; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:10px;
+}
+.fcenter-status {
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:'JetBrains Mono',monospace; font-size:0.56rem;
+  letter-spacing:0.12em; text-transform:uppercase; color:rgba(0,166,166,0.7);
+}
+.fstatus-dot { width:6px;height:6px;border-radius:50%;background:#00A6A6;animation:blinkF 1.6s ease-in-out infinite; }
+@keyframes blinkF { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.conn-path { fill:none; stroke:rgba(0,166,166,0.25); stroke-width:1.5; stroke-dasharray:6 5; stroke-linecap:round; }
+.flow-dot-in  { fill:#00A6A6; filter:drop-shadow(0 0 4px rgba(0,166,166,0.8)); }
+.flow-dot-out { fill:#F5A623; filter:drop-shadow(0 0 4px rgba(245,166,35,0.7)); }
+.fnode:hover .fnode-title { color:#00A6A6; }
 
 /* ═══════════════════════════════════════════
    COUNTERS — amber numbers, dark bg
@@ -1058,146 +1145,101 @@ footer {
     </p>
   </div>
 
-  <!-- N8N FLOW DIAGRAM with real app icons + animated dots -->
-  <div class="flow-container reveal" id="flowContainer">
-    <div class="flow-label" data-i18n="flow-label">// Flux de travail automatisé — exemple</div>
+  <!-- N8N FLOW DIAGRAM — morning briefing scenario -->
+  <div class="flow-wrap reveal" id="flowContainer">
+    <div class="flow-section-label" data-i18n="flow-label">// Flux de travail automatisé — Morning Briefing</div>
 
-    <svg class="flow-svg" viewBox="0 0 920 310" xmlns="http://www.w3.org/2000/svg" id="flowSvg">
-      <defs>
-        <!-- ── APP ICONS as symbols ── -->
+    <!-- SVG connections drawn by JS -->
+    <svg class="flow-conn-svg" id="connSvg" aria-hidden="true"></svg>
 
-        <!-- GMAIL: white bg + red M-envelope -->
-        <symbol id="ico-gmail" viewBox="0 0 44 44">
-          <rect width="44" height="44" rx="8" fill="white"/>
-          <rect x="3" y="11" width="38" height="25" rx="2" fill="#EA4335"/>
-          <path d="M3,11 L22,25 L41,11" fill="none" stroke="white" stroke-width="2.8" stroke-linejoin="round"/>
-          <path d="M3,11 L3,36 L14,24 Z" fill="#B31412" opacity="0.75"/>
-          <path d="M41,11 L41,36 L30,24 Z" fill="#B31412" opacity="0.75"/>
-        </symbol>
+    <div class="flow-wgrid" id="workflowGrid">
 
-        <!-- WHATSAPP: green circle + white phone bubble -->
-        <symbol id="ico-whatsapp" viewBox="0 0 44 44">
-          <circle cx="22" cy="22" r="22" fill="#25D366"/>
-          <path d="M22,9 C14.3,9 8,15.1 8,22.6 C8,25.4 8.9,28 10.4,30.1 L8.2,37.1 L15.5,34.9 C17.5,36.1 19.7,36.8 22.1,36.8 C29.7,36.8 36,30.7 36,23.2 C36,15.6 29.7,9 22,9 Z" fill="white"/>
-          <path d="M17,17.5 C17,16.7 17.7,16.5 18.2,16.5 L19.5,19.8 C19.3,20.2 18.8,20.4 18.5,21 L18,21.8 C18.9,23.6 20.3,25.1 22.2,26.1 L23,25.6 C23.6,25.2 23.8,24.8 24.2,24.6 L27.5,25.9 C27.5,26.4 27.3,27.1 26.5,27.5 C24.2,29.3 18.5,27 15.8,23.7 C13.5,21.4 14.2,18 17,17.5 Z" fill="#25D366"/>
-        </symbol>
+      <!-- ── INPUTS ── -->
+      <div class="flow-col-in" id="colInputs">
+        <div class="fnode fin" id="fn-gmail">
+          <div class="fnode-icon fi-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail"></div>
+          <div class="fnode-text"><div class="fnode-title">Gmail</div><div class="fnode-desc">Emails reçus · 18h → 7h</div></div>
+          <span class="fnode-badge fb-trigger">Source</span>
+        </div>
+        <div class="fnode fin" id="fn-whatsapp">
+          <div class="fnode-icon fi-whatsapp"><img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp"></div>
+          <div class="fnode-text"><div class="fnode-title">WhatsApp</div><div class="fnode-desc">Messages équipe · signaux</div></div>
+          <span class="fnode-badge fb-trigger">Source</span>
+        </div>
+        <div class="fnode fin" id="fn-outlook">
+          <div class="fnode-icon fi-outlook">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <rect x="1" y="4" width="14" height="16" rx="2" fill="#0078D4"/>
+              <path d="M1 8 L8 13 L15 8" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <rect x="15" y="7" width="8" height="10" rx="1.5" fill="#28A8E0"/>
+              <line x1="17" y1="9.5" x2="21" y2="9.5" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+              <line x1="17" y1="11.5" x2="21" y2="11.5" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+              <line x1="17" y1="13.5" x2="19.5" y2="13.5" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="fnode-text"><div class="fnode-title">Outlook</div><div class="fnode-desc">Agenda · réunions du jour</div></div>
+          <span class="fnode-badge fb-trigger">Source</span>
+        </div>
+        <div class="fnode fin" id="fn-feedly">
+          <div class="fnode-icon fi-feedly"><img src="https://cdn.simpleicons.org/feedly/2BB24C" alt="Feedly"></div>
+          <div class="fnode-text"><div class="fnode-title">Veille IA</div><div class="fnode-desc">Actualités · marché Afrique</div></div>
+          <span class="fnode-badge fb-trigger">Source</span>
+        </div>
+      </div>
 
-        <!-- EXCEL: dark green + white X -->
-        <symbol id="ico-excel" viewBox="0 0 44 44">
-          <rect width="44" height="44" rx="8" fill="#1D6F42"/>
-          <rect x="8" y="10" width="18" height="22" rx="1" fill="white" opacity="0.1"/>
-          <line x1="8"  y1="17" x2="26" y2="17" stroke="white" stroke-width="0.7" opacity="0.25"/>
-          <line x1="8"  y1="22" x2="26" y2="22" stroke="white" stroke-width="0.7" opacity="0.25"/>
-          <line x1="8"  y1="27" x2="26" y2="27" stroke="white" stroke-width="0.7" opacity="0.25"/>
-          <line x1="17" y1="10" x2="17" y2="32" stroke="white" stroke-width="0.7" opacity="0.25"/>
-          <!-- White X -->
-          <line x1="28" y1="20" x2="40" y2="32" stroke="white" stroke-width="4" stroke-linecap="round"/>
-          <line x1="40" y1="20" x2="28" y2="32" stroke="white" stroke-width="4" stroke-linecap="round"/>
-        </symbol>
+      <!-- ── CENTER ── -->
+      <div class="flow-col-mid">
+        <div class="fcenter" id="fn-center">
+          <div class="fcenter-name">ORI7ON</div>
+          <div class="fcenter-sub">Intelligence Appliquée</div>
+          <div class="fcenter-status"><span class="fstatus-dot"></span>Traitement en cours</div>
+        </div>
+      </div>
 
-        <!-- OUTLOOK: blue bg + envelope + O circle -->
-        <symbol id="ico-outlook" viewBox="0 0 44 44">
-          <rect width="44" height="44" rx="8" fill="#0078D4"/>
-          <!-- Envelope -->
-          <rect x="3" y="11" width="25" height="17" rx="2" fill="white" opacity="0.92"/>
-          <path d="M3,11 L15.5,19 L28,11" fill="none" stroke="#0078D4" stroke-width="1.6"/>
-          <!-- O circle -->
-          <circle cx="32" cy="28" r="9" fill="white" opacity="0.95"/>
-          <circle cx="32" cy="28" r="5.5" fill="#0078D4"/>
-          <circle cx="32" cy="28" r="2.5" fill="white"/>
-        </symbol>
+      <!-- ── OUTPUTS ── -->
+      <div class="flow-col-out" id="colOutputs">
+        <div class="fnode fout" id="fn-briefing">
+          <div class="fnode-icon fi-briefing">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#00A6A6" stroke-width="1.8" stroke-linecap="round"/>
+              <polyline points="14 2 14 8 20 8" stroke="#00A6A6" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="8" y1="13" x2="16" y2="13" stroke="#00A6A6" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="8" y1="17" x2="12" y2="17" stroke="#00A6A6" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="fnode-text"><div class="fnode-title">Briefing 7h00</div><div class="fnode-desc">Résumé exécutif · 5 points</div></div>
+          <span class="fnode-badge fb-output">Livrable</span>
+        </div>
+        <div class="fnode fout" id="fn-alertes">
+          <div class="fnode-icon fi-alert">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="12" y1="9" x2="12" y2="13" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="12" y1="17" x2="12.01" y2="17" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="fnode-text"><div class="fnode-title">Alertes & signaux</div><div class="fnode-desc">Urgences · classées par criticité</div></div>
+          <span class="fnode-badge fb-output">Livrable</span>
+        </div>
+        <div class="fnode fout" id="fn-agenda">
+          <div class="fnode-icon fi-agenda">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="4" width="18" height="18" rx="2" stroke="#33BBBB" stroke-width="1.8"/>
+              <line x1="16" y1="2" x2="16" y2="6" stroke="#33BBBB" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="8" y1="2" x2="8" y2="6" stroke="#33BBBB" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="3" y1="10" x2="21" y2="10" stroke="#33BBBB" stroke-width="1.8"/>
+              <circle cx="8" cy="15" r="1.2" fill="#33BBBB"/>
+              <circle cx="12" cy="15" r="1.2" fill="#33BBBB"/>
+              <circle cx="16" cy="15" r="1.2" fill="#33BBBB"/>
+            </svg>
+          </div>
+          <div class="fnode-text"><div class="fnode-title">Agenda décisionnel</div><div class="fnode-desc">Planning · contexte réunions</div></div>
+          <span class="fnode-badge fb-output">Livrable</span>
+        </div>
+      </div>
 
-        <!-- Output nodes -->
-        <symbol id="out-briefing" viewBox="0 0 90 52">
-          <rect width="90" height="52" rx="4" fill="#0D2A27" stroke="#00A6A6" stroke-width="1"/>
-          <text x="45" y="22" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#00A6A6" letter-spacing="1">BRIEFING</text>
-          <text x="45" y="38" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#33BBBB" letter-spacing="1" opacity="0.65">AUTO · DAILY</text>
-        </symbol>
-        <symbol id="out-agent" viewBox="0 0 90 52">
-          <rect width="90" height="52" rx="4" fill="#0D2A27" stroke="#00A6A6" stroke-width="1"/>
-          <text x="45" y="22" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#00A6A6" letter-spacing="1">AGENT IA</text>
-          <text x="45" y="38" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#33BBBB" letter-spacing="1" opacity="0.65">24/7 ACTIF</text>
-        </symbol>
-        <symbol id="out-dashboard" viewBox="0 0 90 52">
-          <rect width="90" height="52" rx="4" fill="#0D2A27" stroke="#F5A623" stroke-width="1"/>
-          <text x="45" y="22" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#F5A623" letter-spacing="1">DASHBOARD</text>
-          <text x="45" y="38" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#F5A623" letter-spacing="1" opacity="0.65">TEMPS RÉEL</text>
-        </symbol>
-      </defs>
-
-      <!-- ── CONNECTION PATHS ── -->
-      <!-- Inputs → Central (bezier curves converging to center) -->
-      <path id="p1" class="flow-path" d="M 108,54  C 240,54  310,155 358,155"/>
-      <path id="p2" class="flow-path" d="M 108,118 C 240,118 310,155 358,155"/>
-      <path id="p3" class="flow-path" d="M 108,182 C 240,182 310,155 358,155"/>
-      <path id="p4" class="flow-path" d="M 108,246 C 240,246 310,155 358,155"/>
-      <!-- Central → Outputs -->
-      <path id="p5" class="flow-path" d="M 562,155 C 630,155 700,81  810,81"/>
-      <path id="p6" class="flow-path" d="M 562,155 C 630,155 700,155 810,155"/>
-      <path id="p7" class="flow-path" d="M 562,155 C 630,155 700,229 810,229"/>
-
-      <!-- ── ANIMATED DOTS along paths ── -->
-      <!-- Input dots -->
-      <circle r="4.5" fill="#00A6A6" opacity="0.9"><animateMotion dur="2.2s" repeatCount="indefinite" begin="0s"><mpath href="#p1"/></animateMotion></circle>
-      <circle r="4.5" fill="#00A6A6" opacity="0.9"><animateMotion dur="2.5s" repeatCount="indefinite" begin="0.45s"><mpath href="#p2"/></animateMotion></circle>
-      <circle r="4.5" fill="#33BBBB" opacity="0.8"><animateMotion dur="2.3s" repeatCount="indefinite" begin="0.9s"><mpath href="#p3"/></animateMotion></circle>
-      <circle r="4.5" fill="#00A6A6" opacity="0.9"><animateMotion dur="2.6s" repeatCount="indefinite" begin="1.3s"><mpath href="#p4"/></animateMotion></circle>
-      <!-- Output dots — amber on dashboard -->
-      <circle r="5" fill="#00A6A6" opacity="0.85"><animateMotion dur="1.9s" repeatCount="indefinite" begin="1.6s"><mpath href="#p5"/></animateMotion></circle>
-      <circle r="5" fill="#27C93F" opacity="0.85"><animateMotion dur="2.1s" repeatCount="indefinite" begin="1.9s"><mpath href="#p6"/></animateMotion></circle>
-      <circle r="5" fill="#F5A623" opacity="0.9"><animateMotion dur="2s"   repeatCount="indefinite" begin="2.2s"><mpath href="#p7"/></animateMotion></circle>
-
-      <!-- ── APP ICON NODES ── -->
-      <!-- Gmail: center (86, 54) -->
-      <g class="flow-app-node" id="nodeGmail">
-        <use href="#ico-gmail" x="64" y="32" width="44" height="44"/>
-        <text x="86" y="96" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#7a9090" letter-spacing="0.8">Gmail</text>
-      </g>
-      <!-- WhatsApp: center (86, 118) -->
-      <g class="flow-app-node" id="nodeWhatsapp">
-        <use href="#ico-whatsapp" x="64" y="96" width="44" height="44"/>
-        <text x="86" y="160" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#7a9090" letter-spacing="0.8">WhatsApp</text>
-      </g>
-      <!-- Excel: center (86, 182) -->
-      <g class="flow-app-node" id="nodeExcel">
-        <use href="#ico-excel" x="64" y="160" width="44" height="44"/>
-        <text x="86" y="224" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#7a9090" letter-spacing="0.8">Excel</text>
-      </g>
-      <!-- Outlook: center (86, 246) -->
-      <g class="flow-app-node" id="nodeOutlook">
-        <use href="#ico-outlook" x="64" y="224" width="44" height="44"/>
-        <text x="86" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#7a9090" letter-spacing="0.8">Outlook</text>
-      </g>
-
-      <!-- ── CENTRAL NODE — ORI7ON Intelligence Appliquée ── -->
-      <rect id="centralRect" x="358" y="105" width="204" height="100" rx="4"
-            fill="#002d1a" stroke="#00A6A6" stroke-width="1.5" opacity="0"/>
-      <!-- Pulse ring -->
-      <circle id="centralRing" cx="460" cy="155" r="58" fill="none"
-              stroke="#00A6A6" stroke-width="1" stroke-dasharray="6 4" opacity="0">
-        <animateTransform attributeName="transform" type="rotate"
-          from="0 460 155" to="360 460 155" dur="14s" repeatCount="indefinite"/>
-      </circle>
-      <text id="centralName" x="460" y="147" text-anchor="middle"
-            font-family="Cormorant Garamond, serif" font-size="18" font-weight="300"
-            fill="#f7f2ea" opacity="0">ORI7ON</text>
-      <text id="centralSub1" x="460" y="163" text-anchor="middle"
-            font-family="JetBrains Mono, monospace" font-size="7.5" font-weight="300"
-            fill="#00A6A6" letter-spacing="1.5" opacity="0">Intelligence Appliquée</text>
-
-      <!-- ── OUTPUT NODES ── -->
-      <g id="outBriefing" opacity="0">
-        <use href="#out-briefing" x="810" y="55" width="90" height="52"/>
-      </g>
-      <g id="outAgent" opacity="0">
-        <use href="#out-agent" x="810" y="129" width="90" height="52"/>
-      </g>
-      <g id="outDashboard" opacity="0">
-        <use href="#out-dashboard" x="810" y="203" width="90" height="52"/>
-      </g>
-
-    </svg>
-  </div>
+    </div><!-- /flow-wgrid -->
+  </div><!-- /flow-wrap -->
 </section>
 
 <!-- ══════════════════════════════════════════
@@ -1584,57 +1626,80 @@ function showPanel(panel) {
 }
 
 /* ═══════════════════════════════════════════
-   FLOW DIAGRAM — trigger reveal + draw lines
+   N8N FLOW — dynamic Bézier paths + animated dots
 ═══════════════════════════════════════════ */
-const flowObs = new IntersectionObserver((entries) => {
-  if (!entries[0].isIntersecting) return;
+const FN_INPUTS   = ['fn-gmail','fn-whatsapp','fn-outlook','fn-feedly'];
+const FN_OUTPUTS  = ['fn-briefing','fn-alertes','fn-agenda'];
+const FN_IN_DOTS  = [{dur:2200,delay:0},{dur:2600,delay:500},{dur:2000,delay:900},{dur:2400,delay:1400}];
+const FN_OUT_DOTS = [{dur:1800,delay:200},{dur:2200,delay:700},{dur:2000,delay:1100}];
 
-  // 1. Activate path lines
-  ['p1','p2','p3','p4'].forEach((id, i) => {
-    setTimeout(() => {
-      const p = document.getElementById(id);
-      if (p) p.classList.add('active');
-    }, 200 + i * 100);
+function fnGetCenter(el, container) {
+  const er = el.getBoundingClientRect();
+  const cr = container.getBoundingClientRect();
+  return { x:er.left-cr.left+er.width/2, y:er.top-cr.top+er.height/2,
+           right:er.right-cr.left, left:er.left-cr.left };
+}
+
+function fnBuildPaths() {
+  const wrap = document.getElementById('flowContainer');
+  const svg  = document.getElementById('connSvg');
+  if (!wrap || !svg) return;
+  svg.innerHTML = '';
+  const wR = wrap.getBoundingClientRect();
+  svg.setAttribute('width', wR.width);
+  svg.setAttribute('height', wR.height);
+  const cEl = document.getElementById('fn-center');
+  const cC  = fnGetCenter(cEl, wrap);
+
+  FN_INPUTS.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const pos = fnGetCenter(el, wrap);
+    const sx = pos.right - 4, sy = pos.y, ex = cC.left, ey = cC.y;
+    const c1x = sx + (ex-sx)*0.55, c2x = ex - (ex-sx)*0.35;
+    const d = `M${sx},${sy} C${c1x},${sy} ${c2x},${ey} ${ex},${ey}`;
+    const pid = `fp-in-${i}`;
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', d); path.setAttribute('id', pid);
+    path.setAttribute('class','conn-path'); svg.appendChild(path);
+    const {dur, delay} = FN_IN_DOTS[i];
+    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('class','flow-dot-in'); circle.setAttribute('r','4');
+    const anim = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+    anim.setAttribute('dur',`${dur}ms`); anim.setAttribute('repeatCount','indefinite');
+    anim.setAttribute('begin',`${delay}ms`); anim.setAttribute('calcMode','spline');
+    anim.setAttribute('keyTimes','0;1'); anim.setAttribute('keySplines','0.4 0 0.6 1');
+    const mpath = document.createElementNS('http://www.w3.org/2000/svg','mpath');
+    mpath.setAttributeNS('http://www.w3.org/1999/xlink','href',`#${pid}`);
+    anim.appendChild(mpath); circle.appendChild(anim); svg.appendChild(circle);
   });
 
-  // 2. Reveal central node
-  setTimeout(() => {
-    ['centralRect','centralName','centralSub1'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.style.transition = 'opacity 0.5s ease'; el.style.opacity = '1'; }
-    });
-    const ring = document.getElementById('centralRing');
-    if (ring) { ring.style.transition = 'opacity 0.6s 0.2s ease'; ring.style.opacity = '0.25'; }
-  }, 500);
-
-  // 3. Activate output paths + reveal output nodes
-  ['p5','p6','p7'].forEach((id, i) => {
-    setTimeout(() => {
-      const p = document.getElementById(id);
-      if (p) p.classList.add('active');
-      const outs = ['outBriefing','outAgent','outDashboard'];
-      const out = document.getElementById(outs[i]);
-      if (out) { out.style.transition = 'opacity 0.4s ease'; out.style.opacity = '1'; }
-    }, 900 + i * 160);
+  FN_OUTPUTS.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const pos = fnGetCenter(el, wrap);
+    const sx = cC.right, sy = cC.y, ex = pos.left + 4, ey = pos.y;
+    const c1x = sx + (ex-sx)*0.35, c2x = ex - (ex-sx)*0.55;
+    const d = `M${sx},${sy} C${c1x},${sy} ${c2x},${ey} ${ex},${ey}`;
+    const pid = `fp-out-${i}`;
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', d); path.setAttribute('id', pid);
+    path.setAttribute('class','conn-path'); svg.appendChild(path);
+    const {dur, delay} = FN_OUT_DOTS[i];
+    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('class','flow-dot-out'); circle.setAttribute('r','4');
+    const anim = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+    anim.setAttribute('dur',`${dur}ms`); anim.setAttribute('repeatCount','indefinite');
+    anim.setAttribute('begin',`${delay}ms`); anim.setAttribute('calcMode','spline');
+    anim.setAttribute('keyTimes','0;1'); anim.setAttribute('keySplines','0.4 0 0.6 1');
+    const mpath = document.createElementNS('http://www.w3.org/2000/svg','mpath');
+    mpath.setAttributeNS('http://www.w3.org/1999/xlink','href',`#${pid}`);
+    anim.appendChild(mpath); circle.appendChild(anim); svg.appendChild(circle);
   });
+}
 
-  flowObs.disconnect();
-}, { threshold: 0.25 });
-
-const flowContainer = document.getElementById('flowContainer');
-if (flowContainer) flowObs.observe(flowContainer);
-
-// App icon hover pulse
-document.querySelectorAll('.flow-app-node').forEach(node => {
-  node.style.transformOrigin = 'center';
-  node.style.transition = 'filter 0.2s ease';
-  node.addEventListener('mouseenter', () => {
-    node.style.filter = 'drop-shadow(0 0 8px rgba(0,166,166,0.5))';
-  });
-  node.addEventListener('mouseleave', () => {
-    node.style.filter = 'none';
-  });
-});
+window.addEventListener('load', () => setTimeout(fnBuildPaths, 150));
+window.addEventListener('resize', () => { clearTimeout(window._fnTimer); window._fnTimer = setTimeout(fnBuildPaths, 150); });
 
 /* ═══════════════════════════════════════════
    CONSTAT — fast quasi-simultaneous

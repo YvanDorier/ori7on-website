@@ -16,3 +16,5 @@ ia-design-test.html
 docs/
 *.md
 !README.md
+# Claude Code worktrees (sessions parallèles)
+.claude/worktrees/

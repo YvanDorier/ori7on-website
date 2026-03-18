@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORI7ON — Trajectoires de carrière</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --deep:   #002d1a;
+  --green:  #0d3d20;
+  --gold:   #CE9E5E;
+  --goldl:  #D4B278;
+  --cream:  #f7f2ea;
+}
+body {
+  background: var(--deep);
+  font-family: 'Jost', sans-serif;
+  color: var(--cream);
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 36px 20px 52px;
+}
+
+/* ── MAP ── */
+.wrap { position:relative; width:100%; max-width:880px;
+  border:1px solid rgba(206,158,94,.1); }
+#map { width:100%; height:auto; display:block; }
+
+.country      { fill:#0d3d20; stroke:#1a5a30; stroke-width:.5; }
+.graticule    { fill:none; stroke:rgba(206,158,94,.05); stroke-width:.4; }
+.border-inner { fill:none; stroke:#1a5a30; stroke-width:.4; }
+.border-outer { fill:none; stroke:#2a7040; stroke-width:.6; }
+
+/* ── DOTS ── */
+.dot-ring-main { fill:rgba(206,158,94,0); animation:pMain 2.5s ease-in-out infinite; }
+.dot-ring      { fill:rgba(206,158,94,0); animation:pSec  3s   ease-in-out infinite; }
+@keyframes pMain { 50%{ fill:rgba(206,158,94,.28); r:18; } }
+@keyframes pSec  { 50%{ fill:rgba(206,158,94,.22); r:12; } }
+.dot-core-main { fill:var(--gold); filter:drop-shadow(0 0 6px rgba(206,158,94,.8)); cursor:pointer; }
+.dot-core      { fill:var(--gold); filter:drop-shadow(0 0 3px rgba(206,158,94,.5)); cursor:pointer; }
+.dot-core-main:hover,.dot-core:hover { fill:#e8c070; }
+.city-lbl-main { font-family:'Jost',sans-serif; font-size:11px; font-weight:500;
+  fill:var(--gold); pointer-events:none; }
+.city-lbl      { font-family:'Jost',sans-serif; font-size:10px; font-weight:400;
+  fill:rgba(212,178,120,.65); pointer-events:none; }
+
+/* ── TOOLTIP ── */
+#tip {
+  position:fixed; background:#001810;
+  border:1px solid rgba(206,158,94,.45);
+  max-width:340px; min-width:250px;
+  pointer-events:none; opacity:0;
+  transition:opacity .18s; z-index:200;
+  box-shadow:0 8px 40px rgba(0,0,0,.65);
+}
+#tip.on { opacity:1; }
+.tip-head {
+  background:rgba(206,158,94,.07);
+  border-bottom:1px solid rgba(206,158,94,.18);
+  padding:11px 15px 9px;
+}
+.tip-city    { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); display:block; }
+.tip-country { font-size:11px; font-weight:300; color:rgba(212,178,120,.65);
+  letter-spacing:.08em; text-transform:uppercase; display:block; margin-top:2px; }
+.tip-period  { font-size:11px; color:var(--goldl); margin-top:6px; display:inline-block;
+  border:1px solid rgba(206,158,94,.25); padding:2px 8px; letter-spacing:.06em; }
+.tip-body { padding:11px 15px 13px; }
+.tip-sector { font-size:11px; font-weight:500; color:rgba(212,178,120,.55);
+  letter-spacing:.1em; text-transform:uppercase; margin-bottom:8px; }
+.tip-missions { list-style:none; }
+.tip-missions li { font-size:13px; font-weight:300; color:var(--cream);
+  line-height:1.5; padding:3px 0 3px 14px; position:relative;
+  border-bottom:1px solid rgba(206,158,94,.06); }
+.tip-missions li:last-child { border-bottom:none; }
+.tip-missions li::before { content:'—'; position:absolute; left:0; color:var(--gold); font-size:11px; }
+
+
+/* ── CONTROLS — hidden, speed hardcoded ── */
+.ctrl { display:none; }
+.ctrl-btn { display:none; }
+.spd-lbl { display:none; }
+input[type=range] { display:none; }
+</style>
+</head>
+<body>
+
+<!-- Switcher langue : invisible dans l'UI, appelable par le site parent via setLang('en'/'fr') -->
+<div class="lang" style="display:none">
+  <button class="active" onclick="setLang('fr')">FR</button>
+  <span>|</span>
+  <button onclick="setLang('en')">EN</button>
+</div>
+
+<div class="wrap"><svg id="map"></svg></div>
+
+<div id="tip"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DONNÉES
+// ═══════════════════════════════════════════════
+const CITIES = {
+  abidjan:      { lat: 5.36,  lon: -4.01,  main:true,  iso:384 },
+  daressalam:   { lat:-6.79,  lon: 39.21,             iso:834 },
+  geita:        { lat:-2.87,  lon: 32.23,             iso:834 },
+  bamako:       { lat:12.64,  lon: -8.00,             iso:466 },
+  morila:       { lat:11.07,  lon: -6.83,             iso:466 },
+  johannesburg: { lat:-26.20, lon: 28.04,             iso:710 },
+  jinja:        { lat: 0.44,  lon: 33.20,             iso:800 },
+  reunion:      { lat:-21.11, lon: 55.53,             iso:638 },
+  brazzaville:  { lat:-4.27,  lon: 15.28,             iso:180 },
+  pointenoire:  { lat:-4.78,  lon: 11.87,             iso:180 },
+  dakar:        { lat:14.69,  lon:-17.44,             iso:686 },
+  conakry:      { lat: 9.64,  lon:-13.58,             iso:324 },
+  douala:       { lat: 4.05,  lon:  9.77,             iso:120 },
+  alger:        { lat:36.75,  lon:  3.06,             iso: 12 },
+  accra:        { lat: 5.56,  lon: -0.19,             iso:288 },
+  dubai:        { lat:25.20,  lon: 55.27,             iso:784 },
+};
+
+const LABELS = {
+  abidjan:      { dx: -10, dy: 18,  anchor:'end'   },
+  daressalam:   { dx: 10, dy:-10,  anchor:'start' },
+  geita:        { dx: 10, dy: 4,   anchor:'start' },
+  bamako:       { dx:-10, dy: 4,   anchor:'end'   },
+  morila:       { dx: 10, dy: -8,   anchor:'start' },
+  johannesburg: { dx: 10, dy: 14,  anchor:'start' },
+  jinja:        { dx: 10, dy: 4,   anchor:'start' },
+  reunion:      { dx: 10, dy: 4,   anchor:'start' },
+  brazzaville:  { dx: 10, dy: 4,   anchor:'start' },
+  pointenoire:  { dx:-10, dy:-6,   anchor:'end'   },
+  dakar:        { dx:-10, dy: 4,   anchor:'end'   },
+  conakry:      { dx:-10, dy:-6,   anchor:'end'   },
+  douala:       { dx: 10, dy: 14,  anchor:'start' },
+  alger:        { dx: 10, dy: 4,   anchor:'start' },
+  accra:        { dx: 10, dy:-10,  anchor:'start' },
+  dubai:        { dx: 10, dy: 4,   anchor:'start' },
+};
+
+const CONTENT = {
+  fr: {
+    abidjan:      { city:'Abidjan',       country:"Côte d'Ivoire",    period:'1996–2001 · 2009–2017 · 2024–2025', sector:'Manutention · Cacao · FMCG · Zone industrielle', missions:["Direction financière — manutention portuaire","CFO Groupe (Barry Callebaut/SACO) — SAP, crise politique 2010–2011","CFO Groupe GB Foods — 34 pays Afrique & MENA","DG Zone Industrielle PK24 (Arise)"] },
+    daressalam:   { city:'Dar Es Salaam', country:'Tanzanie',         period:'2001',           sector:'Mines (or) — Transit',       missions:["Entrée en mission Tanzanie — base logistique"] },
+    geita:        { city:'Geita',         country:'Tanzanie',         period:'2001–2002',      sector:'Mines (or)',                 missions:["Mise en place complète d'un site minier","700 employés — logistique lourde opérationnelle"] },
+    bamako:       { city:'Bamako',        country:'Mali',             period:'2002–jan. 2003 · 2015–2017', sector:'Mines (or) · FMCG (GB Foods)', missions:["Direction financière — transition site minier","Missions régionales CFO — supervision Mali (GB Foods)"] },
+    morila:       { city:'Morila',        country:'Mali',             period:'jan. 2003–jan. 2004', sector:'Mines (or)',            missions:["Gestion de crise opérationnelle","Contrôle de gestion quantitatif — performance mine"] },
+    johannesburg: { city:'Johannesburg',  country:'Afrique du Sud',   period:'2004',           sector:'Construction',              missions:["Préparation et structuration de chantier"] },
+    jinja:        { city:'Jinja',         country:'Ouganda',          period:'2004–2005',      sector:'Infrastructure routière',   missions:["Trésorerie multi-devises (5 devises)","Gestion de crise & évacuation opérationnelle"] },
+    reunion:      { city:'La Réunion',    country:'France (DOM)',     period:'2005–2007',      sector:'Infrastructure tunnel',     missions:["Contrôle de gestion quantitatif","Contrat long terme 7 ans"] },
+    brazzaville:  { city:'Brazzaville',   country:'Congo',            period:'2007–2008',      sector:'Construction',              missions:["Restructuration de filiale","Audit interne — éviction DG suite fraude"] },
+    pointenoire:  { city:'Pointe-Noire',  country:'Congo',            period:'2008–2009',      sector:'Énergie (haute tension)',   missions:["Direction financière chantier haute tension"] },
+    dakar:        { city:'Dakar',         country:'Sénégal',          period:'2015–2017',      sector:'FMCG (GB Foods)',           missions:["Missions régionales CFO — supervision Sénégal"] },
+    conakry:      { city:'Conakry',       country:'Guinée',           period:'2015–2017',      sector:'FMCG (GB Foods)',           missions:["Missions régionales CFO — supervision Guinée"] },
+    douala:       { city:'Douala',        country:'Cameroun',         period:'2015–2017',      sector:'FMCG (GB Foods)',           missions:["Missions régionales CFO — supervision Cameroun"] },
+    alger:        { city:'Alger',         country:'Algérie',          period:'2015–2017',      sector:'FMCG (GB Foods)',           missions:["Missions régionales CFO — supervision Algérie"] },
+    accra:        { city:'Accra',         country:'Ghana',            period:'2019–2023',      sector:'Agro-industrie (riz, coton)', missions:["CEO Groupe RMG — restructuration complète","Gestion de fraude — redressement opérationnel"] },
+    dubai:        { city:'Dubaï',         country:'Émirats Arabes Unis', period:'2023–2024',   sector:'Agriculture indoor',        missions:["Développement projet agriculture verticale"] },
+  },
+  en: {
+    abidjan:      { city:'Abidjan',       country:"Côte d'Ivoire",    period:'1996–2001 · 2009–2017 · 2024–2025', sector:'Port ops · Cocoa · FMCG · Industrial zone', missions:["Financial director — port operations","Group CFO (Barry Callebaut/SACO) — SAP, political crisis 2010–2011","Group CFO GB Foods — 34 countries Africa & MENA","GM Industrial Zone PK24 (Arise)"] },
+    daressalam:   { city:'Dar Es Salaam', country:'Tanzania',         period:'2001',           sector:'Mining (gold) — Transit',   missions:["Tanzania mission entry — logistics base"] },
+    geita:        { city:'Geita',         country:'Tanzania',         period:'2001–2002',      sector:'Mining (gold)',             missions:["Full setup of mining site from scratch","700 employees — heavy logistics operations"] },
+    bamako:       { city:'Bamako',        country:'Mali',             period:'2002–Jan 2003 · 2015–2017', sector:'Mining (gold) · FMCG (GB Foods)', missions:["Financial management — mining site transition","Regional CFO missions — Mali oversight (GB Foods)"] },
+    morila:       { city:'Morila',        country:'Mali',             period:'Jan 2003–Jan 2004', sector:'Mining (gold)',          missions:["Operational crisis management","Quantitative management control — mine performance"] },
+    johannesburg: { city:'Johannesburg',  country:'South Africa',     period:'2004',           sector:'Construction',              missions:["Site preparation and structuring"] },
+    jinja:        { city:'Jinja',         country:'Uganda',           period:'2004–2005',      sector:'Road infrastructure',       missions:["Multi-currency treasury (5 currencies)","Crisis management & operational evacuation"] },
+    reunion:      { city:'La Réunion',    country:'France (DOM)',     period:'2005–2007',      sector:'Tunnel infrastructure',     missions:["Quantitative management control","7-year long-term contract"] },
+    brazzaville:  { city:'Brazzaville',   country:'Congo',            period:'2007–2008',      sector:'Construction',              missions:["Subsidiary restructuring","Internal audit — CEO removal following fraud"] },
+    pointenoire:  { city:'Pointe-Noire',  country:'Congo',            period:'2008–2009',      sector:'Energy (high voltage)',     missions:["Financial management — high voltage construction site"] },
+    dakar:        { city:'Dakar',         country:'Senegal',          period:'2015–2017',      sector:'FMCG (GB Foods)',           missions:["Regional CFO missions — Senegal oversight"] },
+    conakry:      { city:'Conakry',       country:'Guinea',           period:'2015–2017',      sector:'FMCG (GB Foods)',           missions:["Regional CFO missions — Guinea oversight"] },
+    douala:       { city:'Douala',        country:'Cameroon',         period:'2015–2017',      sector:'FMCG (GB Foods)',           missions:["Regional CFO missions — Cameroon oversight"] },
+    alger:        { city:'Algiers',       country:'Algeria',          period:'2015–2017',      sector:'FMCG (GB Foods)',           missions:["Regional CFO missions — Algeria oversight"] },
+    accra:        { city:'Accra',         country:'Ghana',            period:'2019–2023',      sector:'Agro-industry (rice, cotton)', missions:["Group CEO RMG — full restructuring","Fraud management — operational turnaround"] },
+    dubai:        { city:'Dubai',         country:'UAE',              period:'2023–2024',      sector:'Indoor agriculture',        missions:["Vertical farming project development"] },
+  },
+};
+
+const I18N = {
+  fr: { lMain:'Base principale', lSec:'Mission / Poste', lArc:'Trajectoire de carrière',
+        lSpd:'Vitesse' },
+  en: { lMain:'Main base', lSec:'Assignment / Position', lArc:'Career trajectory',
+        lSpd:'Speed' },
+};
+
+// ── SÉQUENCES D'ARCS ──
+// type:'seq'  = arcs lancés en séquence (overlapping)
+// type:'burst'= tous partent en rafale quasi-simultanée depuis 'from'
+const SEQUENCES = [
+  { type:'seq', arcs:[
+    { from:'abidjan',     to:'daressalam'  },
+    { from:'daressalam',  to:'geita'       },
+    { from:'geita',       to:'bamako'      },
+    { from:'bamako',      to:'morila'      },
+    { from:'morila',      to:'johannesburg'},
+    { from:'johannesburg',to:'jinja'       },
+    { from:'jinja',       to:'reunion'     },
+    { from:'reunion',     to:'brazzaville' },
+    { from:'brazzaville', to:'pointenoire' },
+    { from:'pointenoire', to:'abidjan'     },
+  ]},
+  { type:'burst', from:'abidjan', targets:['bamako','dakar','conakry','douala','alger'] },
+  { type:'seq', arcs:[
+    { from:'abidjan', to:'accra'   },
+    { from:'accra',   to:'abidjan' },
+    { from:'abidjan', to:'dubai'   },
+    { from:'dubai',   to:'abidjan' },
+  ]},
+];
+
+// ═══════════════════════════════════════════════
+// MAP SETUP
+// ═══════════════════════════════════════════════
+const W=880, H=800;
+const svgEl = document.getElementById('map');
+svgEl.setAttribute('viewBox',`0 0 ${W} ${H}`);
+const svg = d3.select('#map');
+
+const proj = d3.geoMercator().center([20,4]).scale(555).translate([W/2,H/2]);
+const pathGen = d3.geoPath().projection(proj);
+
+const graticule = d3.geoGraticule().step([10,10]);
+svg.append('path').datum(graticule()).attr('class','graticule').attr('d',pathGen);
+
+const africaSet = new Set([
+  12,24,72,86,108,120,132,140,144,174,175,180,188,204,218,231,232,266,270,288,
+  324,328,334,384,404,426,430,434,450,454,466,478,480,504,508,516,562,566,646,
+  678,686,694,706,710,716,728,729,732,740,762,768,788,800,818,834,854,894,
+  784,638,250
+]);
+
+function loadScript(src){
+  return new Promise((res,rej)=>{
+    if(document.querySelector(`script[src="${src}"]`)){res();return;}
+    const s=document.createElement('script');
+    s.src=src; s.onload=res; s.onerror=rej;
+    document.head.appendChild(s);
+  });
+}
+
+const layerCountries = svg.append('g').attr('id','lyr-countries');
+const layerArcs      = svg.append('g').attr('id','lyr-arcs');
+const layerDots      = svg.append('g').attr('id','lyr-dots');
+const layerLabels    = svg.append('g').attr('id','lyr-labels');
+
+Promise.all([
+  loadScript('https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'),
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json').then(r=>r.json())
+]).then(([,world])=>{
+  const countries = topojson.feature(world, world.objects.countries);
+
+  layerCountries.selectAll('path')
+    .data(countries.features)
+    .enter().append('path')
+    .attr('class', 'country')
+    .attr('d', pathGen);
+
+  layerCountries.append('path')
+    .datum(topojson.mesh(world,world.objects.countries,(a,b)=>a!==b))
+    .attr('class','border-inner').attr('d',pathGen);
+  layerCountries.append('path')
+    .datum(topojson.mesh(world,world.objects.countries,(a,b)=>a===b))
+    .attr('class','border-outer').attr('d',pathGen);
+
+  renderDots();
+  startEngine();
+}).catch(err=>{
+  svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
+    .attr('fill','#CE9E5E').attr('font-size','14').text('Erreur réseau');
+});
+
+// ═══════════════════════════════════════════════
+// DOTS + TOOLTIPS
+// ═══════════════════════════════════════════════
+let currentLang='fr', pinnedId=null;
+
+function renderDots(){
+  Object.entries(CITIES).forEach(([id,c],i)=>{
+    const [cx,cy]=proj([c.lon,c.lat]);
+    const g=layerDots.append('g')
+      .attr('transform',`translate(${cx},${cy})`)
+      .style('cursor','pointer');
+
+    g.append('circle')
+      .attr('class', c.main?'dot-ring-main':'dot-ring')
+      .attr('r', c.main?16:10)
+      .style('animation-delay',`${i*.22}s`);
+    g.append('circle')
+      .attr('class', c.main?'dot-core-main':'dot-core')
+      .attr('r', c.main?5.5:3.5);
+
+    const lb=LABELS[id];
+    layerLabels.append('text')
+      .attr('class', c.main?'city-lbl-main':'city-lbl')
+      .attr('x', cx+lb.dx).attr('y', cy+lb.dy)
+      .attr('text-anchor', lb.anchor)
+      .attr('id','lbl-'+id);
+
+    // Zone de touch invisible 44px (mobile) — par-dessus le dot visuel
+    g.append('circle')
+      .attr('r', 22)
+      .attr('fill', 'transparent')
+      .attr('stroke', 'none');
+
+    // Interactions desktop (mouse)
+    g.on('mouseenter',function(ev){ if(!pinnedId) showTip(id,ev); })
+     .on('mousemove', function(ev){ if(!pinnedId) posTip(ev); })
+     .on('mouseleave',function(){   if(!pinnedId) hideTip(); })
+     .on('click',function(ev){
+       ev.stopPropagation();
+       if(pinnedId===id){ pinnedId=null; hideTip(); }
+       else { pinnedId=id; showTip(id,ev); }
+     });
+
+    // Interactions mobile (touch)
+    g.on('touchstart',function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      const t=ev.touches[0];
+      const fakeEv={clientX:t.clientX, clientY:t.clientY};
+      if(pinnedId===id){ pinnedId=null; hideTip(); }
+      else { pinnedId=id; showTip(id,fakeEv); }
+    });
+  });
+  document.addEventListener('click',()=>{ pinnedId=null; hideTip(); });
+  applyLang();
+}
+
+function showTip(id,ev){
+  const d=CONTENT[currentLang][id]; if(!d) return;
+  const mis=d.missions.map(m=>`<li>${m}</li>`).join('');
+  document.getElementById('tip').innerHTML=`
+    <div class="tip-head">
+      <span class="tip-city">${d.city}</span>
+      <span class="tip-country">${d.country}</span>
+      <span class="tip-period">${d.period}</span>
+    </div>
+    <div class="tip-body">
+      <div class="tip-sector">${d.sector}</div>
+      <ul class="tip-missions">${mis}</ul>
+    </div>`;
+  document.getElementById('tip').classList.add('on');
+  if(ev) posTip(ev);
+}
+function posTip(ev){
+  const tip=document.getElementById('tip');
+  const m=16, vw=window.innerWidth, vh=window.innerHeight;
+  const tw=tip.offsetWidth||300, th=tip.offsetHeight||180;
+  // Sur mobile (écran étroit) : centré en bas
+  if(vw<600){
+    tip.style.left=Math.max(m,(vw-tw)/2)+'px';
+    tip.style.top=(vh-th-m)+'px';
+    return;
+  }
+  let x=ev.clientX+m, y=ev.clientY+m;
+  if(x+tw>vw-m) x=ev.clientX-tw-m;
+  if(y+th>vh-m) y=ev.clientY-th-m;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){ document.getElementById('tip').classList.remove('on'); }
+
+// ═══════════════════════════════════════════════
+// I18N
+// ═══════════════════════════════════════════════
+function setLang(l){
+  currentLang=l;
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang button[onclick="setLang('${l}')"]`).classList.add('active');
+  applyLang();
+  if(pinnedId) showTip(pinnedId,null);
+}
+function applyLang(){
+  // City labels
+  Object.entries(CITIES).forEach(([id,c])=>{
+    const el=document.getElementById('lbl-'+id);
+    if(el && CONTENT[currentLang][id]) el.textContent=CONTENT[currentLang][id].city;
+  });
+}
+
+// ═══════════════════════════════════════════════
+// ARC ENGINE
+// ═══════════════════════════════════════════════
+let animSpeed=1.24, animPaused=false, rafId=null;
+// Vitesse constante en pixels SVG par seconde.
+// Tous les arcs avancent à la même vitesse visuelle.
+// Référence : Abidjan→Dar Es Salaam ≈ 480px → ~2400ms à 200px/s
+const PX_PER_SEC  = 200;   // vitesse de base (pixels SVG/sec)
+const BURST_DELAY = 120;   // ms entre arcs rafale (séquence 2)
+const FADE_DUR    = 1100;  // ms pour estomper après impact
+const IMPACT_WAIT = 350;   // ms après impact avant de lancer le suivant
+const WAIT_SEQ    = 800;   // ms attente entre séquences
+
+const ARC_COLORS=['#CE9E5E','#D4B278','#E8C98A','#B88A4A','#F0D9A8','#C49050'];
+
+// État engine — le suivant ne part QUE quand le précédent a atterri
+let seqIdx=0;
+let arcIdx=0;
+let active=[];
+let colorIdx=0;
+let firstFrame=true;
+let engineState='idle';
+let waitUntil=0;
+
+function pt(city){ const [x,y]=proj([CITIES[city].lon,CITIES[city].lat]); return {x,y}; }
+
+function cpOf(A,B){
+  const mx=(A.x+B.x)/2, my=(A.y+B.y)/2;
+  const dx=B.x-A.x, dy=B.y-A.y;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+  const nx=-dy/dist, ny=dx/dist;
+  const h=dist*Math.min(.65,Math.max(.22,dist*.0011+.2));
+  const sign=ny>0?-1:1;
+  return {x:mx+nx*h*sign, y:my+ny*h*sign};
+}
+
+// Longueur approx d'une courbe de Bézier quadratique (subdivision)
+function bezierLen(A,CP,B){
+  let len=0, prev=A;
+  const N=20;
+  for(let i=1;i<=N;i++){
+    const t=i/N, m=1-t;
+    const p={x:m*m*A.x+2*m*t*CP.x+t*t*B.x, y:m*m*A.y+2*m*t*CP.y+t*t*B.y};
+    const dx=p.x-prev.x, dy=p.y-prev.y;
+    len+=Math.sqrt(dx*dx+dy*dy);
+    prev=p;
+  }
+  return len;
+}
+
+function bz(A,CP,B,t){
+  const m=1-t;
+  return {x:m*m*A.x+2*m*t*CP.x+t*t*B.x, y:m*m*A.y+2*m*t*CP.y+t*t*B.y};
+}
+
+function arcD(A,CP,B,tEnd){
+  const N=52, steps=Math.max(2,Math.round(N*tEnd));
+  let d='';
+  for(let i=0;i<=steps;i++){
+    const t=(tEnd/steps)*i;
+    const p=bz(A,CP,B,t);
+    d+=i===0?`M${p.x.toFixed(1)},${p.y.toFixed(1)}`:`L${p.x.toFixed(1)},${p.y.toFixed(1)}`;
+  }
+  return d;
+}
+
+function launchArc(fromId,toId){
+  const A=pt(fromId), B=pt(toId), CP=cpOf(A,B);
+  // Durée = longueur de la courbe / vitesse → vitesse visuelle constante
+  const curveLen=bezierLen(A,CP,B);
+  const dur=(curveLen/PX_PER_SEC)*1000/animSpeed;
+  const col=ARC_COLORS[colorIdx%ARC_COLORS.length]; colorIdx++;
+  const el=layerArcs.append('path')
+    .attr('fill','none').attr('stroke',col)
+    .attr('stroke-width',1.9).attr('stroke-linecap','round')
+    .attr('opacity',0);
+  const flash=layerArcs.append('circle')
+    .attr('cx',B.x).attr('cy',B.y).attr('r',0)
+    .attr('fill','none').attr('stroke',col).attr('stroke-width',1.5).attr('opacity',0);
+  const arc={el,flash,A,B,CP,
+    startTime:performance.now(), dur,
+    phase:'fly', fadeStart:0, impacted:false};
+  active.push(arc);
+  return arc;
+}
+
+// Moteur strict : prochain arc UNIQUEMENT après impact
+function tryAdvance(now){
+  if(engineState!=='idle') return;
+  const seq=SEQUENCES[seqIdx];
+  if(seq.type==='seq'){
+    if(arcIdx<seq.arcs.length){
+      const a=seq.arcs[arcIdx];
+      launchArc(a.from,a.to);
+      arcIdx++;
+      engineState='flying';
+    } else {
+      seqIdx=(seqIdx+1)%SEQUENCES.length;
+      arcIdx=0;
+      engineState='waiting';
+      waitUntil=now+WAIT_SEQ;
+    }
+  } else if(seq.type==='burst'){
+    const targets=seq.targets, fromId=seq.from;
+    // Durée max de la rafale = arc le plus long + FADE_DUR
+    let maxDur=0;
+    targets.forEach((toId,i)=>{
+      const A=pt(fromId), B=pt(toId), CP=cpOf(A,B);
+      const d=(bezierLen(A,CP,B)/PX_PER_SEC)*1000/animSpeed;
+      if(d>maxDur) maxDur=d;
+      setTimeout(()=>{ if(!animPaused) launchArc(fromId,toId); }, i*BURST_DELAY);
+    });
+    seqIdx=(seqIdx+1)%SEQUENCES.length;
+    arcIdx=0;
+    engineState='waiting';
+    waitUntil=now+(targets.length-1)*BURST_DELAY+maxDur+FADE_DUR+IMPACT_WAIT;
+  }
+}
+
+function loop(now){
+  if(animPaused){ rafId=requestAnimationFrame(loop); return; }
+  if(firstFrame){ engineState='idle'; firstFrame=false; }
+
+  if(engineState==='waiting' && now>=waitUntil) engineState='idle';
+
+  tryAdvance(now);
+
+  const dead=[];
+  active.forEach((arc,i)=>{
+    const el=arc.el.node(); if(!el||!el.parentNode){ dead.push(i); return; }
+    const e=now-arc.startTime;
+    if(arc.phase==='fly'){
+      const t=Math.min(e/arc.dur,1);
+      const op=t<.08?t/.08:1;
+      arc.el.attr('d',arcD(arc.A,arc.CP,arc.B,t)).attr('opacity',op);
+      if(t>=1 && !arc.impacted){
+        arc.impacted=true;
+        arc.phase='fade';
+        arc.fadeStart=now;
+        arc.flash.attr('opacity',.9).attr('r',7)
+          .transition().duration(700).ease(d3.easeExpOut)
+          .attr('r',24).attr('opacity',0);
+        if(engineState==='flying'){
+          engineState='waiting';
+          waitUntil=now+IMPACT_WAIT;
+        }
+      }
+    } else {
+      const ft=Math.min((now-arc.fadeStart)/(FADE_DUR/animSpeed),1);
+      arc.el.attr('opacity',Math.pow(1-ft,2.4));
+      if(ft>=1) dead.push(i);
+    }
+  });
+  dead.reverse().forEach(i=>{
+    active[i].el.remove(); active[i].flash.remove(); active.splice(i,1);
+  });
+
+  rafId=requestAnimationFrame(loop);
+}
+
+function startEngine(){ rafId=requestAnimationFrame(loop); }
+
+// ── Contrôles ──
+let paused=false;
+function toggleAnim(){
+  paused=!paused; animPaused=paused;
+  document.getElementById('playbtn').textContent=paused?'▶ Play':'⏸ Pause';
+}
+function setSpeed(v){
+  animSpeed=parseFloat(v);
+  // Recalculer la durée restante de chaque arc actif proportionnellement
+  active.forEach(a=>{
+    const curveLen=bezierLen(a.A,a.CP,a.B);
+    a.dur=(curveLen/PX_PER_SEC)*1000/animSpeed;
+  });
+}
+</script>
+</body>
+</html>

@@ -76,21 +76,21 @@ nav {
 
 /* ─── LOGO IMAGES ─── */
 .nav-logo-img {
-  height: 32px;
+  height: 44px;
   width: auto;
   display: block;
 }
 .footer-logo-img {
-  height: 26px;
+  height: 32px;
   width: auto;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 @media (max-width: 768px) {
-  .nav-logo-img { height: 26px; }
-  .footer-logo-img { height: 22px; }
+  .nav-logo-img { height: 34px; }
+  .footer-logo-img { height: 26px; }
 }
 @media (max-width: 480px) {
-  .nav-logo-img { height: 22px; }
+  .nav-logo-img { height: 28px; }
 }
 
 .nav-links {
@@ -512,6 +512,157 @@ footer {
   footer { flex-direction: column; text-align: center; padding: 32px 24px; }
   .footer-links { flex-wrap: wrap; justify-content: center; }
 }
+
+/* ─── NARRATIVE FORM ─── */
+.nf { max-width: 560px; width: 100%; position: relative; }
+
+.nl {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 1.5rem; line-height: 2.7; color: #1c1208; margin-bottom: .1rem;
+}
+.nl .w { display: inline; transition: opacity .35s ease; }
+
+body.ff .nl .w    { opacity: .3; }
+body.ff .fw       { opacity: .3; }
+body.ff .nl .w.hl { opacity: 1 !important; }
+body.ff .fw.fc    { opacity: 1 !important; }
+
+.fw {
+  display: inline-block; position: relative;
+  vertical-align: baseline; min-width: 80px;
+  transition: opacity .35s ease;
+}
+.fw.block { display: block; min-width: 100%; margin-top: .2rem; }
+
+.fw input[type=text],
+.fw input[type=email] {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 1.5rem; line-height: 2.7; color: #1c1208;
+  background: transparent; border: none;
+  border-bottom: 2px solid transparent; outline: none;
+  padding: 0 .15em; min-width: 80px; width: auto;
+  transition: border-color .3s; caret-color: #CE9E5E;
+  vertical-align: baseline;
+}
+.fw input::placeholder { font-style: italic; color: rgba(28,18,8,.22); font-weight: 300; }
+.fw input:focus { border-bottom-color: #CE9E5E; }
+
+.fw textarea {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 1.5rem; line-height: 1.85; color: #1c1208;
+  background: transparent; border: none;
+  border-bottom: 2px solid transparent; outline: none;
+  padding: .1em .15em; width: 100%; resize: none; overflow: hidden;
+  min-height: 1.85em; caret-color: #CE9E5E;
+  transition: border-color .3s; display: block;
+}
+.fw textarea::placeholder { font-style: italic; color: rgba(28,18,8,.22); font-weight: 300; }
+.fw textarea:focus { border-bottom-color: #CE9E5E; }
+
+.phone-group {
+  display: inline-flex; align-items: baseline;
+  gap: .1em; vertical-align: baseline;
+}
+.cc-select {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 1.5rem; line-height: 2.7; color: #1c1208;
+  background: transparent; border: none;
+  border-bottom: 2px solid transparent; outline: none;
+  appearance: none; -webkit-appearance: none;
+  cursor: pointer; padding: 0 .15em;
+  transition: border-color .3s; caret-color: #CE9E5E;
+}
+.cc-select:focus { border-bottom-color: #CE9E5E; }
+.phone-inp {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 1.5rem; line-height: 2.7; color: #1c1208;
+  background: transparent; border: none;
+  border-bottom: 2px solid transparent; outline: none;
+  padding: 0 .15em; min-width: 120px; width: auto;
+  transition: border-color .3s; caret-color: #CE9E5E;
+}
+.phone-inp::placeholder { font-style: italic; color: rgba(28,18,8,.22); font-weight: 300; }
+.phone-inp:focus { border-bottom-color: #CE9E5E; }
+
+.csw {
+  display: inline-block; position: relative;
+  vertical-align: baseline; cursor: pointer;
+}
+.cs-trigger {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 1.5rem; line-height: 2.7; color: #1c1208;
+  border: none; border-bottom: 2px solid transparent;
+  background: transparent; padding: 0 1.5em 0 .15em;
+  white-space: nowrap; transition: border-color .3s; display: inline-block;
+  position: relative;
+}
+.cs-trigger::after {
+  content: ''; position: absolute; right: .25em; top: 50%;
+  transform: translateY(-50%);
+  border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 4px solid #CE9E5E; transition: transform .25s;
+}
+.csw.open .cs-trigger::after { transform: translateY(-50%) rotate(180deg); }
+.csw.open .cs-trigger,
+.cs-trigger:hover { border-bottom-color: #CE9E5E; }
+.cs-trigger .ph { font-style: italic; color: rgba(28,18,8,.22); }
+.cs-dd {
+  position: absolute; top: calc(100% + 4px); left: -.5em;
+  background: #f7f2ea; border: 1px solid rgba(206,158,94,.25);
+  min-width: 320px; z-index: 100;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: all .22s ease;
+  box-shadow: 0 8px 28px rgba(28,18,8,.08);
+}
+.csw.open .cs-dd { opacity: 1; visibility: visible; transform: translateY(0); }
+.cs-opt {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 1.1rem; color: #1c1208;
+  padding: .6em 1.2em; cursor: pointer; transition: background .18s;
+}
+.cs-opt:hover { background: rgba(206,158,94,.1); }
+.cs-opt.sel { color: #CE9E5E; }
+.cs-native { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+
+.sub-row { text-align: right; margin-top: 2.5rem; opacity: 0; transition: opacity .5s ease; }
+.sub-row.vis { opacity: 1; }
+.sub-btn {
+  font-family: 'Jost', sans-serif; font-weight: 500;
+  font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+  color: #f7f2ea; background: #002d1a; border: none;
+  padding: 1em 2.8em; cursor: pointer;
+  transition: background .3s, transform .2s, box-shadow .3s;
+}
+.sub-btn:hover { background: #003d24; box-shadow: 0 4px 20px rgba(0,45,26,.2); transform: translateY(-1px); }
+.sub-btn:active { transform: translateY(0); }
+.sub-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.err-msg {
+  font-family: 'Jost', sans-serif; font-size: .7rem; letter-spacing: .08em;
+  color: #9a4a1e; margin-top: .8rem; opacity: 0; transition: opacity .3s;
+}
+.err-msg.vis { opacity: 1; }
+
+.success-msg {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
+  font-size: 1.6rem; color: #1c1208; text-align: center;
+  opacity: 0; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none;
+}
+.success-msg.vis { opacity: 1; transition: opacity .8s ease .3s; }
+.nf.done .nc,
+.nf.done .sub-row { opacity: 0; transition: opacity .4s; pointer-events: none; }
+
+.sizer {
+  position: absolute; visibility: hidden; white-space: pre;
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 1.5rem; pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .nl, .fw input, .fw textarea, .cs-trigger, .cc-select, .phone-inp { font-size: 1.2rem; line-height: 2.4; }
+  .cs-dd { min-width: 260px; }
+  .sub-btn { width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -605,52 +756,21 @@ footer {
     </div>
   </div>
 
-  <!-- RIGHT: Form -->
+  <!-- RIGHT: Narrative Form -->
   <div class="contact-right" id="contact-right">
     <div class="form-wrap">
-      <div class="form-header">
-        <div class="section-label" data-i18n="form_label">Votre message</div>
-        <h2 data-i18n-html="form_title">Une conversation,<br>un premier <em>échange.</em></h2>
-      </div>
-
-      <!-- Form (Formspree — replace XXXXXXXX with your form ID) -->
-      <form id="contact-form" action="https://formspree.io/f/XXXXXXXX" method="POST">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="field-nom" data-i18n="form_name_label">Nom</label>
-            <input type="text" id="field-nom" name="name" required
-                   data-i18n-placeholder="form_name_placeholder" placeholder="Votre nom">
+      <div class="nf" id="nf">
+        <form id="cf" action="https://formspree.io/f/xbdzqlqd" method="POST">
+          <div class="nc" id="nc"></div>
+          <div class="sub-row" id="subRow">
+            <button type="submit" class="sub-btn" id="subBtn"></button>
+            <div class="err-msg" id="errMsg"></div>
           </div>
-          <div class="form-group">
-            <label for="field-email" data-i18n="form_email_label">Email</label>
-            <input type="email" id="field-email" name="email" required
-                   data-i18n-placeholder="form_email_placeholder" placeholder="votre@email.com">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="field-objet" data-i18n="form_subject_label">Objet</label>
-          <select id="field-objet" name="subject" required>
-            <option value="" data-i18n="form_subject_default">Sélectionner…</option>
-            <option value="Conseil" data-i18n="form_subject_conseil">Conseil</option>
-            <option value="Direction externalisée" data-i18n="form_subject_direction">Direction externalisée</option>
-            <option value="Intelligence Appliquée" data-i18n="form_subject_ia">Intelligence Appliquée</option>
-            <option value="Autre" data-i18n="form_subject_other">Autre</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="field-message" data-i18n="form_message_label">Message</label>
-          <textarea id="field-message" name="message" required
-                    data-i18n-placeholder="form_message_placeholder"
-                    placeholder="Décrivez brièvement votre situation ou votre question…"></textarea>
-        </div>
-        <button type="submit" class="btn-submit" data-i18n="form_submit">Envoyer</button>
-        <p class="form-note" data-i18n-html="form_note">Vos données sont utilisées uniquement pour traiter votre demande. <a href="mentions-legales.html">Mentions légales</a>.</p>
-      </form>
-
-      <div class="form-success" id="form-success">
-        <h3 data-i18n="success_title">Message envoyé.</h3>
-        <p data-i18n="success_body">Merci. Je vous réponds dans les 24h.</p>
+        </form>
+        <div class="success-msg" id="successMsg"></div>
       </div>
+      <span class="sizer" id="sizer"></span>
+      <span class="sizer" id="ccSizer" style="font-size:1.5rem"></span>
     </div>
   </div>
 
@@ -668,145 +788,490 @@ footer {
 </footer>
 
 <script>
-// ─── TRANSLATIONS ───────────────────────────────────────────────────────────
+/* ─── NARRATIVE FORM TRANSLATIONS ─────────────────────────────────── */
 const T = {
   fr: {
-    nav_conseil: 'Conseil',
-    nav_direction: 'Direction',
-    nav_ia: 'Intelligence IA',
-    nav_contact: 'Contact',
-    left_label: 'Entrons en contact',
-    contact_title: 'Parlons-nous.',
-    contact_subtitle: 'Pas de formulaire à 15 champs. Pas de chatbot. Une conversation entre dirigeants.',
-    info_email_label: 'Email',
-    info_location_label: 'Localisation',
-    info_location: 'Abidjan, Côte d\'Ivoire',
-    info_scope_label: 'Périmètre',
-    info_scope: 'Afrique de l\'Ouest · Afrique Centrale · International',
-    info_response_label: 'Délai',
-    info_response: 'Réponse sous 24h',
-    contact_quote: '"Les meilleures décisions commencent par une conversation honnête."',
-    form_label: 'Votre message',
-    form_title: 'Une conversation,<br>un premier <em>échange.</em>',
-    form_name_label: 'Nom',
-    form_name_placeholder: 'Votre nom',
-    form_email_label: 'Email',
-    form_email_placeholder: 'votre@email.com',
-    form_subject_label: 'Objet',
-    form_subject_default: 'Sélectionner…',
-    form_subject_conseil: 'Conseil',
-    form_subject_direction: 'Direction externalisée',
-    form_subject_ia: 'Intelligence Appliquée',
-    form_subject_other: 'Autre',
-    form_message_label: 'Message',
-    form_message_placeholder: 'Décrivez brièvement votre situation ou votre question…',
-    form_submit: 'Envoyer',
-    form_note: 'Vos données sont utilisées uniquement pour traiter votre demande. <a href="mentions-legales.html">Mentions légales</a>.',
-    success_title: 'Message envoyé.',
-    success_body: 'Merci. Je vous réponds dans les 24h.',
-    footer_legal: 'Mentions légales',
-    footer_contact: 'Contact',
+    subtitle : 'Prenons contact',
+    submit   : 'Envoyer',
+    sending  : '…',
+    success  : 'Message transmis.',
+    errFill  : 'Veuillez compléter tous les champs.',
+    errEmail : 'Adresse email invalide.',
+    ph: { name:'votre nom', role:'votre fonction', company:'votre organisation',
+          message:'décrivez brièvement votre contexte…', email:'votre@email.com', phone:'numéro' },
+    subjectPh: 'choisir un sujet',
+    subjects: [
+      { v:'conseil',      t:'le conseil stratégique et organisationnel' },
+      { v:'direction',    t:'la direction externalisée' },
+      { v:'ia',           t:"l\u2019implémentation de l\u2019IA dans mon entreprise" },
+      { v:'implantation', t:'mon installation en Côte d\u2019Ivoire' },
+      { v:'autre',        t:'différents sujets' }
+    ],
+    narrative: [
+      ['Je m\u2019appelle\u00a0', {f:'name'}, '.\u00a0 Je suis\u00a0', {f:'role'}, ' au sein de\u00a0', {f:'company'}, '\u00a0.'],
+      ['Je souhaite échanger sur\u00a0', {f:'subject'}, '\u00a0.'],
+      ['Voici ma situation en quelques mots\u00a0:'],
+      [{f:'message'}],
+      ['Vous pouvez me joindre à\u00a0', {f:'email'}, ' ou au\u00a0', {f:'phone'}, '.']
+    ]
   },
   en: {
-    nav_conseil: 'Advisory',
-    nav_direction: 'Fractional',
-    nav_ia: 'Applied AI',
-    nav_contact: 'Contact',
-    left_label: 'Get in touch',
-    contact_title: "Let's talk.",
-    contact_subtitle: 'No 15-field form. No chatbot. A conversation between leaders.',
-    info_email_label: 'Email',
-    info_location_label: 'Location',
-    info_location: 'Abidjan, Côte d\'Ivoire',
-    info_scope_label: 'Scope',
-    info_scope: 'West Africa · Central Africa · International',
-    info_response_label: 'Response time',
-    info_response: 'Within 24h',
-    contact_quote: '"The best decisions start with an honest conversation."',
-    form_label: 'Your message',
-    form_title: 'A conversation,<br>a first <em>exchange.</em>',
-    form_name_label: 'Name',
-    form_name_placeholder: 'Your name',
-    form_email_label: 'Email',
-    form_email_placeholder: 'your@email.com',
-    form_subject_label: 'Subject',
-    form_subject_default: 'Select…',
-    form_subject_conseil: 'Advisory',
-    form_subject_direction: 'Fractional Executive',
-    form_subject_ia: 'Applied Intelligence',
-    form_subject_other: 'Other',
-    form_message_label: 'Message',
-    form_message_placeholder: 'Briefly describe your situation or question…',
-    form_submit: 'Send',
-    form_note: 'Your data is used solely to process your request. <a href="mentions-legales.html">Legal notice</a>.',
-    success_title: 'Message sent.',
-    success_body: 'Thank you. I will reply within 24h.',
-    footer_legal: 'Legal notice',
-    footer_contact: 'Contact',
+    subtitle : 'Get in touch',
+    submit   : 'Send',
+    sending  : '…',
+    success  : 'Message sent.',
+    errFill  : 'Please complete all fields.',
+    errEmail : 'Invalid email address.',
+    ph: { name:'your name', role:'your role', company:'your organization',
+          message:'briefly describe your context…', email:'your@email.com', phone:'number' },
+    subjectPh: 'choose a topic',
+    subjects: [
+      { v:'conseil',      t:'strategic and organizational advisory' },
+      { v:'direction',    t:'fractional executive management' },
+      { v:'ia',           t:'AI implementation in my company' },
+      { v:'implantation', t:'establishing my business in Côte d\u2019Ivoire' },
+      { v:'autre',        t:'various topics' }
+    ],
+    narrative: [
+      ['My name is\u00a0', {f:'name'}, '.\u00a0 I am\u00a0', {f:'role'}, ' at\u00a0', {f:'company'}, '.'],
+      ['I would like to discuss\u00a0', {f:'subject'}, '.'],
+      ['Here is my situation in a few words:'],
+      [{f:'message'}],
+      ['You can reach me at\u00a0', {f:'email'}, ' or at\u00a0', {f:'phone'}, '.']
+    ]
   }
 };
 
-let currentLang = 'fr';
+/* ─── COUNTRY CODES (Africa-first) ───────────────────────────────── */
+const CC = [
+  { code:'+225', label:"🇨🇮 +225" }, { code:'+221', label:"🇸🇳 +221" },
+  { code:'+237', label:"🇨🇲 +237" }, { code:'+223', label:"🇲🇱 +223" },
+  { code:'+226', label:"🇧🇫 +226" }, { code:'+228', label:"🇹🇬 +228" },
+  { code:'+229', label:"🇧🇯 +229" }, { code:'+224', label:"🇬🇳 +224" },
+  { code:'+227', label:"🇳🇪 +227" }, { code:'+212', label:"🇲🇦 +212" },
+  { code:'+216', label:"🇹🇳 +216" }, { code:'+234', label:"🇳🇬 +234" },
+  { code:'+233', label:"🇬🇭 +233" }, { code:'+254', label:"🇰🇪 +254" },
+  { code:'+27',  label:"🇿🇦 +27"  }, { code:'+255', label:"🇹🇿 +255" },
+  { code:'+243', label:"🇨🇩 +243" }, { code:'+242', label:"🇨🇬 +242" },
+  { code:'+241', label:"🇬🇦 +241" }, { code:'+250', label:"🇷🇼 +250" },
+  { code:'+33',  label:"🇫🇷 +33"  }, { code:'+32',  label:"🇧🇪 +32"  },
+  { code:'+41',  label:"🇨🇭 +41"  }, { code:'+44',  label:"🇬🇧 +44"  },
+  { code:'+1',   label:"🇺🇸 +1"   }, { code:'+971', label:"🇦🇪 +971" }
+];
 
-function setLang(lang) {
-  currentLang = lang;
-  document.documentElement.lang = lang;
+/* ─── STATE ─────────────────────────────────────────────────────── */
+let lang       = 'fr';
+let selSubject = '';
+let vals       = { name:'', role:'', company:'', message:'', email:'', phone:'' };
 
-  // Update title
-  const titleEl = document.querySelector('title');
-  titleEl.textContent = lang === 'fr'
-    ? 'Parlons-nous — ORI7ON Advisory'
-    : "Let's Talk — ORI7ON Advisory";
+/* ─── DOM REFS ──────────────────────────────────────────────────── */
+const nc      = document.getElementById('nc');
+const nf      = document.getElementById('nf');
+const cf      = document.getElementById('cf');
+const subBtn  = document.getElementById('subBtn');
+const subRow  = document.getElementById('subRow');
+const errMsg  = document.getElementById('errMsg');
+const succMsg = document.getElementById('successMsg');
+const sizer   = document.getElementById('sizer');
+const ccSizer = document.getElementById('ccSizer');
 
-  // data-i18n: textContent
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (T[lang][key] !== undefined) el.textContent = T[lang][key];
+/* ─── RENDER ────────────────────────────────────────────────────── */
+function render() {
+  const t = T[lang];
+  subBtn.textContent = t.submit;
+  succMsg.textContent = t.success;
+  nc.innerHTML = '';
+
+  const allEls = [];
+
+  t.narrative.forEach(line => {
+    const lineDiv = document.createElement('div');
+    lineDiv.className = 'nl';
+
+    line.forEach(tok => {
+      if (typeof tok === 'string') {
+        tok.split(/(\s+)/).filter(Boolean).forEach(part => {
+          const sp = document.createElement('span');
+          sp.className = 'w';
+          sp.textContent = part;
+          lineDiv.appendChild(sp);
+          allEls.push(sp);
+        });
+      } else {
+        const fw = buildField(tok.f, t);
+        lineDiv.appendChild(fw);
+        allEls.push(fw);
+      }
+    });
+
+    nc.appendChild(lineDiv);
   });
 
-  // data-i18n-html: innerHTML
-  document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    const key = el.getAttribute('data-i18n-html');
-    if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
-  });
-
-  // data-i18n-placeholder
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    if (T[lang][key] !== undefined) el.placeholder = T[lang][key];
-  });
-
-  // Select options
-  document.querySelectorAll('select option[data-i18n]').forEach(opt => {
-    const key = opt.getAttribute('data-i18n');
-    if (T[lang][key] !== undefined) opt.textContent = T[lang][key];
-  });
-
-  // Lang buttons
-  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  rebuildSubjectOptions(t);
+  restoreVals();
+  nc.querySelectorAll('input[type=text],input[type=email],.phone-inp').forEach(el => autoW(el));
+  const ta = nc.querySelector('textarea');
+  if (ta) autoH(ta);
+  sizeCCSel();
+  entrance(allEls);
 }
 
-// ─── ANIMATIONS ON LOAD ─────────────────────────────────────────────────────
+/* ─── BUILD FIELD ───────────────────────────────────────────────── */
+function buildField(name, t) {
+  if (name === 'subject') return buildSubjectField(t);
+  if (name === 'message') return buildMessageField(t);
+  if (name === 'phone')   return buildPhoneField(t);
+
+  const fw = document.createElement('span');
+  fw.className = 'fw';
+  fw.dataset.field = name;
+
+  const inp = document.createElement('input');
+  inp.type = name === 'email' ? 'email' : 'text';
+  inp.name = name;
+  inp.placeholder = t.ph[name];
+  inp.required = (name === 'name' || name === 'email');
+  inp.addEventListener('input',  () => { vals[name] = inp.value; autoW(inp); });
+  inp.addEventListener('focus',  () => focusOn(fw));
+  inp.addEventListener('blur',   () => schedBlur());
+
+  fw.appendChild(inp);
+  return fw;
+}
+
+function buildMessageField(t) {
+  const fw = document.createElement('span');
+  fw.className = 'fw block';
+  fw.dataset.field = 'message';
+
+  const ta = document.createElement('textarea');
+  ta.name = 'message';
+  ta.placeholder = t.ph.message;
+  ta.rows = 1;
+  ta.required = true;
+  ta.addEventListener('input',  () => { vals.message = ta.value; autoH(ta); });
+  ta.addEventListener('focus',  () => focusOn(fw));
+  ta.addEventListener('blur',   () => schedBlur());
+
+  fw.appendChild(ta);
+  return fw;
+}
+
+function buildSubjectField(t) {
+  const wrap = document.createElement('span');
+  wrap.className = 'fw csw';
+  wrap.id = 'csw';
+  wrap.dataset.field = 'subject';
+
+  const trigger = document.createElement('span');
+  trigger.className = 'cs-trigger';
+  trigger.id = 'csTrigger';
+  trigger.tabIndex = 0;
+  trigger.setAttribute('role', 'listbox');
+  setTriggerText(trigger, t);
+
+  const dd = document.createElement('div');
+  dd.className = 'cs-dd';
+  dd.id = 'csDD';
+
+  const native = document.createElement('select');
+  native.className = 'cs-native';
+  native.name = 'subject';
+  native.required = true;
+  const defOpt = document.createElement('option');
+  defOpt.value = ''; defOpt.disabled = true; defOpt.selected = !selSubject;
+  native.appendChild(defOpt);
+
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    wrap.classList.toggle('open');
+    if (wrap.classList.contains('open')) focusOn(wrap);
+  });
+  trigger.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger.click(); }
+    if (e.key === 'Escape') wrap.classList.remove('open');
+  });
+
+  wrap.appendChild(trigger);
+  wrap.appendChild(dd);
+  wrap.appendChild(native);
+  return wrap;
+}
+
+function rebuildSubjectOptions(t) {
+  const dd      = document.getElementById('csDD');
+  const trigger = document.getElementById('csTrigger');
+  const native  = cf.querySelector('select[name="subject"]');
+  const wrap    = document.getElementById('csw');
+  if (!dd || !trigger || !native) return;
+
+  dd.innerHTML = '';
+  while (native.options.length > 1) native.remove(1);
+
+  t.subjects.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.v; opt.textContent = s.t;
+    if (s.v === selSubject) opt.selected = true;
+    native.appendChild(opt);
+
+    const div = document.createElement('div');
+    div.className = 'cs-opt' + (s.v === selSubject ? ' sel' : '');
+    div.textContent = s.t;
+    div.addEventListener('click', e => {
+      e.stopPropagation();
+      selSubject = s.v;
+      native.value = s.v;
+      trigger.textContent = s.t;
+      dd.querySelectorAll('.cs-opt').forEach(o => o.classList.remove('sel'));
+      div.classList.add('sel');
+      wrap.classList.remove('open');
+      const ta = cf.querySelector('textarea');
+      if (ta) setTimeout(() => ta.focus(), 120);
+    });
+    dd.appendChild(div);
+  });
+
+  setTriggerText(trigger, t);
+}
+
+function setTriggerText(trigger, t) {
+  if (selSubject) {
+    const found = t.subjects.find(s => s.v === selSubject);
+    trigger.textContent = found ? found.t : t.subjectPh;
+  } else {
+    trigger.innerHTML = '<span class="ph">' + t.subjectPh + '</span>';
+  }
+}
+
+function buildPhoneField(t) {
+  const fw = document.createElement('span');
+  fw.className = 'fw';
+  fw.dataset.field = 'phone';
+
+  const group = document.createElement('span');
+  group.className = 'phone-group';
+
+  const sel = document.createElement('select');
+  sel.className = 'cc-select';
+  sel.name = 'phone_cc';
+  sel.id = 'ccSel';
+  CC.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.code;
+    opt.textContent = c.label;
+    if (c.code === '+225') opt.selected = true;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', sizeCCSel);
+  sel.addEventListener('focus',  () => focusOn(fw));
+  sel.addEventListener('blur',   () => schedBlur());
+
+  const inp = document.createElement('input');
+  inp.type = 'tel';
+  inp.className = 'phone-inp';
+  inp.name = 'phone';
+  inp.placeholder = t.ph.phone;
+  inp.addEventListener('input',  () => { vals.phone = inp.value; autoW(inp); });
+  inp.addEventListener('focus',  () => focusOn(fw));
+  inp.addEventListener('blur',   () => schedBlur());
+
+  group.appendChild(sel);
+  group.appendChild(inp);
+  fw.appendChild(group);
+  return fw;
+}
+
+/* ─── SIZE CC SELECT ───────────────────────────────────────────── */
+function sizeCCSel() {
+  const sel = document.getElementById('ccSel');
+  if (!sel) return;
+  const txt = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '🇨🇮 +225';
+  ccSizer.textContent = txt + '\u2002';
+  sel.style.width = (ccSizer.offsetWidth + 6) + 'px';
+}
+
+/* ─── AUTO-WIDTH INPUT ─────────────────────────────────────────── */
+function autoW(inp) {
+  const val = inp.value || inp.placeholder || '';
+  sizer.style.fontStyle = (!inp.value && inp.placeholder) ? 'italic' : 'normal';
+  sizer.textContent = val;
+  inp.style.width = Math.max(sizer.offsetWidth + 10, 70) + 'px';
+}
+
+/* ─── AUTO-HEIGHT TEXTAREA ─────────────────────────────────────── */
+function autoH(ta) {
+  ta.style.height = 'auto';
+  ta.style.height = ta.scrollHeight + 'px';
+}
+
+/* ─── RESTORE VALUES AFTER LANG SWITCH ────────────────────────── */
+function restoreVals() {
+  ['name','role','company','email'].forEach(n => {
+    const el = cf.querySelector('input[name="'+n+'"]');
+    if (el && vals[n]) el.value = vals[n];
+  });
+  const ta = cf.querySelector('textarea');
+  if (ta && vals.message) ta.value = vals.message;
+  const ph = cf.querySelector('.phone-inp');
+  if (ph && vals.phone) ph.value = vals.phone;
+}
+
+/* ─── FOCUS DIMMING ────────────────────────────────────────────── */
+function focusOn(fw) {
+  document.body.classList.add('ff');
+  nc.querySelectorAll('.fw').forEach(el => el.classList.remove('fc'));
+  nc.querySelectorAll('.w').forEach(el => el.classList.remove('hl'));
+  fw.classList.add('fc');
+  const line = fw.closest('.nl');
+  if (line) line.querySelectorAll('.w').forEach(el => el.classList.add('hl'));
+}
+
+function schedBlur() {
+  setTimeout(() => {
+    const a = document.activeElement;
+    if (!a || !a.closest('.fw,.csw,.cc-select,.phone-inp,.cs-dd')) {
+      document.body.classList.remove('ff');
+      nc.querySelectorAll('.fw').forEach(el => el.classList.remove('fc'));
+      nc.querySelectorAll('.w').forEach(el => el.classList.remove('hl'));
+    }
+  }, 120);
+}
+
+/* ─── CLOSE DROPDOWNS ON OUTSIDE CLICK ────────────────────────── */
+document.addEventListener('click', e => {
+  const csw = document.getElementById('csw');
+  if (csw && !csw.contains(e.target)) csw.classList.remove('open');
+});
+
+/* ─── ENTRANCE ANIMATION ───────────────────────────────────────── */
+function entrance(items) {
+  let delay = 200;
+  items.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(8px)';
+    el.style.transition = 'none';
+    setTimeout(() => {
+      el.style.transition = 'opacity .4s ease, transform .4s ease';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, delay);
+    delay += 55;
+  });
+  setTimeout(() => subRow.classList.add('vis'), delay + 150);
+}
+
+/* ─── LANGUAGE SWITCH ──────────────────────────────────────────── */
+function setLang(l) {
+  if (l === lang) return;
+  // Save current values before re-render
+  ['name','role','company','email'].forEach(n => {
+    const el = cf.querySelector('input[name="'+n+'"]');
+    if (el) vals[n] = el.value;
+  });
+  const ta = cf.querySelector('textarea');
+  if (ta) vals.message = ta.value;
+  const ph = cf.querySelector('.phone-inp');
+  if (ph) vals.phone = ph.value;
+
+  lang = l;
+  document.documentElement.lang = l;
+  document.querySelector('title').textContent = l === 'fr'
+    ? 'Parlons-nous — ORI7ON Advisory'
+    : "Let's Talk — ORI7ON Advisory";
+  document.getElementById('btn-fr').classList.toggle('active', l === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  render();
+}
+
+/* ─── FORM SUBMISSION ──────────────────────────────────────────── */
+cf.addEventListener('submit', async e => {
+  e.preventDefault();
+  const t = T[lang];
+
+  const name    = (cf.querySelector('input[name="name"]')?.value    || '').trim();
+  const email   = (cf.querySelector('input[name="email"]')?.value   || '').trim();
+  const subject = selSubject;
+  const message = (cf.querySelector('textarea[name="message"]')?.value || '').trim();
+
+  if (!name || !email || !subject || !message) {
+    showErr(t.errFill); return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showErr(t.errEmail); return;
+  }
+
+  subBtn.disabled = true;
+  subBtn.textContent = t.sending;
+
+  const formData = new FormData(cf);
+  const ccSel = document.getElementById('ccSel');
+  const phInp = cf.querySelector('.phone-inp');
+  if (ccSel && phInp && phInp.value) {
+    formData.set('phone', ccSel.value + ' ' + phInp.value);
+    formData.delete('phone_cc');
+  }
+
+  try {
+    const res = await fetch(cf.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      showSuccess();
+    } else {
+      throw new Error('server');
+    }
+  } catch {
+    // Fallback: mailto
+    const role    = (cf.querySelector('input[name="role"]')?.value    || '').trim();
+    const company = (cf.querySelector('input[name="company"]')?.value || '').trim();
+    const trig    = document.getElementById('csTrigger');
+    const subText = trig ? trig.textContent : subject;
+    const body    = encodeURIComponent(
+      'Nom : '          + name    + '\n' +
+      'Fonction : '     + role    + '\n' +
+      'Organisation : ' + company + '\n' +
+      'Sujet : '        + subText + '\n\n' +
+      message
+    );
+    window.location.href = 'mailto:ydorier@ori7on.com'
+      + '?subject=' + encodeURIComponent('ORI7ON — ' + subText)
+      + '&body='    + body;
+    setTimeout(showSuccess, 600);
+  }
+});
+
+function showErr(msg) {
+  errMsg.textContent = msg;
+  errMsg.classList.add('vis');
+  setTimeout(() => errMsg.classList.remove('vis'), 3500);
+  subBtn.disabled = false;
+  subBtn.textContent = T[lang].submit;
+}
+
+function showSuccess() {
+  document.body.classList.remove('ff');
+  nf.classList.add('done');
+  succMsg.classList.add('vis');
+}
+
+/* ─── ANIMATIONS ON LOAD ─────────────────────────────────────────── */
 window.addEventListener('load', () => {
-  // Slide in panels after a short delay
   setTimeout(() => {
     document.getElementById('contact-left').classList.add('revealed');
     document.getElementById('contact-right').classList.add('revealed');
   }, 80);
 
-  // Gold line traces after panel has slid in
   setTimeout(() => {
     document.getElementById('gold-line-left').classList.add('traced');
   }, 600);
 
-  // Contact info items stagger in after panel arrives (~1000ms)
   const infoItems = document.querySelectorAll('.contact-info-item');
   infoItems.forEach((item, i) => {
     setTimeout(() => item.classList.add('visible'), 1000 + i * 130);
   });
 
-  // Quote and social fade in after all info items
   const quoteDelay = 1000 + infoItems.length * 130 + 300;
   setTimeout(() => {
     document.getElementById('contact-quote').classList.add('visible');
@@ -816,42 +1281,7 @@ window.addEventListener('load', () => {
   }, quoteDelay + 300);
 });
 
-// ─── FORM SUBMISSION ────────────────────────────────────────────────────────
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const form = this;
-  const btn = form.querySelector('.btn-submit');
-  const origText = btn.textContent;
-
-  btn.textContent = currentLang === 'fr' ? 'Envoi…' : 'Sending…';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (res.ok) {
-      form.style.display = 'none';
-      document.getElementById('form-success').classList.add('visible');
-    } else {
-      btn.textContent = currentLang === 'fr' ? 'Erreur — réessayez' : 'Error — try again';
-      btn.disabled = false;
-    }
-  } catch {
-    // Fallback: open mailto
-    const name = document.getElementById('field-nom').value;
-    const subject = document.getElementById('field-objet').value;
-    const msg = document.getElementById('field-message').value;
-    window.location.href = `mailto:yvan@ori7on.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg + '\n\n— ' + name)}`;
-    btn.textContent = origText;
-    btn.disabled = false;
-  }
-});
-
-// ─── NAV HIDE ON SCROLL ─────────────────────────────────────────────────────
+/* ─── NAV HIDE ON SCROLL ─────────────────────────────────────────── */
 let lastY = 0;
 const nav = document.getElementById('main-nav');
 nav.style.transition = 'transform 0.3s ease';
@@ -860,6 +1290,9 @@ window.addEventListener('scroll', () => {
   nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
   lastY = y;
 });
+
+/* ─── INIT ────────────────────────────────────────────────────────── */
+render();
 </script>
 </body>
 </html>

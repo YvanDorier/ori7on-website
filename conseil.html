@@ -72,21 +72,21 @@ nav {
 
 /* ─── LOGO IMAGES ─── */
 .nav-logo-img {
-  height: 32px;
+  height: 44px;
   width: auto;
   display: block;
 }
 .footer-logo-img {
-  height: 26px;
+  height: 32px;
   width: auto;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 @media (max-width: 768px) {
-  .nav-logo-img { height: 26px; }
-  .footer-logo-img { height: 22px; }
+  .nav-logo-img { height: 34px; }
+  .footer-logo-img { height: 26px; }
 }
 @media (max-width: 480px) {
-  .nav-logo-img { height: 22px; }
+  .nav-logo-img { height: 28px; }
 }
 
 .nav-links {
@@ -757,6 +757,80 @@ footer {
   .cta-conseil { padding: 64px 24px; }
   footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
 }
+
+/* ─── LANG SWITCH ─── */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 16px;
+}
+.lang-switch button {
+  background: transparent;
+  border: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 2px 0;
+  transition: color 0.2s;
+}
+.lang-switch button.active {
+  color: var(--green);
+  border-bottom: 1px solid var(--gold);
+}
+.lang-switch button:hover { color: var(--green); }
+.lang-sep { color: rgba(165,125,55,0.3); font-size: 0.7rem; }
+
+/* ─── BURGER ─── */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--green);
+  transition: all 0.3s ease;
+}
+.burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .burger { display: flex; }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 65px; left: 0; right: 0;
+    background: rgba(247,242,234,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    border-bottom: 1px solid rgba(165,125,55,0.15);
+    z-index: 99;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; text-align: center; }
+  .nav-links a {
+    display: block;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(165,125,55,0.08);
+    font-size: 0.8rem;
+  }
+  .lang-switch { margin-right: 8px; }
+}
 </style>
 </head>
 <body>
@@ -770,7 +844,17 @@ footer {
     <li><a href="intelligence-appliquee.html" style="color: #00A6A6;">Intelligence Appliquée</a></li>
     <li><a href="index.html#references">Références</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Parlons-nous</a>
+  <div style="display:flex;align-items:center;">
+    <div class="lang-switch">
+      <button class="active" onclick="setLang('fr')" id="btn-fr">FR</button>
+      <span class="lang-sep">|</span>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+    <a href="#contact" class="nav-cta">Parlons-nous</a>
+    <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -1003,7 +1087,7 @@ footer {
 <section class="cta-conseil" id="contact">
   <h2 class="reveal">Prêt à avoir une conversation<br><em>qui compte ?</em></h2>
   <p class="reveal">Premier échange de 30 minutes. Pour comprendre votre situation et voir si nous pouvons avancer ensemble.</p>
-  <a href="mailto:contact@ori7on.com" class="btn-cta-gold reveal">Parlons-nous</a>
+  <a href="/cdn-cgi/l/email-protection#b7d4d8d9c3d6d4c3f7d8c5de80d8d999d4d8da" class="btn-cta-gold reveal">Parlons-nous</a>
 </section>
 
 <!-- FOOTER -->
@@ -1012,12 +1096,12 @@ footer {
   <ul class="footer-links">
     <li><a href="#">LinkedIn</a></li>
     <li><a href="#">Mentions légales</a></li>
-    <li><a href="mailto:contact@ori7on.com">Contact</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#781b17160c191b0c38170a114f1716561b1715">Contact</a></li>
   </ul>
   <div class="footer-copy">© 2026 ORI7ON Advisory · Abidjan, Côte d'Ivoire</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ─── HERO TITLE word-by-word reveal ───
 const heroTitleEl = document.getElementById('heroTitle');
 const heroWords = "Votre entreprise mérite un regard qui a déjà porté les mêmes responsabilités.".split(' ');
@@ -1102,6 +1186,28 @@ window.addEventListener('scroll', () => {
   }
   lastY = y;
 });
+nav.style.transition = 'transform 0.3s ease';
+
+// ── Burger menu ──
+function toggleMenu(){
+  const burger = document.getElementById('burger');
+  const links  = document.querySelector('.nav-links');
+  burger.classList.toggle('open');
+  links.classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('burger').classList.remove('open');
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
+// ── Lang switch ──
+function setLang(l){
+  document.getElementById('btn-fr').classList.toggle('active', l==='fr');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.documentElement.lang = l;
+}
 </script>
 </body>
 </html>

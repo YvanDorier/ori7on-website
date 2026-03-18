@@ -168,8 +168,19 @@ nav {
   flex-direction: column;
 }
 
+/* Particle canvas */
+#particles-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* Gradient bar — top signal */
 .hero-gradient-bar {
+  position: relative;
+  z-index: 2;
   height: 4px;
   flex-shrink: 0;
   background: linear-gradient(90deg, #007A7A 0%, #00A6A6 35%, #33BBBB 65%, #F5A623 100%);
@@ -969,6 +980,7 @@ footer {
    HERO — gradient bar + split (title | terminal)
 ══════════════════════════════════════════ -->
 <section class="hero-ia">
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
   <div class="hero-gradient-bar"></div>
   <div class="hero-inner">
 
@@ -1705,6 +1717,103 @@ window.addEventListener('scroll', () => {
    INIT
 ═══════════════════════════════════════════ */
 renderTerminal('fr');
+
+/* ═══════════════════════════════════════════
+   PARTICLE NETWORK — Aether Flow (turquoise)
+   Canvas sur .hero-ia, fond transparent
+   pointer-events:none → contenu cliquable
+═══════════════════════════════════════════ */
+(function initParticles() {
+  const canvas = document.getElementById('particles-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const mouse = { x: null, y: null, radius: 160 };
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x    = Math.random() * canvas.width;
+      this.y    = Math.random() * canvas.height;
+      this.size = Math.random() * 1.8 + 0.5;
+      this.dx   = (Math.random() - 0.5) * 0.38;
+      this.dy   = (Math.random() - 0.5) * 0.38;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,166,166,0.75)';
+      ctx.fill();
+    }
+    update() {
+      if (this.x > canvas.width  || this.x < 0) this.dx = -this.dx;
+      if (this.y > canvas.height || this.y < 0) this.dy = -this.dy;
+      if (mouse.x !== null) {
+        const dx = mouse.x - this.x, dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius + this.size) {
+          const f = (mouse.radius - dist) / mouse.radius;
+          this.x -= (dx / dist) * f * 4;
+          this.y -= (dy / dist) * f * 4;
+        }
+      }
+      this.x += this.dx;
+      this.y += this.dy;
+      this.draw();
+    }
+  }
+
+  function init() {
+    particles = [];
+    const n = Math.floor((canvas.width * canvas.height) / 9000);
+    for (let i = 0; i < n; i++) particles.push(new Particle());
+  }
+
+  function connect() {
+    const thresh = (canvas.width / 7) * (canvas.height / 7);
+    for (let a = 0; a < particles.length; a++) {
+      for (let b = a + 1; b < particles.length; b++) {
+        const dx = particles[a].x - particles[b].x;
+        const dy = particles[a].y - particles[b].y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < thresh) {
+          const op = 1 - d2 / thresh;
+          const near = mouse.x !== null &&
+            Math.hypot(particles[a].x - mouse.x, particles[a].y - mouse.y) < mouse.radius;
+          ctx.strokeStyle = near
+            ? `rgba(51,187,187,${(op * 0.9).toFixed(2)})`
+            : `rgba(0,166,166,${(op * 0.45).toFixed(2)})`;
+          ctx.lineWidth = 0.7;
+          ctx.beginPath();
+          ctx.moveTo(particles[a].x, particles[a].y);
+          ctx.lineTo(particles[b].x, particles[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => p.update());
+    connect();
+  }
+
+  function resize() {
+    const hero = document.querySelector('.hero-ia');
+    canvas.width  = hero ? hero.offsetWidth  : window.innerWidth;
+    canvas.height = hero ? hero.offsetHeight : window.innerHeight;
+    init();
+  }
+
+  window.addEventListener('resize',    resize,  { passive: true });
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+  window.addEventListener('mouseout',  ()  => { mouse.x = null;    mouse.y = null; });
+
+  resize();
+  animate();
+})();
 </script>
 </body>
 </html>

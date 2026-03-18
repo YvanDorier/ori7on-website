@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conseil — ORI7ON Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #343e3a;
+  --green-deep: #002d1a;
+  --green-light: #4a5550;
+  --gold: #CE9E5E;
+  --gold-light: #D4B278;
+  --cream: #f7f2ea;
+  --cream-dark: #ede5d4;
+  --ink: #1c1208;
+  --ink-mid: #4a3820;
+  --ink-muted: #8a7560;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  font-family: 'Jost', sans-serif;
+  color: var(--ink);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── GRAIN ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  background: rgba(247,242,234,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(165,125,55,0.15);
+  animation: fadeDown 0.8s ease both;
+  transition: transform 0.3s ease;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--gold); }
+
+/* ─── LOGO IMAGES ─── */
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+.footer-logo-img {
+  height: 26px;
+  width: auto;
+  opacity: 0.9;
+}
+@media (max-width: 768px) {
+  .nav-logo-img { height: 26px; }
+  .footer-logo-img { height: 22px; }
+}
+@media (max-width: 480px) {
+  .nav-logo-img { height: 22px; }
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--green); }
+.nav-links a.active { color: var(--green); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+.nav-cta {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--green);
+  padding: 10px 22px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-cta:hover { background: var(--green-light); }
+
+/* ─── HERO ─── */
+.hero-conseil {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 160px 80px 100px;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-conseil::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 0%, rgba(52,62,58,0.04) 100%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* Word-by-word hero title */
+.hero-title-conseil {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--green);
+  max-width: 900px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.hero-title-conseil .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  clip-path: inset(0 0 100% 0);
+  animation: wordReveal 0.6s ease forwards;
+  margin-right: 0.25em;
+}
+
+@keyframes wordReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+/* Gold line */
+.hero-gold-line {
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 48px;
+  animation: lineGrow 0.8s 1.4s ease forwards;
+}
+
+@keyframes lineGrow {
+  to { width: min(900px, 100%); }
+}
+
+.hero-subtitle-conseil {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--ink-mid);
+  max-width: 580px;
+  margin-bottom: 52px;
+  animation: fadeUp 0.8s 1.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  animation: fadeUp 0.8s 1.5s ease both;
+}
+
+.btn-primary {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--green);
+  padding: 16px 32px;
+  text-decoration: none;
+  transition: all 0.25s;
+  border: 2px solid var(--green);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--green);
+}
+
+.hero-micro {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+  margin-top: 16px;
+  animation: fadeUp 0.8s 1.7s ease both;
+}
+
+/* ─── SECTION GENERIC ─── */
+section { padding: 100px 80px; }
+
+.section-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+/* ─── CONVICTION ─── */
+.conviction-section {
+  background: var(--cream);
+  text-align: center;
+  padding: 100px 80px;
+}
+
+.conviction-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--green);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.conviction-text .phrase {
+  display: block;
+  overflow: hidden;
+}
+
+.conviction-text .phrase-inner {
+  display: block;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.conviction-text .phrase-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.conviction-text em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* ─── PILIERS ─── */
+.piliers-section {
+  background: var(--white);
+  padding: 100px 80px;
+}
+
+.piliers-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 300;
+  color: var(--green);
+  margin-bottom: 64px;
+  max-width: 700px;
+  line-height: 1.2;
+}
+
+.piliers-section h2 em { font-style: italic; color: var(--gold); }
+
+.piliers-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pilier-card {
+  background: var(--green-deep);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.pilier-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36px 48px;
+  cursor: pointer;
+  gap: 32px;
+}
+
+.pilier-header:hover .pilier-accroche { color: var(--gold-light); }
+
+.pilier-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(206,158,94,0.25);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 60px;
+}
+
+.pilier-header-content {
+  flex: 1;
+}
+
+.pilier-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.pilier-accroche {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(247,242,234,0.55);
+  transition: color 0.25s;
+}
+
+.pilier-toggle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  line-height: 1;
+  user-select: none;
+}
+
+.pilier-card.open .pilier-toggle {
+  transform: rotate(45deg);
+}
+
+.pilier-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.pilier-card.open .pilier-body {
+  max-height: 2000px;
+}
+
+.pilier-body-inner {
+  padding: 0 48px 48px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.pilier-texte {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(247,242,234,0.7);
+  max-width: 760px;
+  margin-bottom: 36px;
+  padding-top: 32px;
+}
+
+.pilier-missions-title {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.pilier-missions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}
+
+.pilier-missions li {
+  background: rgba(255,255,255,0.04);
+  border-left: 2px solid rgba(206,158,94,0.4);
+  padding: 18px 24px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pilier-missions li:hover {
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.06);
+}
+
+.pilier-missions li strong {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--cream);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.pilier-missions li span {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(247,242,234,0.5);
+}
+
+/* ─── DIFFERENCIATEUR ─── */
+.differenciateur-section {
+  background: var(--green);
+  padding: 100px 80px;
+  overflow: hidden;
+}
+
+.differenciateur-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.diff-left {
+  overflow: hidden;
+}
+
+.diff-left .section-label { color: var(--gold-light); }
+.diff-left .section-label::after { background: var(--gold-light); }
+
+.diff-left h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.25;
+  margin-bottom: 36px;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.diff-left h2.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.diff-left p {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(247,242,234,0.7);
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s 0.2s ease, transform 0.8s 0.2s ease;
+}
+
+.diff-left p.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.diff-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diff-portrait-wrap {
+  width: 320px;
+  height: 380px;
+  position: relative;
+  opacity: 0;
+  clip-path: circle(0% at 50% 50%);
+  transition: opacity 0.8s 0.4s ease, clip-path 1s 0.4s ease;
+}
+
+.diff-portrait-wrap.visible {
+  opacity: 1;
+  clip-path: circle(75% at 50% 50%);
+}
+
+.diff-portrait-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(0,45,26,0.6) 0%, rgba(0,45,26,0.9) 100%);
+  border: 1px solid rgba(206,158,94,0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.diff-portrait-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  color: rgba(206,158,94,0.35);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.diff-portrait-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.diff-accent-line {
+  width: 1px;
+  height: 0;
+  background: var(--gold);
+  position: absolute;
+  right: -24px;
+  top: 0;
+  transition: height 1s 0.6s ease;
+}
+
+.diff-portrait-wrap.visible .diff-accent-line {
+  height: 100%;
+}
+
+/* ─── CTA SECTION ─── */
+.cta-conseil {
+  background: var(--green-deep);
+  padding: 100px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-conseil::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 1s ease;
+}
+
+.cta-conseil.line-visible::before {
+  width: 60%;
+}
+
+.cta-conseil h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.cta-conseil h2 em { font-style: italic; color: var(--gold-light); }
+
+.cta-conseil p {
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(247,242,234,0.6);
+  max-width: 520px;
+  margin: 0 auto 44px;
+}
+
+.btn-cta-gold {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--gold);
+  padding: 18px 48px;
+  text-decoration: none;
+  border: 2px solid var(--gold);
+  transition: all 0.25s;
+  display: inline-block;
+  transform: scale(1);
+}
+
+.btn-cta-gold:hover {
+  background: transparent;
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+  transform: scale(1.03);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--green-deep);
+  padding: 48px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(165,125,55,0.2);
+}
+
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--cream);
+  letter-spacing: 0.1em;
+}
+
+.footer-brand span { color: var(--gold); }
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.footer-links a {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(247,242,234,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--gold-light); }
+
+.footer-copy {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: rgba(247,242,234,0.25);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  section { padding: 64px 24px; }
+  .hero-conseil { padding: 120px 24px 64px; }
+  .conviction-section { padding: 64px 24px; }
+  .piliers-section { padding: 64px 24px; }
+  .pilier-header { padding: 24px; }
+  .pilier-body-inner { padding: 0 24px 32px; }
+  .differenciateur-section { padding: 64px 24px; }
+  .differenciateur-grid { grid-template-columns: 1fr; gap: 48px; }
+  .diff-portrait-wrap { width: 100%; max-width: 320px; margin: 0 auto; }
+  .cta-conseil { padding: 64px 24px; }
+  footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logos/logo-light.png" alt="ORI7ON Advisory" class="nav-logo-img"></a>
+  <ul class="nav-links">
+    <li><a href="conseil.html" class="active">Conseil</a></li>
+    <li><a href="direction-externalisee.html">Direction externalisée</a></li>
+    <li><a href="intelligence-appliquee.html" style="color: #00A6A6;">Intelligence Appliquée</a></li>
+    <li><a href="index.html#references">Références</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Parlons-nous</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero-conseil">
+  <div class="hero-eyebrow">Conseil · ORI7ON Advisory</div>
+
+  <h1 class="hero-title-conseil" id="heroTitle">
+    <!-- Words injected by JS -->
+  </h1>
+
+  <div class="hero-gold-line"></div>
+
+  <p class="hero-subtitle-conseil">
+    Diagnostic. Stratégie. Exécution.<br>
+    J'interviens là où la théorie ne suffit plus.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Parlons-nous</a>
+  </div>
+  <p class="hero-micro">Un premier échange, sans engagement.</p>
+</section>
+
+<!-- CONVICTION -->
+<section class="conviction-section" id="conviction">
+  <div class="conviction-text">
+    <span class="phrase"><span class="phrase-inner">Un bon conseil, c'est celui que vous pouvez appliquer dès lundi matin.</span></span>
+    <span class="phrase"><span class="phrase-inner">Pas une présentation de 80 slides.</span></span>
+    <span class="phrase"><span class="phrase-inner">Pas un audit qui finit dans un tiroir.</span></span>
+    <span class="phrase" style="margin-top: 0.4em; display:block;"><span class="phrase-inner"><em>Un plan d'action, une feuille de route, un résultat mesurable.</em></span></span>
+  </div>
+</section>
+
+<!-- LES 4 PILIERS -->
+<section class="piliers-section" id="piliers">
+  <div class="section-label reveal">Les piliers du conseil</div>
+  <h2 class="reveal">Quatre angles d'intervention.<br><em>Un seul objectif : la création de valeur.</em></h2>
+
+  <div class="piliers-grid">
+
+    <!-- PILIER 1 -->
+    <div class="pilier-card reveal" id="pilier1">
+      <div class="pilier-header" onclick="togglePilier('pilier1')">
+        <div class="pilier-num">01</div>
+        <div class="pilier-header-content">
+          <div class="pilier-title">Stratégie & Performance</div>
+          <div class="pilier-accroche">Voir clair. Décider vite. Exécuter juste.</div>
+        </div>
+        <div class="pilier-toggle">+</div>
+      </div>
+      <div class="pilier-body">
+        <div class="pilier-body-inner">
+          <p class="pilier-texte">
+            Vous savez que quelque chose ne fonctionne pas. Vous avez peut-être même identifié le problème. Ce qui manque, c'est quelqu'un qui a déjà résolu ce type de problème, dans votre contexte, avec vos contraintes.
+          </p>
+          <div class="pilier-missions-title">Missions</div>
+          <ul class="pilier-missions">
+            <li>
+              <strong>Diagnostic stratégique 360°</strong>
+              <span>Positionnement, concurrence, performance financière et opérationnelle. Livrable : rapport + recommandations actionnables sous 3 semaines.</span>
+            </li>
+            <li>
+              <strong>Plan stratégique & feuille de route</strong>
+              <span>Co-construction sur 12 à 36 mois, avec jalons, indicateurs et suivi. Pas un document de plus : un outil de pilotage.</span>
+            </li>
+            <li>
+              <strong>Pilotage de performance</strong>
+              <span>Tableaux de bord, revues mensuelles, rituels de gouvernance. L'objectif : que le dirigeant reprenne le contrôle de ses chiffres.</span>
+            </li>
+            <li>
+              <strong>Repositionnement & pivot</strong>
+              <span>Quand le marché a bougé et que le modèle n'a pas suivi. Diagnostic, redéfinition de l'offre, plan de transition.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PILIER 2 -->
+    <div class="pilier-card reveal" id="pilier2">
+      <div class="pilier-header" onclick="togglePilier('pilier2')">
+        <div class="pilier-num">02</div>
+        <div class="pilier-header-content">
+          <div class="pilier-title">Finance & Restructuration</div>
+          <div class="pilier-accroche">La finance n'est pas un département. C'est le langage de la décision.</div>
+        </div>
+        <div class="pilier-toggle">+</div>
+      </div>
+      <div class="pilier-body">
+        <div class="pilier-body-inner">
+          <p class="pilier-texte">
+            Trop de PME africaines pilotent à vue. La trésorerie est tendue, les reporting approximatifs, les décisions prises dans l'urgence. J'interviens pour installer la rigueur et redonner au dirigeant la maîtrise de ses arbitrages.
+          </p>
+          <div class="pilier-missions-title">Missions</div>
+          <ul class="pilier-missions">
+            <li>
+              <strong>Diagnostic financier & restructuration</strong>
+              <span>Structure de coûts, BFR, dette. Plan avec priorisation et calendrier réaliste.</span>
+            </li>
+            <li>
+              <strong>Optimisation de trésorerie</strong>
+              <span>Cartographie des flux, négociation fournisseurs/banques, outils de prévision.</span>
+            </li>
+            <li>
+              <strong>Construction du contrôle de gestion</strong>
+              <span>Mise en place d'un vrai contrôle de gestion : suivi budgétaire, analyse des écarts, reporting mensuel structuré. Pour les entreprises qui pilotent encore à vue ou avec des tableurs approximatifs.</span>
+            </li>
+            <li>
+              <strong>Mise en place du suivi budgétaire</strong>
+              <span>Budget annuel, suivi mensuel, analyse des écarts, rituels de revue. Transformer le budget d'un exercice administratif en outil de pilotage opérationnel.</span>
+            </li>
+            <li>
+              <strong>Gestion de trésorerie multi-devises</strong>
+              <span>Pour les groupes opérant sur plusieurs pays et devises. Structuration des flux, couverture de change, consolidation.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PILIER 3 -->
+    <div class="pilier-card reveal" id="pilier3">
+      <div class="pilier-header" onclick="togglePilier('pilier3')">
+        <div class="pilier-num">03</div>
+        <div class="pilier-header-content">
+          <div class="pilier-title">Organisation & Efficacité Opérationnelle</div>
+          <div class="pilier-accroche">Pas de stratégie sans machine qui l'exécute.</div>
+        </div>
+        <div class="pilier-toggle">+</div>
+      </div>
+      <div class="pilier-body">
+        <div class="pilier-body-inner">
+          <p class="pilier-texte">
+            La stratégie la plus brillante s'effondre si l'organisation ne suit pas. Je restructure les processus, je clarifie les rôles, j'installe les indicateurs pour que l'entreprise fonctionne même quand le dirigeant n'est pas dans la pièce.
+          </p>
+          <div class="pilier-missions-title">Missions</div>
+          <ul class="pilier-missions">
+            <li>
+              <strong>Réorganisation des processus</strong>
+              <span>Cartographie des flux, goulots, refonte des processus critiques.</span>
+            </li>
+            <li>
+              <strong>Structuration des fonctions</strong>
+              <span>Organigramme, fiches de poste, délégations de pouvoir. Clarifier qui fait quoi et qui décide quoi.</span>
+            </li>
+            <li>
+              <strong>Mise en place de KPIs & reporting</strong>
+              <span>Définir ce qui compte, le mesurer, le partager. Tableaux de bord adaptés au dirigeant.</span>
+            </li>
+            <li>
+              <strong>Accompagnement au changement</strong>
+              <span>Conduite du changement pragmatique, terrain, itérative. Pas de PowerPoint, de la présence.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PILIER 4 -->
+    <div class="pilier-card reveal" id="pilier4">
+      <div class="pilier-header" onclick="togglePilier('pilier4')">
+        <div class="pilier-num">04</div>
+        <div class="pilier-header-content">
+          <div class="pilier-title">Implantation en Côte d'Ivoire</div>
+          <div class="pilier-accroche">Le marché ivoirien ne se lit pas dans un rapport. Il se vit.</div>
+        </div>
+        <div class="pilier-toggle">+</div>
+      </div>
+      <div class="pilier-body">
+        <div class="pilier-body-inner">
+          <p class="pilier-texte">
+            Vous êtes un groupe étranger qui veut s'implanter, ou un investisseur qui veut comprendre le terrain avant de s'engager. Mon rôle : raccourcir votre courbe d'apprentissage. Diviser par dix le temps qu'il vous faudrait pour comprendre qui fait quoi, ce qui marche et ce qui ne marche pas. Vous allez droit à l'essentiel.
+          </p>
+          <div class="pilier-missions-title">Missions</div>
+          <ul class="pilier-missions">
+            <li>
+              <strong>Pré-étude de faisabilité</strong>
+              <span>Une première lecture du marché basée sur ma connaissance de l'écosystème industriel et économique ivoirien, mon réseau, et une collecte ciblée d'informations. Pas une étude de marché formelle, mais une vision opérationnelle qui vous dit si ça vaut la peine d'aller plus loin, et dans quelle direction.</span>
+            </li>
+            <li>
+              <strong>Supervision d'études de marché</strong>
+              <span>Vous avez besoin d'une vraie étude terrain ? Je vous aide à sélectionner le bon cabinet, à cadrer la mission, et à contrôler la qualité des livrables. J'accompagne côté entreprise, pas côté prestataire.</span>
+            </li>
+            <li>
+              <strong>Accompagnement à l'implantation</strong>
+              <span>Structure juridique, partenaires locaux, introduction dans les réseaux patronaux (CGECI, EUROCHAM, UGECI).</span>
+            </li>
+            <li>
+              <strong>Intelligence économique</strong>
+              <span>Qui décide, qui bloque, où sont les opportunités. Le savoir informel qui fait la différence entre un projet qui avance et un projet qui s'enlise.</span>
+            </li>
+            <li>
+              <strong>Gestion des parties prenantes</strong>
+              <span>Administration, institutions, partenaires locaux. Navigation dans un environnement où les relations comptent autant que les contrats.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DIFFÉRENCIATEUR -->
+<section class="differenciateur-section" id="differenciateur">
+  <div class="differenciateur-grid">
+
+    <div class="diff-left">
+      <div class="section-label" style="color: var(--gold-light);">Ce qui change tout</div>
+      <h2 id="diffTitle">Le sénior que vous rencontrez est le même qui travaille sur votre dossier.</h2>
+      <p id="diffText">
+        Chez ORI7ON, il n'y a pas de junior qui fait le travail pendant que le partner fait le pitch. Pas de consultant sorti d'école envoyé sur le terrain. Le conseil que vous achetez, c'est 20 ans de direction d'entreprise en Afrique de l'Ouest, appliqués directement à votre situation. Ce n'est pas un modèle scalable. C'est un choix. Le conseil de précision, c'est exactement ça.
+      </p>
+    </div>
+
+    <div class="diff-right">
+      <div class="diff-portrait-wrap" id="diffPortrait">
+        <div class="diff-portrait-bg">
+          <div class="diff-portrait-num">20</div>
+          <div class="diff-portrait-label">Ans de direction<br>d'entreprise en<br>Afrique de l'Ouest</div>
+        </div>
+        <div class="diff-accent-line"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-conseil" id="contact">
+  <h2 class="reveal">Prêt à avoir une conversation<br><em>qui compte ?</em></h2>
+  <p class="reveal">Premier échange de 30 minutes. Pour comprendre votre situation et voir si nous pouvons avancer ensemble.</p>
+  <a href="mailto:contact@ori7on.com" class="btn-cta-gold reveal">Parlons-nous</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><img src="logos/logo-dark.png" alt="ORI7ON Advisory" class="footer-logo-img"></div>
+  <ul class="footer-links">
+    <li><a href="#">LinkedIn</a></li>
+    <li><a href="#">Mentions légales</a></li>
+    <li><a href="mailto:contact@ori7on.com">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 ORI7ON Advisory · Abidjan, Côte d'Ivoire</div>
+</footer>
+
+<script>
+// ─── HERO TITLE word-by-word reveal ───
+const heroTitleEl = document.getElementById('heroTitle');
+const heroWords = "Votre entreprise mérite un regard qui a déjà porté les mêmes responsabilités.".split(' ');
+heroWords.forEach((word, i) => {
+  const span = document.createElement('span');
+  span.className = 'word';
+  span.textContent = word;
+  span.style.animationDelay = `${0.4 + i * 0.07}s`;
+  heroTitleEl.appendChild(span);
+});
+
+// ─── SCROLL REVEAL (generic) ───
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ─── CONVICTION phrase-by-phrase reveal ───
+const phrases = document.querySelectorAll('.phrase-inner');
+const phraseObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    phrases.forEach((phrase, i) => {
+      setTimeout(() => phrase.classList.add('visible'), i * 200);
+    });
+    phraseObserver.disconnect();
+  }
+}, { threshold: 0.3 });
+const convictionSection = document.querySelector('.conviction-section');
+if (convictionSection) phraseObserver.observe(convictionSection);
+
+// ─── DIFFERENCIATEUR lateral reveal ───
+const diffTitle = document.getElementById('diffTitle');
+const diffText = document.getElementById('diffText');
+const diffPortrait = document.getElementById('diffPortrait');
+
+const diffObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    diffTitle.classList.add('visible');
+    diffText.classList.add('visible');
+    diffPortrait.classList.add('visible');
+    diffObserver.disconnect();
+  }
+}, { threshold: 0.2 });
+const diffSection = document.querySelector('.differenciateur-section');
+if (diffSection) diffObserver.observe(diffSection);
+
+// ─── CTA gold line reveal ───
+const ctaSection = document.querySelector('.cta-conseil');
+const ctaObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    ctaSection.classList.add('line-visible');
+    ctaObserver.disconnect();
+  }
+}, { threshold: 0.4 });
+if (ctaSection) ctaObserver.observe(ctaSection);
+
+// ─── PILIER accordion ───
+function togglePilier(id) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.pilier-card').forEach(c => c.classList.remove('open'));
+  // Open this one if it wasn't open
+  if (!isOpen) card.classList.add('open');
+}
+
+// ─── NAV hide on scroll ───
+let lastY = 0;
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > lastY && y > 80) {
+    nav.style.transform = 'translateY(-100%)';
+  } else {
+    nav.style.transform = 'translateY(0)';
+  }
+  lastY = y;
+});
+</script>
+</body>
+</html>

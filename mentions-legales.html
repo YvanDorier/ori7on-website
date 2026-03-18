@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions légales — ORI7ON Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #343e3a;
+  --green-deep: #002d1a;
+  --green-light: #4a5550;
+  --gold: #CE9E5E;
+  --gold-light: #D4B278;
+  --cream: #f7f2ea;
+  --cream-dark: #ede5d4;
+  --ink: #1c1208;
+  --ink-mid: #4a3820;
+  --ink-muted: #8a7560;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  font-family: 'Jost', sans-serif;
+  color: var(--ink);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── GRAIN ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(247,242,234,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(165,125,55,0.15);
+  transition: transform 0.3s ease;
+  animation: fadeDown 0.7s ease both;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+
+/* ─── LOGO IMAGES ─── */
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+.footer-logo-img {
+  height: 26px;
+  width: auto;
+  opacity: 0.9;
+}
+@media (max-width: 768px) {
+  .nav-logo-img { height: 26px; }
+  .footer-logo-img { height: 22px; }
+}
+@media (max-width: 480px) {
+  .nav-logo-img { height: 22px; }
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+  padding: 4px 2px;
+  transition: color 0.2s;
+}
+.lang-btn:hover { color: var(--green); }
+.lang-btn.active { color: var(--green); font-weight: 500; }
+.lang-sep { color: var(--ink-muted); font-size: 0.65rem; opacity: 0.5; }
+
+/* ─── PAGE HEADER ─── */
+.page-header {
+  padding: 140px 0 64px;
+  text-align: center;
+  position: relative;
+}
+.page-header::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  margin: 32px auto 0;
+  opacity: 0.6;
+}
+.page-header .section-label {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.page-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  color: var(--green-deep);
+  line-height: 1.2;
+}
+
+/* ─── CONTENT ─── */
+.legal-content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 48px 120px;
+}
+
+.legal-section {
+  margin-bottom: 56px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.legal-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.legal-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--green-deep);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(206,158,94,0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.legal-section-title::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.legal-section p,
+.legal-section address {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.8;
+  font-style: normal;
+  margin-bottom: 12px;
+}
+.legal-section p:last-child { margin-bottom: 0; }
+
+.legal-section a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.legal-section a:hover { opacity: 0.7; }
+
+.legal-section strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.legal-note {
+  background: rgba(206,158,94,0.06);
+  border-left: 2px solid rgba(206,158,94,0.3);
+  padding: 16px 20px;
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+
+/* Date update */
+.legal-date {
+  text-align: center;
+  margin-bottom: 64px;
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  letter-spacing: 0.12em;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--green);
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.footer-brand span { color: var(--gold); }
+.footer-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+.footer-links a {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247,242,234,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold-light); }
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(247,242,234,0.3);
+  letter-spacing: 0.1em;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 700px) {
+  nav { padding: 18px 24px; }
+  .nav-links { display: none; }
+  .legal-content { padding: 0 24px 80px; }
+  footer { flex-direction: column; text-align: center; padding: 32px 24px; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html"><img src="logos/logo-light.png" alt="ORI7ON Advisory" class="nav-logo-img"></a>
+  <ul class="nav-links">
+    <li><a href="conseil.html" data-i18n="nav_conseil">Conseil</a></li>
+    <li><a href="direction-externalisee.html" data-i18n="nav_direction">Direction</a></li>
+    <li><a href="intelligence-appliquee.html" data-i18n="nav_ia">Intelligence IA</a></li>
+    <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn active" onclick="setLang('fr')" id="btn-fr">FR</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="section-label" data-i18n="header_label">Transparence & Légalité</div>
+  <h1 data-i18n="header_title">Mentions légales</h1>
+</header>
+
+<!-- CONTENT -->
+<main class="legal-content">
+
+  <p class="legal-date" data-i18n="legal_date">Dernière mise à jour : mars 2026</p>
+
+  <!-- Section 1 -->
+  <div class="legal-section" id="sec-1">
+    <h2 class="legal-section-title" data-i18n="sec1_title">Éditeur du site</h2>
+    <address>
+      <strong>ORI7ON Advisory</strong><br>
+      <span data-i18n="sec1_name">Yvan Dorier, Founder &amp; Chief Enabler</span><br>
+      <span data-i18n="sec1_location">Abidjan, Côte d'Ivoire</span><br>
+      <span data-i18n="sec1_email_label">Contact&nbsp;:</span> <a href="mailto:contact@ori7on.com">contact@ori7on.com</a>
+    </address>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="legal-section" id="sec-2">
+    <h2 class="legal-section-title" data-i18n="sec2_title">Hébergement</h2>
+    <address>
+      <strong>Vercel Inc.</strong><br>
+      340 S Lemon Ave #4133, Walnut, CA 91789, USA<br>
+      <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a>
+    </address>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="legal-section" id="sec-3">
+    <h2 class="legal-section-title" data-i18n="sec3_title">Propriété intellectuelle</h2>
+    <p data-i18n="sec3_body">
+      L'ensemble du contenu de ce site (textes, images, logo, design) est la propriété d'ORI7ON Advisory, sauf mention contraire. Toute reproduction, même partielle, est interdite sans autorisation préalable écrite.
+    </p>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="legal-section" id="sec-4">
+    <h2 class="legal-section-title" data-i18n="sec4_title">Données personnelles</h2>
+    <p data-i18n="sec4_body">
+      Les informations recueillies via le formulaire de contact sont destinées exclusivement à ORI7ON Advisory pour le traitement de votre demande. Elles ne sont transmises à aucun tiers.
+    </p>
+    <p data-i18n="sec4_rights">
+      Conformément à la loi ivoirienne n°2013-450 relative à la protection des données à caractère personnel, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ce droit&nbsp;: <a href="mailto:contact@ori7on.com">contact@ori7on.com</a>.
+    </p>
+    <div class="legal-note" data-i18n="sec4_note">
+      Note : ce site s'adressant également à des visiteurs basés dans l'Union européenne, les données sont traitées dans un esprit conforme au Règlement Général sur la Protection des Données (RGPD). Aucune donnée n'est conservée au-delà du délai nécessaire au traitement de votre demande.
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="legal-section" id="sec-5">
+    <h2 class="legal-section-title" data-i18n="sec5_title">Cookies et mesure d'audience</h2>
+    <p data-i18n="sec5_body">
+      Ce site utilise <strong>Plausible Analytics</strong>, un outil de mesure d'audience respectueux de la vie privée qui ne dépose aucun cookie et ne collecte aucune donnée personnelle identifiable. Aucun bandeau de consentement cookies n'est nécessaire.
+    </p>
+    <p data-i18n="sec5_calendly">
+      Si vous utilisez le formulaire de contact ou prenez rendez-vous via un outil intégré, cet outil tiers peut déposer des cookies techniques nécessaires à son fonctionnement.
+    </p>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="legal-section" id="sec-6">
+    <h2 class="legal-section-title" data-i18n="sec6_title">Responsabilité</h2>
+    <p data-i18n="sec6_body">
+      ORI7ON Advisory s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur ce site. Toutefois, la responsabilité de l'éditeur ne saurait être engagée en cas d'erreur ou d'omission dans le contenu, ni pour tout dommage résultant de l'utilisation des informations présentées.
+    </p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><img src="logos/logo-dark.png" alt="ORI7ON Advisory" class="footer-logo-img"></div>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/yvan-dorier" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="mentions-legales.html" data-i18n="footer_legal">Mentions légales</a></li>
+    <li><a href="contact.html" data-i18n="footer_contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 ORI7ON Advisory · Abidjan, Côte d'Ivoire</div>
+</footer>
+
+<script>
+// ─── TRANSLATIONS ───────────────────────────────────────────────────────────
+const T = {
+  fr: {
+    nav_conseil: 'Conseil',
+    nav_direction: 'Direction',
+    nav_ia: 'Intelligence IA',
+    nav_contact: 'Contact',
+    header_label: 'Transparence & Légalité',
+    header_title: 'Mentions légales',
+    legal_date: 'Dernière mise à jour : mars 2026',
+    sec1_title: 'Éditeur du site',
+    sec1_name: 'Yvan Dorier, Founder & Chief Enabler',
+    sec1_location: 'Abidjan, Côte d\'Ivoire',
+    sec1_email_label: 'Contact\u00a0:',
+    sec2_title: 'Hébergement',
+    sec3_title: 'Propriété intellectuelle',
+    sec3_body: "L'ensemble du contenu de ce site (textes, images, logo, design) est la propriété d'ORI7ON Advisory, sauf mention contraire. Toute reproduction, même partielle, est interdite sans autorisation préalable écrite.",
+    sec4_title: 'Données personnelles',
+    sec4_body: "Les informations recueillies via le formulaire de contact sont destinées exclusivement à ORI7ON Advisory pour le traitement de votre demande. Elles ne sont transmises à aucun tiers.",
+    sec4_rights: "Conformément à la loi ivoirienne n°2013-450 relative à la protection des données à caractère personnel, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ce droit\u00a0: contact@ori7on.com.",
+    sec4_note: "Note : ce site s'adressant également à des visiteurs basés dans l'Union européenne, les données sont traitées dans un esprit conforme au Règlement Général sur la Protection des Données (RGPD). Aucune donnée n'est conservée au-delà du délai nécessaire au traitement de votre demande.",
+    sec5_title: 'Cookies et mesure d\'audience',
+    sec5_body: "Ce site utilise Plausible Analytics, un outil de mesure d'audience respectueux de la vie privée qui ne dépose aucun cookie et ne collecte aucune donnée personnelle identifiable. Aucun bandeau de consentement cookies n'est nécessaire.",
+    sec5_calendly: "Si vous utilisez le formulaire de contact ou prenez rendez-vous via un outil intégré, cet outil tiers peut déposer des cookies techniques nécessaires à son fonctionnement.",
+    sec6_title: 'Responsabilité',
+    sec6_body: "ORI7ON Advisory s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur ce site. Toutefois, la responsabilité de l'éditeur ne saurait être engagée en cas d'erreur ou d'omission dans le contenu, ni pour tout dommage résultant de l'utilisation des informations présentées.",
+    footer_legal: 'Mentions légales',
+    footer_contact: 'Contact',
+  },
+  en: {
+    nav_conseil: 'Advisory',
+    nav_direction: 'Fractional',
+    nav_ia: 'Applied AI',
+    nav_contact: 'Contact',
+    header_label: 'Transparency & Compliance',
+    header_title: 'Legal Notice',
+    legal_date: 'Last updated: March 2026',
+    sec1_title: 'Site Publisher',
+    sec1_name: 'Yvan Dorier, Founder & Chief Enabler',
+    sec1_location: 'Abidjan, Côte d\'Ivoire',
+    sec1_email_label: 'Contact:',
+    sec2_title: 'Hosting',
+    sec3_title: 'Intellectual Property',
+    sec3_body: "All content on this website (text, images, logo, design) is the property of ORI7ON Advisory unless otherwise stated. Any reproduction, even partial, is prohibited without prior written authorization.",
+    sec4_title: 'Personal Data',
+    sec4_body: "Information collected through the contact form is intended solely for ORI7ON Advisory to process your inquiry. It is not shared with any third party.",
+    sec4_rights: "In accordance with Ivorian law n°2013-450 on the protection of personal data, you have the right to access, rectify, and delete your data. To exercise this right: contact@ori7on.com.",
+    sec4_note: "Note: as this site is also accessed by visitors based in the European Union, data is handled in a manner consistent with the General Data Protection Regulation (GDPR). No data is retained beyond the period necessary to process your request.",
+    sec5_title: 'Cookies & Analytics',
+    sec5_body: "This site uses Plausible Analytics, a privacy-friendly analytics tool that does not use cookies and does not collect any personally identifiable data. No cookie consent banner is required.",
+    sec5_calendly: "If you use the contact form or book an appointment via an integrated tool, that third-party tool may set technical cookies required for its operation.",
+    sec6_title: 'Liability',
+    sec6_body: "ORI7ON Advisory endeavors to ensure the accuracy and currency of the information published on this site. However, the publisher cannot be held liable for any errors or omissions in the content, nor for any damage resulting from the use of the information presented.",
+    footer_legal: 'Legal notice',
+    footer_contact: 'Contact',
+  }
+};
+
+let currentLang = 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelector('title').textContent = lang === 'fr'
+    ? 'Mentions légales — ORI7ON Advisory'
+    : 'Legal Notice — ORI7ON Advisory';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[lang][key] !== undefined) el.textContent = T[lang][key];
+  });
+
+  // Reconstruct sec4_rights with link
+  const sec4rights = document.querySelector('[data-i18n="sec4_rights"]');
+  if (sec4rights) {
+    const txt = T[lang].sec4_rights;
+    sec4rights.innerHTML = txt.replace('contact@ori7on.com', '<a href="mailto:contact@ori7on.com">contact@ori7on.com</a>');
+  }
+
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+
+// ─── SCROLL REVEAL ──────────────────────────────────────────────────────────
+const sections = document.querySelectorAll('.legal-section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+sections.forEach(s => observer.observe(s));
+
+// ─── NAV HIDE ON SCROLL ─────────────────────────────────────────────────────
+let lastY = 0;
+const nav = document.getElementById('main-nav');
+nav.style.transition = 'transform 0.3s ease';
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
+  lastY = y;
+});
+</script>
+</body>
+</html>

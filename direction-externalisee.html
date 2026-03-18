@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n-title="page-title">Direction externalisée — ORI7ON Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #343e3a;
+  --green-deep: #002d1a;
+  --green-light: #4a5550;
+  --gold: #CE9E5E;
+  --gold-light: #D4B278;
+  --cream: #f7f2ea;
+  --cream-dark: #ede5d4;
+  --ink: #1c1208;
+  --ink-mid: #4a3820;
+  --ink-muted: #8a7560;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  font-family: 'Jost', sans-serif;
+  color: var(--ink);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── GRAIN ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  background: rgba(247,242,234,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(165,125,55,0.15);
+  animation: fadeDown 0.8s ease both;
+  transition: transform 0.3s ease;
+  gap: 24px;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-logo span { color: var(--gold); }
+
+/* ─── LOGO IMAGES ─── */
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+.footer-logo-img {
+  height: 26px;
+  width: auto;
+  opacity: 0.9;
+}
+@media (max-width: 768px) {
+  .nav-logo-img { height: 26px; }
+  .footer-logo-img { height: 22px; }
+}
+@media (max-width: 480px) {
+  .nav-logo-img { height: 22px; }
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--green); }
+.nav-links a.active {
+  color: var(--green);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 2px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.nav-cta {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--green);
+  padding: 10px 22px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-cta:hover { background: var(--green-light); }
+
+/* ─── LANG SWITCHER ─── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lang-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.2s;
+}
+
+.lang-btn:hover { color: var(--green); }
+
+.lang-btn.active {
+  color: var(--green);
+  font-weight: 500;
+  border-bottom: 1px solid var(--gold);
+}
+
+.lang-sep {
+  font-size: 0.6rem;
+  color: var(--ink-muted);
+  opacity: 0.4;
+}
+
+/* ─── HERO ─── */
+.hero-dir {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 160px 80px 100px;
+  background: var(--green-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle geometric texture on hero */
+.hero-dir::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  border: 1px solid rgba(206,158,94,0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-dir::after {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  border: 1px solid rgba(206,158,94,0.04);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: var(--gold);
+}
+
+/* Word-by-word hero title */
+.hero-title-dir {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.6rem, 4.5vw, 4.6rem);
+  font-weight: 300;
+  line-height: 1.12;
+  color: var(--cream);
+  max-width: 920px;
+  margin-bottom: 16px;
+}
+
+.hero-title-dir .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  clip-path: inset(0 0 100% 0);
+  animation: wordReveal 0.55s ease forwards;
+  margin-right: 0.22em;
+}
+
+.hero-title-dir .word em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+@keyframes wordReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+/* Gold line under title */
+.hero-gold-line {
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 48px;
+  animation: lineGrow 0.9s 1.6s ease forwards;
+}
+
+@keyframes lineGrow {
+  to { width: min(920px, 100%); }
+}
+
+.hero-subtitle-dir {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(247,242,234,0.65);
+  max-width: 620px;
+  margin-bottom: 52px;
+  animation: fadeUp 0.8s 1.4s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  animation: fadeUp 0.8s 1.6s ease both;
+}
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--green);
+  padding: 16px 32px;
+  text-decoration: none;
+  transition: all 0.25s;
+  border: 2px solid var(--green);
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--cream);
+  border-color: var(--cream);
+}
+
+.btn-cta-gold {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--gold);
+  padding: 18px 48px;
+  text-decoration: none;
+  border: 2px solid var(--gold);
+  transition: all 0.25s;
+  display: inline-block;
+}
+
+.btn-cta-gold:hover {
+  background: transparent;
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+  transform: scale(1.02);
+}
+
+/* ─── SECTION GENERIC ─── */
+section { padding: 100px 80px; }
+
+.section-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+/* ─── PHILOSOPHIE ─── */
+.philosophie-section {
+  background: var(--white);
+  padding: 100px 80px;
+}
+
+.philosophie-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.philosophie-inner .section-label { justify-content: flex-start; }
+
+.philosophie-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--green);
+}
+
+.philosophie-quote em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* Phrase reveal for philosophie */
+.philo-phrase {
+  display: block;
+  overflow: hidden;
+}
+
+.philo-phrase-inner {
+  display: block;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.philo-phrase-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── SI VOUS ÊTES ─── */
+.sivous-section {
+  background: var(--cream);
+  padding: 100px 80px;
+}
+
+.sivous-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 300;
+  color: var(--green);
+  margin-bottom: 64px;
+  line-height: 1.2;
+}
+
+.sivous-section h2 em { font-style: italic; color: var(--gold); }
+
+.sivous-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sivous-card {
+  background: var(--white);
+  border: 2px solid transparent;
+  transition: border-color 0.25s ease, background 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.sivous-card:hover {
+  border-color: var(--gold);
+  background: var(--white);
+}
+
+.sivous-card.open {
+  border-color: var(--gold);
+}
+
+.sivous-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 40px;
+  gap: 24px;
+}
+
+.sivous-header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+}
+
+.sivous-icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(206,158,94,0.4);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 40px;
+}
+
+.sivous-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: var(--green);
+  line-height: 1.2;
+}
+
+.sivous-toggle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  line-height: 1;
+  user-select: none;
+  opacity: 0.6;
+}
+
+.sivous-card:hover .sivous-toggle,
+.sivous-card.open .sivous-toggle { opacity: 1; }
+
+.sivous-card.open .sivous-toggle { transform: rotate(45deg); }
+
+.sivous-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+
+.sivous-card.open .sivous-body { max-height: 400px; }
+
+.sivous-body-inner {
+  padding: 0 40px 32px 104px;
+  border-top: 1px solid var(--cream-dark);
+}
+
+.sivous-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink-mid);
+  padding-top: 24px;
+  max-width: 680px;
+}
+
+/* ─── LES 3 FONCTIONS ─── */
+.fonctions-section {
+  background: var(--green-deep);
+  padding: 100px 80px;
+}
+
+.fonctions-section .section-label { color: var(--gold-light); }
+.fonctions-section .section-label::after { background: var(--gold-light); }
+
+.fonctions-section > h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 80px;
+  line-height: 1.2;
+}
+
+.fonctions-section > h2 em { font-style: italic; color: var(--gold-light); }
+
+.fonctions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fonction-block {
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid rgba(206,158,94,0.2);
+  padding: 48px 56px;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.3s ease;
+}
+
+.fonction-block:hover {
+  border-left-color: var(--gold);
+  background: rgba(255,255,255,0.05);
+}
+
+.fonction-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fonction-num {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+
+.fonction-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.fonction-pitch {
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(247,242,234,0.65);
+  max-width: 700px;
+  margin-bottom: 36px;
+  border-left: 2px solid rgba(206,158,94,0.3);
+  padding-left: 20px;
+}
+
+.fonction-missions-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.fonction-missions {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 36px;
+  max-width: 700px;
+}
+
+.fonction-missions li {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(247,242,234,0.55);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.fonction-missions li::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  margin-top: 0.65em;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.fonction-ref {
+  background: rgba(206,158,94,0.06);
+  border: 1px solid rgba(206,158,94,0.15);
+  padding: 20px 24px;
+  max-width: 700px;
+}
+
+.fonction-ref-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+.fonction-ref-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(247,242,234,0.6);
+  line-height: 1.6;
+}
+
+/* Differentiateur inside fonction */
+.fonction-differentiateur {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  max-width: 700px;
+}
+
+.fonction-differentiateur-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+.fonction-differentiateur p {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(247,242,234,0.5);
+  font-style: italic;
+}
+
+/* ─── MODALITÉS ─── */
+.modalites-section {
+  background: var(--white);
+  padding: 100px 80px;
+}
+
+.modalites-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.modalites-left h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 300;
+  color: var(--green);
+  margin-bottom: 32px;
+  line-height: 1.2;
+}
+
+.modalites-left h2 em { font-style: italic; color: var(--gold); }
+
+.modalites-left p {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--ink-mid);
+  margin-bottom: 20px;
+}
+
+.modalites-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--cream-dark);
+}
+
+.modalite-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--cream-dark);
+  align-items: flex-start;
+}
+
+.modalite-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.modalite-item p {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ink-mid);
+}
+
+.modalite-item p strong {
+  color: var(--green);
+  font-weight: 500;
+}
+
+/* ─── CTA ─── */
+.cta-dir {
+  background: var(--green);
+  padding: 100px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold line traced across bottom */
+.cta-dir::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 1.2s ease;
+}
+
+.cta-dir.line-visible::after { width: 60%; }
+
+.cta-dir h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.cta-dir h2 em { font-style: italic; color: var(--gold-light); }
+
+.cta-dir p {
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(247,242,234,0.6);
+  max-width: 520px;
+  margin: 0 auto 44px;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--green-deep);
+  padding: 48px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(165,125,55,0.2);
+}
+
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--cream);
+  letter-spacing: 0.1em;
+}
+
+.footer-brand span { color: var(--gold); }
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.footer-links a {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(247,242,234,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--gold-light); }
+
+.footer-copy {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: rgba(247,242,234,0.25);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  section { padding: 64px 24px; }
+  .hero-dir { padding: 120px 24px 64px; }
+  .philosophie-section { padding: 64px 24px; }
+  .sivous-section { padding: 64px 24px; }
+  .sivous-header { padding: 20px 24px; }
+  .sivous-body-inner { padding: 0 24px 24px 24px; }
+  .fonctions-section { padding: 64px 24px; }
+  .fonction-block { padding: 32px 24px; }
+  .modalites-section { padding: 64px 24px; }
+  .modalites-inner { grid-template-columns: 1fr; gap: 40px; }
+  .cta-dir { padding: 64px 24px; }
+  footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logos/logo-light.png" alt="ORI7ON Advisory" class="nav-logo-img"></a>
+  <ul class="nav-links">
+    <li><a href="conseil.html" data-i18n="nav-conseil">Conseil</a></li>
+    <li><a href="direction-externalisee.html" class="active" data-i18n="nav-direction">Direction externalisée</a></li>
+    <li><a href="intelligence-appliquee.html" style="color:#00A6A6;" data-i18n="nav-ia">Intelligence Appliquée</a></li>
+    <li><a href="index.html#references" data-i18n="nav-refs">Références</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-i18n="nav-cta">Parlons-nous</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-dir">
+  <div class="hero-eyebrow" data-i18n="hero-eyebrow">Direction externalisée · ORI7ON Advisory</div>
+  <h1 class="hero-title-dir" id="heroTitle"></h1>
+  <div class="hero-gold-line" id="heroLine"></div>
+  <p class="hero-subtitle-dir" data-i18n-html="hero-subtitle">
+    De quelques jours par mois à plusieurs jours par semaine. Un dirigeant de haut niveau, calibré à vos besoins réels, sans les contraintes d'un recrutement.
+  </p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary" data-i18n="cta-btn">Parlons-nous</a>
+  </div>
+</section>
+
+<!-- PHILOSOPHIE -->
+<section class="philosophie-section" id="philosophie">
+  <div class="philosophie-inner">
+    <div class="section-label" data-i18n="philo-label">Pourquoi la direction externalisée</div>
+    <div class="philosophie-quote" id="philoQuote">
+      <span class="philo-phrase"><span class="philo-phrase-inner">Recruter un DG ou un DAF de haut niveau prend 6 mois et coûte cher.</span></span>
+      <span class="philo-phrase"><span class="philo-phrase-inner">Mais votre entreprise n'attend pas.</span></span>
+      <span class="philo-phrase"><span class="philo-phrase-inner">Je vous donne accès immédiatement à une direction expérimentée, engagée dans vos résultats,</span></span>
+      <span class="philo-phrase"><span class="philo-phrase-inner"><em>sans les contraintes du CDI ni les risques d'un mauvais recrutement.</em></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- SI VOUS ÊTES -->
+<section class="sivous-section" id="sivous">
+  <div class="section-label reveal" data-i18n="sivous-label">Votre situation</div>
+  <h2 class="reveal" data-i18n-html="sivous-title">Si vous êtes<em>…</em></h2>
+
+  <div class="sivous-cards">
+
+    <div class="sivous-card reveal" id="sivous1">
+      <div class="sivous-header" onclick="toggleSivous('sivous1')">
+        <div class="sivous-header-left">
+          <div class="sivous-icon">I</div>
+          <div class="sivous-title" data-i18n="sivous1-title">Un fonds d'investissement ou de private equity</div>
+        </div>
+        <div class="sivous-toggle">+</div>
+      </div>
+      <div class="sivous-body">
+        <div class="sivous-body-inner">
+          <p class="sivous-text" data-i18n-html="sivous1-text">
+            Vous avez besoin d'un regard opérationnel sur vos participations. D'un DG intérimaire post-acquisition. D'un CFO qui restructure avant la cession. Ou d'un administrateur indépendant qui protège vos intérêts au Board.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sivous-card reveal" id="sivous2">
+      <div class="sivous-header" onclick="toggleSivous('sivous2')">
+        <div class="sivous-header-left">
+          <div class="sivous-icon">II</div>
+          <div class="sivous-title" data-i18n="sivous2-title">Une PME en croissance</div>
+        </div>
+        <div class="sivous-toggle">+</div>
+      </div>
+      <div class="sivous-body">
+        <div class="sivous-body-inner">
+          <p class="sivous-text" data-i18n-html="sivous2-text">
+            Vous grandissez plus vite que votre organisation. Vous avez besoin d'un DAF qui structure avant que la trésorerie ne devienne un problème, ou d'un DG qui installe les processus de pilotage.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sivous-card reveal" id="sivous3">
+      <div class="sivous-header" onclick="toggleSivous('sivous3')">
+        <div class="sivous-header-left">
+          <div class="sivous-icon">III</div>
+          <div class="sivous-title" data-i18n="sivous3-title">Une entreprise familiale en transition</div>
+        </div>
+        <div class="sivous-toggle">+</div>
+      </div>
+      <div class="sivous-body">
+        <div class="sivous-body-inner">
+          <p class="sivous-text" data-i18n-html="sivous3-text">
+            La transmission approche, le fondateur lâche les rênes progressivement. Il faut quelqu'un de confiance au Board ou à la Direction pour assurer la continuité et la gouvernance.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sivous-card reveal" id="sivous4">
+      <div class="sivous-header" onclick="toggleSivous('sivous4')">
+        <div class="sivous-header-left">
+          <div class="sivous-icon">IV</div>
+          <div class="sivous-title" data-i18n="sivous4-title">Un groupe étranger qui s'implante</div>
+        </div>
+        <div class="sivous-toggle">+</div>
+      </div>
+      <div class="sivous-body">
+        <div class="sivous-body-inner">
+          <p class="sivous-text" data-i18n-html="sivous4-text">
+            Vous ne voulez pas expatrier un cadre pour tester un marché. Je prends la direction locale, j'installe les bases, et je transfère quand votre équipe est prête.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LES 3 FONCTIONS -->
+<section class="fonctions-section" id="fonctions">
+  <div class="section-label" data-i18n="fonctions-label">Les fonctions</div>
+  <h2 data-i18n-html="fonctions-title">Trois mandats.<br><em>Une seule exigence : la performance.</em></h2>
+
+  <div class="fonctions-grid">
+
+    <!-- FONCTION 1 -->
+    <div class="fonction-block" id="fonction1">
+      <div class="fonction-num" data-i18n="f1-num">Fonction 01</div>
+      <div class="fonction-title" data-i18n="f1-title">Administrateur de société</div>
+      <p class="fonction-pitch" data-i18n-html="f1-pitch">
+        Un administrateur indépendant, c'est une vision extérieure sans agenda caché. J'apporte au Board une expérience opérationnelle de 20 ans, un réseau actif, et la capacité de challenger les décisions avec la crédibilité de quelqu'un qui a tenu les mêmes responsabilités.
+      </p>
+      <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
+      <ul class="fonction-missions" id="f1-missions">
+        <li data-i18n-html="f1-m1">Participation au Conseil d'Administration comme administrateur indépendant</li>
+        <li data-i18n-html="f1-m2">Apport d'expertise en stratégie, finance, gouvernance</li>
+        <li data-i18n-html="f1-m3">Regard extérieur sur les décisions structurantes</li>
+        <li data-i18n-html="f1-m4">Accès à un réseau patronal actif (CGECI, EUROCHAM, UGECI)</li>
+        <li data-i18n-html="f1-m5">Protection des intérêts des actionnaires minoritaires</li>
+        <li data-i18n-html="f1-m6">Accompagnement de la transmission familiale au niveau du Board</li>
+      </ul>
+      <div class="fonction-differentiateur">
+        <div class="fonction-differentiateur-label" data-i18n="diff-label">Ce qui change tout</div>
+        <p data-i18n-html="f1-diff">Je ne suis pas un profil honorifique. J'ai dirigé des entreprises, restructuré des groupes, géré des crises. Mon rôle au Board n'est pas de valider, c'est de challenger avec la légitimité du terrain.</p>
+      </div>
+    </div>
+
+    <!-- FONCTION 2 -->
+    <div class="fonction-block" id="fonction2">
+      <div class="fonction-num" data-i18n="f2-num">Fonction 02</div>
+      <div class="fonction-title" data-i18n="f2-title">Direction Générale</div>
+      <p class="fonction-pitch" data-i18n-html="f2-pitch">
+        Quand l'entreprise a besoin d'un capitaine mais pas encore les moyens d'un recrutement permanent. J'interviens comme DG à temps partagé : 1 à 3 jours par semaine, avec la même exigence que si j'étais là à plein temps.
+      </p>
+      <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
+      <ul class="fonction-missions" id="f2-missions">
+        <li data-i18n-html="f2-m1">Pilotage opérationnel et stratégique de la PME/ETI</li>
+        <li data-i18n-html="f2-m2">Management de transition post-crise ou post-acquisition</li>
+        <li data-i18n-html="f2-m3">Structuration de la gouvernance (comité de direction, reporting)</li>
+        <li data-i18n-html="f2-m4">Supervision des fonctions clés (finance, commercial, RH)</li>
+        <li data-i18n-html="f2-m5">Gestion de crise et retournement</li>
+      </ul>
+      <div class="fonction-ref">
+        <div class="fonction-ref-label" data-i18n="ref-label">Référence carrière</div>
+        <p class="fonction-ref-text" data-i18n-html="f2-ref">CEO d'un groupe agro-industriel multi-pays : restructuration complète, fermeture de 3 usines déficitaires, assainissement d'une dette de $120M, épuration de 60% de l'effectif en 6 semaines. Continuité d'exploitation assurée.</p>
+      </div>
+    </div>
+
+    <!-- FONCTION 3 -->
+    <div class="fonction-block" id="fonction3">
+      <div class="fonction-num" data-i18n="f3-num">Fonction 03</div>
+      <div class="fonction-title" data-i18n="f3-title">Direction Financière — DAF / CFO</div>
+      <p class="fonction-pitch" data-i18n-html="f3-pitch">
+        Trop de PME africaines attendent la crise pour recruter un DAF. J'interviens en amont : structurer la finance, installer les outils, sécuriser la trésorerie. Et quand la crise est déjà là, j'ai l'expérience des situations dégradées.
+      </p>
+      <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
+      <ul class="fonction-missions" id="f3-missions">
+        <li data-i18n-html="f3-m1">Direction financière externalisée (1 à 4 jours/semaine)</li>
+        <li data-i18n-html="f3-m2">Mise en place du reporting, du contrôle de gestion, des KPIs</li>
+        <li data-i18n-html="f3-m3">Optimisation du BFR et pilotage de trésorerie</li>
+        <li data-i18n-html="f3-m4">Préparation des dossiers de financement et due diligence</li>
+        <li data-i18n-html="f3-m5">Supervision des clôtures, des audits et de la conformité</li>
+        <li data-i18n-html="f3-m6">Gestion de trésorerie multi-devises et multi-pays</li>
+      </ul>
+      <div class="fonction-ref">
+        <div class="fonction-ref-label" data-i18n="ref-label">Référence carrière</div>
+        <p class="fonction-ref-text" data-i18n-html="f3-ref">CFO Groupe d'une filiale de multinationale agroalimentaire : implémentation SAP sur 6 sites et 700 personnes en contexte de crise politique. Mise en place d'un système de paiement alternatif quand les banques ont fermé. Gestion en double calendrier comptable.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODALITÉS -->
+<section class="modalites-section" id="modalites">
+  <div class="modalites-inner">
+    <div class="modalites-left reveal">
+      <div class="section-label" data-i18n="modalites-label">Comment ça fonctionne</div>
+      <h2 data-i18n-html="modalites-title">Un mandat<br>sur <em>mesure.</em></h2>
+      <p data-i18n-html="modalites-p1">Chaque mandat est calibré sur mesure. De quelques jours par mois à plusieurs jours par semaine. Pas d'engagement de durée minimum. Pas de frais récurrents. La mission s'adapte à votre rythme, pas l'inverse.</p>
+      <p data-i18n-html="modalites-p2">Premier échange de 30 minutes pour comprendre votre besoin. Si nous décidons d'avancer, une lettre de mission claire sous 48h.</p>
+    </div>
+    <div class="modalites-right reveal">
+      <div class="modalite-item">
+        <div class="modalite-dot"></div>
+        <p data-i18n-html="mod-item1"><strong>Calibrage sur mesure</strong> — De quelques jours par mois à plusieurs jours par semaine selon votre situation réelle.</p>
+      </div>
+      <div class="modalite-item">
+        <div class="modalite-dot"></div>
+        <p data-i18n-html="mod-item2"><strong>Pas d'engagement minimum</strong> — Pas de durée imposée, pas de frais récurrents. La mission s'arrête quand elle n'est plus nécessaire.</p>
+      </div>
+      <div class="modalite-item">
+        <div class="modalite-dot"></div>
+        <p data-i18n-html="mod-item3"><strong>Lettre de mission sous 48h</strong> — Si le premier échange confirme la compatibilité, vous avez un cadre clair en deux jours.</p>
+      </div>
+      <div class="modalite-item">
+        <div class="modalite-dot"></div>
+        <p data-i18n-html="mod-item4"><strong>Le même interlocuteur du début à la fin</strong> — Pas de transmission de dossier. Je suis là de la première réunion à la dernière livraison.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-dir" id="contact">
+  <h2 class="reveal" data-i18n-html="cta-title">Votre entreprise n'a pas<br>à attendre le bon moment.<br><em>C'est maintenant.</em></h2>
+  <p class="reveal" data-i18n-html="cta-text">Un échange de 30 minutes. Pas de pitch, pas de proposition commerciale immédiate. Une conversation pour comprendre votre situation et voir si nous pouvons travailler ensemble.</p>
+  <a href="mailto:contact@ori7on.com" class="btn-cta-gold reveal" data-i18n="cta-btn">Parlons-nous</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><img src="logos/logo-dark.png" alt="ORI7ON Advisory" class="footer-logo-img"></div>
+  <ul class="footer-links">
+    <li><a href="#">LinkedIn</a></li>
+    <li><a href="#">Mentions légales</a></li>
+    <li><a href="mailto:contact@ori7on.com">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 ORI7ON Advisory · Abidjan, Côte d'Ivoire</div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════════════════ */
+const TRANSLATIONS = {
+  fr: {
+    // Page title
+    'page-title': 'Direction externalisée — ORI7ON Advisory',
+    // Nav
+    'nav-conseil':   'Conseil',
+    'nav-direction': 'Direction externalisée',
+    'nav-ia':        'Intelligence Appliquée',
+    'nav-refs':      'Références',
+    'nav-cta':       'Parlons-nous',
+    // Hero
+    'hero-eyebrow':  'Direction externalisée · ORI7ON Advisory',
+    'hero-title-text': "Ayez votre directeur avant d'en avoir besoin. Ayez une direction avant de pouvoir vous l'offrir.",
+    'hero-subtitle': "De quelques jours par mois à plusieurs jours par semaine. Un dirigeant de haut niveau, calibré à vos besoins réels, sans les contraintes d'un recrutement.",
+    'cta-btn':       'Parlons-nous',
+    // Philosophie
+    'philo-label':   'Pourquoi la direction externalisée',
+    'philo-phrases': [
+      "Recruter un DG ou un DAF de haut niveau prend 6 mois et coûte cher.",
+      "Mais votre entreprise n'attend pas.",
+      "Je vous donne accès immédiatement à une direction expérimentée, engagée dans vos résultats,",
+      "<em>sans les contraintes du CDI ni les risques d'un mauvais recrutement.</em>"
+    ],
+    // Si vous êtes
+    'sivous-label':  'Votre situation',
+    'sivous-title':  "Si vous êtes<em>…</em>",
+    'sivous1-title': "Un fonds d'investissement ou de private equity",
+    'sivous1-text':  "Vous avez besoin d'un regard opérationnel sur vos participations. D'un DG intérimaire post-acquisition. D'un CFO qui restructure avant la cession. Ou d'un administrateur indépendant qui protège vos intérêts au Board.",
+    'sivous2-title': "Une PME en croissance",
+    'sivous2-text':  "Vous grandissez plus vite que votre organisation. Vous avez besoin d'un DAF qui structure avant que la trésorerie ne devienne un problème, ou d'un DG qui installe les processus de pilotage.",
+    'sivous3-title': "Une entreprise familiale en transition",
+    'sivous3-text':  "La transmission approche, le fondateur lâche les rênes progressivement. Il faut quelqu'un de confiance au Board ou à la Direction pour assurer la continuité et la gouvernance.",
+    'sivous4-title': "Un groupe étranger qui s'implante",
+    'sivous4-text':  "Vous ne voulez pas expatrier un cadre pour tester un marché. Je prends la direction locale, j'installe les bases, et je transfère quand votre équipe est prête.",
+    // Fonctions
+    'fonctions-label': 'Les fonctions',
+    'fonctions-title': "Trois mandats.<br><em>Une seule exigence : la performance.</em>",
+    'missions-label':  'Missions',
+    'diff-label':      'Ce qui change tout',
+    'ref-label':       'Référence carrière',
+    // Fonction 1
+    'f1-num':   'Fonction 01',
+    'f1-title': 'Administrateur de société',
+    'f1-pitch': "Un administrateur indépendant, c'est une vision extérieure sans agenda caché. J'apporte au Board une expérience opérationnelle de 20 ans, un réseau actif, et la capacité de challenger les décisions avec la crédibilité de quelqu'un qui a tenu les mêmes responsabilités.",
+    'f1-m1': "Participation au Conseil d'Administration comme administrateur indépendant",
+    'f1-m2': "Apport d'expertise en stratégie, finance, gouvernance",
+    'f1-m3': "Regard extérieur sur les décisions structurantes",
+    'f1-m4': "Accès à un réseau patronal actif (CGECI, EUROCHAM, UGECI)",
+    'f1-m5': "Protection des intérêts des actionnaires minoritaires",
+    'f1-m6': "Accompagnement de la transmission familiale au niveau du Board",
+    'f1-diff': "Je ne suis pas un profil honorifique. J'ai dirigé des entreprises, restructuré des groupes, géré des crises. Mon rôle au Board n'est pas de valider, c'est de challenger avec la légitimité du terrain.",
+    // Fonction 2
+    'f2-num':   'Fonction 02',
+    'f2-title': 'Direction Générale',
+    'f2-pitch': "Quand l'entreprise a besoin d'un capitaine mais pas encore les moyens d'un recrutement permanent. J'interviens comme DG à temps partagé : 1 à 3 jours par semaine, avec la même exigence que si j'étais là à plein temps.",
+    'f2-m1': "Pilotage opérationnel et stratégique de la PME/ETI",
+    'f2-m2': "Management de transition post-crise ou post-acquisition",
+    'f2-m3': "Structuration de la gouvernance (comité de direction, reporting)",
+    'f2-m4': "Supervision des fonctions clés (finance, commercial, RH)",
+    'f2-m5': "Gestion de crise et retournement",
+    'f2-ref': "CEO d'un groupe agro-industriel multi-pays : restructuration complète, fermeture de 3 usines déficitaires, assainissement d'une dette de $120M, épuration de 60% de l'effectif en 6 semaines. Continuité d'exploitation assurée.",
+    // Fonction 3
+    'f3-num':   'Fonction 03',
+    'f3-title': 'Direction Financière — DAF / CFO',
+    'f3-pitch': "Trop de PME africaines attendent la crise pour recruter un DAF. J'interviens en amont : structurer la finance, installer les outils, sécuriser la trésorerie. Et quand la crise est déjà là, j'ai l'expérience des situations dégradées.",
+    'f3-m1': "Direction financière externalisée (1 à 4 jours/semaine)",
+    'f3-m2': "Mise en place du reporting, du contrôle de gestion, des KPIs",
+    'f3-m3': "Optimisation du BFR et pilotage de trésorerie",
+    'f3-m4': "Préparation des dossiers de financement et due diligence",
+    'f3-m5': "Supervision des clôtures, des audits et de la conformité",
+    'f3-m6': "Gestion de trésorerie multi-devises et multi-pays",
+    'f3-ref': "CFO Groupe d'une filiale de multinationale agroalimentaire : implémentation SAP sur 6 sites et 700 personnes en contexte de crise politique. Mise en place d'un système de paiement alternatif quand les banques ont fermé. Gestion en double calendrier comptable.",
+    // Modalités
+    'modalites-label': 'Comment ça fonctionne',
+    'modalites-title': "Un mandat<br>sur <em>mesure.</em>",
+    'modalites-p1': "Chaque mandat est calibré sur mesure. De quelques jours par mois à plusieurs jours par semaine. Pas d'engagement de durée minimum. Pas de frais récurrents. La mission s'adapte à votre rythme, pas l'inverse.",
+    'modalites-p2': "Premier échange de 30 minutes pour comprendre votre besoin. Si nous décidons d'avancer, une lettre de mission claire sous 48h.",
+    'mod-item1': "<strong>Calibrage sur mesure</strong> — De quelques jours par mois à plusieurs jours par semaine selon votre situation réelle.",
+    'mod-item2': "<strong>Pas d'engagement minimum</strong> — Pas de durée imposée, pas de frais récurrents. La mission s'arrête quand elle n'est plus nécessaire.",
+    'mod-item3': "<strong>Lettre de mission sous 48h</strong> — Si le premier échange confirme la compatibilité, vous avez un cadre clair en deux jours.",
+    'mod-item4': "<strong>Le même interlocuteur du début à la fin</strong> — Pas de transmission de dossier. Je suis là de la première réunion à la dernière livraison.",
+    // CTA
+    'cta-title': "Votre entreprise n'a pas<br>à attendre le bon moment.<br><em>C'est maintenant.</em>",
+    'cta-text':  "Un échange de 30 minutes. Pas de pitch, pas de proposition commerciale immédiate. Une conversation pour comprendre votre situation et voir si nous pouvons travailler ensemble.",
+  },
+
+  en: {
+    // Page title
+    'page-title': 'Outsourced Leadership — ORI7ON Advisory',
+    // Nav
+    'nav-conseil':   'Advisory',
+    'nav-direction': 'Outsourced Leadership',
+    'nav-ia':        'Applied Intelligence',
+    'nav-refs':      'References',
+    'nav-cta':       "Let's talk",
+    // Hero
+    'hero-eyebrow':    'Outsourced Leadership · ORI7ON Advisory',
+    'hero-title-text': "Have your director before you need one. Have leadership before you can afford it.",
+    'hero-subtitle':   "From a few days a month to several days a week. A senior executive, calibrated to your real needs, without the constraints of a hire.",
+    'cta-btn':         "Let's talk",
+    // Philosophie
+    'philo-label':   'Why outsourced leadership',
+    'philo-phrases': [
+      "Hiring a high-level CEO or CFO takes 6 months and costs a fortune.",
+      "But your business won't wait.",
+      "I give you immediate access to experienced leadership, committed to your results,",
+      "<em>without the constraints of a permanent contract or the risks of a bad hire.</em>"
+    ],
+    // Si vous êtes
+    'sivous-label':  'Your situation',
+    'sivous-title':  "If you are<em>…</em>",
+    'sivous1-title': "An investment fund or PE firm",
+    'sivous1-text':  "You need an operational eye on your portfolio companies. An interim CEO post-acquisition. A CFO who restructures before the exit. Or an independent board member who protects your interests.",
+    'sivous2-title': "A growing SME",
+    'sivous2-text':  "You're growing faster than your organization. You need a CFO who structures before cash becomes a problem, or a CEO who installs management processes.",
+    'sivous3-title': "A family business in transition",
+    'sivous3-text':  "Succession is approaching, the founder is gradually letting go. You need someone trusted on the Board or at the helm to ensure continuity and governance.",
+    'sivous4-title': "A foreign group establishing locally",
+    'sivous4-text':  "You don't want to expatriate an executive to test a market. I take local leadership, set up the foundations, and transfer when your team is ready.",
+    // Fonctions
+    'fonctions-label': 'The roles',
+    'fonctions-title': "Three mandates.<br><em>One standard: performance.</em>",
+    'missions-label':  'Missions',
+    'diff-label':      'What makes the difference',
+    'ref-label':       'Career reference',
+    // Fonction 1
+    'f1-num':   'Role 01',
+    'f1-title': 'Board Member',
+    'f1-pitch': "An independent board member means an outside perspective with no hidden agenda. I bring 20 years of operational experience, an active network, and the ability to challenge decisions with the credibility of someone who's held the same responsibilities.",
+    'f1-m1': "Serving on the Board of Directors as an independent member",
+    'f1-m2': "Strategic, financial, and governance expertise",
+    'f1-m3': "Outside perspective on structural decisions",
+    'f1-m4': "Access to an active business network (CGECI, EUROCHAM, UGECI)",
+    'f1-m5': "Protection of minority shareholder interests",
+    'f1-m6': "Supporting family succession at the Board level",
+    'f1-diff': "I'm not an honorary profile. I've run companies, restructured groups, managed crises. My role on the Board isn't to validate — it's to challenge with the legitimacy of the field.",
+    // Fonction 2
+    'f2-num':   'Role 02',
+    'f2-title': 'General Management',
+    'f2-pitch': "When the business needs a captain but can't yet afford a permanent hire. I step in as part-time CEO: 1 to 3 days per week, with the same standards as if I were there full-time.",
+    'f2-m1': "Operational and strategic leadership of the SME/mid-cap",
+    'f2-m2': "Transition management post-crisis or post-acquisition",
+    'f2-m3': "Governance structuring (executive committee, reporting)",
+    'f2-m4': "Oversight of key functions (finance, commercial, HR)",
+    'f2-m5': "Crisis management and turnaround",
+    'f2-ref': "CEO of a multi-country agro-industrial group: full restructuring, closure of 3 loss-making plants, cleanup of $120M debt, 60% workforce restructuring in 6 weeks. Business continuity maintained.",
+    // Fonction 3
+    'f3-num':   'Role 03',
+    'f3-title': 'Financial Leadership — CFO',
+    'f3-pitch': "Too many African SMEs wait for the crisis before hiring a CFO. I step in upstream: structure the finance function, install the tools, secure the cash. And when the crisis is already here, I have the experience of degraded situations.",
+    'f3-m1': "Outsourced financial leadership (1 to 4 days/week)",
+    'f3-m2': "Reporting, management control, and KPI setup",
+    'f3-m3': "Working capital optimization and cash management",
+    'f3-m4': "Financing preparation and due diligence",
+    'f3-m5': "Oversight of closings, audits, and compliance",
+    'f3-m6': "Multi-currency, multi-country treasury management",
+    'f3-ref': "Group CFO of an agribusiness multinational subsidiary: SAP implementation across 6 sites and 700 people during a political crisis. Set up an alternative payment system when banks shut down. Dual accounting calendar management.",
+    // Modalités
+    'modalites-label': 'How it works',
+    'modalites-title': "A mandate<br><em>built around you.</em>",
+    'modalites-p1': "Every engagement is custom-calibrated. From a few days a month to several days a week. No minimum duration. No recurring fees. The mission adapts to your pace, not the other way around.",
+    'modalites-p2': "A 30-minute first conversation to understand your needs. If we decide to move forward, a clear engagement letter within 48 hours.",
+    'mod-item1': "<strong>Custom calibration</strong> — From a few days a month to several days a week, based on your actual situation.",
+    'mod-item2': "<strong>No minimum commitment</strong> — No imposed duration, no recurring fees. The mandate ends when it's no longer needed.",
+    'mod-item3': "<strong>Engagement letter within 48h</strong> — If the first conversation confirms fit, you have a clear framework in two days.",
+    'mod-item4': "<strong>Same point of contact start to finish</strong> — No file handover. I'm there from the first meeting to the final delivery.",
+    // CTA
+    'cta-title': "Your business doesn't have<br>to wait for the right moment.<br><em>It's now.</em>",
+    'cta-text':  "A 30-minute first exchange. No pitch, no immediate commercial proposal. A conversation to understand your situation and see if we can move forward together.",
+  }
+};
+
+/* ═══════════════════════════════════════════
+   HERO TITLE — WORD BY WORD
+═══════════════════════════════════════════ */
+let heroRendered = false;
+
+function renderHeroTitle(lang, animate) {
+  const el = document.getElementById('heroTitle');
+  const text = TRANSLATIONS[lang]['hero-title-text'];
+  el.innerHTML = '';
+
+  // Re-trigger gold line animation on first load only
+  if (animate) {
+    const line = document.getElementById('heroLine');
+    line.style.animation = 'none';
+    void line.offsetWidth; // reflow
+    line.style.animation = 'lineGrow 0.9s 1.6s ease forwards';
+  }
+
+  text.split(' ').forEach((word, i) => {
+    const span = document.createElement('span');
+    span.className = 'word';
+    if (animate) {
+      span.style.animationDelay = `${0.4 + i * 0.06}s`;
+    } else {
+      // No animation on language switch — just show text
+      span.style.opacity = '1';
+      span.style.transform = 'translateY(0)';
+      span.style.clipPath = 'inset(0 0 0% 0)';
+      span.style.animation = 'none';
+    }
+    span.textContent = word;
+    el.appendChild(span);
+  });
+}
+
+/* ═══════════════════════════════════════════
+   PHILOSOPHIE PHRASES
+═══════════════════════════════════════════ */
+function renderPhiloPhrases(lang) {
+  const container = document.getElementById('philoQuote');
+  const phrases = TRANSLATIONS[lang]['philo-phrases'];
+  const alreadyVisible = container.querySelectorAll('.philo-phrase-inner.visible').length > 0;
+
+  container.innerHTML = '';
+  phrases.forEach(phraseHTML => {
+    const outer = document.createElement('span');
+    outer.className = 'philo-phrase';
+    const inner = document.createElement('span');
+    inner.className = 'philo-phrase-inner';
+    if (alreadyVisible) inner.classList.add('visible');
+    inner.innerHTML = phraseHTML;
+    outer.appendChild(inner);
+    container.appendChild(outer);
+  });
+}
+
+/* ═══════════════════════════════════════════
+   LANGUAGE SWITCH
+═══════════════════════════════════════════ */
+let currentLang = 'fr';
+
+function setLang(lang) {
+  if (lang === currentLang) return;
+  currentLang = lang;
+
+  document.documentElement.lang = lang;
+  document.documentElement.dataset.lang = lang;
+
+  // Update page title
+  document.title = TRANSLATIONS[lang]['page-title'];
+
+  // Update all [data-i18n] elements (textContent)
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (TRANSLATIONS[lang][key] !== undefined) {
+      el.textContent = TRANSLATIONS[lang][key];
+    }
+  });
+
+  // Update all [data-i18n-html] elements (innerHTML)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (TRANSLATIONS[lang][key] !== undefined) {
+      el.innerHTML = TRANSLATIONS[lang][key];
+    }
+  });
+
+  // Update hero title (no animation)
+  renderHeroTitle(lang, false);
+
+  // Update philosophie phrases
+  renderPhiloPhrases(lang);
+
+  // Toggle lang button active state
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+
+/* ═══════════════════════════════════════════
+   "SI VOUS ÊTES" ACCORDION
+═══════════════════════════════════════════ */
+function toggleSivous(id) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.sivous-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL — GENERIC .reveal
+═══════════════════════════════════════════ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL — PHILOSOPHIE PHRASES
+═══════════════════════════════════════════ */
+const philoObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.philo-phrase-inner').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 220);
+    });
+    philoObserver.disconnect();
+  }
+}, { threshold: 0.3 });
+
+const philoSection = document.querySelector('.philosophie-section');
+if (philoSection) philoObserver.observe(philoSection);
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL — 3 FONCTIONS (sequential)
+═══════════════════════════════════════════ */
+const fonctionsObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    ['fonction1', 'fonction2', 'fonction3'].forEach((id, i) => {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('visible');
+      }, i * 200);
+    });
+    fonctionsObserver.disconnect();
+  }
+}, { threshold: 0.1 });
+
+const fonctionsSection = document.querySelector('.fonctions-grid');
+if (fonctionsSection) fonctionsObserver.observe(fonctionsSection);
+
+/* ═══════════════════════════════════════════
+   CTA GOLD LINE
+═══════════════════════════════════════════ */
+const ctaSection = document.querySelector('.cta-dir');
+const ctaObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    ctaSection.classList.add('line-visible');
+    ctaObserver.disconnect();
+  }
+}, { threshold: 0.4 });
+if (ctaSection) ctaObserver.observe(ctaSection);
+
+/* ═══════════════════════════════════════════
+   NAV HIDE ON SCROLL
+═══════════════════════════════════════════ */
+let lastY = 0;
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
+  lastY = y;
+});
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+renderHeroTitle('fr', true);
+renderPhiloPhrases('fr');
+</script>
+</body>
+</html>

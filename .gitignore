@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Drafts — not deployed
+index_v2.html
+index_with_map.html
+conseil_v2.html
+ia-design-test.html
+ori7on_career_map_V6_clean.html
+
+# Docs
+docs/
+*.md
+!README.md

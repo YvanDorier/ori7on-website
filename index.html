@@ -296,6 +296,36 @@ nav {
   z-index: 2;
   background: radial-gradient(ellipse at center, transparent 35%, rgba(0,29,16,0.5) 100%);
 }
+.hero-quote-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 3;
+  pointer-events: none;
+  padding: 40px 48px;
+  background: linear-gradient(to top, rgba(0,29,16,0.92) 0%, rgba(0,29,16,0.5) 60%, transparent 100%);
+}
+.hero-quote-overlay blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.hero-quote-overlay cite {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-style: normal;
+}
+@media (max-width: 768px) {
+  .hero-quote-overlay { padding: 28px 24px; }
+  .hero-quote-overlay blockquote { font-size: 1.15rem; }
+}
   line-height: 1.55;
   margin-bottom: 20px;
 }
@@ -1024,6 +1054,10 @@ footer {
     <canvas id="hero-main-canvas"></canvas>
     <canvas id="hero-mist-canvas"></canvas>
     <div class="hero-anim-vignette"></div>
+    <div class="hero-quote-overlay">
+      <blockquote data-i18n="hero-quote">"Les meilleurs conseils que j'ai reçus venaient de gens qui avaient déjà traversé la même tempête."</blockquote>
+      <cite data-i18n="hero-author">Yvan Dorier · Fondateur ORI7ON Advisory</cite>
+    </div>
   </div>
 </section>
 

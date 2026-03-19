@@ -110,6 +110,17 @@ nav {
 
 .nav-links a:hover { color: var(--green); }
 
+.nav-ia-link {
+  color: #007a7a;
+  transition: color 0.2s, background 0.2s, padding 0.2s;
+  border-radius: 100px;
+}
+.nav-ia-link:hover {
+  color: var(--ink) !important;
+  background: #00A6A6;
+  padding: 8px 16px;
+}
+
 .nav-cta {
   font-family: 'Jost', sans-serif;
   font-size: 0.7rem;
@@ -1016,7 +1027,7 @@ footer {
   <ul class="nav-links">
     <li><a href="conseil.html" data-i18n="nav-conseil">Conseil</a></li>
     <li><a href="direction-externalisee.html" data-i18n="nav-direction">Direction</a></li>
-    <li><a href="intelligence-appliquee.html" data-i18n="nav-ia">Intelligence Appliquée</a></li>
+    <li><a href="intelligence-appliquee.html" data-i18n="nav-ia" class="nav-ia-link">Intelligence Appliquée</a></li>
     <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;">

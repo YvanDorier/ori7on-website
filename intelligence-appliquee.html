@@ -944,10 +944,11 @@ nav {
 
 .avantapres-slider {
   display: flex;
+  width: 200%;
   transition: transform 0.48s cubic-bezier(0.4,0,0.2,1);
 }
 
-.avantapres-panel { min-width: 100%; flex-shrink: 0; }
+.avantapres-panel { min-width: 50%; flex-shrink: 0; }
 
 .aa-row {
   display: grid;
@@ -1724,7 +1725,7 @@ function showPanel(panel) {
   if (panel === currentPanel) return;
   currentPanel = panel;
   document.getElementById('aaSlider').style.transform =
-    panel === 'apres' ? 'translateX(-100%)' : 'translateX(0)';
+    panel === 'apres' ? 'translateX(-50%)' : 'translateX(0)';
   document.getElementById('tabAvant').classList.toggle('active', panel === 'avant');
   document.getElementById('tabApres').classList.toggle('active', panel === 'apres');
 }
@@ -1893,6 +1894,7 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 let lastY = 0;
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
+  if (window.innerWidth < 960) return;
   const y = window.scrollY;
   nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
   lastY = y;

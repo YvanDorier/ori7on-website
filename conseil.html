@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Conseil — ORI7ON Advisory</title>
+<!-- i18n: page title set by JS -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -846,10 +847,10 @@ footer {
 <nav>
   <a href="index.html" class="nav-logo"><img src="logos/logo-light.png" alt="ORI7ON Advisory" class="nav-logo-img"></a>
   <ul class="nav-links">
-    <li><a href="conseil.html" class="active">Conseil</a></li>
-    <li><a href="direction-externalisee.html">Direction</a></li>
-    <li><a href="intelligence-appliquee.html">Intelligence Appliquée</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="conseil.html" class="active" data-i18n="nav-conseil">Conseil</a></li>
+    <li><a href="direction-externalisee.html" data-i18n="nav-direction">Direction</a></li>
+    <li><a href="intelligence-appliquee.html" data-i18n="nav-intelligence">Intelligence Appliquée</a></li>
+    <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;">
     <div class="lang-switch">
@@ -857,7 +858,7 @@ footer {
       <span class="lang-sep">|</span>
       <button onclick="setLang('en')" id="btn-en">EN</button>
     </div>
-    <a href="#contact" class="nav-cta">Parlons-nous</a>
+    <a href="#contact" class="nav-cta" data-i18n="nav-cta">Parlons-nous</a>
     <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -866,7 +867,7 @@ footer {
 
 <!-- HERO -->
 <section class="hero-conseil">
-  <div class="hero-eyebrow">Conseil · ORI7ON Advisory</div>
+  <div class="hero-eyebrow" data-i18n="hero-eyebrow">Conseil · ORI7ON Advisory</div>
 
   <h1 class="hero-title-conseil" id="heroTitle">
     <!-- Words injected by JS -->
@@ -874,66 +875,66 @@ footer {
 
   <div class="hero-gold-line"></div>
 
-  <p class="hero-subtitle-conseil">
+  <p class="hero-subtitle-conseil" data-i18n-html="hero-subtitle">
     Diagnostic. Stratégie. Exécution.<br>
     J'interviens là où la théorie ne suffit plus.
   </p>
 
   <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Parlons-nous</a>
+    <a href="#contact" class="btn-primary" data-i18n="hero-cta">Parlons-nous</a>
   </div>
-  <p class="hero-micro">Un premier échange, sans engagement.</p>
+  <p class="hero-micro" data-i18n="hero-micro">Un premier échange, sans engagement.</p>
 </section>
 
 <!-- CONVICTION -->
 <section class="conviction-section" id="conviction">
   <div class="conviction-text">
-    <span class="phrase"><span class="phrase-inner">Un bon conseil, c'est celui que vous pouvez appliquer dès lundi matin.</span></span>
-    <span class="phrase"><span class="phrase-inner">Pas une présentation de 80 slides.</span></span>
-    <span class="phrase"><span class="phrase-inner">Pas un audit qui finit dans un tiroir.</span></span>
-    <span class="phrase" style="margin-top: 0.4em; display:block;"><span class="phrase-inner"><em>Un plan d'action, une feuille de route, un résultat mesurable.</em></span></span>
+    <span class="phrase"><span class="phrase-inner" data-i18n="conviction-heading">Un bon conseil, c'est celui que vous pouvez appliquer dès lundi matin.</span></span>
+    <span class="phrase"><span class="phrase-inner" data-i18n="conviction-line1">Pas une présentation de 80 slides.</span></span>
+    <span class="phrase"><span class="phrase-inner" data-i18n="conviction-line2">Pas un audit qui finit dans un tiroir.</span></span>
+    <span class="phrase" style="margin-top: 0.4em; display:block;"><span class="phrase-inner"><em data-i18n="conviction-line3">Un plan d'action, une feuille de route, un résultat mesurable.</em></span></span>
   </div>
 </section>
 
 <!-- LES 4 PILIERS -->
 <section class="piliers-section" id="piliers">
-  <div class="section-label reveal">Les piliers du conseil</div>
-  <h2 class="reveal">Quatre angles d'intervention.<br><em>Un seul objectif : la création de valeur.</em></h2>
+  <div class="section-label reveal" data-i18n="piliers-label">Les piliers du conseil</div>
+  <h2 class="reveal" data-i18n-html="piliers-heading">Quatre angles d'intervention.<br><em>Un seul objectif : la création de valeur.</em></h2>
 
   <div class="piliers-grid">
 
     <!-- PILIER 1 -->
     <div class="pilier-card reveal" id="pilier1">
       <div class="pilier-header" onclick="togglePilier('pilier1')">
-        <div class="pilier-num">01</div>
+        <div class="pilier-num" data-i18n="p1-num">01</div>
         <div class="pilier-header-content">
-          <div class="pilier-title">Stratégie & Performance</div>
-          <div class="pilier-accroche">Voir clair. Décider vite. Exécuter juste.</div>
+          <div class="pilier-title" data-i18n="p1-title">Stratégie & Performance</div>
+          <div class="pilier-accroche" data-i18n="p1-tagline">Voir clair. Décider vite. Exécuter juste.</div>
         </div>
         <div class="pilier-toggle">+</div>
       </div>
       <div class="pilier-body">
         <div class="pilier-body-inner">
-          <p class="pilier-texte">
+          <p class="pilier-texte" data-i18n="p1-text">
             Vous savez que quelque chose ne fonctionne pas. Vous avez peut-être même identifié le problème. Ce qui manque, c'est quelqu'un qui a déjà résolu ce type de problème, dans votre contexte, avec vos contraintes.
           </p>
           <div class="pilier-missions-title">Missions</div>
           <ul class="pilier-missions">
             <li>
-              <strong>Diagnostic stratégique 360°</strong>
-              <span>Positionnement, concurrence, performance financière et opérationnelle. Livrable : rapport + recommandations actionnables sous 3 semaines.</span>
+              <strong data-i18n="p1-m1-title">Diagnostic stratégique 360°</strong>
+              <span data-i18n="p1-m1-desc">Positionnement, concurrence, performance financière et opérationnelle. Livrable : rapport + recommandations actionnables sous 3 semaines.</span>
             </li>
             <li>
-              <strong>Plan stratégique & feuille de route</strong>
-              <span>Co-construction sur 12 à 36 mois, avec jalons, indicateurs et suivi. Pas un document de plus : un outil de pilotage.</span>
+              <strong data-i18n="p1-m2-title">Plan stratégique & feuille de route</strong>
+              <span data-i18n="p1-m2-desc">Co-construction sur 12 à 36 mois, avec jalons, indicateurs et suivi. Pas un document de plus : un outil de pilotage.</span>
             </li>
             <li>
-              <strong>Pilotage de performance</strong>
-              <span>Tableaux de bord, revues mensuelles, rituels de gouvernance. L'objectif : que le dirigeant reprenne le contrôle de ses chiffres.</span>
+              <strong data-i18n="p1-m3-title">Pilotage de performance</strong>
+              <span data-i18n="p1-m3-desc">Tableaux de bord, revues mensuelles, rituels de gouvernance. L'objectif : que le dirigeant reprenne le contrôle de ses chiffres.</span>
             </li>
             <li>
-              <strong>Repositionnement & pivot</strong>
-              <span>Quand le marché a bougé et que le modèle n'a pas suivi. Diagnostic, redéfinition de l'offre, plan de transition.</span>
+              <strong data-i18n="p1-m4-title">Repositionnement & pivot</strong>
+              <span data-i18n="p1-m4-desc">Quand le marché a bougé et que le modèle n'a pas suivi. Diagnostic, redéfinition de l'offre, plan de transition.</span>
             </li>
           </ul>
         </div>
@@ -943,39 +944,39 @@ footer {
     <!-- PILIER 2 -->
     <div class="pilier-card reveal" id="pilier2">
       <div class="pilier-header" onclick="togglePilier('pilier2')">
-        <div class="pilier-num">02</div>
+        <div class="pilier-num" data-i18n="p2-num">02</div>
         <div class="pilier-header-content">
-          <div class="pilier-title">Finance & Restructuration</div>
-          <div class="pilier-accroche">La finance n'est pas un département. C'est le langage de la décision.</div>
+          <div class="pilier-title" data-i18n="p2-title">Finance & Restructuration</div>
+          <div class="pilier-accroche" data-i18n="p2-tagline">La finance n'est pas un département. C'est le langage de la décision.</div>
         </div>
         <div class="pilier-toggle">+</div>
       </div>
       <div class="pilier-body">
         <div class="pilier-body-inner">
-          <p class="pilier-texte">
+          <p class="pilier-texte" data-i18n="p2-text">
             Trop de PME africaines pilotent à vue. La trésorerie est tendue, les reporting approximatifs, les décisions prises dans l'urgence. J'interviens pour installer la rigueur et redonner au dirigeant la maîtrise de ses arbitrages.
           </p>
           <div class="pilier-missions-title">Missions</div>
           <ul class="pilier-missions">
             <li>
-              <strong>Diagnostic financier & restructuration</strong>
-              <span>Structure de coûts, BFR, dette. Plan avec priorisation et calendrier réaliste.</span>
+              <strong data-i18n="p2-m1-title">Diagnostic financier & restructuration</strong>
+              <span data-i18n="p2-m1-desc">Structure de coûts, BFR, dette. Plan avec priorisation et calendrier réaliste.</span>
             </li>
             <li>
-              <strong>Optimisation de trésorerie</strong>
-              <span>Cartographie des flux, négociation fournisseurs/banques, outils de prévision.</span>
+              <strong data-i18n="p2-m2-title">Optimisation de trésorerie</strong>
+              <span data-i18n="p2-m2-desc">Cartographie des flux, négociation fournisseurs/banques, outils de prévision.</span>
             </li>
             <li>
-              <strong>Construction du contrôle de gestion</strong>
-              <span>Mise en place d'un vrai contrôle de gestion : suivi budgétaire, analyse des écarts, reporting mensuel structuré. Pour les entreprises qui pilotent encore à vue ou avec des tableurs approximatifs.</span>
+              <strong data-i18n="p2-m3-title">Construction du contrôle de gestion</strong>
+              <span data-i18n="p2-m3-desc">Mise en place d'un vrai contrôle de gestion : suivi budgétaire, analyse des écarts, reporting mensuel structuré. Pour les entreprises qui pilotent encore à vue ou avec des tableurs approximatifs.</span>
             </li>
             <li>
-              <strong>Mise en place du suivi budgétaire</strong>
-              <span>Budget annuel, suivi mensuel, analyse des écarts, rituels de revue. Transformer le budget d'un exercice administratif en outil de pilotage opérationnel.</span>
+              <strong data-i18n="p2-m4-title">Mise en place du suivi budgétaire</strong>
+              <span data-i18n="p2-m4-desc">Budget annuel, suivi mensuel, analyse des écarts, rituels de revue. Transformer le budget d'un exercice administratif en outil de pilotage opérationnel.</span>
             </li>
             <li>
-              <strong>Gestion de trésorerie multi-devises</strong>
-              <span>Pour les groupes opérant sur plusieurs pays et devises. Structuration des flux, couverture de change, consolidation.</span>
+              <strong data-i18n="p2-m5-title">Gestion de trésorerie multi-devises</strong>
+              <span data-i18n="p2-m5-desc">Pour les groupes opérant sur plusieurs pays et devises. Structuration des flux, couverture de change, consolidation.</span>
             </li>
           </ul>
         </div>
@@ -985,35 +986,35 @@ footer {
     <!-- PILIER 3 -->
     <div class="pilier-card reveal" id="pilier3">
       <div class="pilier-header" onclick="togglePilier('pilier3')">
-        <div class="pilier-num">03</div>
+        <div class="pilier-num" data-i18n="p3-num">03</div>
         <div class="pilier-header-content">
-          <div class="pilier-title">Organisation & Efficacité Opérationnelle</div>
-          <div class="pilier-accroche">Pas de stratégie sans machine qui l'exécute.</div>
+          <div class="pilier-title" data-i18n="p3-title">Organisation & Efficacité Opérationnelle</div>
+          <div class="pilier-accroche" data-i18n="p3-tagline">Pas de stratégie sans machine qui l'exécute.</div>
         </div>
         <div class="pilier-toggle">+</div>
       </div>
       <div class="pilier-body">
         <div class="pilier-body-inner">
-          <p class="pilier-texte">
+          <p class="pilier-texte" data-i18n="p3-text">
             La stratégie la plus brillante s'effondre si l'organisation ne suit pas. Je restructure les processus, je clarifie les rôles, j'installe les indicateurs pour que l'entreprise fonctionne même quand le dirigeant n'est pas dans la pièce.
           </p>
           <div class="pilier-missions-title">Missions</div>
           <ul class="pilier-missions">
             <li>
-              <strong>Réorganisation des processus</strong>
-              <span>Cartographie des flux, goulots, refonte des processus critiques.</span>
+              <strong data-i18n="p3-m1-title">Réorganisation des processus</strong>
+              <span data-i18n="p3-m1-desc">Cartographie des flux, goulots, refonte des processus critiques.</span>
             </li>
             <li>
-              <strong>Structuration des fonctions</strong>
-              <span>Organigramme, fiches de poste, délégations de pouvoir. Clarifier qui fait quoi et qui décide quoi.</span>
+              <strong data-i18n="p3-m2-title">Structuration des fonctions</strong>
+              <span data-i18n="p3-m2-desc">Organigramme, fiches de poste, délégations de pouvoir. Clarifier qui fait quoi et qui décide quoi.</span>
             </li>
             <li>
-              <strong>Mise en place de KPIs & reporting</strong>
-              <span>Définir ce qui compte, le mesurer, le partager. Tableaux de bord adaptés au dirigeant.</span>
+              <strong data-i18n="p3-m3-title">Mise en place de KPIs & reporting</strong>
+              <span data-i18n="p3-m3-desc">Définir ce qui compte, le mesurer, le partager. Tableaux de bord adaptés au dirigeant.</span>
             </li>
             <li>
-              <strong>Accompagnement au changement</strong>
-              <span>Conduite du changement pragmatique, terrain, itérative. Pas de PowerPoint, de la présence.</span>
+              <strong data-i18n="p3-m4-title">Accompagnement au changement</strong>
+              <span data-i18n="p3-m4-desc">Conduite du changement pragmatique, terrain, itérative. Pas de PowerPoint, de la présence.</span>
             </li>
           </ul>
         </div>
@@ -1023,39 +1024,39 @@ footer {
     <!-- PILIER 4 -->
     <div class="pilier-card reveal" id="pilier4">
       <div class="pilier-header" onclick="togglePilier('pilier4')">
-        <div class="pilier-num">04</div>
+        <div class="pilier-num" data-i18n="p4-num">04</div>
         <div class="pilier-header-content">
-          <div class="pilier-title">Implantation en Côte d'Ivoire</div>
-          <div class="pilier-accroche">Le marché ivoirien ne se lit pas dans un rapport. Il se vit.</div>
+          <div class="pilier-title" data-i18n="p4-title">Implantation en Côte d'Ivoire</div>
+          <div class="pilier-accroche" data-i18n="p4-tagline">Le marché ivoirien ne se lit pas dans un rapport. Il se vit.</div>
         </div>
         <div class="pilier-toggle">+</div>
       </div>
       <div class="pilier-body">
         <div class="pilier-body-inner">
-          <p class="pilier-texte">
+          <p class="pilier-texte" data-i18n="p4-text">
             Vous êtes un groupe étranger qui veut s'implanter, ou un investisseur qui veut comprendre le terrain avant de s'engager. Mon rôle : raccourcir votre courbe d'apprentissage. Diviser par dix le temps qu'il vous faudrait pour comprendre qui fait quoi, ce qui marche et ce qui ne marche pas. Vous allez droit à l'essentiel.
           </p>
           <div class="pilier-missions-title">Missions</div>
           <ul class="pilier-missions">
             <li>
-              <strong>Pré-étude de faisabilité</strong>
-              <span>Une première lecture du marché basée sur ma connaissance de l'écosystème industriel et économique ivoirien, mon réseau, et une collecte ciblée d'informations. Pas une étude de marché formelle, mais une vision opérationnelle qui vous dit si ça vaut la peine d'aller plus loin, et dans quelle direction.</span>
+              <strong data-i18n="p4-m1-title">Pré-étude de faisabilité</strong>
+              <span data-i18n="p4-m1-desc">Une première lecture du marché basée sur ma connaissance de l'écosystème industriel et économique ivoirien, mon réseau, et une collecte ciblée d'informations. Pas une étude de marché formelle, mais une vision opérationnelle qui vous dit si ça vaut la peine d'aller plus loin, et dans quelle direction.</span>
             </li>
             <li>
-              <strong>Supervision d'études de marché</strong>
-              <span>Vous avez besoin d'une vraie étude terrain ? Je vous aide à sélectionner le bon cabinet, à cadrer la mission, et à contrôler la qualité des livrables. J'accompagne côté entreprise, pas côté prestataire.</span>
+              <strong data-i18n="p4-m2-title">Supervision d'études de marché</strong>
+              <span data-i18n="p4-m2-desc">Vous avez besoin d'une vraie étude terrain ? Je vous aide à sélectionner le bon cabinet, à cadrer la mission, et à contrôler la qualité des livrables. J'accompagne côté entreprise, pas côté prestataire.</span>
             </li>
             <li>
-              <strong>Accompagnement à l'implantation</strong>
-              <span>Structure juridique, partenaires locaux, introduction dans les réseaux patronaux (CGECI, EUROCHAM, UGECI).</span>
+              <strong data-i18n="p4-m3-title">Accompagnement à l'implantation</strong>
+              <span data-i18n="p4-m3-desc">Structure juridique, partenaires locaux, introduction dans les réseaux patronaux (CGECI, EUROCHAM, UGECI).</span>
             </li>
             <li>
-              <strong>Intelligence économique</strong>
-              <span>Qui décide, qui bloque, où sont les opportunités. Le savoir informel qui fait la différence entre un projet qui avance et un projet qui s'enlise.</span>
+              <strong data-i18n="p4-m4-title">Intelligence économique</strong>
+              <span data-i18n="p4-m4-desc">Qui décide, qui bloque, où sont les opportunités. Le savoir informel qui fait la différence entre un projet qui avance et un projet qui s'enlise.</span>
             </li>
             <li>
-              <strong>Gestion des parties prenantes</strong>
-              <span>Administration, institutions, partenaires locaux. Navigation dans un environnement où les relations comptent autant que les contrats.</span>
+              <strong data-i18n="p4-m5-title">Gestion des parties prenantes</strong>
+              <span data-i18n="p4-m5-desc">Administration, institutions, partenaires locaux. Navigation dans un environnement où les relations comptent autant que les contrats.</span>
             </li>
           </ul>
         </div>
@@ -1070,9 +1071,9 @@ footer {
   <div class="differenciateur-grid">
 
     <div class="diff-left">
-      <div class="section-label" style="color: var(--gold-light);">Ce qui change tout</div>
-      <h2 id="diffTitle">Le sénior que vous rencontrez est le même qui travaille sur votre dossier.</h2>
-      <p id="diffText">
+      <div class="section-label" style="color: var(--gold-light);" data-i18n="diff-label">Ce qui change tout</div>
+      <h2 id="diffTitle" data-i18n="diff-heading">Le sénior que vous rencontrez est le même qui travaille sur votre dossier.</h2>
+      <p id="diffText" data-i18n="diff-text">
         Chez ORI7ON, il n'y a pas de junior qui fait le travail pendant que le partner fait le pitch. Pas de consultant sorti d'école envoyé sur le terrain. Le conseil que vous achetez, c'est 20 ans de direction d'entreprise en Afrique de l'Ouest, appliqués directement à votre situation. Ce n'est pas un modèle scalable. C'est un choix. Le conseil de précision, c'est exactement ça.
       </p>
     </div>
@@ -1081,7 +1082,7 @@ footer {
       <div class="diff-portrait-wrap" id="diffPortrait">
         <div class="diff-portrait-bg">
           <div class="diff-portrait-num">20</div>
-          <div class="diff-portrait-label">Ans de direction<br>d'entreprise en<br>Afrique de l'Ouest</div>
+          <div class="diff-portrait-label" data-i18n-html="diff-stat">Ans de direction<br>d'entreprise en<br>Afrique de l'Ouest</div>
         </div>
         <div class="diff-accent-line"></div>
       </div>
@@ -1092,33 +1093,207 @@ footer {
 
 <!-- CTA -->
 <section class="cta-conseil" id="contact">
-  <h2 class="reveal">Prêt à avoir une conversation<br><em>qui compte ?</em></h2>
-  <p class="reveal">Premier échange de 30 minutes. Pour comprendre votre situation et voir si nous pouvons avancer ensemble.</p>
-  <a href="/cdn-cgi/l/email-protection#b7d4d8d9c3d6d4c3f7d8c5de80d8d999d4d8da" class="btn-cta-gold reveal">Parlons-nous</a>
+  <h2 class="reveal" data-i18n-html="cta-heading">Prêt à avoir une conversation<br><em>qui compte ?</em></h2>
+  <p class="reveal" data-i18n="cta-text">Premier échange de 30 minutes. Pour comprendre votre situation et voir si nous pouvons avancer ensemble.</p>
+  <a href="/cdn-cgi/l/email-protection#b7d4d8d9c3d6d4c3f7d8c5de80d8d999d4d8da" class="btn-cta-gold reveal" data-i18n="cta-button">Parlons-nous</a>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand"><img src="logos/logo-dark.png" alt="ORI7ON Advisory" class="footer-logo-img"></div>
   <ul class="footer-links">
-    <li><a href="https://www.linkedin.com/in/yvan-dorier" target="_blank" rel="noopener">LinkedIn</a></li>
-    <li><a href="mentions-legales.html">Mentions légales</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="https://www.linkedin.com/in/ydorier" target="_blank" rel="noopener" data-i18n="footer-linkedin">LinkedIn</a></li>
+    <li><a href="mentions-legales.html" data-i18n="footer-legal">Mentions légales</a></li>
+    <li><a href="contact.html" data-i18n="footer-contact">Contact</a></li>
   </ul>
-  <div class="footer-copy">© 2026 ORI7ON Advisory · Abidjan, Côte d'Ivoire</div>
+  <div class="footer-copy" data-i18n="footer-copy">© 2026 ORI7ON Advisory · Abidjan, Côte d'Ivoire</div>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── TRANSLATIONS ───
+const T = {
+  fr: {
+    'page-title': 'Conseil — ORI7ON Advisory',
+    'nav-conseil': 'Conseil',
+    'nav-direction': 'Direction',
+    'nav-intelligence': 'Intelligence Appliquée',
+    'nav-contact': 'Contact',
+    'nav-cta': 'Parlons-nous',
+    'hero-eyebrow': 'Conseil · ORI7ON Advisory',
+    'hero-title': 'Votre entreprise mérite un regard qui a déjà porté les mêmes responsabilités.',
+    'hero-subtitle': 'Diagnostic. Stratégie. Exécution.<br>J\'interviens là où la théorie ne suffit plus.',
+    'hero-cta': 'Parlons-nous',
+    'hero-micro': 'Un premier échange, sans engagement.',
+    'conviction-heading': 'Un bon conseil, c\'est celui que vous pouvez appliquer dès lundi matin.',
+    'conviction-line1': 'Pas une présentation de 80 slides.',
+    'conviction-line2': 'Pas un audit qui finit dans un tiroir.',
+    'conviction-line3': 'Un plan d\'action, une feuille de route, un résultat mesurable.',
+    'piliers-label': 'Les piliers du conseil',
+    'piliers-heading': 'Quatre angles d\'intervention.<br><em>Un seul objectif : la création de valeur.</em>',
+    'p1-num': '01',
+    'p1-title': 'Stratégie & Performance',
+    'p1-tagline': 'Voir clair. Décider vite. Exécuter juste.',
+    'p1-text': 'Vous savez que quelque chose ne fonctionne pas. Vous avez peut-être même identifié le problème. Ce qui manque, c\'est quelqu\'un qui a déjà résolu ce type de problème, dans votre contexte, avec vos contraintes.',
+    'p1-m1-title': 'Diagnostic stratégique 360°',
+    'p1-m1-desc': 'Positionnement, concurrence, performance financière et opérationnelle. Livrable : rapport + recommandations actionnables sous 3 semaines.',
+    'p1-m2-title': 'Plan stratégique & feuille de route',
+    'p1-m2-desc': 'Co-construction sur 12 à 36 mois, avec jalons, indicateurs et suivi. Pas un document de plus : un outil de pilotage.',
+    'p1-m3-title': 'Pilotage de performance',
+    'p1-m3-desc': 'Tableaux de bord, revues mensuelles, rituels de gouvernance. L\'objectif : que le dirigeant reprenne le contrôle de ses chiffres.',
+    'p1-m4-title': 'Repositionnement & pivot',
+    'p1-m4-desc': 'Quand le marché a bougé et que le modèle n\'a pas suivi. Diagnostic, redéfinition de l\'offre, plan de transition.',
+    'p2-num': '02',
+    'p2-title': 'Finance & Restructuration',
+    'p2-tagline': 'La finance n\'est pas un département. C\'est le langage de la décision.',
+    'p2-text': 'Trop de PME africaines pilotent à vue. La trésorerie est tendue, les reporting approximatifs, les décisions prises dans l\'urgence. J\'interviens pour installer la rigueur et redonner au dirigeant la maîtrise de ses arbitrages.',
+    'p2-m1-title': 'Diagnostic financier & restructuration',
+    'p2-m1-desc': 'Structure de coûts, BFR, dette. Plan avec priorisation et calendrier réaliste.',
+    'p2-m2-title': 'Optimisation de trésorerie',
+    'p2-m2-desc': 'Cartographie des flux, négociation fournisseurs/banques, outils de prévision.',
+    'p2-m3-title': 'Construction du contrôle de gestion',
+    'p2-m3-desc': 'Mise en place d\'un vrai contrôle de gestion : suivi budgétaire, analyse des écarts, reporting mensuel structuré. Pour les entreprises qui pilotent encore à vue ou avec des tableurs approximatifs.',
+    'p2-m4-title': 'Mise en place du suivi budgétaire',
+    'p2-m4-desc': 'Budget annuel, suivi mensuel, analyse des écarts, rituels de revue. Transformer le budget d\'un exercice administratif en outil de pilotage opérationnel.',
+    'p2-m5-title': 'Gestion de trésorerie multi-devises',
+    'p2-m5-desc': 'Pour les groupes opérant sur plusieurs pays et devises. Structuration des flux, couverture de change, consolidation.',
+    'p3-num': '03',
+    'p3-title': 'Organisation & Efficacité Opérationnelle',
+    'p3-tagline': 'Pas de stratégie sans machine qui l\'exécute.',
+    'p3-text': 'La stratégie la plus brillante s\'effondre si l\'organisation ne suit pas. Je restructure les processus, je clarifie les rôles, j\'installe les indicateurs pour que l\'entreprise fonctionne même quand le dirigeant n\'est pas dans la pièce.',
+    'p3-m1-title': 'Réorganisation des processus',
+    'p3-m1-desc': 'Cartographie des flux, goulots, refonte des processus critiques.',
+    'p3-m2-title': 'Structuration des fonctions',
+    'p3-m2-desc': 'Organigramme, fiches de poste, délégations de pouvoir. Clarifier qui fait quoi et qui décide quoi.',
+    'p3-m3-title': 'Mise en place de KPIs & reporting',
+    'p3-m3-desc': 'Définir ce qui compte, le mesurer, le partager. Tableaux de bord adaptés au dirigeant.',
+    'p3-m4-title': 'Accompagnement au changement',
+    'p3-m4-desc': 'Conduite du changement pragmatique, terrain, itérative. Pas de PowerPoint, de la présence.',
+    'p4-num': '04',
+    'p4-title': 'Implantation en Côte d\'Ivoire',
+    'p4-tagline': 'Le marché ivoirien ne se lit pas dans un rapport. Il se vit.',
+    'p4-text': 'Vous êtes un groupe étranger qui veut s\'implanter, ou un investisseur qui veut comprendre le terrain avant de s\'engager. Mon rôle : raccourcir votre courbe d\'apprentissage. Diviser par dix le temps qu\'il vous faudrait pour comprendre qui fait quoi, ce qui marche et ce qui ne marche pas. Vous allez droit à l\'essentiel.',
+    'p4-m1-title': 'Pré-étude de faisabilité',
+    'p4-m1-desc': 'Une première lecture du marché basée sur ma connaissance de l\'écosystème industriel et économique ivoirien, mon réseau, et une collecte ciblée d\'informations. Pas une étude de marché formelle, mais une vision opérationnelle qui vous dit si ça vaut la peine d\'aller plus loin, et dans quelle direction.',
+    'p4-m2-title': 'Supervision d\'études de marché',
+    'p4-m2-desc': 'Vous avez besoin d\'une vraie étude terrain ? Je vous aide à sélectionner le bon cabinet, à cadrer la mission, et à contrôler la qualité des livrables. J\'accompagne côté entreprise, pas côté prestataire.',
+    'p4-m3-title': 'Accompagnement à l\'implantation',
+    'p4-m3-desc': 'Structure juridique, partenaires locaux, introduction dans les réseaux patronaux (CGECI, EUROCHAM, UGECI).',
+    'p4-m4-title': 'Intelligence économique',
+    'p4-m4-desc': 'Qui décide, qui bloque, où sont les opportunités. Le savoir informel qui fait la différence entre un projet qui avance et un projet qui s\'enlise.',
+    'p4-m5-title': 'Gestion des parties prenantes',
+    'p4-m5-desc': 'Administration, institutions, partenaires locaux. Navigation dans un environnement où les relations comptent autant que les contrats.',
+    'diff-label': 'Ce qui change tout',
+    'diff-heading': 'Le sénior que vous rencontrez est le même qui travaille sur votre dossier.',
+    'diff-text': 'Chez ORI7ON, il n\'y a pas de junior qui fait le travail pendant que le partner fait le pitch. Pas de consultant sorti d\'école envoyé sur le terrain. Le conseil que vous achetez, c\'est 20 ans de direction d\'entreprise en Afrique de l\'Ouest, appliqués directement à votre situation. Ce n\'est pas un modèle scalable. C\'est un choix. Le conseil de précision, c\'est exactement ça.',
+    'diff-stat': 'Ans de direction<br>d\'entreprise en<br>Afrique de l\'Ouest',
+    'cta-heading': 'Prêt à avoir une conversation<br><em>qui compte ?</em>',
+    'cta-text': 'Premier échange de 30 minutes. Pour comprendre votre situation et voir si nous pouvons avancer ensemble.',
+    'cta-button': 'Parlons-nous',
+    'footer-linkedin': 'LinkedIn',
+    'footer-legal': 'Mentions légales',
+    'footer-contact': 'Contact',
+    'footer-copy': '© 2026 ORI7ON Advisory · Abidjan, Côte d\'Ivoire'
+  },
+  en: {
+    'page-title': 'Advisory — ORI7ON Advisory',
+    'nav-conseil': 'Advisory',
+    'nav-direction': 'Leadership',
+    'nav-intelligence': 'Applied Intelligence',
+    'nav-contact': 'Contact',
+    'nav-cta': 'Let\'s talk',
+    'hero-eyebrow': 'Advisory · ORI7ON Advisory',
+    'hero-title': 'Your business deserves a perspective that has already carried the same responsibilities.',
+    'hero-subtitle': 'Diagnosis. Strategy. Execution.<br>I step in where theory is no longer enough.',
+    'hero-cta': 'Let\'s talk',
+    'hero-micro': 'A first call, no commitment.',
+    'conviction-heading': 'Good advice is advice you can act on by Monday morning.',
+    'conviction-line1': 'Not an 80-slide presentation.',
+    'conviction-line2': 'Not an audit that ends up in a drawer.',
+    'conviction-line3': 'An action plan, a roadmap, a measurable result.',
+    'piliers-label': 'Advisory pillars',
+    'piliers-heading': 'Four angles of intervention.<br><em>One objective: value creation.</em>',
+    'p1-num': '01',
+    'p1-title': 'Strategy & Performance',
+    'p1-tagline': 'See clearly. Decide fast. Execute right.',
+    'p1-text': 'You know something isn\'t working. You may have even identified the problem. What\'s missing is someone who has already solved this type of problem, in your context, with your constraints.',
+    'p1-m1-title': '360° Strategic Diagnostic',
+    'p1-m1-desc': 'Positioning, competition, financial and operational performance. Deliverable: report + actionable recommendations within 3 weeks.',
+    'p1-m2-title': 'Strategic Plan & Roadmap',
+    'p1-m2-desc': 'Co-built over 12 to 36 months, with milestones, KPIs and follow-up. Not another document: a management tool.',
+    'p1-m3-title': 'Performance Steering',
+    'p1-m3-desc': 'Dashboards, monthly reviews, governance rituals. The goal: the executive regains control of their numbers.',
+    'p1-m4-title': 'Repositioning & Pivot',
+    'p1-m4-desc': 'When the market has moved and the model hasn\'t followed. Diagnosis, offer redefinition, transition plan.',
+    'p2-num': '02',
+    'p2-title': 'Finance & Restructuring',
+    'p2-tagline': 'Finance is not a department. It is the language of decision.',
+    'p2-text': 'Too many African SMEs operate by gut feel. Cash is tight, reporting is approximate, decisions are made under pressure. I step in to install rigor and give the executive back control over their choices.',
+    'p2-m1-title': 'Financial Diagnostic & Restructuring',
+    'p2-m1-desc': 'Cost structure, working capital, debt. Plan with prioritization and realistic timeline.',
+    'p2-m2-title': 'Cash Flow Optimization',
+    'p2-m2-desc': 'Flow mapping, supplier/bank negotiation, forecasting tools.',
+    'p2-m3-title': 'Management Accounting Setup',
+    'p2-m3-desc': 'Implementing real management control: budget tracking, variance analysis, structured monthly reporting. For companies still operating on guesswork or rough spreadsheets.',
+    'p2-m4-title': 'Budget Tracking Setup',
+    'p2-m4-desc': 'Annual budget, monthly tracking, variance analysis, review rituals. Transform the budget from an administrative exercise into an operational management tool.',
+    'p2-m5-title': 'Multi-Currency Cash Management',
+    'p2-m5-desc': 'For groups operating across multiple countries and currencies. Flow structuring, FX hedging, consolidation.',
+    'p3-num': '03',
+    'p3-title': 'Organization & Operational Efficiency',
+    'p3-tagline': 'No strategy without a machine to execute it.',
+    'p3-text': 'The most brilliant strategy collapses if the organization can\'t keep up. I restructure processes, clarify roles, install the indicators to make the company run even when the leader isn\'t in the room.',
+    'p3-m1-title': 'Process Reorganization',
+    'p3-m1-desc': 'Flow mapping, bottlenecks, redesign of critical processes.',
+    'p3-m2-title': 'Function Structuring',
+    'p3-m2-desc': 'Org chart, job descriptions, delegation of authority. Clarify who does what and who decides what.',
+    'p3-m3-title': 'KPI & Reporting Setup',
+    'p3-m3-desc': 'Define what matters, measure it, share it. Dashboards tailored to the executive.',
+    'p3-m4-title': 'Change Management',
+    'p3-m4-desc': 'Pragmatic, field-based, iterative change management. No PowerPoint — presence.',
+    'p4-num': '04',
+    'p4-title': 'Expansion into Côte d\'Ivoire',
+    'p4-tagline': 'The Ivorian market can\'t be read in a report. It has to be lived.',
+    'p4-text': 'You are a foreign group looking to establish or expand in CI, or an investor wanting to understand the terrain before committing. My role: shorten your learning curve. Cut by ten the time it would take you to understand who does what, what works and what doesn\'t. You go straight to what matters.',
+    'p4-m1-title': 'Pre-Feasibility Study',
+    'p4-m1-desc': 'A first market read based on my knowledge of the Ivorian industrial and economic ecosystem, my network, and targeted information gathering. Not a formal market study, but an operational view that tells you whether it\'s worth going further — and in which direction.',
+    'p4-m2-title': 'Market Study Supervision',
+    'p4-m2-desc': 'Need a real field study? I help you select the right firm, frame the brief, and control deliverable quality. I support on the company side, not the supplier side.',
+    'p4-m3-title': 'Establishment Support',
+    'p4-m3-desc': 'Legal structure, local partners, introduction into business networks (CGECI, EUROCHAM, UGECI).',
+    'p4-m4-title': 'Economic Intelligence',
+    'p4-m4-desc': 'Who decides, who blocks, where the opportunities are. The informal knowledge that makes the difference between a project that moves and one that stalls.',
+    'p4-m5-title': 'Stakeholder Management',
+    'p4-m5-desc': 'Administration, institutions, local partners. Navigating an environment where relationships matter as much as contracts.',
+    'diff-label': 'The difference',
+    'diff-heading': 'The senior you meet is the same one working on your file.',
+    'diff-text': 'At ORI7ON, there is no junior doing the work while the partner gives the pitch. No fresh-out-of-school consultant sent into the field. The advice you\'re buying is 20 years of running businesses in West Africa, applied directly to your situation. This is not a scalable model. It\'s a choice. Precision consulting is exactly that.',
+    'diff-stat': 'Years running<br>businesses in<br>West Africa',
+    'cta-heading': 'Ready for a conversation<br><em>that matters?</em>',
+    'cta-text': '30-minute first call. To understand your situation and see if we can move forward together.',
+    'cta-button': 'Let\'s talk',
+    'footer-linkedin': 'LinkedIn',
+    'footer-legal': 'Legal notice',
+    'footer-contact': 'Contact',
+    'footer-copy': '© 2026 ORI7ON Advisory · Abidjan, Côte d\'Ivoire'
+  }
+};
+
+let currentLang = 'fr';
+
 // ─── HERO TITLE word-by-word reveal ───
 const heroTitleEl = document.getElementById('heroTitle');
-const heroWords = "Votre entreprise mérite un regard qui a déjà porté les mêmes responsabilités.".split(' ');
-heroWords.forEach((word, i) => {
-  const span = document.createElement('span');
-  span.className = 'word';
-  span.textContent = word;
-  span.style.animationDelay = `${0.4 + i * 0.07}s`;
-  heroTitleEl.appendChild(span);
-});
+
+function buildHeroTitle(lang) {
+  heroTitleEl.innerHTML = '';
+  const words = T[lang]['hero-title'].split(' ');
+  words.forEach((word, i) => {
+    const span = document.createElement('span');
+    span.className = 'word';
+    span.textContent = word;
+    span.style.animationDelay = `${0.4 + i * 0.07}s`;
+    heroTitleEl.appendChild(span);
+  });
+}
 
 // ─── SCROLL REVEAL (generic) ───
 const revealEls = document.querySelectorAll('.reveal');
@@ -1210,11 +1385,26 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 });
 
 // ── Lang switch ──
-function setLang(l){
-  document.getElementById('btn-fr').classList.toggle('active', l==='fr');
-  document.getElementById('btn-en').classList.toggle('active', l==='en');
+function setLang(l) {
+  currentLang = l;
+  document.getElementById('btn-fr').classList.toggle('active', l === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
   document.documentElement.lang = l;
+  document.title = T[l]['page-title'];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (T[l][k] !== undefined) el.textContent = T[l][k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const k = el.dataset.i18nHtml;
+    if (T[l][k] !== undefined) el.innerHTML = T[l][k];
+  });
+  buildHeroTitle(l);
+  localStorage.setItem('ori7on_lang', l);
 }
+
+// ── Init language from localStorage ──
+setLang(localStorage.getItem('ori7on_lang') || 'fr');
 </script>
 </body>
 </html>

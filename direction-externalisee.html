@@ -1137,7 +1137,7 @@ footer {
 <footer>
   <div class="footer-brand"><img src="logos/logo-dark.png" alt="ORI7ON Advisory" class="footer-logo-img"></div>
   <ul class="footer-links">
-    <li><a href="https://www.linkedin.com/in/yvan-dorier" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://www.linkedin.com/in/ydorier" target="_blank" rel="noopener">LinkedIn</a></li>
     <li><a href="mentions-legales.html">Mentions légales</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
@@ -1379,7 +1379,7 @@ function renderPhiloPhrases(lang) {
 /* ═══════════════════════════════════════════
    LANGUAGE SWITCH
 ═══════════════════════════════════════════ */
-let currentLang = 'fr';
+let currentLang = '';
 
 function setLang(lang) {
   if (lang === currentLang) return;
@@ -1416,6 +1416,8 @@ function setLang(lang) {
   // Toggle lang button active state
   document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  localStorage.setItem('ori7on_lang', lang);
 }
 
 /* ═══════════════════════════════════════════
@@ -1501,8 +1503,10 @@ window.addEventListener('scroll', () => {
 /* ═══════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════ */
-renderHeroTitle('fr', true);
-renderPhiloPhrases('fr');
+const _initLang = localStorage.getItem('ori7on_lang') || 'fr';
+renderHeroTitle(_initLang, true);
+renderPhiloPhrases(_initLang);
+setLang(_initLang);
 </script>
 </body>
 </html>

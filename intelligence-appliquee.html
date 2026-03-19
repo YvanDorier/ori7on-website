@@ -1403,7 +1403,7 @@ footer {
 <footer>
   <div class="footer-brand"><img src="logos/logo-dark.png" alt="ORI7ON Advisory" class="footer-logo-img"></div>
   <ul class="footer-links">
-    <li><a href="https://www.linkedin.com/in/yvan-dorier" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://www.linkedin.com/in/ydorier" target="_blank" rel="noopener">LinkedIn</a></li>
     <li><a href="mentions-legales.html">Mentions légales</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
@@ -1534,7 +1534,7 @@ const T = {
 /* ═══════════════════════════════════════════
    LANG SWITCH
 ═══════════════════════════════════════════ */
-let currentLang = 'fr';
+let currentLang = '';
 
 function setLang(lang) {
   if (lang === currentLang) return;
@@ -1553,6 +1553,8 @@ function setLang(lang) {
   renderTerminal(lang);
   document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  localStorage.setItem('ori7on_lang', lang);
 }
 
 /* ═══════════════════════════════════════════
@@ -1781,7 +1783,9 @@ window.addEventListener('scroll', () => {
 /* ═══════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════ */
-renderTerminal('fr');
+const _initLang = localStorage.getItem('ori7on_lang') || 'fr';
+renderTerminal(_initLang);
+setLang(_initLang);
 
 /* ═══════════════════════════════════════════
    PARTICLE NETWORK — Aether Flow (turquoise)

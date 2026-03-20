@@ -643,6 +643,43 @@ section { padding: 100px 80px; }
   padding-left: 20px;
 }
 
+/* ── Collapse / expand missions ── */
+.fonction-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+.fonction-block.open .fonction-details {
+  max-height: 900px;
+}
+.fonction-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 12px;
+  background: none;
+  border: none;
+  border-top: 1px solid rgba(165,125,55,0.2);
+  cursor: pointer;
+  color: var(--gold);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  text-align: left;
+}
+.fonction-toggle:hover { color: var(--gold-light); }
+.toggle-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.fonction-block.open .toggle-icon { transform: rotate(45deg); }
+
 .fonction-missions-label {
   font-family: 'Jost', sans-serif;
   font-size: 0.6rem;
@@ -1133,18 +1170,24 @@ footer {
       <p class="fonction-pitch" data-i18n-html="f1-pitch">
         Un administrateur indépendant, c'est une vision extérieure sans agenda caché. J'apporte au Board une expérience opérationnelle de 20 ans, un réseau actif, et la capacité de challenger les décisions avec la crédibilité de quelqu'un qui a tenu les mêmes responsabilités.
       </p>
-      <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
-      <ul class="fonction-missions" id="f1-missions">
-        <li data-i18n-html="f1-m1">Participation au Conseil d'Administration comme administrateur indépendant</li>
-        <li data-i18n-html="f1-m2">Apport d'expertise en stratégie, finance, gouvernance</li>
-        <li data-i18n-html="f1-m3">Regard extérieur sur les décisions structurantes</li>
-        <li data-i18n-html="f1-m4">Accès à un réseau patronal actif (CGECI, EUROCHAM, UGECI)</li>
-        <li data-i18n-html="f1-m5">Protection des intérêts des actionnaires minoritaires</li>
-        <li data-i18n-html="f1-m6">Accompagnement de la transmission familiale au niveau du Board</li>
-      </ul>
-      <div class="fonction-differentiateur">
-        <div class="fonction-differentiateur-label" data-i18n="diff-label">Ce qui change tout</div>
-        <p data-i18n-html="f1-diff">Je ne suis pas un profil honorifique. J'ai dirigé des entreprises, restructuré des groupes, géré des crises. Mon rôle au Board n'est pas de valider, c'est de challenger avec la légitimité du terrain.</p>
+      <button class="fonction-toggle" onclick="toggleFonction('fonction1')" data-i18n-toggle="f1">
+        <span data-i18n="toggle-open">Voir les missions</span>
+        <span class="toggle-icon">+</span>
+      </button>
+      <div class="fonction-details">
+        <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
+        <ul class="fonction-missions" id="f1-missions">
+          <li data-i18n-html="f1-m1">Participation au Conseil d'Administration comme administrateur indépendant</li>
+          <li data-i18n-html="f1-m2">Apport d'expertise en stratégie, finance, gouvernance</li>
+          <li data-i18n-html="f1-m3">Regard extérieur sur les décisions structurantes</li>
+          <li data-i18n-html="f1-m4">Accès à un réseau patronal actif (CGECI, EUROCHAM, UGECI)</li>
+          <li data-i18n-html="f1-m5">Protection des intérêts des actionnaires minoritaires</li>
+          <li data-i18n-html="f1-m6">Accompagnement de la transmission familiale au niveau du Board</li>
+        </ul>
+        <div class="fonction-differentiateur">
+          <div class="fonction-differentiateur-label" data-i18n="diff-label">Ce qui change tout</div>
+          <p data-i18n-html="f1-diff">Je ne suis pas un profil honorifique. J'ai dirigé des entreprises, restructuré des groupes, géré des crises. Mon rôle au Board n'est pas de valider, c'est de challenger avec la légitimité du terrain.</p>
+        </div>
       </div>
     </div>
 
@@ -1155,17 +1198,23 @@ footer {
       <p class="fonction-pitch" data-i18n-html="f2-pitch">
         Quand l'entreprise a besoin d'un capitaine mais pas encore les moyens d'un recrutement permanent. J'interviens comme DG à temps partagé : 1 à 3 jours par semaine, avec la même exigence que si j'étais là à plein temps.
       </p>
-      <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
-      <ul class="fonction-missions" id="f2-missions">
-        <li data-i18n-html="f2-m1">Pilotage opérationnel et stratégique de la PME/ETI</li>
-        <li data-i18n-html="f2-m2">Management de transition post-crise ou post-acquisition</li>
-        <li data-i18n-html="f2-m3">Structuration de la gouvernance (comité de direction, reporting)</li>
-        <li data-i18n-html="f2-m4">Supervision des fonctions clés (finance, commercial, RH)</li>
-        <li data-i18n-html="f2-m5">Gestion de crise et retournement</li>
-      </ul>
-      <div class="fonction-ref">
-        <div class="fonction-ref-label" data-i18n="ref-label">Référence carrière</div>
-        <p class="fonction-ref-text" data-i18n-html="f2-ref">CEO d'un groupe agro-industriel multi-pays : restructuration complète, fermeture de 3 usines déficitaires, assainissement d'une dette de $120M, épuration de 60% de l'effectif en 6 semaines. Continuité d'exploitation assurée.</p>
+      <button class="fonction-toggle" onclick="toggleFonction('fonction2')" data-i18n-toggle="f2">
+        <span data-i18n="toggle-open">Voir les missions</span>
+        <span class="toggle-icon">+</span>
+      </button>
+      <div class="fonction-details">
+        <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
+        <ul class="fonction-missions" id="f2-missions">
+          <li data-i18n-html="f2-m1">Pilotage opérationnel et stratégique de la PME/ETI</li>
+          <li data-i18n-html="f2-m2">Management de transition post-crise ou post-acquisition</li>
+          <li data-i18n-html="f2-m3">Structuration de la gouvernance (comité de direction, reporting)</li>
+          <li data-i18n-html="f2-m4">Supervision des fonctions clés (finance, commercial, RH)</li>
+          <li data-i18n-html="f2-m5">Gestion de crise et retournement</li>
+        </ul>
+        <div class="fonction-ref">
+          <div class="fonction-ref-label" data-i18n="ref-label">Référence carrière</div>
+          <p class="fonction-ref-text" data-i18n-html="f2-ref">CEO d'un groupe agro-industriel multi-pays : restructuration complète, fermeture de 3 usines déficitaires, assainissement d'une dette de $120M, épuration de 60% de l'effectif en 6 semaines. Continuité d'exploitation assurée.</p>
+        </div>
       </div>
     </div>
 
@@ -1176,18 +1225,24 @@ footer {
       <p class="fonction-pitch" data-i18n-html="f3-pitch">
         Trop de PME africaines attendent la crise pour recruter un DAF. J'interviens en amont : structurer la finance, installer les outils, sécuriser la trésorerie. Et quand la crise est déjà là, j'ai l'expérience des situations dégradées.
       </p>
-      <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
-      <ul class="fonction-missions" id="f3-missions">
-        <li data-i18n-html="f3-m1">Direction financière externalisée (1 à 4 jours/semaine)</li>
-        <li data-i18n-html="f3-m2">Mise en place du reporting, du contrôle de gestion, des KPIs</li>
-        <li data-i18n-html="f3-m3">Optimisation du BFR et pilotage de trésorerie</li>
-        <li data-i18n-html="f3-m4">Préparation des dossiers de financement et due diligence</li>
-        <li data-i18n-html="f3-m5">Supervision des clôtures, des audits et de la conformité</li>
-        <li data-i18n-html="f3-m6">Gestion de trésorerie multi-devises et multi-pays</li>
-      </ul>
-      <div class="fonction-ref">
-        <div class="fonction-ref-label" data-i18n="ref-label">Référence carrière</div>
-        <p class="fonction-ref-text" data-i18n-html="f3-ref">CFO Groupe d'une filiale de multinationale agroalimentaire : implémentation SAP sur 6 sites et 700 personnes en contexte de crise politique. Mise en place d'un système de paiement alternatif quand les banques ont fermé. Gestion en double calendrier comptable.</p>
+      <button class="fonction-toggle" onclick="toggleFonction('fonction3')" data-i18n-toggle="f3">
+        <span data-i18n="toggle-open">Voir les missions</span>
+        <span class="toggle-icon">+</span>
+      </button>
+      <div class="fonction-details">
+        <div class="fonction-missions-label" data-i18n="missions-label">Missions</div>
+        <ul class="fonction-missions" id="f3-missions">
+          <li data-i18n-html="f3-m1">Direction financière externalisée (1 à 4 jours/semaine)</li>
+          <li data-i18n-html="f3-m2">Mise en place du reporting, du contrôle de gestion, des KPIs</li>
+          <li data-i18n-html="f3-m3">Optimisation du BFR et pilotage de trésorerie</li>
+          <li data-i18n-html="f3-m4">Préparation des dossiers de financement et due diligence</li>
+          <li data-i18n-html="f3-m5">Supervision des clôtures, des audits et de la conformité</li>
+          <li data-i18n-html="f3-m6">Gestion de trésorerie multi-devises et multi-pays</li>
+        </ul>
+        <div class="fonction-ref">
+          <div class="fonction-ref-label" data-i18n="ref-label">Référence carrière</div>
+          <p class="fonction-ref-text" data-i18n-html="f3-ref">CFO Groupe d'une filiale de multinationale agroalimentaire : implémentation SAP sur 6 sites et 700 personnes en contexte de crise politique. Mise en place d'un système de paiement alternatif quand les banques ont fermé. Gestion en double calendrier comptable.</p>
+        </div>
       </div>
     </div>
 
@@ -1258,6 +1313,7 @@ const TRANSLATIONS = {
     'nav-about':     'Qui sommes-nous',
     'nav-refs':      'Références',
     'nav-cta':       'Parlons-nous',
+    'toggle-open':   'Voir les missions',
     // Hero
     'hero-eyebrow':  'Direction externalisée · ORI7ON Advisory',
     'hero-title-text': "Ayez votre directeur avant d'en avoir besoin. Ayez une direction avant de pouvoir vous l'offrir.",
@@ -1344,6 +1400,7 @@ const TRANSLATIONS = {
     'nav-about':     'About',
     'nav-refs':      'References',
     'nav-cta':       "Let's talk",
+    'toggle-open':   'See the missions',
     // Hero
     'hero-eyebrow':    'Outsourced Leadership · ORI7ON Advisory',
     'hero-title-text': "Have your director before you need one. Have leadership before you can afford it.",
@@ -1524,6 +1581,13 @@ function setLang(lang) {
 /* ═══════════════════════════════════════════
    "SI VOUS ÊTES" ACCORDION
 ═══════════════════════════════════════════ */
+function toggleFonction(id) {
+  const block = document.getElementById(id);
+  const isOpen = block.classList.contains('open');
+  document.querySelectorAll('.fonction-block').forEach(b => b.classList.remove('open'));
+  if (!isOpen) block.classList.add('open');
+}
+
 function toggleSivous(id) {
   const card = document.getElementById(id);
   const isOpen = card.classList.contains('open');

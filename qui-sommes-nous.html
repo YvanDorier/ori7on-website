@@ -24,7 +24,7 @@ body { font-family: var(--font-sans); background: var(--cream); color: var(--gre
 /* NAV */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 0 48px; height: 72px;
+  padding: 24px 48px; height: auto;
   display: flex; align-items: center;
   background: #002d1a;
   border-bottom: 1px solid rgba(0,166,166,0.12);
@@ -144,7 +144,7 @@ body { font-family: var(--font-sans); background: var(--cream); color: var(--gre
   PHOTO : enregistrez votre photo sous le nom "photo-yvan-dorier.jpg"
   dans le même dossier que ce fichier, puis remplacez la balise
   .portrait-placeholder par :
-  <img src="photo-yvan-dorier.jpg" alt="Yvan Dorier" class="portrait-img">
+  <img src="photo-yvan-dorier.JPG" alt="Yvan Dorier" class="portrait-img">
 */
 .portrait-img {
   width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top;
@@ -367,7 +367,7 @@ body { font-family: var(--font-sans); background: var(--cream); color: var(--gre
 <section class="section-person">
   <div class="person-grid">
     <div class="portrait-wrap reveal">
-      <img src="photo-yvan-dorier.jpg" alt="Yvan Dorier" class="portrait-img">
+      <img src="photo-yvan-dorier.JPG" alt="Yvan Dorier" class="portrait-img">
     </div>
     <div class="person-content reveal reveal-d2">
       <p class="section-label" data-i18n="person-eyebrow">Founder &amp; Chief Enabler</p>
@@ -429,7 +429,7 @@ body { font-family: var(--font-sans); background: var(--cream); color: var(--gre
         <p class="sector-tag" data-i18n="s5-tag">Génie civil et Construction</p>
         <p class="sector-geo" data-i18n="s5-geo">La Réunion · Afrique centrale</p>
         <p class="sector-function" data-i18n="s5-func">Direction financière</p>
-        <p class="sector-desc" data-i18n="s5-desc">Contrôle de gestion quantitatif sur un projet de 25 ans. Reprise en situation de gouvernance défaillante : audit, identification de non-conformités majeures, mise en conformité en 12 mois.</p>
+        <p class="sector-desc" data-i18n="s5-desc">Contrôle de gestion quantitatif sur un projet de 7 ans. Reprise en situation de gouvernance défaillante : audit, identification de non-conformités majeures, mise en conformité en 12 mois.</p>
       </div>
       <div class="sector-card reveal reveal-d2">
         <p class="sector-tag" data-i18n="s6-tag">Conseil et Transformation</p>
@@ -555,7 +555,7 @@ const T = {
     's4-desc': "Création d'une entité opérationnelle de zéro : juridique, fiscal, paie. Recrutement de 700 personnes en trois jours. Organisation logistique pour 50 expatriés. Importation d'équipements lourds par voie maritime et lacustre.",
     's5-tag': 'Génie civil et Construction', 's5-geo': 'La Réunion · Afrique centrale',
     's5-func': 'Direction financière',
-    's5-desc': "Contrôle de gestion quantitatif sur un projet de 25 ans. Reprise en situation de gouvernance défaillante : audit, identification de non-conformités majeures, mise en conformité en 12 mois.",
+    's5-desc': "Contrôle de gestion quantitatif sur un projet de 7 ans. Reprise en situation de gouvernance défaillante : audit, identification de non-conformités majeures, mise en conformité en 12 mois.",
     's6-tag': 'Conseil et Transformation', 's6-geo': 'Abidjan, Côte d\'Ivoire',
     's6-func': 'Direction de mission',
     's6-desc': "Intégration de l'IA dans les processus opérationnels. Structuration de systèmes de gestion centralisés. Accompagnement digital de structures de conseil et d'organisations professionnelles.",
@@ -624,7 +624,7 @@ const T = {
     's4-desc': "Built an operational entity from scratch: legal, tax, payroll. Recruited 700 people in three days. Logistics for 50 expatriates. Heavy equipment imports by sea and lake.",
     's5-tag': 'Civil Engineering & Construction', 's5-geo': 'Réunion · Central Africa',
     's5-func': 'CFO',
-    's5-desc': "Quantitative management control on a 25-year project. Took over a financial leadership in a governance failure situation: audit, identified major non-compliance, corrected within 12 months.",
+    's5-desc': "Quantitative management control on a 7-year project. Took over a financial leadership in a governance failure situation: audit, identified major non-compliance, corrected within 12 months.",
     's6-tag': 'Advisory & Transformation', 's6-geo': 'Abidjan, Côte d\'Ivoire',
     's6-func': 'Mission leadership',
     's6-desc': "AI integration into operational processes. Centralized management system structuring. Digital transformation of advisory firms and professional organizations.",

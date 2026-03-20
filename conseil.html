@@ -104,11 +104,25 @@ nav {
   text-transform: uppercase;
   color: var(--ink-mid);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s, background 0.25s, padding 0.25s;
 }
 
 .nav-links a:hover { color: var(--green); }
-.nav-links a.active { color: var(--green); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+.nav-ia-link,
+.nav-about-link {
+  color: #007a7a;
+  border-radius: 100px;
+  padding: 7px 14px;
+  background: transparent;
+}
+.nav-ia-link:hover,
+.nav-about-link:hover {
+  color: var(--ink) !important;
+  background: #00A6A6;
+}
+
+.nav-links a.active { color: #007a7a; border-bottom: 1px solid #00A6A6; padding-bottom: 2px; }
 
 .nav-cta {
   font-family: 'Jost', sans-serif;
@@ -902,8 +916,8 @@ footer {
   <ul class="nav-links">
     <li><a href="conseil.html" class="active" data-i18n="nav-conseil">Conseil</a></li>
     <li><a href="direction-externalisee.html" data-i18n="nav-direction">Direction</a></li>
-    <li><a href="intelligence-appliquee.html" data-i18n="nav-intelligence">Intelligence Appliquée</a></li>
-    <li><a href="qui-sommes-nous.html" data-i18n="nav-about">Qui sommes-nous</a></li>
+    <li><a href="intelligence-appliquee.html" data-i18n="nav-intelligence" class="nav-ia-link">Intelligence Appliquée</a></li>
+    <li><a href="qui-sommes-nous.html" data-i18n="nav-about" class="nav-about-link">Qui sommes-nous</a></li>
   </ul>
   <div style="display:flex;align-items:center;">
     <div class="lang-switch">

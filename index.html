@@ -576,12 +576,13 @@ section { padding: 100px 80px; }
   font-size: 1.5rem;
   font-weight: 400;
   color: var(--green);
+  opacity: 1;
   line-height: 1.2;
   margin-bottom: 14px;
-  transition: color 0.3s;
+  transition: color 0.3s, opacity 0.3s;
 }
 
-.service-card:hover h3 { color: var(--cream); }
+.service-card:hover h3 { color: var(--cream); opacity: 1; }
 
 .service-card .tagline {
   font-family: 'Jost', sans-serif;
@@ -640,12 +641,24 @@ section { padding: 100px 80px; }
   padding: 4px 10px;
   border: 1px solid var(--gold);
   color: var(--gold);
+  text-decoration: none;
+  cursor: pointer;
   transition: all 0.3s;
+}
+
+.service-tag:hover {
+  background: var(--gold);
+  color: #fff;
 }
 
 .service-card:hover .service-tag {
   border-color: rgba(165,125,55,0.5);
   color: var(--gold-light);
+}
+
+.service-card:hover .service-tag:hover {
+  background: var(--gold-light);
+  color: var(--green-deep);
 }
 
 /* ─── APPROCHE ─── */
@@ -1156,7 +1169,7 @@ footer {
         <li data-i18n="s1-d3">Revue de performance & plan de redressement</li>
         <li data-i18n="s1-d4">Accompagnement en séances mensuelles de pilotage</li>
       </ul>
-      <span class="service-tag" data-i18n="s1-badge">Signature ORI7ON</span>
+      <a href="conseil.html" class="service-tag" data-i18n="s1-badge" onclick="event.stopPropagation()">Signature ORI7ON</a>
     </div>
 
     <div class="service-card" onclick="toggleService(this)">
@@ -1169,7 +1182,7 @@ footer {
         <li data-i18n="s2-d3">Pilotage en phase de transmission ou de crise</li>
         <li data-i18n="s2-d4">Structuration de la gouvernance pour PME en croissance</li>
       </ul>
-      <span class="service-tag" data-i18n="s2-badge">Offre Premium</span>
+      <a href="direction-externalisee.html" class="service-tag" data-i18n="s2-badge" onclick="event.stopPropagation()">Offre Premium</a>
     </div>
 
     <div class="service-card" onclick="toggleService(this)">
@@ -1182,7 +1195,7 @@ footer {
         <li data-i18n="s3-d3">Accès au réseau patronal (CGECI, EUROCHAM, UGECI)</li>
         <li data-i18n="s3-d4">Accompagnement dans la durée post-installation</li>
       </ul>
-      <span class="service-tag" data-i18n="s3-badge">Marché CI</span>
+      <a href="conseil.html" class="service-tag" data-i18n="s3-badge" onclick="event.stopPropagation()">Marché CI</a>
     </div>
 
     <div class="service-card" onclick="toggleService(this)">
@@ -1195,7 +1208,7 @@ footer {
         <li data-i18n="s4-d3">Implémentation avec votre équipe, pas à la place</li>
         <li data-i18n="s4-d4">Formation des dirigeants à l'IA comme outil décisionnel</li>
       </ul>
-      <span class="service-tag" data-i18n="s4-badge">Exclusive</span>
+      <a href="intelligence-appliquee.html" class="service-tag" data-i18n="s4-badge" onclick="event.stopPropagation()">Exclusive</a>
     </div>
 
     <div class="service-card" onclick="toggleService(this)">
@@ -1208,7 +1221,7 @@ footer {
         <li data-i18n="s5-d3">Préparation à la levée de fonds ou à la cession</li>
         <li data-i18n="s5-d4">Accompagnement à la transmission familiale</li>
       </ul>
-      <span class="service-tag" data-i18n="s5-badge">Prioritaire</span>
+      <a href="conseil.html" class="service-tag" data-i18n="s5-badge" onclick="event.stopPropagation()">Prioritaire</a>
     </div>
 
     <div class="service-card" onclick="toggleService(this)">
@@ -1221,7 +1234,7 @@ footer {
         <li data-i18n="s6-d3">Mise en place d'outils de pilotage (KPIs, tableaux de bord)</li>
         <li data-i18n="s6-d4">Accompagnement managérial des équipes de direction</li>
       </ul>
-      <span class="service-tag" data-i18n="s6-badge">Opérationnel</span>
+      <a href="conseil.html" class="service-tag" data-i18n="s6-badge" onclick="event.stopPropagation()">Opérationnel</a>
     </div>
 
   </div>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qui sommes-nous — ORI7ON Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+:root {
+  --green-dark: #002d1a;
+  --green-mid: #003d24;
+  --cream: #f7f2ea;
+  --turquoise: #00A6A6;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body { font-family: var(--font-sans); background: var(--cream); color: var(--green-dark); overflow-x: hidden; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 48px; height: 72px;
+  display: flex; align-items: center;
+  background: #002d1a;
+  border-bottom: 1px solid rgba(0,166,166,0.12);
+}
+.nav-inner {
+  width: 100%;
+  display: flex; align-items: center; gap: 48px;
+}
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo-img { height: 62px; width: auto; display: block; }
+.nav-links { display: flex; align-items: center; gap: 32px; margin-left: auto; }
+.nav-link {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(247,242,234,0.75); text-decoration: none; transition: color 0.2s, background 0.2s, padding 0.2s;
+}
+.nav-link:hover { color: rgba(247,242,234,1); }
+.nav-link-ia { color: #00A6A6; border-radius: 100px; }
+.nav-link-ia:hover { color: #002d1a !important; background: #00A6A6; padding: 8px 16px; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.lang-toggle { display: flex; align-items: center; gap: 6px; }
+.lang-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em;
+  color: rgba(247,242,234,0.4); padding: 2px 4px; transition: color 0.2s;
+}
+.lang-btn.active, .lang-btn:hover { color: var(--turquoise); }
+.lang-sep { color: rgba(247,242,234,0.2); font-size: 0.7rem; }
+.nav-cta-btn {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+  color: var(--green-dark); background: var(--turquoise);
+  padding: 10px 26px; border-radius: 100px; text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.nav-cta-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--cream); transition: all 0.3s; }
+
+/* HERO */
+.hero-about {
+  min-height: 55vh; background: var(--green-dark);
+  display: flex; align-items: flex-end; padding: 130px 80px 80px;
+}
+.hero-about-inner { max-width: 1280px; margin: 0 auto; width: 100%; }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 400;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--turquoise); margin-bottom: 20px;
+}
+.hero-title {
+  font-family: var(--font-serif); font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  font-weight: 300; line-height: 1.05; color: var(--cream); margin-bottom: 24px;
+}
+.hero-title em { font-style: italic; color: var(--turquoise); }
+.hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(247,242,234,0.55); letter-spacing: 0.02em; }
+
+/* SECTION BASE */
+.section-label {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--turquoise); margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-serif); font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 300; line-height: 1.15; margin-bottom: 48px;
+}
+.section-title em { font-style: italic; }
+.section-inner { max-width: 1280px; margin: 0 auto; }
+
+/* SECTION FIRM */
+.section-firm { background: var(--cream); padding: 100px 80px; }
+.firm-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: start; max-width: 1280px; margin: 0 auto;
+}
+.firm-right {
+  display: flex; flex-direction: column; gap: 48px;
+}
+.firm-quote-wrap {
+  display: flex; align-items: flex-start;
+}
+.firm-quote-text {
+  font-family: var(--font-serif); font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+  font-weight: 300; line-height: 1.3; font-style: italic;
+  color: var(--green-dark); border-left: 2px solid var(--turquoise);
+  padding-left: 28px;
+}
+.firm-quote-text em { font-style: italic; color: var(--turquoise); }
+.firm-text p {
+  font-size: 1.05rem; font-weight: 300; line-height: 1.85;
+  color: rgba(0,45,26,0.78); margin-bottom: 22px;
+}
+.firm-text p:last-child { margin-bottom: 0; }
+.name-aside {
+  background: rgba(0,45,26,0.04); border-left: 2px solid var(--turquoise);
+  padding: 32px 28px; border-radius: 0 4px 4px 0; position: sticky; top: 96px;
+}
+.name-aside-label {
+  font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--turquoise); margin-bottom: 16px;
+}
+.name-aside-wordmark {
+  font-family: var(--font-serif); font-size: 2.6rem; font-weight: 300;
+  color: var(--green-dark); letter-spacing: 0.08em; margin-bottom: 20px;
+}
+.name-aside-wordmark span { color: var(--turquoise); }
+.name-aside-text {
+  font-size: 0.88rem; font-weight: 300; line-height: 1.75; color: rgba(0,45,26,0.6);
+}
+
+/* SECTION PERSON */
+.section-person { background: var(--green-dark); padding: 100px 80px; }
+.person-grid {
+  display: grid; grid-template-columns: 320px 1fr; gap: 80px;
+  align-items: start; max-width: 1280px; margin: 0 auto;
+}
+/*
+  PHOTO : enregistrez votre photo sous le nom "photo-yvan-dorier.jpg"
+  dans le même dossier que ce fichier, puis remplacez la balise
+  .portrait-placeholder par :
+  <img src="photo-yvan-dorier.jpg" alt="Yvan Dorier" class="portrait-img">
+*/
+.portrait-img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top;
+  display: block;
+  /* Traitement noir et blanc */
+  filter: grayscale(100%) contrast(1.05) brightness(1.05);
+  /* Option crayon : décommenter la ligne suivante et commenter la ligne ci-dessus */
+  /* filter: grayscale(100%) brightness(1.4) contrast(0.65); */
+}
+.portrait-placeholder {
+  width: 100%; aspect-ratio: 3/4;
+  background: rgba(0,166,166,0.07); border: 1px solid rgba(0,166,166,0.18);
+  display: flex; align-items: center; justify-content: center;
+}
+.portrait-placeholder span {
+  font-family: var(--font-serif); font-size: 4rem; font-weight: 300;
+  color: rgba(0,166,166,0.35); letter-spacing: 0.15em;
+}
+.person-content .section-label { color: var(--turquoise); }
+.person-name {
+  font-family: var(--font-serif); font-size: clamp(2.5rem, 4vw, 3.8rem);
+  font-weight: 300; color: var(--cream); line-height: 1.1; margin-bottom: 8px;
+}
+.person-role {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--turquoise); margin-bottom: 44px;
+}
+.credentials-label {
+  font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(247,242,234,0.3); margin-bottom: 16px;
+}
+.credential-item {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 14px 0; border-bottom: 1px solid rgba(247,242,234,0.08);
+}
+.credential-item:first-of-type { border-top: 1px solid rgba(247,242,234,0.08); }
+.credential-degree { font-size: 0.9rem; font-weight: 400; color: var(--cream); }
+.credential-school {
+  font-size: 0.75rem; font-weight: 300; color: rgba(247,242,234,0.45);
+  font-family: var(--font-mono); letter-spacing: 0.04em;
+}
+
+/* SECTION CAREER */
+.section-career { background: var(--cream); padding: 100px 80px; }
+.career-sub {
+  font-size: 0.88rem; font-weight: 300; color: rgba(0,45,26,0.45);
+  font-style: italic; margin-top: -32px; margin-bottom: 56px;
+}
+.sectors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.sector-card { background: white; padding: 32px 28px; transition: background 0.2s; }
+.sector-card:hover { background: rgba(0,45,26,0.025); }
+.sector-tag {
+  font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--turquoise); margin-bottom: 6px;
+}
+.sector-geo { font-size: 0.78rem; font-weight: 300; color: rgba(0,45,26,0.42); margin-bottom: 12px; }
+.sector-function {
+  font-family: var(--font-serif); font-size: 1.15rem; font-weight: 400;
+  color: var(--green-dark); margin-bottom: 10px; line-height: 1.3;
+}
+.sector-desc { font-size: 0.82rem; font-weight: 300; line-height: 1.65; color: rgba(0,45,26,0.6); }
+
+/* SECTION CONVICTIONS */
+.section-convictions { background: #f0ebe2; padding: 100px 80px; }
+.convictions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 64px; }
+.conviction-card { padding: 40px 0; border-top: 1px solid rgba(0,45,26,0.1); }
+.conviction-num {
+  font-family: var(--font-serif); font-size: 3.2rem; font-weight: 300;
+  color: rgba(0,166,166,0.45); line-height: 1; margin-bottom: 16px;
+}
+.conviction-title {
+  font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400;
+  color: var(--green-dark); margin-bottom: 14px; line-height: 1.3;
+}
+.conviction-text { font-size: 0.88rem; font-weight: 300; line-height: 1.85; color: rgba(0,45,26,0.62); }
+
+/* SECTION APPROACH */
+.section-approach { background: var(--cream); padding: 100px 80px; }
+.approach-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  max-width: 1280px; margin: 0 auto;
+}
+.approach-block-title, .value-block-title {
+  font-family: var(--font-serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 300; color: var(--green-dark); margin-bottom: 28px; line-height: 1.2;
+}
+.approach-block-title em, .value-block-title em { font-style: italic; color: var(--turquoise); }
+.approach-block p, .value-block p {
+  font-size: 0.97rem; font-weight: 300; line-height: 1.9;
+  color: rgba(0,45,26,0.7); margin-bottom: 18px;
+}
+.approach-block p:last-child, .value-block p:last-child { margin-bottom: 0; }
+
+/* SECTION CTA */
+.section-cta { background: var(--green-dark); padding: 100px 80px; text-align: center; }
+.cta-inner { max-width: 700px; margin: 0 auto; }
+.cta-title {
+  font-family: var(--font-serif); font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 300; color: var(--cream); margin-bottom: 40px; line-height: 1.2;
+}
+.cta-title em { font-style: italic; color: var(--turquoise); }
+.cta-btn {
+  display: inline-block; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.06em;
+  color: var(--green-dark); background: var(--turquoise);
+  padding: 18px 52px; border-radius: 100px; text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.cta-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+
+/* FOOTER */
+.footer { background: var(--cream); border-top: 1px solid rgba(0,45,26,0.08); padding: 48px 80px; }
+.footer-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+}
+.footer-logo img { height: 45px; width: auto; display: block; }
+.footer-links { display: flex; align-items: center; gap: 28px; }
+.footer-link {
+  font-size: 0.78rem; font-weight: 300; color: rgba(0,45,26,0.5);
+  text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s;
+}
+.footer-link:hover { color: var(--turquoise); }
+.footer-copy { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; color: rgba(0,45,26,0.3); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+  .firm-grid { grid-template-columns: 1fr; }
+  .name-aside { position: static; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: fixed;
+    top: 72px; left: 0; right: 0; background: var(--green-dark);
+    padding: 24px; gap: 20px; border-bottom: 1px solid rgba(0,166,166,0.15);
+  }
+  .nav-burger { display: flex; }
+  .hero-about { padding: 100px 24px 60px; }
+  .section-firm, .section-person, .section-career,
+  .section-convictions, .section-approach, .section-cta { padding: 72px 24px; }
+  .person-grid, .approach-grid { grid-template-columns: 1fr; gap: 48px; }
+  .sectors-grid { grid-template-columns: 1fr; }
+  .convictions-grid { grid-template-columns: 1fr; }
+  .footer { padding: 40px 24px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logos/logo-dark.png" alt="ORI7ON Advisory" class="nav-logo-img">
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="conseil.html" class="nav-link" data-i18n="nav-conseil">Conseil</a>
+      <a href="direction-externalisee.html" class="nav-link" data-i18n="nav-direction">Direction</a>
+      <a href="intelligence-appliquee.html" class="nav-link nav-link-ia" data-i18n="nav-ia">Intelligence Appliquée</a>
+      <a href="contact.html" class="nav-link" data-i18n="nav-contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="contact.html" class="nav-cta-btn" data-i18n="nav-cta">Parlons-nous</a>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-about">
+  <div class="hero-about-inner">
+    <p class="eyebrow" data-i18n="hero-eyebrow">ORI7ON Advisory</p>
+    <h1 class="hero-title" data-i18n-html="hero-title">Qui sommes-<em>nous</em></h1>
+    <p class="hero-sub" data-i18n="hero-sub">Un cabinet indépendant. Une vision de terrain.</p>
+  </div>
+</section>
+
+<!-- LA STRUCTURE -->
+<section class="section-firm">
+  <div class="firm-grid">
+    <div class="firm-text reveal">
+      <p class="section-label" data-i18n="firm-eyebrow">La structure</p>
+      <h2 class="section-title" data-i18n-html="firm-title">Une <em>boutique advisory firm</em></h2>
+      <p data-i18n="firm-p1">ORI7ON Advisory est un cabinet de conseil indépendant, spécialisé et à taille humaine. Ce que le monde anglophone appelle une boutique advisory firm : une structure agile qui privilégie la profondeur d'engagement sur le volume de mandats, et la relation directe sur les strates hiérarchiques des grands cabinets.</p>
+      <p data-i18n="firm-p2">Fondé à Abidjan, ORI7ON Advisory intervient auprès de dirigeants de PME et de groupes régionaux qui cherchent le niveau d'exigence des grandes organisations, sans les contraintes qui viennent avec.</p>
+      <p data-i18n="firm-p3">Le cabinet dispose d'un réseau actif de CEO et d'experts sectoriels, mobilisables selon les besoins de chaque engagement.</p>
+    </div>
+    <div class="firm-right reveal reveal-d2">
+      <div class="name-aside">
+        <p class="name-aside-label" data-i18n="name-label">Le nom</p>
+        <p class="name-aside-wordmark">ORI<span>7</span>ON</p>
+        <p class="name-aside-text" data-i18n="name-text">Une lecture qui tient à la fois du code et de la signature. La vision portée par la technicité.</p>
+      </div>
+      <div class="firm-quote-wrap">
+        <blockquote class="firm-quote-text" data-i18n-html="firm-quote">La rigueur du grand groupe, calibrée à l'<em>agilité</em> et à la réalité de la PME africaine.</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LA PERSONNE -->
+<section class="section-person">
+  <div class="person-grid">
+    <div class="portrait-wrap reveal">
+      <img src="photo-yvan-dorier.jpg" alt="Yvan Dorier" class="portrait-img">
+    </div>
+    <div class="person-content reveal reveal-d2">
+      <p class="section-label" data-i18n="person-eyebrow">Founder &amp; Chief Enabler</p>
+      <h2 class="person-name">Yvan Dorier</h2>
+      <p class="person-role" data-i18n="person-role">Fondateur d'ORI7ON Advisory</p>
+      <p class="credentials-label" data-i18n="credentials-label">Formation</p>
+      <div class="credential-item">
+        <span class="credential-degree" data-i18n="cred-1-degree">Executive Certificate, Corporate Finance</span>
+        <span class="credential-school">HEC Paris · ICCF</span>
+      </div>
+      <div class="credential-item">
+        <span class="credential-degree" data-i18n="cred-2-degree">Executive Certificate, Corporate Strategy</span>
+        <span class="credential-school">HEC Paris Executive Education</span>
+      </div>
+      <div class="credential-item">
+        <span class="credential-degree" data-i18n="cred-3-degree">Master en Gestion et Finances</span>
+        <span class="credential-school">Lincoln International Business School, semestre à l'University of New South Wales (Sydney)</span>
+      </div>
+      <div class="credential-item">
+        <span class="credential-degree" data-i18n="cred-4-degree">DECF, Comptabilité, Gestion, Finance</span>
+        <span class="credential-school">Conservatoire National des Arts et Métiers (CNAM)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section class="section-career">
+  <div class="section-inner">
+    <p class="section-label reveal" data-i18n="career-eyebrow">Expériences</p>
+    <h2 class="section-title reveal" data-i18n-html="career-title">Un parcours <em>de terrain</em></h2>
+    <p class="career-sub reveal" data-i18n="career-sub">Vingt ans de directions opérationnelles et financières, en Afrique et à l'international. Par secteur, sans ordre chronologique.</p>
+    <div class="sectors-grid">
+      <div class="sector-card reveal">
+        <p class="sector-tag" data-i18n="s1-tag">FMCG / Grande consommation</p>
+        <p class="sector-geo" data-i18n="s1-geo">Afrique et international · 34 pays</p>
+        <p class="sector-function" data-i18n="s1-func">Direction financière et stratégique</p>
+        <p class="sector-desc" data-i18n="s1-desc">Co-pilotage de la stratégie avec le CEO. Diagnostic de marque, repositionnement, plan de croissance. Construction du premier modèle de prévision financière roulant. EBIT à deux chiffres, croissance annuelle de 8%.</p>
+      </div>
+      <div class="sector-card reveal reveal-d1">
+        <p class="sector-tag" data-i18n="s2-tag">Agro-industrie</p>
+        <p class="sector-geo" data-i18n="s2-geo">Côte d'Ivoire, Ghana, Sénégal, Afrique de l'Ouest</p>
+        <p class="sector-function" data-i18n="s2-func">Direction générale · Direction financière</p>
+        <p class="sector-desc" data-i18n="s2-desc">Six ans de direction financière d'un groupe de 500M€, équipe de 35 personnes. Direction d'un groupe de 17 entités dans 9 pays. Périmètre complet : budget, contrôle de gestion, trésorerie, fiscalité, ERP, juridique.</p>
+      </div>
+      <div class="sector-card reveal reveal-d2">
+        <p class="sector-tag" data-i18n="s3-tag">Zones industrielles et Infrastructure</p>
+        <p class="sector-geo" data-i18n="s3-geo">Côte d'Ivoire · Afrique de l'Est</p>
+        <p class="sector-function" data-i18n="s3-func">Direction générale</p>
+        <p class="sector-desc" data-i18n="s3-desc">Direction d'un projet d'infrastructure de 300M€. Structuration institutionnelle, financière et partenariale. Obtention du titre foncier, du budget infrastructures et de l'entrée de l'État au capital.</p>
+      </div>
+      <div class="sector-card reveal">
+        <p class="sector-tag" data-i18n="s4-tag">Mines et extraction</p>
+        <p class="sector-geo" data-i18n="s4-geo">Afrique de l'Est</p>
+        <p class="sector-function" data-i18n="s4-func">Structuration multi-fonctions</p>
+        <p class="sector-desc" data-i18n="s4-desc">Création d'une entité opérationnelle de zéro : juridique, fiscal, paie. Recrutement de 700 personnes en trois jours. Organisation logistique pour 50 expatriés. Importation d'équipements lourds par voie maritime et lacustre.</p>
+      </div>
+      <div class="sector-card reveal reveal-d1">
+        <p class="sector-tag" data-i18n="s5-tag">Génie civil et Construction</p>
+        <p class="sector-geo" data-i18n="s5-geo">La Réunion · Afrique centrale</p>
+        <p class="sector-function" data-i18n="s5-func">Direction financière</p>
+        <p class="sector-desc" data-i18n="s5-desc">Contrôle de gestion quantitatif sur un projet de 25 ans. Reprise en situation de gouvernance défaillante : audit, identification de non-conformités majeures, mise en conformité en 12 mois.</p>
+      </div>
+      <div class="sector-card reveal reveal-d2">
+        <p class="sector-tag" data-i18n="s6-tag">Conseil et Transformation</p>
+        <p class="sector-geo" data-i18n="s6-geo">Abidjan, Côte d'Ivoire</p>
+        <p class="sector-function" data-i18n="s6-func">Direction de mission</p>
+        <p class="sector-desc" data-i18n="s6-desc">Intégration de l'IA dans les processus opérationnels. Structuration de systèmes de gestion centralisés. Accompagnement digital de structures de conseil et d'organisations professionnelles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONVICTIONS -->
+<section class="section-convictions">
+  <div class="section-inner">
+    <p class="section-label reveal" data-i18n="conv-eyebrow">Ce en quoi je crois</p>
+    <h2 class="section-title reveal" data-i18n-html="conv-title">Quatre <em>convictions</em></h2>
+    <div class="convictions-grid">
+      <div class="conviction-card reveal">
+        <p class="conviction-num">01</p>
+        <h3 class="conviction-title" data-i18n="conv-1-title">Le terrain prime sur la théorie</h3>
+        <p class="conviction-text" data-i18n="conv-1-text">Dans ma carrière, j'ai reçu des conseils brillants que je ne pouvais pas appliquer. J'ai appris ce que ça coûte. Chaque recommandation que je formule doit pouvoir se traduire en action concrète dès la semaine suivante. Pas dans six mois, après un rapport de 200 pages.</p>
+      </div>
+      <div class="conviction-card reveal reveal-d2">
+        <p class="conviction-num">02</p>
+        <h3 class="conviction-title" data-i18n="conv-2-title">La finance et la stratégie parlent la même langue</h3>
+        <p class="conviction-text" data-i18n="conv-2-text">Trop de dirigeants vivent la finance comme une contrainte et la stratégie comme un horizon. Ce sont deux lectures du même réel. Comprendre les deux simultanément, c'est ce qui permet de prendre des décisions justes, au bon moment, avec les bonnes priorités.</p>
+      </div>
+      <div class="conviction-card reveal">
+        <p class="conviction-num">03</p>
+        <h3 class="conviction-title" data-i18n="conv-3-title">La technicité est un amplificateur, pas une finalité</h3>
+        <p class="conviction-text" data-i18n="conv-3-text">L'IA, les outils, les processus automatisés : ils décuplent la qualité d'une analyse, la rapidité d'une décision, la précision d'un suivi. Mais c'est le dirigeant qui décide. Toujours. Ma mission est de lui donner les instruments pour décider mieux, pas de décider à sa place.</p>
+      </div>
+      <div class="conviction-card reveal reveal-d2">
+        <p class="conviction-num">04</p>
+        <h3 class="conviction-title" data-i18n="conv-4-title">L'expertise des grands groupes a vocation à irriguer les PME</h3>
+        <p class="conviction-text" data-i18n="conv-4-text">Ce que j'ai appris dans des multinationales : la rigueur des reportings, la discipline de la planification stratégique, la gestion dans des environnements multi-pays et multi-devises. Les PME africaines jouent, elles aussi, une partition internationale. Elles méritent le même niveau d'exigence, adapté à leur agilité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROCHE + VALEUR -->
+<section class="section-approach">
+  <div class="approach-grid">
+    <div class="approach-block reveal">
+      <p class="section-label" data-i18n="approach-eyebrow">L'approche</p>
+      <h2 class="approach-block-title" data-i18n-html="approach-title">La relation <em>dirigeant</em></h2>
+      <p data-i18n="approach-p1">Ce qui me différencie n'est pas d'abord une expertise sectorielle. C'est une capacité à me mettre à la hauteur du dirigeant que j'ai en face de moi.</p>
+      <p data-i18n="approach-p2">Le patron d'une PME n'a pas le même vocabulaire qu'un DAF de multinationale. Il n'en a ni moins d'ambition, ni moins de lucidité. Il a simplement évolué dans un environnement différent, avec des ressources différentes et une solitude que les grands groupes ne connaissent pas.</p>
+      <p data-i18n="approach-p3">Mon rôle est de lui apporter le même niveau de rigueur analytique, dans un langage qu'il peut s'approprier, sur des décisions qu'il peut prendre immédiatement. Pas de jargon. Pas de slides de 80 pages. Une conversation entre pairs, suivie d'un plan.</p>
+    </div>
+    <div class="value-block reveal reveal-d2">
+      <p class="section-label" data-i18n="value-eyebrow">La valeur ajoutée</p>
+      <h2 class="value-block-title" data-i18n-html="value-title">L'expertise des grands groupes, calibrée à l'<em>agilité PME</em></h2>
+      <p data-i18n="value-p1">Vingt ans dans des environnements exigeants : filiales de groupes internationaux, opérations multi-pays, consolidations multi-devises, planifications stratégiques soumises aux standards d'actionnaires internationaux.</p>
+      <p data-i18n="value-p2">Ce que j'apporte, ce n'est pas un modèle importé. C'est une exigence adaptée : la discipline du grand groupe, calibrée à l'agilité et à la réalité de la PME africaine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-cta">
+  <div class="cta-inner">
+    <h2 class="cta-title" data-i18n-html="cta-title">Une conversation<br>suffit à <em>commencer</em>.</h2>
+    <a href="contact.html" class="cta-btn" data-i18n="cta-btn">Parlons-nous</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <img src="logos/logo-dark.png" alt="ORI7ON Advisory">
+    </a>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/company/ori7on" class="footer-link" target="_blank" rel="noopener" data-i18n="footer-li">ORI7ON sur LinkedIn</a>
+      <a href="https://www.linkedin.com/in/ydorier" class="footer-link" target="_blank" rel="noopener" data-i18n="footer-yvan">Yvan Dorier</a>
+      <a href="mentions-legales.html" class="footer-link" data-i18n="footer-legal">Mentions légales</a>
+      <a href="contact.html" class="footer-link" data-i18n="footer-contact">Contact</a>
+    </div>
+    <p class="footer-copy" data-i18n="footer-copy">© 2025 ORI7ON Advisory · Abidjan, Côte d'Ivoire</p>
+  </div>
+</footer>
+
+<script>
+const T = {
+  fr: {
+    'page-title': 'Qui sommes-nous — ORI7ON Advisory',
+    'nav-conseil': 'Conseil', 'nav-direction': 'Direction',
+    'nav-ia': 'Intelligence Appliquée', 'nav-contact': 'Contact', 'nav-cta': 'Parlons-nous',
+    'hero-eyebrow': 'ORI7ON Advisory',
+    'hero-title': 'Qui sommes-<em>nous</em>',
+    'hero-sub': 'Un cabinet indépendant. Une vision de terrain.',
+    'firm-eyebrow': 'La structure',
+    'firm-title': 'Une <em>boutique advisory firm</em>',
+    'firm-p1': "ORI7ON Advisory est un cabinet de conseil indépendant, spécialisé et à taille humaine. Ce que le monde anglophone appelle une boutique advisory firm : une structure agile qui privilégie la profondeur d'engagement sur le volume de mandats, et la relation directe sur les strates hiérarchiques des grands cabinets.",
+    'firm-p2': "Fondé à Abidjan, ORI7ON Advisory intervient auprès de dirigeants de PME et de groupes régionaux qui cherchent le niveau d'exigence des grandes organisations, sans les contraintes qui viennent avec.",
+    'firm-p3': "Le cabinet dispose d'un réseau actif de CEO et d'experts sectoriels, mobilisables selon les besoins de chaque engagement.",
+    'name-label': 'Le nom',
+    'name-text': "Une lecture qui tient à la fois du code et de la signature. La vision portée par la technicité.",
+    'firm-quote': "La rigueur du grand groupe, calibrée à l'<em>agilité</em> et à la réalité de la PME africaine.",
+    'person-eyebrow': 'Founder & Chief Enabler',
+    'person-role': "Fondateur d'ORI7ON Advisory",
+    'credentials-label': 'Formation',
+    'cred-1-degree': 'Executive Certificate, Corporate Finance',
+    'cred-2-degree': 'Executive Certificate, Corporate Strategy',
+    'cred-3-degree': 'Master en Gestion et Finances',
+    'cred-4-degree': 'DECF, Comptabilité, Gestion, Finance',
+    'career-eyebrow': 'Expériences',
+    'career-title': 'Un parcours <em>de terrain</em>',
+    'career-sub': "Vingt ans de directions opérationnelles et financières, en Afrique et à l'international. Par secteur, sans ordre chronologique.",
+    's1-tag': 'FMCG / Grande consommation', 's1-geo': 'Afrique et international · 34 pays',
+    's1-func': 'Direction financière et stratégique',
+    's1-desc': "Co-pilotage de la stratégie avec le CEO. Diagnostic de marque, repositionnement, plan de croissance. Construction du premier modèle de prévision financière roulant. EBIT à deux chiffres, croissance annuelle de 8%.",
+    's2-tag': 'Agro-industrie', 's2-geo': "Côte d'Ivoire, Ghana, Sénégal, Afrique de l'Ouest",
+    's2-func': 'Direction générale · Direction financière',
+    's2-desc': "Six ans de direction financière d'un groupe de 500M€, équipe de 35 personnes. Direction d'un groupe de 17 entités dans 9 pays. Périmètre complet : budget, contrôle de gestion, trésorerie, fiscalité, ERP, juridique.",
+    's3-tag': 'Zones industrielles et Infrastructure', 's3-geo': "Côte d'Ivoire · Afrique de l'Est",
+    's3-func': 'Direction générale',
+    's3-desc': "Direction d'un projet d'infrastructure de 300M€. Structuration institutionnelle, financière et partenariale. Obtention du titre foncier, du budget infrastructures et de l'entrée de l'État au capital.",
+    's4-tag': 'Mines et extraction', 's4-geo': "Afrique de l'Est",
+    's4-func': 'Structuration multi-fonctions',
+    's4-desc': "Création d'une entité opérationnelle de zéro : juridique, fiscal, paie. Recrutement de 700 personnes en trois jours. Organisation logistique pour 50 expatriés. Importation d'équipements lourds par voie maritime et lacustre.",
+    's5-tag': 'Génie civil et Construction', 's5-geo': 'La Réunion · Afrique centrale',
+    's5-func': 'Direction financière',
+    's5-desc': "Contrôle de gestion quantitatif sur un projet de 25 ans. Reprise en situation de gouvernance défaillante : audit, identification de non-conformités majeures, mise en conformité en 12 mois.",
+    's6-tag': 'Conseil et Transformation', 's6-geo': 'Abidjan, Côte d\'Ivoire',
+    's6-func': 'Direction de mission',
+    's6-desc': "Intégration de l'IA dans les processus opérationnels. Structuration de systèmes de gestion centralisés. Accompagnement digital de structures de conseil et d'organisations professionnelles.",
+    'conv-eyebrow': 'Ce en quoi je crois',
+    'conv-title': 'Quatre <em>convictions</em>',
+    'conv-1-title': 'Le terrain prime sur la théorie',
+    'conv-1-text': "Dans ma carrière, j'ai reçu des conseils brillants que je ne pouvais pas appliquer. J'ai appris ce que ça coûte. Chaque recommandation que je formule doit pouvoir se traduire en action concrète dès la semaine suivante. Pas dans six mois, après un rapport de 200 pages.",
+    'conv-2-title': 'La finance et la stratégie parlent la même langue',
+    'conv-2-text': "Trop de dirigeants vivent la finance comme une contrainte et la stratégie comme un horizon. Ce sont deux lectures du même réel. Comprendre les deux simultanément, c'est ce qui permet de prendre des décisions justes, au bon moment, avec les bonnes priorités.",
+    'conv-3-title': 'La technicité est un amplificateur, pas une finalité',
+    'conv-3-text': "L'IA, les outils, les processus automatisés : ils décuplent la qualité d'une analyse, la rapidité d'une décision, la précision d'un suivi. Mais c'est le dirigeant qui décide. Toujours. Ma mission est de lui donner les instruments pour décider mieux, pas de décider à sa place.",
+    'conv-4-title': "L'expertise des grands groupes a vocation à irriguer les PME",
+    'conv-4-text': "Ce que j'ai appris dans des multinationales : la rigueur des reportings, la discipline de la planification stratégique, la gestion dans des environnements multi-pays et multi-devises. Les PME africaines jouent, elles aussi, une partition internationale. Elles méritent le même niveau d'exigence, adapté à leur agilité.",
+    'approach-eyebrow': "L'approche",
+    'approach-title': 'La relation <em>dirigeant</em>',
+    'approach-p1': "Ce qui me différencie n'est pas d'abord une expertise sectorielle. C'est une capacité à me mettre à la hauteur du dirigeant que j'ai en face de moi.",
+    'approach-p2': "Le patron d'une PME n'a pas le même vocabulaire qu'un DAF de multinationale. Il n'en a ni moins d'ambition, ni moins de lucidité. Il a simplement évolué dans un environnement différent, avec des ressources différentes et une solitude que les grands groupes ne connaissent pas.",
+    'approach-p3': "Mon rôle est de lui apporter le même niveau de rigueur analytique, dans un langage qu'il peut s'approprier, sur des décisions qu'il peut prendre immédiatement. Pas de jargon. Pas de slides de 80 pages. Une conversation entre pairs, suivie d'un plan.",
+    'value-eyebrow': 'La valeur ajoutée',
+    'value-title': "L'expertise des grands groupes, calibrée à l'<em>agilité PME</em>",
+    'value-p1': "Vingt ans dans des environnements exigeants : filiales de groupes internationaux, opérations multi-pays, consolidations multi-devises, planifications stratégiques soumises aux standards d'actionnaires internationaux.",
+    'value-p2': "Ce que j'apporte, ce n'est pas un modèle importé. C'est une exigence adaptée. La rigueur du grand groupe, calibrée à l'agilité et à la réalité de la PME africaine.",
+    'value-p3': "ORI7ON, c'est ce pont.",
+    'cta-title': "Une conversation<br>suffit à <em>commencer</em>.",
+    'cta-btn': 'Parlons-nous',
+    'footer-li': 'ORI7ON sur LinkedIn', 'footer-yvan': 'Yvan Dorier',
+    'footer-legal': 'Mentions légales', 'footer-contact': 'Contact',
+    'footer-copy': "© 2026 ORI7ON Advisory · Abidjan, Côte d'Ivoire",
+  },
+  en: {
+    'page-title': 'About — ORI7ON Advisory',
+    'nav-conseil': 'Advisory', 'nav-direction': 'Management',
+    'nav-ia': 'Applied Intelligence', 'nav-contact': 'Contact', 'nav-cta': "Let's talk",
+    'hero-eyebrow': 'ORI7ON Advisory',
+    'hero-title': 'About <em>us</em>',
+    'hero-sub': 'An independent firm. A ground-level vision.',
+    'firm-eyebrow': 'The firm',
+    'firm-title': 'A <em>boutique advisory firm</em>',
+    'firm-p1': "ORI7ON Advisory is an independent, specialized advisory firm built for depth over volume. What the professional world calls a boutique advisory firm: an agile structure that prioritizes the quality of engagement over the number of mandates, and direct relationships over the hierarchical layers of large consulting groups.",
+    'firm-p2': "Based in Abidjan, ORI7ON Advisory works with SME leaders and regional groups seeking the standards of large organizations, without the constraints that come with them.",
+    'firm-p3': "The firm has an active network of CEOs and sector experts, available as each engagement requires.",
+    'name-label': 'The name',
+    'name-text': "A name that reads like a code and a signature. Vision carried by technology.",
+    'firm-quote': "The discipline of the large group, adapted to the <em>agility</em> and reality of the African SME.",
+    'person-eyebrow': 'Founder & Chief Enabler',
+    'person-role': 'Founder of ORI7ON Advisory',
+    'credentials-label': 'Education',
+    'cred-1-degree': 'Executive Certificate, Corporate Finance',
+    'cred-2-degree': 'Executive Certificate, Corporate Strategy',
+    'cred-3-degree': 'Master in Finance and Management',
+    'cred-4-degree': 'DECF, Accounting, Finance and Management',
+    'career-eyebrow': 'Experience',
+    'career-title': 'A <em>field-built</em> career',
+    'career-sub': 'Twenty years in operational and financial leadership across Africa and internationally. By sector, not by date.',
+    's1-tag': 'FMCG / Consumer Goods', 's1-geo': 'Africa and international · 34 countries',
+    's1-func': 'Financial and strategic leadership',
+    's1-desc': "Strategic co-piloting with the CEO. Brand diagnosis, repositioning, growth plan. Built the first rolling financial forecast model. Double-digit EBIT, 8% annual growth.",
+    's2-tag': 'Agri-industry', 's2-geo': "Côte d'Ivoire, Ghana, Senegal, West Africa",
+    's2-func': 'CEO · CFO',
+    's2-desc': "Six years as CFO of a €500M group with a team of 35. CEO of a group of 17 entities across 9 countries. Full scope: budget, management control, treasury, tax, ERP, legal.",
+    's3-tag': 'Industrial Zones & Infrastructure', 's3-geo': "Côte d'Ivoire · East Africa",
+    's3-func': 'CEO',
+    's3-desc': "Leadership of a €300M infrastructure project. Institutional, financial and partnership structuring. Secured land title, infrastructure budget and state equity participation.",
+    's4-tag': 'Mining & Extraction', 's4-geo': 'East Africa',
+    's4-func': 'Multi-function leadership',
+    's4-desc': "Built an operational entity from scratch: legal, tax, payroll. Recruited 700 people in three days. Logistics for 50 expatriates. Heavy equipment imports by sea and lake.",
+    's5-tag': 'Civil Engineering & Construction', 's5-geo': 'Réunion · Central Africa',
+    's5-func': 'CFO',
+    's5-desc': "Quantitative management control on a 25-year project. Took over a financial leadership in a governance failure situation: audit, identified major non-compliance, corrected within 12 months.",
+    's6-tag': 'Advisory & Transformation', 's6-geo': 'Abidjan, Côte d\'Ivoire',
+    's6-func': 'Mission leadership',
+    's6-desc': "AI integration into operational processes. Centralized management system structuring. Digital transformation of advisory firms and professional organizations.",
+    'conv-eyebrow': 'What I believe',
+    'conv-title': 'Four <em>convictions</em>',
+    'conv-1-title': 'Field reality over theory',
+    'conv-1-text': "During my career, I received brilliant advice I could not implement. I learned what that costs. Every recommendation I make must translate into concrete action by the following week. Not six months from now, after a 200-page report.",
+    'conv-2-title': 'Finance and strategy speak the same language',
+    'conv-2-text': "Too many executives experience finance as a constraint and strategy as an abstraction. They are two readings of the same reality. Understanding both simultaneously is what allows decisions to be made correctly, at the right moment, with the right priorities.",
+    'conv-3-title': 'Technology amplifies. It does not decide.',
+    'conv-3-text': "AI, tools, automated processes: they multiply the quality of analysis, the speed of decisions, the precision of follow-through. But it is the executive who decides. Always. My role is to give them the instruments to decide better, not to decide for them.",
+    'conv-4-title': 'Large-group expertise belongs in SMEs too',
+    'conv-4-text': "What I learned in multinationals: the rigor of reporting, the discipline of strategic planning, management across multi-country and multi-currency environments. African SMEs are also playing on an international stage. They deserve the same level of rigor, calibrated to their agility.",
+    'approach-eyebrow': 'The approach',
+    'approach-title': 'The <em>executive</em> relationship',
+    'approach-p1': "What differentiates me is not primarily sector expertise. It is the ability to engage at the level of the executive I am working with.",
+    'approach-p2': "An SME founder does not have the same vocabulary as a multinational CFO. They have no less ambition, and no less clarity. They have simply operated in a different environment, with different resources and a degree of solitude that large organizations rarely know.",
+    'approach-p3': "My role is to bring them the same level of analytical rigor, in a language they can own, applied to decisions they can make immediately. No jargon. No 80-slide decks. A conversation between peers, followed by a plan.",
+    'value-eyebrow': 'The value',
+    'value-title': "Large-group expertise, calibrated for <em>SME agility</em>",
+    'value-p1': "Twenty years in demanding environments: subsidiaries of international groups, multi-country operations, multi-currency consolidations, strategic planning held to international shareholder standards.",
+    'value-p2': "What I bring is not an imported template. It is calibrated rigor. The discipline of the large group, adapted to the agility and reality of the African SME.",
+    'value-p3': "ORI7ON is that bridge.",
+    'cta-title': "A single conversation<br>is enough to <em>begin</em>.",
+    'cta-btn': "Let's talk",
+    'footer-li': 'ORI7ON on LinkedIn', 'footer-yvan': 'Yvan Dorier',
+    'footer-legal': 'Legal notice', 'footer-contact': 'Contact',
+    'footer-copy': "© 2026 ORI7ON Advisory · Abidjan, Côte d'Ivoire",
+  }
+};
+
+function setLang(l) {
+  localStorage.setItem('ori7on_lang', l);
+  document.documentElement.lang = l;
+  if (T[l]['page-title']) document.title = T[l]['page-title'];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = T[l][el.dataset.i18n];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const v = T[l][el.dataset.i18nHtml];
+    if (v !== undefined) el.innerHTML = v;
+  });
+  document.getElementById('btn-fr').classList.toggle('active', l === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+}
+
+setLang(localStorage.getItem('ori7on_lang') || 'fr');
+
+// Scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Burger
+document.getElementById('nav-burger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('nav-links').classList.toggle('open');
+});
+</script>
+</body>
+</html>

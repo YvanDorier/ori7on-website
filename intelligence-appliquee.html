@@ -1145,6 +1145,13 @@ footer {
   .aa-arrow { display: none; }
   .aa-before { font-size: 0.85rem; }
   .aa-after { font-size: 0.85rem; }
+  .avantapres-slider { width: 100%; transform: none !important; }
+  .avantapres-panel { display: none; }
+  .avantapres-panel:first-child { display: block; }
+  .avantapres-slider.show-apres .avantapres-panel:first-child { display: none; }
+  .avantapres-slider.show-apres .avantapres-panel:last-child { display: block; }
+  .livrable-tag { white-space: normal; }
+  .niveau-text { max-width: 100%; }
   .flow-wrap { display: none; }
   .constat-grid { grid-template-columns: 1fr; }
   .counters-grid { grid-template-columns: 1fr 1fr; }
@@ -1745,8 +1752,12 @@ let currentPanel = 'avant';
 function showPanel(panel) {
   if (panel === currentPanel) return;
   currentPanel = panel;
-  document.getElementById('aaSlider').style.transform =
-    panel === 'apres' ? 'translateX(-50%)' : 'translateX(0)';
+  const slider = document.getElementById('aaSlider');
+  if (window.innerWidth <= 960) {
+    slider.classList.toggle('show-apres', panel === 'apres');
+  } else {
+    slider.style.transform = panel === 'apres' ? 'translateX(-50%)' : 'translateX(0)';
+  }
   document.getElementById('tabAvant').classList.toggle('active', panel === 'avant');
   document.getElementById('tabApres').classList.toggle('active', panel === 'apres');
 }

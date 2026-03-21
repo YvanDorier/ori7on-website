@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n-title-fr="Parlons-nous — ORI7ON Advisory" data-i18n-title-en="Let's Talk — ORI7ON Advisory">Parlons-nous — ORI7ON Advisory</title>
+<title data-i18n-title-fr="Parlons-nous - ORI7ON Advisory" data-i18n-title-en="Let's Talk - ORI7ON Advisory">Parlons-nous - ORI7ON Advisory</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -694,7 +694,7 @@ body.ff .fw.fc    { opacity: 1 !important; }
   <a class="nav-logo" href="index.html"><img src="logos/logo-light.png" alt="ORI7ON Advisory" class="nav-logo-img"></a>
   <ul class="nav-links">
     <li><a href="conseil.html" data-i18n="nav_conseil">Conseil</a></li>
-    <li><a href="direction-externalisee.html" data-i18n="nav_direction">Direction</a></li>
+    <li><a href="direction-externalisee.html" data-i18n="nav_direction">Direction externalisée</a></li>
     <li><a href="intelligence-appliquee.html" data-i18n="nav_ia">Intelligence Appliquée</a></li>
     <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
   </ul>
@@ -746,7 +746,7 @@ body.ff .fw.fc    { opacity: 1 !important; }
         </svg>
         <div class="info-text">
           <strong data-i18n="info_scope_label">Périmètre</strong>
-          <span data-i18n="info_scope">Afrique de l'Ouest · Afrique Centrale · International</span>
+          <span data-i18n="info_scope">Afrique · Afrique Centrale · International</span>
         </div>
       </div>
       <div class="contact-info-item" id="info-4">
@@ -1200,8 +1200,8 @@ function setLang(l) {
   localStorage.setItem('ori7on_lang', l);
   document.documentElement.lang = l;
   document.querySelector('title').textContent = l === 'fr'
-    ? 'Parlons-nous — ORI7ON Advisory'
-    : "Let's Talk — ORI7ON Advisory";
+    ? 'Parlons-nous - ORI7ON Advisory'
+    : "Let's Talk - ORI7ON Advisory";
   document.getElementById('btn-fr').classList.toggle('active', l === 'fr');
   document.getElementById('btn-en').classList.toggle('active', l === 'en');
   render();
@@ -1260,7 +1260,7 @@ cf.addEventListener('submit', async e => {
       message
     );
     window.location.href = 'mailto:contact@ori7on.com'
-      + '?subject=' + encodeURIComponent('ORI7ON — ' + subText)
+      + '?subject=' + encodeURIComponent('ORI7ON - ' + subText)
       + '&body='    + body;
     setTimeout(showSuccess, 600);
   }
@@ -1319,8 +1319,8 @@ window.addEventListener('scroll', () => {
 render();
 // Apply saved language: sync button state and title on init
 document.querySelector('title').textContent = lang === 'fr'
-  ? 'Parlons-nous — ORI7ON Advisory'
-  : "Let's Talk — ORI7ON Advisory";
+  ? 'Parlons-nous - ORI7ON Advisory'
+  : "Let's Talk - ORI7ON Advisory";
 document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
 document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 </script>

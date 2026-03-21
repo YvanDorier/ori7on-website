@@ -480,7 +480,7 @@ nav {
 ═══════════════════════════════════════════ */
 .label-mono {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 300;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -543,7 +543,7 @@ nav {
 
 .constat-tag {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.54rem;
+  font-size: 0.72rem;
   font-weight: 400;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -778,10 +778,10 @@ nav {
 }
 .counter-label {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   font-weight: 300;
   line-height: 1.6;
-  color: rgba(247,242,234,0.4);
+  color: rgba(247,242,234,0.72);
   margin-bottom: 12px;
 }
 .counter-delta {
@@ -870,7 +870,7 @@ nav {
 
 .niveau-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
+  font-size: 0.72rem;
   font-weight: 300;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -901,7 +901,7 @@ nav {
 
 .livrable-tag {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
+  font-size: 0.72rem;
   font-weight: 300;
   letter-spacing: 0.1em;
   color: var(--teal);
@@ -1141,6 +1141,10 @@ footer {
   .hero-right { display: none; }
   .constat-section, .approche-section, .niveaux-section,
   .avantapres-section, .cta-ia, .counters-section { padding: 56px 24px; }
+  .aa-row { grid-template-columns: 1fr; gap: 8px; }
+  .aa-arrow { display: none; }
+  .aa-before { font-size: 0.85rem; }
+  .aa-after { font-size: 0.85rem; }
   .flow-wrap { display: none; }
   .constat-grid { grid-template-columns: 1fr; }
   .counters-grid { grid-template-columns: 1fr 1fr; }
@@ -1374,7 +1378,7 @@ footer {
     </div>
     <div class="counter-card reveal">
       <div class="counter-num"><span id="cnt2">0</span><span class="counter-unit">h</span></div>
-      <div class="counter-label" data-i18n="cnt2-label">pour traiter un audit qui prenait 3 semaines</div>
+      <div class="counter-label" data-i18n="cnt2-label">pour traiter un audit qui prenait 3 jours</div>
       <div class="counter-delta" data-i18n="cnt2-delta">↓ de 504h à 2h</div>
     </div>
     <div class="counter-card reveal">
@@ -1458,7 +1462,7 @@ footer {
       <!-- AVANT -->
       <div class="avantapres-panel">
         <div class="aa-row" id="aa1">
-          <div class="aa-before" data-i18n="aa1-before">Un rapport d'audit prend 3 semaines</div>
+          <div class="aa-before" data-i18n="aa1-before">Un rapport d'audit prend 2 semaines</div>
           <div class="aa-arrow">→</div>
           <div class="aa-after" data-i18n="aa1-after">L'IA traite les données en 2 heures, je me concentre sur l'analyse</div>
         </div>
@@ -1470,7 +1474,7 @@ footer {
         <div class="aa-row" id="aa3">
           <div class="aa-before" data-i18n="aa3-before">La prospection dépend d'un commercial</div>
           <div class="aa-arrow">→</div>
-          <div class="aa-after" data-i18n="aa3-after">Un agent IA qualifie les leads 24/7</div>
+          <div class="aa-after" data-i18n="aa3-after">Un agent IA qualifie les leads 24/7, puis les fait valider</div>
         </div>
         <div class="aa-row" id="aa4">
           <div class="aa-before" data-i18n="aa4-before">Le recouvrement traîne</div>
@@ -1481,7 +1485,7 @@ footer {
       <!-- APRÈS — same data, highlighted -->
       <div class="avantapres-panel">
         <div class="aa-row visible" style="background:rgba(0,166,166,0.03);padding:20px 16px;">
-          <div class="aa-before" style="color:#bbb;text-decoration:line-through;opacity:0.5;" data-i18n="aa1-before">Un rapport d'audit prend 3 semaines</div>
+          <div class="aa-before" style="color:#bbb;text-decoration:line-through;opacity:0.5;" data-i18n="aa1-before">Un rapport d'audit prend 2 semaines</div>
           <div class="aa-arrow" style="color:var(--teal);opacity:1;">✓</div>
           <div class="aa-after" style="font-weight:500;font-size:0.95rem;" data-i18n="aa1-after">L'IA traite les données en 2 heures, je me concentre sur l'analyse</div>
         </div>
@@ -1493,7 +1497,7 @@ footer {
         <div class="aa-row visible" style="background:rgba(0,166,166,0.03);padding:20px 16px;">
           <div class="aa-before" style="color:#bbb;text-decoration:line-through;opacity:0.5;" data-i18n="aa3-before">La prospection dépend d'un commercial</div>
           <div class="aa-arrow" style="color:var(--teal);opacity:1;">✓</div>
-          <div class="aa-after" style="font-weight:500;font-size:0.95rem;" data-i18n="aa3-after">Un agent IA qualifie les leads 24/7</div>
+          <div class="aa-after" style="font-weight:500;font-size:0.95rem;" data-i18n="aa3-after">Un agent IA qualifie les leads 24/7, puis les fait valider</div>
         </div>
         <div class="aa-row visible" style="background:rgba(0,166,166,0.03);padding:20px 16px;">
           <div class="aa-before" style="color:#bbb;text-decoration:line-through;opacity:0.5;" data-i18n="aa4-before">Le recouvrement traîne</div>
@@ -1569,7 +1573,7 @@ const T = {
     'flow-label':'// Flux de travail automatisé - exemple',
     'counters-label':'Résultats mesurés',
     'cnt1-label':'des processus analysés sont automatisables','cnt1-delta':'↑ détecté lors du diagnostic',
-    'cnt2-label':'pour traiter un audit qui prenait 3 semaines','cnt2-delta':'↓ de 504h à 2h',
+    'cnt2-label':'pour traiter un audit qui prenait 3 jours','cnt2-delta':'↓ de 504h à 2h',
     'cnt3-label':"l'agent IA qualifie les leads en continu",'cnt3-delta':'24h sur 24, sans interruption',
     'cnt4-label':'pour une lettre de mission post-échange','cnt4-delta':'← temps garanti',
     'niveaux-label':"Niveaux d'intervention",
@@ -1585,9 +1589,9 @@ const T = {
     'n3-t1':'Agents IA déployés sur les fonctions clés','n3-t2':'Tableau de bord des gains','n3-t3':"Autonomie complète de l'équipe",
     'aa-label':'Résultats concrets','aa-heading':"Avant l'IA. <em>Après l'IA.</em>",
     'tab-avant':'← Avant','tab-apres':'Après →',
-    'aa1-before':"Un rapport d'audit prend 3 semaines",'aa1-after':"L'IA traite les données en 2 heures, je me concentre sur l'analyse",
+    'aa1-before':"Un rapport d'audit prend 2 semaines",'aa1-after':"L'IA traite les données en 2 heures, je me concentre sur l'analyse",
     'aa2-before':'Le dirigeant attend le reporting mensuel','aa2-after':'Un briefing quotidien automatique sur les indicateurs clés',
-    'aa3-before':"La prospection dépend d'un commercial",'aa3-after':'Un agent IA qualifie les leads 24/7',
+    'aa3-before':"La prospection dépend d'un commercial",'aa3-after':'Un agent IA qualifie les leads 24/7, puis les fait valider',
     'aa4-before':'Le recouvrement traîne','aa4-after':'Un agent IA relance, escalade, documente',
     'cta-title':"Prêt à voir ce que l'IA<br>peut faire pour votre entreprise ?<br><em>Concrètement.</em>",
     'cta-text':"Pas une démo. Pas un PowerPoint. Un échange de 30 minutes pour comprendre vos processus et identifier les gains immédiats.",
@@ -1626,7 +1630,7 @@ const T = {
     'flow-label':'// Automated workflow - example',
     'counters-label':'Measured results',
     'cnt1-label':'of processes analysed are automatable','cnt1-delta':'↑ identified during diagnosis',
-    'cnt2-label':'to process an audit that took 3 weeks','cnt2-delta':'↓ from 504h to 2h',
+    'cnt2-label':'to process an audit that took 3 days','cnt2-delta':'↓ from 504h to 2h',
     'cnt3-label':'the AI agent qualifies leads continuously','cnt3-delta':'24h a day, non-stop',
     'cnt4-label':'for an engagement letter post-call','cnt4-delta':'← guaranteed turnaround',
     'niveaux-label':'Intervention levels',
@@ -1642,9 +1646,9 @@ const T = {
     'n3-t1':'AI agents deployed on key functions','n3-t2':'Gains dashboard','n3-t3':'Full team autonomy',
     'aa-label':'Concrete results','aa-heading':"Before AI. <em>After AI.</em>",
     'tab-avant':'← Before','tab-apres':'After →',
-    'aa1-before':'An audit report takes 3 weeks','aa1-after':'AI processes the data in 2 hours, I focus on the analysis',
+    'aa1-before':'An audit report takes 2 weeks','aa1-after':'AI processes the data in 2 hours, I focus on the analysis',
     'aa2-before':'The leader waits for the monthly report','aa2-after':'An automatic daily briefing on key indicators',
-    'aa3-before':'Prospecting depends on one salesperson','aa3-after':'An AI agent qualifies leads 24/7',
+    'aa3-before':'Prospecting depends on one salesperson','aa3-after':'An AI agent qualifies leads 24/7, then has them validated',
     'aa4-before':'Collections lag behind','aa4-after':'An AI agent follows up, escalates, documents',
     'cta-title':"Ready to see what AI<br>can do for your business?<br><em>Concretely.</em>",
     'cta-text':"Not a demo. Not a PowerPoint. A 30-minute exchange to understand your processes and identify immediate gains.",

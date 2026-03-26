@@ -294,7 +294,7 @@ nav {
   background: var(--green-deep);
   overflow: hidden;
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
 }
 .accordion-container {
   display: flex;
@@ -368,7 +368,7 @@ nav {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.4rem;
   font-weight: 600;
-  color: rgba(206, 158, 94, 0.55);
+  color: rgba(206, 158, 94, 0.7);
   z-index: 2;
   transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
@@ -378,7 +378,7 @@ nav {
   font-size: 1.8rem;
   color: rgba(206, 158, 94, 0.75);
 }
-.acc-panel[data-panel="ia"] .acc-panel-num { color: rgba(0, 166, 166, 0.55); }
+.acc-panel[data-panel="ia"] .acc-panel-num { color: rgba(0, 166, 166, 0.7); }
 .acc-panel[data-panel="ia"].active .acc-panel-num { color: rgba(0, 166, 166, 0.75); }
 .acc-panel-title-vertical {
   position: absolute;
@@ -408,11 +408,13 @@ nav {
   right: 32px;
   z-index: 2;
   opacity: 0;
+  pointer-events: none;
   transform: translateY(14px);
   transition: opacity 0.6s ease 0s, transform 0.6s ease 0s;
 }
 .acc-panel.active .acc-panel-title-horizontal {
   opacity: 1;
+  pointer-events: auto;
   transform: translateY(0);
   transition: opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
 }
@@ -454,7 +456,7 @@ nav {
 }
 .acc-panel[data-panel="ia"] .panel-cta:hover { border-color: var(--turquoise); }
 @media (max-width: 1024px) {
-  .hero-right { min-height: 50vh; }
+  .hero-right { min-height: calc(100vh - 80px); }
 }
 @media (max-width: 768px) {
   .hero-right { min-height: 42vh; }

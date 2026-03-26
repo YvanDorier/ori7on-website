@@ -870,57 +870,133 @@ section { padding: 100px 80px; }
   line-height: 1.2;
 }
 
+.cas { background: var(--green-deep); }
+.cas h2 { color: var(--cream); }
 .cas h2 em { font-style: italic; color: var(--gold); }
+.cas .section-label { color: rgba(206,158,94,0.7); }
 
-.cas-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-  background: rgba(165,125,55,0.12);
+.cas-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0 60px;
 }
-
+.cas-track {
+  display: flex;
+  will-change: transform;
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
 .cas-card {
+  flex: 0 0 min(600px, 80vw);
+  margin: 0 16px;
   background: var(--cream);
+  border-radius: 2px;
   padding: 40px;
-  transition: background 0.25s;
+  position: relative;
+  transform: scale(0.92);
+  opacity: 0.5;
+  filter: blur(0.5px);
+  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-
-.cas-card:hover { background: white; }
-
+.cas-card.active {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+}
+.cas-card.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+.cas-card--cta {
+  background: var(--green);
+}
+.cas-card--cta.active::after {
+  background: var(--gold);
+}
 .cas-sector {
   font-family: 'Jost', sans-serif;
-  font-size: 0.58rem;
+  font-size: 0.65rem;
   font-weight: 400;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
-
+.cas-card--cta .cas-sector { color: rgba(206,158,94,0.7); }
 .cas-card h3 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   font-weight: 400;
   color: var(--green);
-  margin-bottom: 12px;
-  line-height: 1.25;
+  margin-bottom: 16px;
+  line-height: 1.3;
 }
-
+.cas-card--cta h3 { color: var(--cream); font-style: italic; }
 .cas-card .mission {
   font-size: 0.88rem;
   line-height: 1.7;
   color: var(--ink-muted);
   margin-bottom: 20px;
 }
-
+.cas-card--cta .mission { color: rgba(247,242,234,0.55); }
 .cas-result {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-style: italic;
-  color: var(--green);
-  padding-top: 16px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--gold);
+  padding-top: 20px;
   border-top: 1px solid var(--cream-dark);
 }
+.cas-card--cta .cas-result {
+  border-color: rgba(206,158,94,0.2);
+  color: var(--gold-light);
+}
+.cas-dots {
+  text-align: center;
+  margin-top: 28px;
+}
+.cas-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(206,158,94,0.25);
+  border: none;
+  margin: 0 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  padding: 0;
+}
+.cas-dot.active {
+  background: var(--gold);
+  transform: scale(1.4);
+}
+.cas-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(206,158,94,0.3);
+  background: rgba(0,30,15,0.6);
+  color: var(--gold);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s, border-color 0.3s;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cas-arrow:hover {
+  background: rgba(0,30,15,0.85);
+  border-color: var(--gold);
+}
+.cas-arrow--prev { left: 24px; }
+.cas-arrow--next { right: 24px; }
 
 /* ─── CTA ─── */
 .cta-section {
@@ -1061,7 +1137,10 @@ footer {
   .about { grid-template-columns: 1fr; gap: 40px; }
   .services-grid { grid-template-columns: 1fr; }
   .approche-grid { grid-template-columns: 1fr; }
-  .cas-grid { grid-template-columns: 1fr; }
+  .cas-card { flex: 0 0 85vw; margin: 0 8px; padding: 28px; }
+  .cas-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+  .cas-arrow--prev { left: 8px; }
+  .cas-arrow--next { right: 8px; }
   .strip { padding: 20px 24px; gap: 0; }
   footer { flex-direction: column; gap: 20px; text-align: center; }
 }
@@ -1464,39 +1543,60 @@ footer {
   </div>
 </section>
 
-<!-- CAS CLIENTS -->
+<!-- RÉFÉRENCES -->
 <section class="cas" id="references">
   <div class="section-label reveal" data-i18n="cas-label">Références</div>
   <h2 class="reveal" data-i18n-html="cas-heading">Des missions concrètes.<br><em>Des résultats nommés.</em></h2>
 
-  <div class="cas-grid reveal">
-    <div class="cas-card">
-      <div class="cas-sector" data-i18n="cas-1-sector">Assurance · Abidjan</div>
-      <h3 data-i18n="cas-1-title">Courtier en assurances</h3>
-      <p class="mission" data-i18n="cas-1-mission">Audit stratégique et organisationnel. Identification des leviers d'automatisations et des dysfonctionnements opérationnels. Roadmap de transformation sur 6 mois.</p>
-      <div class="cas-result" data-i18n="cas-1-result">"Un diagnostic qui nomme enfin ce qu'on savait mais qu'on n'arrivait pas à formuler."</div>
-    </div>
+  <div class="cas-carousel" id="cas-carousel">
+    <div class="cas-track" id="cas-track">
 
-    <div class="cas-card">
-      <div class="cas-sector" data-i18n="cas-2-sector">Institutions · Côte d'Ivoire</div>
-      <h3 data-i18n="cas-2-title">Organisation professionnelle - Benchmark Stratégique</h3>
-      <p class="mission" data-i18n="cas-2-mission">Étude comparative des principales organisations professionnelles africaines et francophones. Identification des écarts de positionnement et des axes de modernisation digitale pour l'organisation.</p>
-      <div class="cas-result" data-i18n="cas-2-result">"Une analyse qui change la façon dont on se voit, et dont on se positionne."</div>
-    </div>
+      <div class="cas-card active">
+        <div class="cas-sector" data-i18n="cas-1-sector">FMCG · Afrique &amp; international</div>
+        <h3 data-i18n="cas-1-title">Diagnostic stratégique et plan de retour à la croissance d'une marque présente dans 34 pays</h3>
+        <p class="mission" data-i18n="cas-1-mission">Identification de trois leviers de rentabilité. Redéfinition du mix produit, résolution des problèmes de pricing.</p>
+        <div class="cas-result" data-i18n="cas-1-result">11% de croissance l'année suivante.</div>
+      </div>
 
-    <div class="cas-card">
-      <div class="cas-sector" data-i18n="cas-3-sector">Implantation · Afrique</div>
-      <h3 data-i18n="cas-3-title">Accompagnement Investisseur Étranger</h3>
-      <p class="mission" data-i18n="cas-3-mission">Structuration de l'approche marché CI pour un groupe international. Mise en réseau, analyse réglementaire, identification des partenaires locaux stratégiques.</p>
-      <div class="cas-result" data-i18n="cas-3-result">"Six mois gagnés sur un processus d'implantation qui aurait pu durer deux ans."</div>
-    </div>
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cas-2-sector">Agro-industrie · Ghana / Afrique de l'Ouest</div>
+        <h3 data-i18n="cas-2-title">Restructuration d'un groupe de PME multi-pays surendetté</h3>
+        <p class="mission" data-i18n="cas-2-mission">Prise de direction d'un groupe de 17 entités dans 9 pays. Arrêt des activités déficitaires, renégociation avec les prêteurs, relance des opérations viables.</p>
+        <div class="cas-result" data-i18n="cas-2-result">Retour au meilleur résultat opérationnel en 5 ans.</div>
+      </div>
 
-    <div class="cas-card" style="background: var(--green); cursor: default;">
-      <div class="cas-sector" style="color: rgba(165,125,55,0.7);" data-i18n="cas-4-sector">Votre entreprise · Prochaine</div>
-      <h3 style="color: var(--cream); font-style: italic;" data-i18n-html="cas-4-title">Votre défi est probablement<br>celui que j'ai déjà vu.</h3>
-      <p class="mission" style="color: rgba(247,242,234,0.55);" data-i18n="cas-4-mission">Chaque engagement commence par un échange de 30 minutes, sans engagement, sans formulaire. Juste une conversation entre dirigeants.</p>
-      <div class="cas-result" style="border-color: rgba(165,125,55,0.2); color: var(--gold-light);" data-i18n="cas-4-result">→ Prendre rendez-vous directement</div>
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cas-3-sector">Zone industrielle · Côte d'Ivoire</div>
+        <h3 data-i18n="cas-3-title">Direction générale et relance d'un projet d'infrastructure de 300M€ au repos</h3>
+        <p class="mission" data-i18n="cas-3-mission">Arbitrage stratégique pour forcer le déblocage institutionnel. Obtention du titre foncier, du budget infrastructures et de l'entrée de l'État au capital.</p>
+        <div class="cas-result" data-i18n="cas-3-result">Crédibilité reconstruite auprès des ministères et des investisseurs étrangers.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cas-4-sector">Assurance &amp; Services · Abidjan</div>
+        <h3 data-i18n="cas-4-title">Audit de processus, implémentation IA et conception de présence digitale</h3>
+        <p class="mission" data-i18n="cas-4-mission">Cartographie complète des processus d'un cabinet de courtage. Identification des leviers d'automatisation par l'IA. Conception et réalisation d'un site web professionnel.</p>
+        <div class="cas-result" data-i18n="cas-4-result">Fonctionnement et automatisation IA implémentés.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cas-5-sector">Multi-secteurs · Afrique de l'Ouest et centrale</div>
+        <h3 data-i18n="cas-5-title">Reprise de contrôle d'entités en situation de gouvernance défaillante</h3>
+        <p class="mission" data-i18n="cas-5-mission">Interventions dans des contextes de détournement de ressources et de non-conformité comptable. Audit des dysfonctionnements, restructuration des équipes, mise en conformité des pratiques.</p>
+        <div class="cas-result" data-i18n="cas-5-result">Restructuration de 60% des effectifs et reconstruction de l'organisation.</div>
+      </div>
+
+      <div class="cas-card cas-card--cta">
+        <div class="cas-sector" data-i18n="cas-6-sector">Votre entreprise · Prochaine</div>
+        <h3 data-i18n-html="cas-6-title">Votre défi est probablement<br>celui que j'ai déjà vu.</h3>
+        <p class="mission" data-i18n="cas-6-mission">Chaque engagement commence par un échange de 30 minutes, sans engagement. Juste une conversation entre dirigeants.</p>
+        <div class="cas-result"><a href="#contact" style="color: var(--gold-light); text-decoration: none;" data-i18n="cas-6-result">→ Prendre rendez-vous directement</a></div>
+      </div>
+
     </div>
+    <button class="cas-arrow cas-arrow--prev" aria-label="Précédent">&#8249;</button>
+    <button class="cas-arrow cas-arrow--next" aria-label="Suivant">&#8250;</button>
+    <div class="cas-dots" id="cas-dots"></div>
   </div>
 </section>
 
@@ -1683,22 +1783,30 @@ const T = {
     // Case studies
     'cas-label': 'Références',
     'cas-heading': 'Des missions concrètes.<br><em>Des résultats nommés.</em>',
-    'cas-1-sector': 'Assurance · Abidjan',
-    'cas-1-title': 'Courtier en assurances',
-    'cas-1-mission': "Audit stratégique et organisationnel. Identification des leviers d'automatisations et des dysfonctionnements opérationnels. Roadmap de transformation sur 6 mois.",
-    'cas-1-result': '"Un diagnostic qui nomme enfin ce qu\'on savait mais qu\'on n\'arrivait pas à formuler."',
-    'cas-2-sector': "Institutions · Côte d'Ivoire",
-    'cas-2-title': 'Organisation professionnelle - Benchmark Stratégique',
-    'cas-2-mission': "Étude comparative des principales organisations professionnelles africaines et francophones. Identification des écarts de positionnement et des axes de modernisation digitale pour l'organisation.",
-    'cas-2-result': '"Une analyse qui change la façon dont on se voit, et dont on se positionne."',
-    'cas-3-sector': "Implantation · Afrique",
-    'cas-3-title': 'Accompagnement Investisseur Étranger',
-    'cas-3-mission': "Structuration de l'approche marché CI pour un groupe international. Mise en réseau, analyse réglementaire, identification des partenaires locaux stratégiques.",
-    'cas-3-result': '"Six mois gagnés sur un processus d\'implantation qui aurait pu durer deux ans."',
-    'cas-4-sector': 'Votre entreprise · Prochaine',
-    'cas-4-title': "Votre défi est probablement<br>celui que j'ai déjà vu.",
-    'cas-4-mission': "Chaque engagement commence par un échange de 30 minutes, sans engagement, sans formulaire. Juste une conversation entre dirigeants.",
-    'cas-4-result': '→ Prendre rendez-vous directement',
+    'cas-1-sector': 'FMCG · Afrique & international',
+    'cas-1-title': "Diagnostic stratégique et plan de retour à la croissance d'une marque présente dans 34 pays",
+    'cas-1-mission': "Identification de trois leviers de rentabilité. Redéfinition du mix produit, résolution des problèmes de pricing.",
+    'cas-1-result': "11% de croissance l'année suivante.",
+    'cas-2-sector': "Agro-industrie · Ghana / Afrique de l'Ouest",
+    'cas-2-title': "Restructuration d'un groupe de PME multi-pays surendetté",
+    'cas-2-mission': "Prise de direction d'un groupe de 17 entités dans 9 pays. Arrêt des activités déficitaires, renégociation avec les prêteurs, relance des opérations viables.",
+    'cas-2-result': "Retour au meilleur résultat opérationnel en 5 ans.",
+    'cas-3-sector': "Zone industrielle · Côte d'Ivoire",
+    'cas-3-title': "Direction générale et relance d'un projet d'infrastructure de 300M€ au repos",
+    'cas-3-mission': "Arbitrage stratégique pour forcer le déblocage institutionnel. Obtention du titre foncier, du budget infrastructures et de l'entrée de l'État au capital.",
+    'cas-3-result': "Crédibilité reconstruite auprès des ministères et des investisseurs étrangers.",
+    'cas-4-sector': 'Assurance & Services · Abidjan',
+    'cas-4-title': "Audit de processus, implémentation IA et conception de présence digitale",
+    'cas-4-mission': "Cartographie complète des processus d'un cabinet de courtage. Identification des leviers d'automatisation par l'IA. Conception et réalisation d'un site web professionnel.",
+    'cas-4-result': "Fonctionnement et automatisation IA implémentés.",
+    'cas-5-sector': "Multi-secteurs · Afrique de l'Ouest et centrale",
+    'cas-5-title': "Reprise de contrôle d'entités en situation de gouvernance défaillante",
+    'cas-5-mission': "Interventions dans des contextes de détournement de ressources et de non-conformité comptable. Audit des dysfonctionnements, restructuration des équipes, mise en conformité des pratiques.",
+    'cas-5-result': "Restructuration de 60% des effectifs et reconstruction de l'organisation.",
+    'cas-6-sector': 'Votre entreprise · Prochaine',
+    'cas-6-title': "Votre défi est probablement<br>celui que j'ai déjà vu.",
+    'cas-6-mission': "Chaque engagement commence par un échange de 30 minutes, sans engagement. Juste une conversation entre dirigeants.",
+    'cas-6-result': '→ Prendre rendez-vous directement',
     // CTA
     'map-label': 'Vingt ans de terrain',
     'map-title': "Une connaissance qui ne s'apprend<br>que sur le terrain.",
@@ -1810,22 +1918,30 @@ const T = {
     // Case studies
     'cas-label': 'References',
     'cas-heading': 'Concrete engagements.<br><em>Named results.</em>',
-    'cas-1-sector': 'Insurance · Abidjan',
-    'cas-1-title': 'Insurance Broker',
-    'cas-1-mission': "Strategic and organizational audit. Identification of automation levers and operational dysfunctions. 6-month transformation roadmap.",
-    'cas-1-result': '"A diagnostic that finally names what we knew but couldn\'t articulate."',
-    'cas-2-sector': "Institutions · Côte d'Ivoire",
-    'cas-2-title': 'Professional Organization - Strategic Benchmark',
-    'cas-2-mission': "Comparative study of major Ivorian and Francophone professional organizations. Identification of positioning gaps and digital modernization axes.",
-    'cas-2-result': '"An analysis that changes how you see yourself, and how you position yourself."',
-    'cas-3-sector': 'Expansion · West Africa',
-    'cas-3-title': 'Foreign Investor Support',
-    'cas-3-mission': "Market entry structuring for an international group entering CI. Networking, regulatory analysis, identification of strategic local partners.",
-    'cas-3-result': '"Six months saved on an establishment process that could have taken two years."',
-    'cas-4-sector': 'Your company · Next',
-    'cas-4-title': "Your challenge is probably<br>one I've already seen.",
-    'cas-4-mission': "Every engagement starts with a 30-minute call, no commitment, no form. Just a conversation between executives.",
-    'cas-4-result': '→ Schedule directly',
+    'cas-1-sector': 'FMCG · Africa & International',
+    'cas-1-title': 'Strategic diagnostic and growth recovery plan for a brand present in 34 countries',
+    'cas-1-mission': "Identification of three profitability levers. Product mix redefinition, pricing issues resolution.",
+    'cas-1-result': "11% growth the following year.",
+    'cas-2-sector': 'Agro-industry · Ghana / West Africa',
+    'cas-2-title': 'Restructuring of an over-indebted multi-country SME group',
+    'cas-2-mission': "Taking over management of a group of 17 entities across 9 countries. Shutting down loss-making activities, renegotiating with lenders, relaunching viable operations.",
+    'cas-2-result': "Return to best operating result in 5 years.",
+    'cas-3-sector': "Industrial zone · Côte d'Ivoire",
+    'cas-3-title': 'General management and restart of a €300M stalled infrastructure project',
+    'cas-3-mission': "Strategic arbitration to force institutional unblocking. Obtaining land title, infrastructure budget, and state entry into capital.",
+    'cas-3-result': "Credibility rebuilt with ministries and foreign investors.",
+    'cas-4-sector': 'Insurance & Services · Abidjan',
+    'cas-4-title': 'Process audit, AI implementation and digital presence design',
+    'cas-4-mission': "Complete process mapping of a brokerage firm. Identification of AI automation levers. Design and delivery of a professional website.",
+    'cas-4-result': "AI-powered operations and automation implemented.",
+    'cas-5-sector': 'Multi-sector · West & Central Africa',
+    'cas-5-title': 'Regaining control of entities under failed governance',
+    'cas-5-mission': "Interventions in contexts of resource misappropriation and accounting non-compliance. Audit of dysfunctions, team restructuring, practice compliance.",
+    'cas-5-result': "60% workforce restructuring and organizational rebuild.",
+    'cas-6-sector': 'Your company · Next',
+    'cas-6-title': "Your challenge is probably<br>one I've already seen.",
+    'cas-6-mission': "Every engagement starts with a 30-minute call, no commitment. Just a conversation between executives.",
+    'cas-6-result': '→ Schedule directly',
     // CTA
     'map-label': 'Twenty years on the ground',
     'map-title': 'Knowledge that can only be gained<br>in the field.',
@@ -1867,6 +1983,124 @@ function setLang(l) {
 // ── Init language from localStorage ──
 setLang(localStorage.getItem('ori7on_lang') || 'fr');
 
+</script>
+
+<!-- ══════════════════════════════════════
+     RÉFÉRENCES CARROUSEL
+     ══════════════════════════════════════ -->
+<script>
+(function() {
+  var track = document.getElementById('cas-track');
+  if (!track) return;
+  var carousel = track.parentElement;
+  var origCards = [].slice.call(track.children);
+  var n = origCards.length;
+  var dots = document.getElementById('cas-dots');
+  var prevBtn = carousel.querySelector('.cas-arrow--prev');
+  var nextBtn = carousel.querySelector('.cas-arrow--next');
+  var current = 0;
+  var autoTimer;
+  var isTransitioning = false;
+
+  // Clone cards AFTER originals
+  origCards.forEach(function(card) {
+    var cl = card.cloneNode(true);
+    cl.classList.add('cas-clone');
+    cl.querySelectorAll('[data-i18n]').forEach(function(e) { e.removeAttribute('data-i18n'); });
+    cl.querySelectorAll('[data-i18n-html]').forEach(function(e) { e.removeAttribute('data-i18n-html'); });
+    track.appendChild(cl);
+  });
+  // Clone cards BEFORE originals (prepend in reverse to keep order)
+  for (var i = origCards.length - 1; i >= 0; i--) {
+    var cl = origCards[i].cloneNode(true);
+    cl.classList.add('cas-clone');
+    cl.querySelectorAll('[data-i18n]').forEach(function(e) { e.removeAttribute('data-i18n'); });
+    cl.querySelectorAll('[data-i18n-html]').forEach(function(e) { e.removeAttribute('data-i18n-html'); });
+    track.insertBefore(cl, track.firstChild);
+  }
+
+  // Track: [n clones before] [n originals] [n clones after] = 3n
+  var allCards = [].slice.call(track.children);
+  var base = n; // index of first original
+
+  // Create dots
+  origCards.forEach(function(_, i) {
+    var d = document.createElement('button');
+    d.className = 'cas-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Référence ' + (i + 1));
+    d.onclick = function() { snapTo(i); resetAuto(); };
+    dots.appendChild(d);
+  });
+
+  function positionAt(idx, animate) {
+    var card = allCards[idx];
+    var cw = carousel.offsetWidth;
+    var cardW = card.offsetWidth;
+    var pos = card.offsetLeft - (cw - cardW) / 2;
+    if (!animate) {
+      track.style.transition = 'none';
+    }
+    track.style.transform = 'translateX(-' + pos + 'px)';
+    if (!animate) {
+      track.offsetHeight; // force reflow
+      track.style.transition = '';
+    }
+    allCards.forEach(function(c) { c.classList.remove('active'); });
+    card.classList.add('active');
+  }
+
+  function updateDots() {
+    dots.querySelectorAll('.cas-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function snapTo(idx) {
+    current = ((idx % n) + n) % n;
+    positionAt(base + current, true);
+    updateDots();
+  }
+
+  function next() {
+    var targetAll = base + current + 1;
+    isTransitioning = true;
+    positionAt(targetAll, true);
+    current = (current + 1) % n;
+    updateDots();
+  }
+
+  function prev() {
+    var targetAll = base + current - 1;
+    isTransitioning = true;
+    positionAt(targetAll, true);
+    current = ((current - 1) + n) % n;
+    updateDots();
+  }
+
+  // After transition, silently snap to real card
+  track.addEventListener('transitionend', function(e) {
+    if (e.target !== track) return;
+    if (isTransitioning) {
+      isTransitioning = false;
+      positionAt(base + current, false);
+    }
+  });
+
+  function startAuto() { autoTimer = setInterval(next, 5000); }
+  function stopAuto() { clearInterval(autoTimer); }
+  function resetAuto() { stopAuto(); startAuto(); }
+
+  prevBtn.onclick = function() { prev(); resetAuto(); };
+  nextBtn.onclick = function() { next(); resetAuto(); };
+
+  // Init: center card 0 without animation
+  positionAt(base + 0, false);
+  startAuto();
+
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('touchstart', stopAuto, { once: true });
+})();
 </script>
 
 <!-- ══════════════════════════════════════

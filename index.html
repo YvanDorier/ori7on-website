@@ -12,6 +12,7 @@
   --green-light: #4a5550;
   --gold: #CE9E5E;
   --gold-light: #D4B278;
+  --turquoise: #00A6A6;
   --cream: #f7f2ea;
   --cream-dark: #ede5d4;
   --ink: #1c1208;
@@ -287,78 +288,181 @@ nav {
 .btn-secondary:hover { color: var(--green); }
 .btn-secondary::after { content: '→'; }
 
+/* ── Hero accordion ── */
 .hero-right {
   position: relative;
   background: var(--green-deep);
   overflow: hidden;
-  animation: fadeIn 1.2s 0.4s ease both;
+  display: flex;
+  min-height: 100vh;
 }
-
-/* ── Hero animation canvases ── */
-#hero-main-canvas {
-  position: absolute;
-  inset: 0;
+.accordion-container {
+  display: flex;
   width: 100%;
   height: 100%;
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='8' fill='none' stroke='%23CE9E5E' stroke-width='1.2'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23CE9E5E'/%3E%3Cline x1='12' y1='0' x2='12' y2='6' stroke='%23CE9E5E' stroke-width='0.8'/%3E%3Cline x1='12' y1='18' x2='12' y2='24' stroke='%23CE9E5E' stroke-width='0.8'/%3E%3Cline x1='0' y1='12' x2='6' y2='12' stroke='%23CE9E5E' stroke-width='0.8'/%3E%3Cline x1='18' y1='12' x2='24' y2='12' stroke='%23CE9E5E' stroke-width='0.8'/%3E%3C/svg%3E") 12 12, crosshair;
 }
-#hero-mist-canvas {
+.acc-panel {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  border-right: 1px solid rgba(206, 158, 94, 0.1);
+}
+.acc-panel:last-child { border-right: none; }
+.acc-panel.active { flex: 5; }
+.acc-panel[data-panel="ia"] { border-right-color: rgba(0, 166, 166, 0.1); }
+.acc-panel-bg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+              filter 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  opacity: 0.07;
+  filter: brightness(0.4);
+}
+.acc-panel.active .acc-panel-bg {
+  opacity: 1;
+  filter: brightness(0.65);
+}
+.acc-panel-overlay {
+  position: absolute;
+  inset: 0;
   z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0, 29, 16, 0.92) 0%,
+    rgba(0, 29, 16, 0.3) 40%,
+    rgba(0, 29, 16, 0.05) 70%,
+    rgba(0, 29, 16, 0.2) 100%
+  );
+  transition: background 1s ease;
 }
-.hero-anim-vignette {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  background: radial-gradient(ellipse at center, transparent 35%, rgba(0,29,16,0.5) 100%);
+.acc-panel.active .acc-panel-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 29, 16, 0.85) 0%,
+    rgba(0, 29, 16, 0.12) 30%,
+    transparent 65%,
+    rgba(0, 29, 16, 0.08) 100%
+  );
 }
-.hero-quote-overlay {
+.acc-panel-accent {
   position: absolute;
   bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
   z-index: 3;
-  pointer-events: none;
-  padding: 40px 48px;
-  background: linear-gradient(to top, rgba(0,29,16,0.92) 0%, rgba(0,29,16,0.5) 60%, transparent 100%);
+  transform: scaleX(0);
+  transition: transform 1.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transform-origin: left;
 }
-.hero-quote-overlay blockquote {
+.acc-panel.active .acc-panel-accent { transform: scaleX(1); }
+.acc-panel[data-panel="ia"] .acc-panel-accent { background: var(--turquoise); }
+.acc-panel-num {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.4rem;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--cream);
-  line-height: 1.6;
-  margin-bottom: 12px;
+  font-weight: 600;
+  color: rgba(206, 158, 94, 0.55);
+  z-index: 2;
+  transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-.hero-quote-overlay cite {
-  font-family: 'Jost', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-style: normal;
+.acc-panel.active .acc-panel-num {
+  left: 32px;
+  transform: translateX(0);
+  font-size: 1.8rem;
+  color: rgba(206, 158, 94, 0.75);
 }
-@media (max-width: 768px) {
-  .hero-quote-overlay { padding: 28px 24px; }
-  .hero-quote-overlay blockquote { font-size: 1.15rem; }
-}
-  line-height: 1.55;
-  margin-bottom: 20px;
-}
-
-.hero-quote cite {
+.acc-panel[data-panel="ia"] .acc-panel-num { color: rgba(0, 166, 166, 0.55); }
+.acc-panel[data-panel="ia"].active .acc-panel-num { color: rgba(0, 166, 166, 0.75); }
+.acc-panel-title-vertical {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
   font-family: 'Jost', sans-serif;
   font-size: 0.65rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--gold-light);
-  font-style: normal;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.6s ease 0.3s;
+}
+.acc-panel.active .acc-panel-title-vertical {
+  opacity: 0;
+  transition: opacity 0.4s ease 0s;
+}
+.acc-panel[data-panel="ia"] .acc-panel-title-vertical { color: var(--turquoise); }
+.acc-panel-title-horizontal {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  right: 32px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease 0s, transform 0.6s ease 0s;
+}
+.acc-panel.active .acc-panel-title-horizontal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
+}
+.acc-panel-title-horizontal h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.acc-panel[data-panel="ia"] .acc-panel-title-horizontal h3 { color: var(--turquoise); }
+.acc-panel-title-horizontal .tagline {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: rgba(247, 242, 234, 0.6);
+  line-height: 1.5;
+  max-width: 300px;
+}
+.acc-panel-title-horizontal .panel-cta {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(206, 158, 94, 0.25);
+  padding-bottom: 2px;
+  transition: border-color 0.3s;
+}
+.acc-panel-title-horizontal .panel-cta:hover { border-color: var(--gold); }
+.acc-panel[data-panel="ia"] .panel-cta {
+  color: var(--turquoise);
+  border-bottom-color: rgba(0, 166, 166, 0.25);
+}
+.acc-panel[data-panel="ia"] .panel-cta:hover { border-color: var(--turquoise); }
+@media (max-width: 1024px) {
+  .hero-right { min-height: 50vh; }
+}
+@media (max-width: 768px) {
+  .hero-right { min-height: 42vh; }
+  .acc-panel-title-vertical { font-size: 0.55rem; letter-spacing: 0.22em; }
+  .acc-panel-title-horizontal h3 { font-size: 1.2rem; }
+  .acc-panel-title-horizontal .tagline { display: none; }
+  .acc-panel-title-horizontal { bottom: 18px; left: 16px; right: 16px; }
+  .acc-panel-num { top: 16px; font-size: 1.1rem; }
 }
 
 /* ─── CREDIBILITY STRIP ─── */
@@ -1084,13 +1188,74 @@ footer {
     </div>
   </div>
 
-  <div class="hero-right" id="hero-anim-wrap">
-    <canvas id="hero-main-canvas"></canvas>
-    <canvas id="hero-mist-canvas"></canvas>
-    <div class="hero-anim-vignette"></div>
-    <div class="hero-quote-overlay">
-      <blockquote data-i18n="hero-quote">"Les meilleurs conseils que j'ai reçus venaient de gens qui avaient été confrontés aux mêmes obstacles."</blockquote>
-      <cite data-i18n="hero-author">Yvan Dorier · Fondateur ORI7ON Advisory</cite>
+  <div class="hero-right">
+    <div class="accordion-container" id="accordion">
+
+      <div class="acc-panel active" data-panel="strategie" onmouseenter="activate(this)" onclick="activate(this)">
+        <div class="acc-panel-bg" style="background-image: url('images/hero/01-strategie.png')"></div>
+        <div class="acc-panel-overlay"></div>
+        <div class="acc-panel-accent"></div>
+        <span class="acc-panel-num">01</span>
+        <div class="acc-panel-title-vertical" data-i18n="acc-v-strategie">Stratégie</div>
+        <div class="acc-panel-title-horizontal">
+          <h3 data-i18n-html="acc-h-strategie">Stratégie &amp;<br>Performance</h3>
+          <div class="tagline" data-i18n="acc-tag-strategie">Traduire votre vision en plan actionnable, avec quelqu'un qui a déjà tenu ce rôle.</div>
+          <a href="conseil.html" class="panel-cta" data-i18n="acc-cta-strategie">Découvrir →</a>
+        </div>
+      </div>
+
+      <div class="acc-panel" data-panel="direction" onmouseenter="activate(this)" onclick="activate(this)">
+        <div class="acc-panel-bg" style="background-image: url('images/hero/02-direction.png')"></div>
+        <div class="acc-panel-overlay"></div>
+        <div class="acc-panel-accent"></div>
+        <span class="acc-panel-num">02</span>
+        <div class="acc-panel-title-vertical" data-i18n="acc-v-direction">Direction</div>
+        <div class="acc-panel-title-horizontal">
+          <h3 data-i18n-html="acc-h-direction">Direction à<br>Temps Partagé</h3>
+          <div class="tagline" data-i18n="acc-tag-direction">Un DG ou CFO de haut niveau, sans les contraintes d'un recrutement.</div>
+          <a href="direction-externalisee.html" class="panel-cta" data-i18n="acc-cta-direction">Découvrir →</a>
+        </div>
+      </div>
+
+      <div class="acc-panel" data-panel="implantation" onmouseenter="activate(this)" onclick="activate(this)">
+        <div class="acc-panel-bg" style="background-image: url('images/hero/03-implantation.png')"></div>
+        <div class="acc-panel-overlay"></div>
+        <div class="acc-panel-accent"></div>
+        <span class="acc-panel-num">03</span>
+        <div class="acc-panel-title-vertical" data-i18n="acc-v-implantation">Implantation</div>
+        <div class="acc-panel-title-horizontal">
+          <h3 data-i18n-html="acc-h-implantation">Implantation<br>Côte d'Ivoire</h3>
+          <div class="tagline" data-i18n="acc-tag-implantation">Le partenaire local qui vous évite les erreurs coûteuses.</div>
+          <a href="conseil.html" class="panel-cta" data-i18n="acc-cta-implantation">Découvrir →</a>
+        </div>
+      </div>
+
+      <div class="acc-panel" data-panel="ia" onmouseenter="activate(this)" onclick="activate(this)">
+        <div class="acc-panel-bg" style="background-image: url('images/hero/04-ia.png')"></div>
+        <div class="acc-panel-overlay"></div>
+        <div class="acc-panel-accent"></div>
+        <span class="acc-panel-num">04</span>
+        <div class="acc-panel-title-vertical" data-i18n="acc-v-ia">Intelligence Appliquée</div>
+        <div class="acc-panel-title-horizontal">
+          <h3 data-i18n-html="acc-h-ia">Transformation<br>IA</h3>
+          <div class="tagline" data-i18n="acc-tag-ia">Intégrer l'intelligence artificielle dans vos décisions, sans jargon technique.</div>
+          <a href="intelligence-appliquee.html" class="panel-cta" data-i18n="acc-cta-ia">Découvrir →</a>
+        </div>
+      </div>
+
+      <div class="acc-panel" data-panel="finance" onmouseenter="activate(this)" onclick="activate(this)">
+        <div class="acc-panel-bg" style="background-image: url('images/hero/05-finance.png')"></div>
+        <div class="acc-panel-overlay"></div>
+        <div class="acc-panel-accent"></div>
+        <span class="acc-panel-num">05</span>
+        <div class="acc-panel-title-vertical" data-i18n="acc-v-finance">Finance</div>
+        <div class="acc-panel-title-horizontal">
+          <h3 data-i18n-html="acc-h-finance">Finance &amp;<br>Restructuration</h3>
+          <div class="tagline" data-i18n="acc-tag-finance">Trésorerie sous tension, financement à structurer. Des situations vécues.</div>
+          <a href="conseil.html" class="panel-cta" data-i18n="acc-cta-finance">Découvrir →</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1703,248 +1868,35 @@ setLang(localStorage.getItem('ori7on_lang') || 'fr');
 </script>
 
 <!-- ══════════════════════════════════════
-     HERO ANIMATION — Words + Mist + Connectors
+     HERO ACCORDION — Accordion panels script
      ══════════════════════════════════════ -->
 <script>
-(function heroAnimation() {
-  const GREEN_DEEP = '#002d1a';
-  const GOLD       = '#CE9E5E';
-  const GOLD_LIGHT = '#D4B278';
-  const TURQUOISE  = '#00A6A6';
+let _hoverTimer = null;
+function activate(el) {
+  clearTimeout(_hoverTimer);
+  _hoverTimer = setTimeout(() => {
+    document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+  }, 80);
+  clearTimeout(window._autoCycle);
+}
 
-  const TERMS_STRAT = [
-    'Restructuration','Plan stratégique','Diagnostic','Repositionnement',
-    'Direction externalisée','Gouvernance','Retour à la croissance',
-    'Arbitrage stratégique','Continuité','Négociation bancaire',
-    'Due diligence','Business plan','Contrôle de gestion','Audit de processus',
-  ];
-  const TERMS_IA = [
-    'Audit IA','Agents IA','Automatisations','Base de connaissances',
-    'Workflow intelligent','Data Analytics','Assistant IA','Dashboard décisionnel',
-  ];
-
-  // Mix 3:1 ratio (strat:IA)
-  const ALL_TERMS = [];
-  {
-    const s = [...TERMS_STRAT].sort(() => Math.random() - 0.5);
-    const a = [...TERMS_IA].sort(() => Math.random() - 0.5);
-    let si = 0, ai = 0;
-    while (si < s.length || ai < a.length) {
-      for (let k = 0; k < 3 && si < s.length; k++) ALL_TERMS.push(s[si++]);
-      if (ai < a.length) ALL_TERMS.push(a[ai++]);
-    }
+(function() {
+  const panels = [...document.querySelectorAll('.acc-panel')];
+  let idx = 0;
+  function cycle() {
+    idx = (idx + 1) % panels.length;
+    panels.forEach(p => p.classList.remove('active'));
+    panels[idx].classList.add('active');
+    window._autoCycle = setTimeout(cycle, 3800);
   }
-
-  function isIA(t) { return TERMS_IA.includes(t); }
-
-  const wrap = document.getElementById('hero-anim-wrap');
-  const mc = document.getElementById('hero-main-canvas');
-  const mx = mc.getContext('2d');
-  const ic = document.getElementById('hero-mist-canvas');
-  const ix = ic.getContext('2d');
-  let W, H;
-
-  function resize() {
-    W = wrap.offsetWidth;
-    H = wrap.offsetHeight;
-    mc.width = W; mc.height = H;
-    ic.width = W; ic.height = H;
-    initDrift(); initMist();
-  }
-
-  // ── ZOOM WORDS ──
-  const zoomWords = [];
-  let zoomIdx = 0, lastZoom = -5000;
-  const ZOOM_DUR = 7000;
-
-  function spawnZoom(now) {
-    const term = ALL_TERMS[zoomIdx++ % ALL_TERMS.length];
-    const corners = [
-      {x:W*0.2,y:H*0.2},{x:W*0.8,y:H*0.2},
-      {x:W*0.2,y:H*0.8},{x:W*0.8,y:H*0.8},
-      {x:W*0.15,y:H*0.5},{x:W*0.85,y:H*0.5},
-    ];
-    const c = corners[Math.floor(Math.random()*corners.length)];
-    zoomWords.push({
-      term, ia:isIA(term), st:now,
-      sx:W*0.5, sy:H*0.5, ex:c.x, ey:c.y,
-      sScale:3.2, eScale:0.4, sAlpha:0.45,
-    });
-    lastZoom = now;
-  }
-
-  function drawZoom(now) {
-    if (now - lastZoom > ZOOM_DUR * 0.55) spawnZoom(now);
-    for (let i = zoomWords.length-1; i >= 0; i--) {
-      const w = zoomWords[i];
-      const p = Math.min((now - w.st) / ZOOM_DUR, 1);
-      if (p >= 1) { zoomWords.splice(i,1); continue; }
-      const e = 1 - Math.pow(1-p, 2.5);
-      const sc = w.sScale + (w.eScale - w.sScale) * e;
-      const x = w.sx + (w.ex - w.sx) * e;
-      const y = w.sy + (w.ey - w.sy) * e;
-      let a; if (p<0.06) a=(p/0.06)*w.sAlpha; else if (p<0.7) a=w.sAlpha; else a=w.sAlpha*(1-(p-0.7)/0.3);
-      const fs = Math.round(Math.min(W,H)*0.08*sc);
-      if (fs < 8) continue;
-      mx.save(); mx.globalAlpha=a;
-      mx.font=`300 ${fs}px 'Cormorant Garamond',serif`;
-      mx.fillStyle=w.ia?TURQUOISE:GOLD;
-      mx.textAlign='center'; mx.textBaseline='middle';
-      mx.fillText(w.term,x,y);
-      w.currentX=x; w.currentY=y;
-      if (a>0.08 && fs>14) regHit(x,y,w.term,fs,w);
-      mx.restore();
-    }
-  }
-
-  // ── DRIFT TERMS ──
-  const drift = [];
-  function initDrift() {
-    drift.length = 0;
-    for (let i=0; i<18; i++) drift.push(mkDrift(true));
-  }
-  function mkDrift(rY) {
-    const ia = Math.random()>0.6;
-    const pool = ia ? TERMS_IA : TERMS_STRAT;
-    const t = pool[Math.floor(Math.random()*pool.length)];
-    const bf = Math.min(W,H)*0.018;
-    const sz = bf + Math.random()*bf*0.6;
-    return { term:t, ia, x:W*0.08+Math.random()*W*0.84,
-      y:rY?Math.random()*H:H+20+Math.random()*60,
-      size:sz, speed:0.15+Math.random()*0.25,
-      baseOp:0.08+Math.random()*0.18 };
-  }
-  function drawDrift() {
-    for (let i=0; i<drift.length; i++) {
-      const t=drift[i]; t.y-=t.speed;
-      let f=1;
-      if (t.y<H*0.08) f=Math.max(0,t.y/(H*0.08));
-      if (t.y>H*0.88) f=Math.max(0,(H-t.y)/(H*0.12));
-      if (t.y<-30) { drift[i]=mkDrift(false); continue; }
-      const a=t.baseOp*f; if(a<0.01) continue;
-      mx.save(); mx.globalAlpha=a;
-      mx.font=`300 ${t.size}px 'Jost',sans-serif`;
-      mx.fillStyle=t.ia?TURQUOISE:GOLD_LIGHT;
-      mx.textAlign='center';
-      mx.fillText(t.term,t.x,t.y);
-      t.currentX=t.x; t.currentY=t.y;
-      if (a>0.05) regHit(t.x,t.y,t.term,t.size,t);
-      mx.restore();
-    }
-  }
-
-  // ── MIST ──
-  const mist = [];
-  function initMist() {
-    mist.length=0;
-    for (let i=0; i<22; i++) mist.push(mkMist());
-  }
-  function mkMist() {
-    return { x:W*0.3+Math.random()*W*0.5, y:H*0.1+Math.random()*H*0.8,
-      vx:-0.3-Math.random()*0.6, vy:(Math.random()-0.5)*0.15,
-      r:40+Math.random()*90, ph:Math.random()*Math.PI*2,
-      sp:0.005+Math.random()*0.01, ba:0.06+Math.random()*0.1,
-      gold:Math.random()>0.4 };
-  }
-  function drawMist() {
-    ix.clearRect(0,0,W,H);
-    mist.forEach(b => {
-      b.x+=b.vx; b.y+=b.vy; b.ph+=b.sp;
-      b.vy+=(Math.random()-0.5)*0.004; b.vy*=0.996;
-      if (b.x<-b.r*2) { Object.assign(b,mkMist()); b.x=W*0.6+Math.random()*W*0.4; }
-      const pulse=0.5+0.5*Math.sin(b.ph);
-      const al=b.ba*pulse; if(al<0.003) return;
-      let ef=1;
-      if(b.x<W*0.1) ef=b.x/(W*0.1);
-      if(b.x>W*0.9) ef=(W-b.x)/(W*0.1);
-      ef=Math.max(0,Math.min(1,ef));
-      const fa=al*ef; if(fa<0.003) return;
-      const r=b.r*(0.85+0.15*pulse);
-      const g=ix.createRadialGradient(b.x,b.y,0,b.x,b.y,r);
-      if(b.gold){
-        g.addColorStop(0,`rgba(206,158,94,${fa})`);
-        g.addColorStop(0.2,`rgba(206,158,94,${fa*0.7})`);
-        g.addColorStop(0.5,`rgba(206,158,94,${fa*0.2})`);
-        g.addColorStop(1,'transparent');
-      } else {
-        g.addColorStop(0,`rgba(0,166,166,${fa*0.9})`);
-        g.addColorStop(0.2,`rgba(0,166,166,${fa*0.6})`);
-        g.addColorStop(0.5,`rgba(0,166,166,${fa*0.15})`);
-        g.addColorStop(1,'transparent');
-      }
-      ix.fillStyle=g;
-      ix.fillRect(b.x-r,b.y-r,r*2,r*2);
-    });
-  }
-
-  // ── CONNECTORS ──
-  let hitBoxes=[];
-  function regHit(x,y,term,fs,ref) {
-    const w=mx.measureText(term).width;
-    hitBoxes.push({left:x-w/2,top:y-fs*0.55,right:x+w/2,bottom:y+fs*0.35,ref});
-  }
-  let sel=null;
-  const conns=[];
-  function hitTest(px,py) {
-    for (let i=hitBoxes.length-1;i>=0;i--) {
-      const b=hitBoxes[i];
-      if(px>=b.left&&px<=b.right&&py>=b.top&&py<=b.bottom) return b;
-    }
-    return null;
-  }
-  mc.addEventListener('click',e=>{
-    const r=mc.getBoundingClientRect();
-    const px=(e.clientX-r.left)*(mc.width/r.width);
-    const py=(e.clientY-r.top)*(mc.height/r.height);
-    const h=hitTest(px,py);
-    if(!h){sel=null;return;}
-    if(!sel){sel=h;} else {
-      if(h.ref!==sel.ref) conns.push({r1:sel.ref,r2:h.ref,st:performance.now(),dur:2000});
-      sel=null;
-    }
-  });
-  function drawConns(now) {
-    for(let i=conns.length-1;i>=0;i--){
-      const c=conns[i]; const el=now-c.st;
-      if(el>c.dur){conns.splice(i,1);continue;}
-      const p=el/c.dur;
-      const a=p<0.4?0.7:0.7*(1-(p-0.4)/0.6);
-      const x1=c.r1.currentX||0,y1=c.r1.currentY||0;
-      const x2=c.r2.currentX||0,y2=c.r2.currentY||0;
-      mx.save(); mx.globalAlpha=a; mx.strokeStyle=GOLD; mx.lineWidth=2;
-      mx.setLineDash([6,4]);
-      const mX=(x1+x2)/2, mY=(y1+y2)/2;
-      const cp=Math.min(80,Math.sqrt((x2-x1)**2+(y2-y1)**2)*0.25);
-      mx.beginPath(); mx.moveTo(x1,y1); mx.quadraticCurveTo(mX,mY-cp,x2,y2); mx.stroke();
-      mx.setLineDash([]);
-      [[x1,y1],[x2,y2]].forEach(([px,py])=>{
-        mx.beginPath(); mx.arc(px,py,4,0,Math.PI*2);
-        mx.fillStyle=`rgba(206,158,94,${a})`; mx.fill();
-      });
-      mx.restore();
-    }
-    if(sel){
-      const r=sel.ref, sx=r.currentX||0, sy=r.currentY||0;
-      const pulse=0.5+0.3*Math.sin(now*0.006);
-      mx.save(); mx.globalAlpha=pulse; mx.strokeStyle=GOLD;
-      mx.lineWidth=1.5; mx.beginPath(); mx.arc(sx,sy,20,0,Math.PI*2); mx.stroke();
-      mx.restore();
-    }
-  }
-
-  // ── LOOP ──
-  function draw(now) {
-    mx.clearRect(0,0,W,H); hitBoxes=[];
-    mx.fillStyle=GREEN_DEEP; mx.fillRect(0,0,W,H);
-    const g=mx.createRadialGradient(W*0.5,H*0.5,0,W*0.5,H*0.5,H*0.65);
-    g.addColorStop(0,'rgba(206,158,94,0.03)'); g.addColorStop(1,'transparent');
-    mx.fillStyle=g; mx.fillRect(0,0,W,H);
-    drawDrift(); drawZoom(now); drawConns(now); drawMist();
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize',resize);
-  document.fonts.ready.then(()=>{ resize(); requestAnimationFrame(draw); });
+  window._autoCycle = setTimeout(cycle, 4200);
+  document.getElementById('accordion').addEventListener('mouseenter', () => {
+    clearTimeout(window._autoCycle);
+  }, { once: true });
+  document.getElementById('accordion').addEventListener('touchstart', () => {
+    clearTimeout(window._autoCycle);
+  }, { once: true });
 })();
 </script>
 </body>

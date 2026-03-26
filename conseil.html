@@ -158,13 +158,48 @@ nav {
 /* ─── HERO ─── */
 .hero-conseil {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hero-conseil-left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 160px 80px 100px;
+  padding: 160px 64px 100px 80px;
   background: var(--cream);
   position: relative;
+}
+
+.hero-conseil-right {
+  position: relative;
+  background: var(--green-deep);
   overflow: hidden;
+  min-height: 100vh;
+}
+
+.hero-conseil-img {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/hero/01-strategie.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.65);
+}
+
+.hero-conseil-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--green-deep) 0%, transparent 35%);
+}
+
+.hero-conseil-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gold);
 }
 
 
@@ -193,11 +228,11 @@ nav {
 /* Word-by-word hero title */
 .hero-title-conseil {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-size: clamp(2.8rem, 4vw, 4.6rem);
   font-weight: 300;
   line-height: 1.1;
   color: var(--green);
-  max-width: 900px;
+  max-width: 620px;
   margin-bottom: 16px;
   overflow: hidden;
 }
@@ -229,7 +264,7 @@ nav {
 }
 
 @keyframes lineGrow {
-  to { width: min(900px, 100%); }
+  to { width: min(620px, 100%); }
 }
 
 .hero-subtitle-conseil {
@@ -238,7 +273,7 @@ nav {
   font-weight: 300;
   line-height: 1.75;
   color: var(--ink-mid);
-  max-width: 580px;
+  max-width: 480px;
   margin-bottom: 52px;
   animation: fadeUp 0.8s 1.2s ease both;
 }
@@ -801,7 +836,9 @@ footer {
   nav { padding: 20px 24px; }
   .nav-links { display: none; }
   section { padding: 64px 24px; }
-  .hero-conseil { padding: 120px 24px 64px; }
+  .hero-conseil { grid-template-columns: 1fr; }
+  .hero-conseil-left { padding: 120px 24px 64px; order: 2; }
+  .hero-conseil-right { min-height: 40vh; order: 1; }
   .conviction-section { padding: 64px 24px; }
   .piliers-section { padding: 64px 24px; }
   .pilier-header { padding: 24px; }
@@ -924,23 +961,30 @@ footer {
 
 <!-- HERO -->
 <section class="hero-conseil">
-  <div class="hero-eyebrow" data-i18n="hero-eyebrow">Conseil · ORI7ON Advisory</div>
+  <div class="hero-conseil-left">
+    <div class="hero-eyebrow" data-i18n="hero-eyebrow">Conseil · ORI7ON Advisory</div>
 
-  <h1 class="hero-title-conseil" id="heroTitle">
-    <!-- Words injected by JS -->
-  </h1>
+    <h1 class="hero-title-conseil" id="heroTitle">
+      <!-- Words injected by JS -->
+    </h1>
 
-  <div class="hero-gold-line"></div>
+    <div class="hero-gold-line"></div>
 
-  <p class="hero-subtitle-conseil" data-i18n-html="hero-subtitle">
-    Diagnostic. Stratégie. Exécution.<br>
-    J'interviens là où la théorie ne suffit plus.
-  </p>
+    <p class="hero-subtitle-conseil" data-i18n-html="hero-subtitle">
+      Diagnostic. Stratégie. Exécution.<br>
+      J'interviens là où la théorie ne suffit plus.
+    </p>
 
-  <div class="hero-actions">
-    <a href="contact.html" class="btn-primary" data-i18n="hero-cta">Parlons-nous</a>
+    <div class="hero-actions">
+      <a href="contact.html" class="btn-primary" data-i18n="hero-cta">Parlons-nous</a>
+    </div>
+    <p class="hero-micro" data-i18n="hero-micro">Un premier échange, sans engagement.</p>
   </div>
-  <p class="hero-micro" data-i18n="hero-micro">Un premier échange, sans engagement.</p>
+  <div class="hero-conseil-right">
+    <div class="hero-conseil-img"></div>
+    <div class="hero-conseil-overlay"></div>
+    <div class="hero-conseil-accent"></div>
+  </div>
 </section>
 
 <!-- CONVICTION -->

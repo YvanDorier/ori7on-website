@@ -208,17 +208,22 @@ nav {
 /* ─── HERO ─── */
 .hero-dir {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hero-dir-left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 160px 80px 100px;
+  padding: 160px 64px 100px 80px;
   background: var(--green-deep);
   position: relative;
   overflow: hidden;
 }
 
-/* Subtle geometric texture on hero */
-.hero-dir::before {
+/* Subtle geometric texture on hero left */
+.hero-dir-left::before {
   content: '';
   position: absolute;
   top: -200px; right: -200px;
@@ -228,7 +233,7 @@ nav {
   pointer-events: none;
 }
 
-.hero-dir::after {
+.hero-dir-left::after {
   content: '';
   position: absolute;
   top: -100px; right: -100px;
@@ -236,6 +241,37 @@ nav {
   border: 1px solid rgba(206,158,94,0.04);
   border-radius: 50%;
   pointer-events: none;
+}
+
+.hero-dir-right {
+  position: relative;
+  background: var(--green-deep);
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.hero-dir-img {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/hero/02-direction.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.65);
+}
+
+.hero-dir-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--green-deep) 0%, transparent 35%);
+}
+
+.hero-dir-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gold);
 }
 
 .hero-eyebrow {
@@ -262,11 +298,11 @@ nav {
 /* Word-by-word hero title */
 .hero-title-dir {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.6rem, 4.5vw, 4.6rem);
+  font-size: clamp(2.2rem, 3.5vw, 4rem);
   font-weight: 300;
   line-height: 1.12;
   color: var(--cream);
-  max-width: 920px;
+  max-width: 640px;
   margin-bottom: 16px;
 }
 
@@ -302,7 +338,7 @@ nav {
 }
 
 @keyframes lineGrow {
-  to { width: min(920px, 100%); }
+  to { width: min(640px, 100%); }
 }
 
 .hero-subtitle-dir {
@@ -311,7 +347,7 @@ nav {
   font-weight: 300;
   line-height: 1.8;
   color: rgba(247,242,234,0.65);
-  max-width: 620px;
+  max-width: 500px;
   margin-bottom: 52px;
   animation: fadeUp 0.8s 1.4s ease both;
 }
@@ -1023,7 +1059,9 @@ footer {
     font-size: 0.8rem;
   }
   section { padding: 64px 24px; }
-  .hero-dir { padding: 120px 24px 64px; }
+  .hero-dir { grid-template-columns: 1fr; }
+  .hero-dir-left { padding: 120px 24px 64px; order: 2; }
+  .hero-dir-right { min-height: 40vh; order: 1; }
   .philosophie-section { padding: 64px 24px; }
   .sivous-section { padding: 64px 24px; }
   .sivous-header { padding: 20px 24px; }
@@ -1070,14 +1108,21 @@ footer {
 
 <!-- HERO -->
 <section class="hero-dir">
-  <div class="hero-eyebrow" data-i18n="hero-eyebrow">Direction externalisée · ORI7ON Advisory</div>
-  <h1 class="hero-title-dir" id="heroTitle"></h1>
-  <div class="hero-gold-line" id="heroLine"></div>
-  <p class="hero-subtitle-dir" data-i18n-html="hero-subtitle">
-    De quelques jours par mois à plusieurs jours par semaine. Un dirigeant de haut niveau, calibré à vos besoins réels, sans les contraintes d'un recrutement.
-  </p>
-  <div class="hero-actions">
-    <a href="contact.html" class="btn-primary" data-i18n="cta-btn">Parlons-nous</a>
+  <div class="hero-dir-left">
+    <div class="hero-eyebrow" data-i18n="hero-eyebrow">Direction externalisée · ORI7ON Advisory</div>
+    <h1 class="hero-title-dir" id="heroTitle"></h1>
+    <div class="hero-gold-line" id="heroLine"></div>
+    <p class="hero-subtitle-dir" data-i18n-html="hero-subtitle">
+      De quelques jours par mois à plusieurs jours par semaine. Un dirigeant de haut niveau, calibré à vos besoins réels, sans les contraintes d'un recrutement.
+    </p>
+    <div class="hero-actions">
+      <a href="contact.html" class="btn-primary" data-i18n="cta-btn">Parlons-nous</a>
+    </div>
+  </div>
+  <div class="hero-dir-right">
+    <div class="hero-dir-img"></div>
+    <div class="hero-dir-overlay"></div>
+    <div class="hero-dir-accent"></div>
   </div>
 </section>
 

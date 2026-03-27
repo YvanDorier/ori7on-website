@@ -2086,7 +2086,7 @@ setLang(localStorage.getItem('ori7on_lang') || 'fr');
     }
   });
 
-  function startAuto() { autoTimer = setInterval(next, 5000); }
+  function startAuto() { clearInterval(autoTimer); autoTimer = setInterval(next, 5000); }
   function stopAuto() { clearInterval(autoTimer); }
   function resetAuto() { stopAuto(); startAuto(); }
 
@@ -2099,7 +2099,8 @@ setLang(localStorage.getItem('ori7on_lang') || 'fr');
 
   carousel.addEventListener('mouseenter', stopAuto);
   carousel.addEventListener('mouseleave', startAuto);
-  carousel.addEventListener('touchstart', stopAuto, { once: true });
+  carousel.addEventListener('touchstart', stopAuto, { passive: true });
+  carousel.addEventListener('touchend', resetAuto, { passive: true });
 })();
 </script>
 

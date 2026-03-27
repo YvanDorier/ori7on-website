@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mémo Git">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>Mémo Git</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #7c9ef8;
+      --green: #6fcf97;
+      --yellow: #f2c94c;
+      --orange: #f2994a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      padding: 1.5rem 1rem 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    .section {
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.2rem 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .badge-blue  { background: rgba(124,158,248,0.15); color: var(--accent); }
+    .badge-green { background: rgba(111,207,151,0.15); color: var(--green); }
+    .badge-yellow{ background: rgba(242,201,76,0.15);  color: var(--yellow); }
+    .badge-orange{ background: rgba(242,153,74,0.15);  color: var(--orange); }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .card p, .card li {
+      font-size: 0.9rem;
+      color: #c0c0c0;
+      line-height: 1.55;
+    }
+
+    .card ul {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+    }
+
+    .card li {
+      margin-bottom: 0.25rem;
+    }
+
+    .analogy {
+      margin-top: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+      border-left: 2px solid var(--border);
+      padding-left: 0.75rem;
+    }
+
+    .flow {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .flow h2 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .step:last-child { margin-bottom: 0; }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #0f0f0f;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .step-text {
+      font-size: 0.9rem;
+      color: #c0c0c0;
+    }
+
+    .step-text strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .step-done .step-num {
+      background: var(--green);
+    }
+
+    .step-todo .step-num {
+      background: var(--border);
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      padding-left: 0.25rem;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--border);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Mémo Git &amp; GitHub</h1>
+    <p>Les 5 concepts essentiels</p>
+  </header>
+
+  <div class="section">
+    <p class="section-title">Les concepts</p>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-blue">Commit</span>
+        <h2>Sauvegarder une version</h2>
+      </div>
+      <p>Tu modifies des fichiers, puis tu fais un commit pour dire : <em>"Je sauvegarde ces changements avec un message explicatif."</em></p>
+      <p class="analogy">Comme appuyer sur "Enregistrer" avec un commentaire dans Word.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-green">Branch</span>
+        <h2>Une copie de travail isolée</h2>
+      </div>
+      <p>Une branche est une copie parallèle du code. On y travaille sans toucher à <code style="font-size:0.85em;background:#2a2a2a;padding:0.1em 0.4em;border-radius:4px;">main</code>, pour ne pas casser ce qui fonctionne.</p>
+      <p class="analogy">Comme faire une photocopie d'un document avant de le corriger au stylo rouge.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-yellow">Push</span>
+        <h2>Envoyer vers GitHub</h2>
+      </div>
+      <p>Push = envoyer tes commits depuis ta machine vers GitHub. Sans push, tes modifications restent invisibles en ligne.</p>
+      <p class="analogy">Comme envoyer un e-mail : le brouillon reste local jusqu'à ce que tu appuies sur "Envoyer".</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-orange">Pull Request</span>
+        <h2>Demander à fusionner</h2>
+      </div>
+      <p>Une PR est une demande formelle sur GitHub pour intégrer ta branche dans <code style="font-size:0.85em;background:#2a2a2a;padding:0.1em 0.4em;border-radius:4px;">main</code>. C'est là qu'on relit, commente, approuve.</p>
+      <p class="analogy">Comme soumettre un rapport à ton responsable avant qu'il soit officiel.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-green">Merge</span>
+        <h2>Fusionner dans main</h2>
+      </div>
+      <p>Merge = valider la PR et intégrer définitivement les changements dans <code style="font-size:0.85em;background:#2a2a2a;padding:0.1em 0.4em;border-radius:4px;">main</code>. C'est l'étape finale.</p>
+      <p class="analogy">Ton responsable signe le rapport et il devient officiel.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-title">Le flux complet</p>
+    <div class="flow">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Modifier</strong> les fichiers du projet</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Commit</strong> — sauvegarder avec un message</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Push</strong> — envoyer la branche sur GitHub</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Pull Request</strong> — ouvrir une demande de fusion</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Relecture</strong> — révision et approbation</div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-text"><strong>Merge</strong> — fusionner dans main ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-title">Où on en est sur le projet</p>
+    <div class="flow">
+      <div class="step step-done">
+        <div class="step-num">✓</div>
+        <div class="step-text">Suppression de "Ce n'est pas négociable." dans <code style="font-size:0.85em;background:#2a2a2a;padding:0.1em 0.4em;border-radius:4px;">index.html</code></div>
+      </div>
+      <div class="step step-done">
+        <div class="step-num">✓</div>
+        <div class="step-text">Commit effectué</div>
+      </div>
+      <div class="step step-done">
+        <div class="step-num">✓</div>
+        <div class="step-text">Push de la branche <code style="font-size:0.85em;background:#2a2a2a;padding:0.1em 0.4em;border-radius:4px;">claude/fix-differentiators-text-vZSxl</code></div>
+      </div>
+      <div class="step step-todo">
+        <div class="step-num">4</div>
+        <div class="step-text">Créer la Pull Request sur GitHub</div>
+      </div>
+      <div class="step step-todo">
+        <div class="step-num">5</div>
+        <div class="step-text">Merger dans main</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>ori7on-website · mémo git</footer>
+
+</body>
+</html>

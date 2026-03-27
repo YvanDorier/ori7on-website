@@ -934,7 +934,7 @@ footer {
 .cas h2 em { font-style: italic; color: var(--gold); }
 .cas .section-label { color: rgba(206,158,94,0.7); }
 .cas-carousel { position: relative; overflow: hidden; padding: 32px 0 48px; }
-.cas-track { display: flex; will-change: transform; transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.cas-track { display: flex; align-items: flex-start; will-change: transform; transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
 .cas-card { flex: 0 0 min(520px, 72vw); margin: 0 14px; background: var(--cream); border-radius: 2px; padding: 28px; position: relative; transform: scale(0.92); opacity: 0.5; filter: blur(0.5px); transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
 .cas-card.active { transform: scale(1); opacity: 1; filter: blur(0); }
 .cas-card.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
@@ -1238,7 +1238,7 @@ footer {
       <div class="cas-card">
         <div class="cas-sector" data-i18n="cref-2-sector">Agro-industrie · Ghana / Afrique de l'Ouest</div>
         <h3 data-i18n="cref-2-title">Relance commerciale d'un groupe en restructuration</h3>
-        <p class="mission" data-i18n="cref-2-mission">Remise en production d'une exploitation agricole irriguée (de 60 à 300 hectares). Relance complète d'une marque consommateur : repositionnement, nouveau branding, refonte du packaging, mise en place du plan de distribution.</p>
+        <p class="mission" data-i18n="cref-2-mission">Remise en production d'une exploitation agricole irriguée (de 60 à 300 hectares). Relance complète d'une marque consommateur : repositionnement, nouveau branding, refonte du packaging, plan de distribution.</p>
         <div class="cas-result" data-i18n="cref-2-result">Meilleur résultat opérationnel en 5 ans.</div>
       </div>
 
@@ -1291,12 +1291,6 @@ footer {
         <div class="cas-result" data-i18n="cref-9-result">Crédibilité reconstruite auprès des ministères et des investisseurs étrangers.</div>
       </div>
 
-      <div class="cas-card">
-        <div class="cas-sector" data-i18n="cref-10-sector">Multi-secteurs · Afrique de l'Ouest, de l'Est et centrale</div>
-        <h3 data-i18n="cref-10-title">Maintien de la continuité d'exploitation en contexte de crise politique, sécuritaire et industrielle</h3>
-        <p class="mission" data-i18n="cref-10-mission">Gestion d'opérations multi-sites en période d'instabilité politique majeure, incluant la mise en place de systèmes de paiement alternatifs. Évacuation sécurisée de sites et de personnels. Gestion de la claim d'assurance d'un sinistre industriel majeur.</p>
-        <div class="cas-result" data-i18n="cref-10-result">Production maintenue et équipes sécurisées dans chaque situation.</div>
-      </div>
 
     </div>
     <button class="cas-arrow cas-arrow--prev" aria-label="Précédent">&#8249;</button>
@@ -1409,7 +1403,7 @@ const T = {
     'cref-1-result': "11% de croissance l'année suivante.",
     'cref-2-sector': "Agro-industrie · Ghana / Afrique de l'Ouest",
     'cref-2-title': "Relance commerciale d'un groupe en restructuration",
-    'cref-2-mission': "Remise en production d'une exploitation agricole irriguée (de 60 à 300 hectares). Relance complète d'une marque consommateur : repositionnement, nouveau branding, refonte du packaging, mise en place du plan de distribution.",
+    'cref-2-mission': "Remise en production d'une exploitation agricole irriguée (de 60 à 300 hectares). Relance complète d'une marque consommateur : repositionnement, nouveau branding, refonte du packaging, plan de distribution.",
     'cref-2-result': "Meilleur résultat opérationnel en 5 ans.",
     'cref-3-sector': "Agro-industrie · Côte d'Ivoire · 500M€ de CA",
     'cref-3-title': "Mise en place d'une trésorerie haute fréquence",
@@ -1439,10 +1433,6 @@ const T = {
     'cref-9-title': "Déblocage institutionnel et relance d'une concession PPP",
     'cref-9-mission': "Obtention du titre foncier, du budget infrastructures, de l'entrée de l'État au capital. Développement de partenariats avec les chambres de commerce, le CEPICI et les ambassades. Sourcing de plus de 50 hectares de prospects.",
     'cref-9-result': "Crédibilité reconstruite auprès des ministères et des investisseurs étrangers.",
-    'cref-10-sector': "Multi-secteurs · Afrique de l'Ouest, de l'Est et centrale",
-    'cref-10-title': "Maintien de la continuité d'exploitation en contexte de crise politique, sécuritaire et industrielle",
-    'cref-10-mission': "Gestion d'opérations multi-sites en période d'instabilité politique majeure, incluant la mise en place de systèmes de paiement alternatifs. Évacuation sécurisée de sites et de personnels. Gestion de la claim d'assurance d'un sinistre industriel majeur.",
-    'cref-10-result': "Production maintenue et équipes sécurisées dans chaque situation.",
     'cta-heading': 'Prêt à avoir une conversation<br><em>qui compte ?</em>',
     'cta-text': 'Premier échange de 30 minutes. Pour comprendre votre situation et voir si nous pouvons avancer ensemble.',
     'cta-button': 'Parlons-nous',
@@ -1534,7 +1524,7 @@ const T = {
     'cref-1-result': '11% growth the following year.',
     'cref-2-sector': 'Agro-industry · Ghana / West Africa',
     'cref-2-title': 'Commercial relaunch of a group in restructuring',
-    'cref-2-mission': 'Restarting an irrigated agricultural operation (from 60 to 300 hectares). Full relaunch of a consumer brand: repositioning, new branding, packaging redesign, distribution plan rollout.',
+    'cref-2-mission': 'Restarting an irrigated agricultural operation (from 60 to 300 hectares). Full relaunch of a consumer brand: repositioning, new branding, packaging redesign, distribution plan.',
     'cref-2-result': 'Best operating result in 5 years.',
     'cref-3-sector': "Agro-industry · Côte d'Ivoire · €500M revenue",
     'cref-3-title': 'High-frequency treasury implementation',
@@ -1564,10 +1554,6 @@ const T = {
     'cref-9-title': 'Institutional unblocking and relaunch of a PPP concession',
     'cref-9-mission': 'Obtaining land title, infrastructure budget, and state equity stake. Development of partnerships with chambers of commerce, CEPICI and embassies. Sourcing over 50 hectares of prospects.',
     'cref-9-result': 'Credibility rebuilt with ministries and foreign investors.',
-    'cref-10-sector': 'Multi-sector · West, East and Central Africa',
-    'cref-10-title': 'Maintaining operational continuity in political, security and industrial crisis',
-    'cref-10-mission': 'Managing multi-site operations during major political instability, including setting up alternative payment systems. Safe evacuation of sites and personnel. Management of the insurance claim for a major industrial incident.',
-    'cref-10-result': 'Production maintained and teams secured in every situation.',
     'cta-heading': 'Ready for a conversation<br><em>that matters?</em>',
     'cta-text': '30-minute first call. To understand your situation and see if we can move forward together.',
     'cta-button': 'Let\'s talk',

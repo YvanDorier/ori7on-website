@@ -1160,6 +1160,34 @@ footer {
   .niveau-block { padding: 28px 20px; }
   footer { flex-direction: column; gap: 20px; text-align: center; padding: 36px 24px; }
 }
+
+/* ─── CARROUSEL RÉFÉRENCES (IA) ─── */
+.cas { background: var(--green-deep); }
+.cas h2 { color: var(--cream); font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 2.8vw, 2.4rem); font-weight: 300; line-height: 1.2; margin-bottom: 48px; }
+.cas h2 em { font-style: italic; color: var(--gold); }
+.cas .section-label { color: rgba(206,158,94,0.7); }
+.cas-carousel { position: relative; overflow: hidden; padding: 32px 0 48px; }
+.cas-track { display: flex; align-items: flex-start; will-change: transform; transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.cas-card { flex: 0 0 min(520px, 72vw); margin: 0 14px; background: var(--cream); border-radius: 2px; padding: 28px; position: relative; transform: scale(0.92); opacity: 0.5; filter: blur(0.5px); transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.cas-card.active { transform: scale(1); opacity: 1; filter: blur(0); }
+.cas-card.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+.cas-sector { font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.cas-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--green); margin-bottom: 12px; line-height: 1.3; }
+.cas-card .mission { font-size: 0.88rem; line-height: 1.75; color: var(--ink-muted); margin-bottom: 16px; }
+.cas-result { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); padding-top: 16px; border-top: 1px solid var(--cream-dark); }
+.cas-dots { text-align: center; margin-top: 24px; }
+.cas-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(206,158,94,0.25); border: none; margin: 0 6px; cursor: pointer; transition: background 0.3s, transform 0.3s; padding: 0; }
+.cas-dot.active { background: var(--gold); transform: scale(1.4); }
+.cas-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(206,158,94,0.3); background: rgba(0,30,15,0.6); color: var(--gold); font-size: 1.5rem; cursor: pointer; z-index: 10; transition: background 0.3s, border-color 0.3s; backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; }
+.cas-arrow:hover { background: rgba(0,30,15,0.85); border-color: var(--gold); }
+.cas-arrow--prev { left: 24px; }
+.cas-arrow--next { right: 24px; }
+@media (max-width: 900px) {
+  .cas-card { flex: 0 0 85vw; margin: 0 8px; padding: 22px; }
+  .cas-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+  .cas-arrow--prev { left: 8px; }
+  .cas-arrow--next { right: 8px; }
+}
 </style>
 
 <!-- Privacy-friendly analytics by Plausible -->
@@ -1516,6 +1544,48 @@ footer {
   </div>
 </section>
 
+<!-- RÉFÉRENCES -->
+<section class="cas" id="references">
+  <div class="section-label reveal" data-i18n="iref-label">Références</div>
+  <h2 class="reveal" data-i18n-html="iref-heading">Des missions concrètes.<br><em>Des résultats nommés.</em></h2>
+  <div class="cas-carousel" id="iref-carousel">
+    <div class="cas-track" id="iref-track">
+
+      <div class="cas-card active">
+        <div class="cas-sector" data-i18n="iref-1-sector">Assurance · Abidjan</div>
+        <h3 data-i18n="iref-1-title">Audit de processus et identification des leviers d'automatisation par l'IA</h3>
+        <p class="mission" data-i18n="iref-1-mission">Cartographie des processus métier d'une compagnie d'assurance. Identification des tâches automatisables par l'IA. Évaluation des gains potentiels et priorisation des chantiers.</p>
+        <div class="cas-result" data-i18n="iref-1-result">Plan d'action livré avec recommandations chiffrées.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="iref-2-sector">Organisation professionnelle · Côte d'Ivoire</div>
+        <h3 data-i18n="iref-2-title">Plan stratégique et identification des options d'intégration IA</h3>
+        <p class="mission" data-i18n="iref-2-mission">Accompagnement d'une organisation professionnelle dans la définition de sa stratégie à 3 ans. Identification et hiérarchisation des options d'intégration de l'IA dans les activités de l'organisation.</p>
+        <div class="cas-result" data-i18n="iref-2-result">Options d'intégration IA hiérarchisées et arbitrées.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="iref-3-sector">Conseil · Abidjan</div>
+        <h3 data-i18n="iref-3-title">Conception et réalisation d'un site web professionnel assisté par l'IA</h3>
+        <p class="mission" data-i18n="iref-3-mission">Conception et développement complets d'un site web professionnel en utilisant l'IA comme outil de production. De la stratégie de contenu au code, en passant par le design.</p>
+        <div class="cas-result" data-i18n="iref-3-result">Site web professionnel livré, conçu et développé avec l'IA.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="iref-4-sector">Conseil · Abidjan</div>
+        <h3 data-i18n="iref-4-title">Structuration d'un système de gestion de projet centralisé</h3>
+        <p class="mission" data-i18n="iref-4-mission">Conception et déploiement d'un système de gestion de projet centralisé pour un cabinet de conseil. Mise en place des outils, des processus et de la structure de travail.</p>
+        <div class="cas-result" data-i18n="iref-4-result">Système centralisé opérationnel. Structure de travail complète.</div>
+      </div>
+
+    </div>
+    <button class="cas-arrow cas-arrow--prev" aria-label="Précédent">&#8249;</button>
+    <button class="cas-arrow cas-arrow--next" aria-label="Suivant">&#8250;</button>
+    <div class="cas-dots" id="iref-dots"></div>
+  </div>
+</section>
+
 <!-- ══════════════════════════════════════════
    CTA
 ══════════════════════════════════════════ -->
@@ -1600,6 +1670,25 @@ const T = {
     'aa2-before':'Le dirigeant attend le reporting mensuel','aa2-after':'Un briefing quotidien automatique sur les indicateurs clés',
     'aa3-before':"La prospection dépend d'un commercial",'aa3-after':'Un agent IA qualifie les leads 24/7, puis les fait valider',
     'aa4-before':'Le recouvrement traîne','aa4-after':'Un agent IA relance, escalade, documente',
+    // Références
+    'iref-label': 'Références',
+    'iref-heading': 'Des missions concrètes.<br><em>Des résultats nommés.</em>',
+    'iref-1-sector': "Assurance · Abidjan",
+    'iref-1-title': "Audit de processus et identification des leviers d'automatisation par l'IA",
+    'iref-1-mission': "Cartographie des processus métier d'une compagnie d'assurance. Identification des tâches automatisables par l'IA. Évaluation des gains potentiels et priorisation des chantiers.",
+    'iref-1-result': "Plan d'action livré avec recommandations chiffrées.",
+    'iref-2-sector': "Organisation professionnelle · Côte d'Ivoire",
+    'iref-2-title': "Plan stratégique et identification des options d'intégration IA",
+    'iref-2-mission': "Accompagnement d'une organisation professionnelle dans la définition de sa stratégie à 3 ans. Identification et hiérarchisation des options d'intégration de l'IA dans les activités de l'organisation.",
+    'iref-2-result': "Options d'intégration IA hiérarchisées et arbitrées.",
+    'iref-3-sector': "Conseil · Abidjan",
+    'iref-3-title': "Conception et réalisation d'un site web professionnel assisté par l'IA",
+    'iref-3-mission': "Conception et développement complets d'un site web professionnel en utilisant l'IA comme outil de production. De la stratégie de contenu au code, en passant par le design.",
+    'iref-3-result': "Site web professionnel livré, conçu et développé avec l'IA.",
+    'iref-4-sector': "Conseil · Abidjan",
+    'iref-4-title': "Structuration d'un système de gestion de projet centralisé",
+    'iref-4-mission': "Conception et déploiement d'un système de gestion de projet centralisé pour un cabinet de conseil. Mise en place des outils, des processus et de la structure de travail.",
+    'iref-4-result': "Système centralisé opérationnel. Structure de travail complète.",
     'cta-title':"Prêt à voir ce que l'IA<br>peut faire pour votre entreprise ?<br><em>Concrètement.</em>",
     'cta-text':"Pas une démo. Pas un PowerPoint. Un échange de 30 minutes pour comprendre vos processus et identifier les gains immédiats.",
   },
@@ -1657,6 +1746,25 @@ const T = {
     'aa2-before':'The leader waits for the monthly report','aa2-after':'An automatic daily briefing on key indicators',
     'aa3-before':'Prospecting depends on one salesperson','aa3-after':'An AI agent qualifies leads 24/7, then has them validated',
     'aa4-before':'Collections lag behind','aa4-after':'An AI agent follows up, escalates, documents',
+    // Références
+    'iref-label': 'References',
+    'iref-heading': 'Concrete engagements.<br><em>Named results.</em>',
+    'iref-1-sector': "Insurance · Abidjan",
+    'iref-1-title': "Process audit and identification of AI automation levers",
+    'iref-1-mission': "Mapping of business processes at an insurance company. Identification of tasks automatable by AI. Assessment of potential gains and prioritisation of initiatives.",
+    'iref-1-result': "Action plan delivered with quantified recommendations.",
+    'iref-2-sector': "Professional organisation · Côte d'Ivoire",
+    'iref-2-title': "Strategic plan and identification of AI integration options",
+    'iref-2-mission': "Supporting a professional organisation in defining its 3-year strategy. Identification and prioritisation of AI integration options across the organisation's activities.",
+    'iref-2-result': "AI integration options ranked and decided.",
+    'iref-3-sector': "Consulting · Abidjan",
+    'iref-3-title': "Design and delivery of a professional website assisted by AI",
+    'iref-3-mission': "Full design and development of a professional website using AI as a production tool. From content strategy to code, including design.",
+    'iref-3-result': "Professional website delivered, designed and built with AI.",
+    'iref-4-sector': "Consulting · Abidjan",
+    'iref-4-title': "Structuring a centralised project management system",
+    'iref-4-mission': "Design and deployment of a centralised project management system for a consulting firm. Implementation of tools, processes and work structure.",
+    'iref-4-result': "Centralised system operational. Complete work structure.",
     'cta-title':"Ready to see what AI<br>can do for your business?<br><em>Concretely.</em>",
     'cta-text':"Not a demo. Not a PowerPoint. A 30-minute exchange to understand your processes and identify immediate gains.",
   }
@@ -2034,6 +2142,89 @@ setLang(_initLang);
 
   resize();
   animate();
+})();
+
+// ── Carrousel Références ──
+(function() {
+  var track = document.getElementById('iref-track');
+  if (!track) return;
+  var carousel = track.parentElement;
+  var origCards = [].slice.call(track.children);
+  var n = origCards.length;
+  var dots = document.getElementById('iref-dots');
+  var prevBtn = carousel.querySelector('.cas-arrow--prev');
+  var nextBtn = carousel.querySelector('.cas-arrow--next');
+  var current = 0;
+  var autoTimer;
+  var isTransitioning = false;
+
+  origCards.forEach(function(card) {
+    var cl = card.cloneNode(true);
+    cl.classList.add('cas-clone');
+    cl.querySelectorAll('[data-i18n]').forEach(function(e) { e.removeAttribute('data-i18n'); });
+    cl.querySelectorAll('[data-i18n-html]').forEach(function(e) { e.removeAttribute('data-i18n-html'); });
+    track.appendChild(cl);
+  });
+  for (var i = origCards.length - 1; i >= 0; i--) {
+    var cl = origCards[i].cloneNode(true);
+    cl.classList.add('cas-clone');
+    cl.querySelectorAll('[data-i18n]').forEach(function(e) { e.removeAttribute('data-i18n'); });
+    cl.querySelectorAll('[data-i18n-html]').forEach(function(e) { e.removeAttribute('data-i18n-html'); });
+    track.insertBefore(cl, track.firstChild);
+  }
+
+  var allCards = [].slice.call(track.children);
+  var base = n;
+
+  origCards.forEach(function(_, i) {
+    var d = document.createElement('button');
+    d.className = 'cas-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Référence ' + (i + 1));
+    d.onclick = function() { snapTo(i); resetAuto(); };
+    dots.appendChild(d);
+  });
+
+  function positionAt(idx, animate) {
+    var card = allCards[idx];
+    var cw = carousel.offsetWidth;
+    var cardW = card.offsetWidth;
+    var pos = card.offsetLeft - (cw - cardW) / 2;
+    if (!animate) { track.style.transition = 'none'; }
+    track.style.transform = 'translateX(-' + pos + 'px)';
+    if (!animate) { track.offsetHeight; track.style.transition = ''; }
+    allCards.forEach(function(c) { c.classList.remove('active'); });
+    card.classList.add('active');
+  }
+
+  function updateDots() {
+    dots.querySelectorAll('.cas-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function snapTo(idx) { current = ((idx % n) + n) % n; positionAt(base + current, true); updateDots(); }
+  function next() { var t = base + current + 1; isTransitioning = true; positionAt(t, true); current = (current + 1) % n; updateDots(); }
+  function prev() { var t = base + current - 1; isTransitioning = true; positionAt(t, true); current = ((current - 1) + n) % n; updateDots(); }
+
+  track.addEventListener('transitionend', function(e) {
+    if (e.target !== track) return;
+    if (isTransitioning) { isTransitioning = false; positionAt(base + current, false); }
+  });
+
+  function startAuto() { clearInterval(autoTimer); autoTimer = setInterval(next, 10000); }
+  function stopAuto() { clearInterval(autoTimer); }
+  function resetAuto() { stopAuto(); startAuto(); }
+
+  prevBtn.onclick = function() { prev(); resetAuto(); };
+  nextBtn.onclick = function() { next(); resetAuto(); };
+
+  positionAt(base + 0, false);
+  startAuto();
+
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('touchstart', stopAuto, { passive: true });
+  carousel.addEventListener('touchend', resetAuto, { passive: true });
 })();
 </script>
 </body>

@@ -1191,6 +1191,96 @@ footer {
 }
 </style>
 
+<!-- ═══════ STYLES DIAGNOSTIC IA ═══════ -->
+<style id="diagnostic-styles">
+/* ----- Modal overlay ----- */
+.dg-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,45,26,0.85);z-index:9999;display:none;justify-content:center;align-items:flex-start;overflow-y:auto;padding:24px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity .3s ease}
+.dg-overlay.open{display:flex;opacity:1}
+.dg-panel{background:#f7f2ea;border-radius:16px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;padding:40px 32px;position:relative;transform:translateY(20px);transition:transform .3s ease;margin:auto}
+.dg-overlay.open .dg-panel{transform:translateY(0)}
+.dg-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(52,62,58,0.08);color:#343e3a;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.dg-close:hover{background:rgba(52,62,58,0.15)}
+.dg-panel.analysis-mode{background:#002d1a}
+
+/* ----- CTA Block ----- */
+.dg-cta-block{background:#002d1a;padding:72px 80px;text-align:center;position:relative;overflow:hidden}
+.dg-cta-block::before{content:'';position:absolute;top:-40%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(0,166,166,0.08) 0%,transparent 70%);pointer-events:none}
+.dg-cta-title{font-family:'Cormorant Garamond',Georgia,serif;color:#f7f2ea;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;line-height:1.3;margin-bottom:16px}
+.dg-cta-sub{color:rgba(247,242,234,0.6);font-family:'Space Grotesk',sans-serif;font-size:1rem;margin-bottom:36px;line-height:1.6;max-width:520px;margin-left:auto;margin-right:auto}
+.dg-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:16px 40px;background:#00A6A6;color:#fff;border:none;border-radius:100px;font-size:0.88rem;font-weight:500;font-family:'Space Grotesk',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:.3px;text-transform:uppercase;letter-spacing:.12em}
+.dg-cta-btn:hover{background:#008B8B;transform:translateY(-2px)}
+.dg-cta-btn svg{transition:transform .2s}
+.dg-cta-btn:hover svg{transform:translateX(3px)}
+
+/* ----- Quiz internals ----- */
+.dg *{box-sizing:border-box;margin:0;padding:0}
+.dg{font-family:'Space Grotesk',sans-serif;color:#343e3a}
+.dg .fade{transition:opacity .3s ease}
+.dg .progress-bar{width:100%;height:3px;background:rgba(0,166,166,.12);border-radius:2px;margin-bottom:28px;overflow:hidden}
+.dg .progress-fill{height:100%;background:#00A6A6;border-radius:2px;transition:width .4s ease}
+.dg .tag{display:inline-block;padding:4px 12px;background:rgba(0,166,166,.15);color:#00A6A6;border-radius:20px;font-size:12px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+.dg .divider{width:40px;height:2px;background:#CE9E5E;margin-bottom:20px}
+.dg .step-ind{font-size:13px;color:#00A6A6;font-weight:500;margin-bottom:6px;letter-spacing:.5px}
+.dg h1,.dg h2{font-family:'Cormorant Garamond',Georgia,serif;color:#002d1a;font-weight:600;line-height:1.25}
+.dg h1{font-size:28px;margin-bottom:10px}
+.dg h2{font-size:22px;margin-bottom:18px}
+.dg .muted{color:#6b7c74;font-size:14px;line-height:1.5}
+.dg .opt{display:block;width:100%;text-align:left;padding:13px 16px;margin-bottom:7px;background:#fff;border:1.5px solid rgba(52,62,58,.15);border-radius:10px;cursor:pointer;transition:all .2s;font-family:'Space Grotesk',sans-serif;font-size:14.5px;color:#343e3a;outline:none}
+.dg .opt:hover{border-color:rgba(0,166,166,.4)}
+.dg .opt.sel{background:rgba(0,166,166,.08);border-color:#00A6A6}
+.dg .opt-row{display:flex;align-items:center;gap:11px}
+.dg .chk{width:17px;height:17px;border:2px solid rgba(52,62,58,.2);background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.dg .chk.r{border-radius:50%}.dg .chk.c{border-radius:4px}
+.dg .chk.sel{border-color:#00A6A6;background:#00A6A6}
+.dg .chk .tk{color:#fff;font-size:10px;display:none}.dg .chk.sel .tk{display:block}
+.dg .opt-lbl{font-weight:500}.dg .opt-sub{font-size:12.5px;color:#6b7c74;margin-top:1px}
+.dg .cat-lbl{font-size:11.5px;font-weight:600;color:#00A6A6;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px;padding-left:2px}
+.dg .cat-grp{margin-bottom:18px}
+.dg .btn-row{display:flex;align-items:center;gap:12px;margin-top:12px}
+.dg .pbtn{display:inline-flex;align-items:center;justify-content:center;padding:13px 32px;background:#00A6A6;color:#fff;border:none;border-radius:8px;font-size:14.5px;font-weight:500;font-family:'Space Grotesk',sans-serif;cursor:pointer;transition:all .2s}
+.dg .pbtn:hover{background:#008B8B}.dg .pbtn:disabled{background:rgba(0,166,166,.4);cursor:not-allowed}
+.dg .gbtn{display:inline-flex;align-items:center;padding:8px 16px;background:transparent;color:#6b7c74;border:none;border-radius:8px;font-size:13.5px;font-family:'Space Grotesk',sans-serif;cursor:pointer}
+.dg .card{background:#fff;border:1px solid rgba(52,62,58,.1);border-radius:12px;padding:22px;margin-bottom:14px}
+.dg .card-dark{background:#002d1a;border:none;color:#f7f2ea;margin-top:22px;border-radius:12px;padding:24px}
+.dg .icon-box{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:10px}
+.dg .card-t{font-weight:600;font-size:15px;margin-bottom:12px;color:#002d1a}
+.dg .ri{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px;font-size:14px;line-height:1.5;color:#343e3a}
+.dg .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:7px}
+.dg .dt{background:#00A6A6}.dg .dg-gold{background:#CE9E5E}.dg .dd{background:#002d1a}
+.dg .cout{background:rgba(206,158,94,.08);border:1px solid rgba(206,158,94,.25);border-radius:10px;padding:14px 18px;margin-bottom:18px}
+.dg .cout-l{font-size:12.5px;color:#CE9E5E;font-weight:600;margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase}
+.dg .resp-block{border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.6;color:#343e3a}
+.dg .resp-lost{background:rgba(206,158,94,.05);border:1px solid rgba(206,158,94,.2)}
+.dg .resp-blocker{background:rgba(0,166,166,.05);border:1px solid rgba(0,166,166,.15)}
+.dg .bl{font-size:12.5px;font-weight:600;margin-bottom:5px}
+.dg .bt{margin:0;font-style:italic}
+.dg .idark{width:100%;padding:12px 15px;border-radius:8px;font-size:14.5px;font-family:'Space Grotesk',sans-serif;outline:none;margin-bottom:10px;transition:border-color .2s;background:rgba(247,242,234,.08);border:1.5px solid rgba(247,242,234,.15);color:#f7f2ea;box-sizing:border-box}
+.dg .idark::placeholder{color:rgba(247,242,234,.45)}.dg .idark:focus{border-color:#00A6A6}
+.dg select.idark{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f7f2ea' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.dg select.idark option{color:#333;background:#fff}
+.dg textarea.idark{resize:vertical;min-height:64px}
+.dg .fsep{border-top:1px solid rgba(247,242,234,.1);margin:14px 0;padding-top:14px}
+.dg .fsep-l{color:rgba(247,242,234,.5);font-size:11.5px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.dg .ffine{color:rgba(247,242,234,.4);font-size:11.5px;margin-top:8px;text-align:center}
+.dg .card-dark h3{font-family:'Cormorant Garamond',Georgia,serif;color:#f7f2ea;font-size:20px;font-weight:600;margin-bottom:4px}
+.dg .card-dark .desc{color:rgba(247,242,234,.7);font-size:13.5px;line-height:1.5;margin-bottom:18px}
+.dg .pbtn.gold{background:#CE9E5E}.dg .pbtn.gold:hover{background:#b8894f}.dg .pbtn.gold:disabled{background:rgba(206,158,94,.3)}
+.dg .pbtn.full{width:100%;margin-top:6px}
+.dg .confirm-icon{width:56px;height:56px;border-radius:50%;background:rgba(0,166,166,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px}
+/* Analysis */
+.dg .an-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;padding:30px 0}
+.dg .an-icon{width:64px;height:64px;border-radius:50%;background:rgba(247,242,234,.06);display:flex;align-items:center;justify-content:center;margin-bottom:28px;position:relative;box-shadow:0 0 0 6px rgba(247,242,234,.03),0 0 0 12px rgba(247,242,234,.015)}
+.dg .an-spin{width:64px;height:64px;border-radius:50%;position:absolute;top:0;left:0;border:2px solid transparent;border-top-color:#00A6A6;animation:dgspin 1.2s linear infinite}
+.dg .an-spin.done{border-top-color:#CE9E5E;animation:none}
+.dg .an-sym{font-size:24px;color:#00A6A6;transition:color .4s}.dg .an-sym.done{color:#CE9E5E}
+.dg .an-msg{font-size:16px;color:#f7f2ea;max-width:380px;line-height:1.6;margin-bottom:22px;min-height:48px}
+.dg .an-bar{width:180px;height:2px;background:rgba(247,242,234,.1);border-radius:1px;overflow:hidden}
+.dg .an-bar-f{height:100%;border-radius:1px;transition:width .15s linear;background:linear-gradient(90deg,#00A6A6,#CE9E5E)}
+.dg .an-brand{color:rgba(247,242,234,.2);font-size:11px;margin-top:28px;letter-spacing:2px;text-transform:uppercase}
+@keyframes dgspin{to{transform:rotate(360deg)}}
+@media(max-width:768px){.dg-cta-block{padding:48px 24px}}
+</style>
+
 <!-- Privacy-friendly analytics by Plausible -->
 <script async src="https://plausible.io/js/pa-URupHmv7wVE8f3jPwO8MT.js"></script>
 <script>
@@ -1597,7 +1687,7 @@ footer {
   <p class="reveal" data-i18n="cta-text">
     Pas une démo. Pas un PowerPoint. Un échange de 30 minutes pour comprendre vos processus et identifier les gains immédiats.
   </p>
-  <a href="contact.html" class="btn-teal reveal" data-i18n="cta-btn" style="position:relative;z-index:1;">Parlons-nous</a>
+  <button class="btn-teal reveal" onclick="openDiagnostic()" style="position:relative;z-index:1;cursor:pointer;border:none;">Faire mon diagnostic gratuit</button>
 </section>
 
 <!-- FOOTER -->
@@ -2227,6 +2317,124 @@ setLang(_initLang);
   carousel.addEventListener('touchstart', stopAuto, { passive: true });
   carousel.addEventListener('touchend', resetAuto, { passive: true });
 })();
+</script>
+
+<!-- ═══════ MODALE DIAGNOSTIC ═══════ -->
+<div id="diagnostic-modal" class="dg-overlay" onclick="if(event.target===this)closeDiagnostic()">
+  <div class="dg-panel" id="dg-panel">
+    <button class="dg-close" onclick="closeDiagnostic()" title="Fermer">×</button>
+    <div class="dg" id="dg-content"></div>
+  </div>
+</div>
+
+<!-- ═══════ SCRIPT DIAGNOSTIC ═══════ -->
+<script>
+const SUPABASE_URL = 'https://ctdavxbdxpfcnvwybpfr.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0ZGF2eGJkeHBmY252d3licGZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4Mjk3ODgsImV4cCI6MjA4NjQwNTc4OH0.V0HY9SLE4Z6zv7ja2f24AUs49WtgpAFJ6YLmTODXOm0';
+
+const SECTORS=[{id:"services-pro",label:"Services professionnels",sub:"Cabinet comptable, juridique, fiscal, conseil"},{id:"immobilier",label:"Immobilier & construction",sub:"Promotion, gestion locative, agence, BTP résidentiel"},{id:"commerce",label:"Commerce & distribution",sub:"Négoce, retail, import-export, e-commerce"},{id:"btp-industrie",label:"BTP, industrie & services techniques",sub:"Ingénierie, maintenance, logistique, énergie"}];
+const SIZES=[{id:"micro",label:"1 à 5 personnes"},{id:"small",label:"6 à 20 personnes"},{id:"medium",label:"21 à 50 personnes"},{id:"large",label:"50 à 200 personnes"},{id:"xlarge",label:"Plus de 200 personnes"}];
+const TASKS=[{id:"saisie",label:"Saisie comptable & rapprochements"},{id:"relances",label:"Suivi clients & relances"},{id:"reporting",label:"Reporting & tableaux de bord"},{id:"rh",label:"Gestion RH, paie & administration"},{id:"prospection",label:"Prospection & développement commercial"},{id:"redaction",label:"Rédaction de documents"},{id:"reunions",label:"Réunions & suivi post-réunion"},{id:"recherche",label:"Recherche d'informations & documents"}];
+const TOOL_CATS=[{id:"comm",label:"Communication",tools:[{id:"whatsapp",label:"WhatsApp"},{id:"email",label:"Email (Outlook, Gmail...)"},{id:"visio",label:"Visioconférence (Teams, Zoom, Meet)"}]},{id:"bureau",label:"Bureautique",tools:[{id:"excel-word",label:"Excel / Word"},{id:"google-suite",label:"Google Docs / Sheets"},{id:"powerpoint",label:"PowerPoint / Google Slides"}]},{id:"metier",label:"Logiciels métier",tools:[{id:"compta",label:"Logiciel comptable (Sage, SAARI...)"},{id:"crm",label:"CRM (gestion clients)"},{id:"erp",label:"ERP (gestion intégrée)"}]},{id:"ia",label:"Intelligence artificielle",tools:[{id:"chatgpt",label:"ChatGPT"},{id:"gemini",label:"Gemini"},{id:"copilot",label:"Copilot"},{id:"autre-ia",label:"Autre outil IA"}]},{id:"stockage",label:"Stockage & partage",tools:[{id:"gdrive",label:"Google Drive"},{id:"onedrive",label:"OneDrive / SharePoint"},{id:"dropbox",label:"Dropbox"}]}];
+const HIGH_MAT=["compta","crm","erp","chatgpt","gemini","copilot","autre-ia"];
+const LOST_OPTS=[{id:"yes",label:"Oui, c'est déjà arrivé"},{id:"probably",label:"Probablement, mais c'est difficile à mesurer"},{id:"no",label:"Non, jamais"},{id:"unknown",label:"Je ne sais pas"}];
+const LOST_R={yes:"Vous le savez déjà : chaque oubli a un coût direct. L'IA ne remplace pas la relation humaine, mais elle garantit que plus aucun client, aucune relance, aucune échéance ne passe entre les mailles.",probably:"Si vous n'êtes pas sûr, c'est probablement que ça arrive sans que vous le mesuriez. Un système de suivi intelligent rend ces pertes visibles, et surtout, les empêche.",no:null,unknown:"Ne pas savoir, c'est déjà un signal. Un suivi structuré vous donnerait la réponse, et surtout, la certitude que rien ne vous échappe."};
+const BLOCKERS=[{id:"start",label:"Je ne sais pas par où commencer"},{id:"budget",label:"Je n'ai pas le budget"},{id:"team",label:"Mon équipe ne suivra pas le changement"},{id:"roi",label:"Je ne vois pas le retour sur investissement concret"}];
+const BLOCKER_R={start:"C'est exactement pour cela qu'ORI7ON existe. Nous commençons toujours par un diagnostic ciblé de 2 à 3 processus, pas par un grand plan théorique. Vous repartez avec des actions concrètes.",budget:"L'investissement se mesure contre le coût de ne rien faire. Les heures perdues chaque semaine en tâches manuelles ont un prix. Notre diagnostic vous donne les chiffres pour décider en connaissance de cause.",team:"Le changement ne se décrète pas, il se prépare. Nous accompagnons vos équipes étape par étape, en commençant par les tâches où le gain est immédiat et visible. L'adhésion vient avec les résultats.",roi:"Chaque recommandation que nous faisons est liée à un résultat mesurable. Pas de promesses vagues. Vous saurez exactement ce que chaque automatisation vous fait gagner en temps et en argent."};
+const FUNCS=[{id:"dg",label:"Directeur Général / PDG / CEO"},{id:"daf",label:"Directeur Administratif & Financier"},{id:"dir-ops",label:"Directeur des Opérations"},{id:"dir-com",label:"Directeur Commercial / Marketing"},{id:"manager",label:"Manager / Chef de service"},{id:"gerant",label:"Gérant / Propriétaire"},{id:"autre",label:"Autre"}];
+const SRCS=[{id:"linkedin",label:"LinkedIn"},{id:"recommandation",label:"Recommandation / bouche-à-oreille"},{id:"google",label:"Recherche Google"},{id:"evenement",label:"Événement / rencontre"},{id:"autre-source",label:"Autre"}];
+const PROFILES={"services-pro-low":{title:"Vos collaborateurs passent plus de temps à saisir qu'à conseiller",socle:["Un assistant qui organise votre journée : les urgences, les retards, ce qui attend votre décision","Relances automatiques des clients et fournisseurs en retard, sans que vous ayez à y penser","Vos documents, emails et notes accessibles en une recherche, plus de temps perdu à fouiller"],secteur:["Extraction et saisie automatique de pièces comptables (factures, relevés, bordereaux)","Génération assistée de courriers types (lettres de mission, memos, rapports)"],croissance:["Prospection ciblée : identifier les entreprises qui auraient besoin de vos services","Présence LinkedIn structurée : publication régulière qui positionne votre expertise"],cout:"Un collaborateur qui passe 2h par jour à chercher des informations et saisir des données, c'est 40h par mois qui ne servent pas vos clients."},"services-pro-high":{title:"Vous avez les outils. Il manque l'intelligence qui les connecte.",socle:["Un briefing quotidien qui consolide tous vos canaux (email, WhatsApp, outils métier) en un point de situation","Suivi intelligent des dossiers en cours : qui est en retard, quelles échéances approchent, quoi relancer","Mémoire de l'entreprise : retrouvez n'importe quel document, échange ou décision en quelques secondes"],secteur:["Agents IA qui analysent vos données et remontent des anomalies avant la clôture","Veille réglementaire automatisée (SYSCOHADA, OHADA, fiscalité CI)"],croissance:["Détection d'opportunités commerciales dans votre base clients existante","Stratégie de contenu LinkedIn alimentée par votre veille réglementaire"],cout:"Vos outils produisent des données. Sans intelligence pour les relier, vos équipes passent leur temps à faire le lien manuellement."},"immobilier-low":{title:"Vos agents passent plus de temps au téléphone qu'à conclure des ventes",socle:["Un assistant qui suit chaque projet et chaque prospect : plus rien ne tombe entre les mailles","Relances automatiques des clients, locataires et fournisseurs en retard","Vos documents de chantier, baux et échanges retrouvés instantanément"],secteur:["Qualification automatique des demandes entrantes (WhatsApp, appels, site web)","Suivi de chantier simplifié : le point est fait sans réunion de 2 heures"],croissance:["Visibilité en ligne de vos biens et programmes : réseaux sociaux alimentés sans effort","Identification de prospects acheteurs/locataires via vos canaux entrants"],cout:"Un prospect non relancé dans les 48h a de fortes chances d'aller voir ailleurs. Combien en perdez-vous chaque semaine ?"},"immobilier-high":{title:"Vous gérez des volumes. L'IA peut transformer le suivi en pilotage.",socle:["Briefing quotidien consolidé : état des chantiers, relances en attente, décisions à prendre","Suivi automatique de toutes les tâches déléguées, avec alertes sur les retards","Archivage et classement intelligent de la documentation projet"],secteur:["Pipeline commercial piloté : les bons prospects remontent en priorité","Reporting automatique sur l'avancement des programmes"],croissance:["Campagnes de relance ciblées sur les prospects dormants de votre CRM","LinkedIn entreprise actif : programmes, réalisations et témoignages clients"],cout:"Sans suivi automatique, vos commerciaux et chefs de projet passent leur lundi matin à reconstituer où en sont les choses au lieu d'avancer."},"commerce-low":{title:"Vous pilotez à vue. L'IA peut vous donner le tableau de bord.",socle:["Organisation automatique de votre journée : urgences, relances, points à traiter","Suivi des facturations et encaissements en retard, relances envoyées sans effort","Vos bons de commande, factures et échanges fournisseurs accessibles en une recherche"],secteur:["Alertes de stock sur vos produits critiques (sans tableau Excel à maintenir)","Vue consolidée de vos ventes pour identifier ce qui marche et ce qui stagne"],croissance:["Fidélisation : identifier les clients inactifs et les relancer automatiquement","Présence sur les réseaux sociaux avec mise en avant de vos produits"],cout:"Chaque jour sans visibilité sur vos encours et vos stocks, c'est une décision prise à l'aveugle."},"commerce-high":{title:"Vos données existent. Elles ne travaillent pas encore pour vous.",socle:["Briefing quotidien qui consolide ventes, stocks, encaissements et alertes en un seul point","Relances clients automatisées avec suivi de l'historique de chaque compte","Mémoire commerciale : chaque interaction client tracée et retrouvable"],secteur:["Rapports de ventes générés automatiquement sans ressaisie","Segmentation client pour identifier les comptes à fort potentiel"],croissance:["Prospection structurée : identifier de nouveaux clients B2B à partir de vos critères","Marketing digital ciblé : campagnes alimentées par vos données de vente"],cout:"Vos équipes commerciales traitent tous les clients de la même façon. Les meilleurs comptes ne reçoivent pas plus d'attention que les autres."},"btp-industrie-low":{title:"Vos équipes font tourner l'opérationnel. Qui s'occupe de l'organiser ?",socle:["Un assistant qui coordonne : qui fait quoi, quelles tâches sont en retard, quoi relancer","Plus de réunions de suivi de 2 heures : le point est fait automatiquement chaque matin","Documents techniques, PV de réunion et échanges classés et retrouvables sans chercher"],secteur:["Résumé automatique des réunions de chantier avec extraction des actions et responsables","Suivi des interventions et de la maintenance (planifié vs réalisé)"],croissance:["Veille appels d'offres : les marchés pertinents pour votre activité remontés automatiquement","Profil LinkedIn du dirigeant actif : partager votre expertise pour attirer des donneurs d'ordre"],cout:"Ne plus avoir à répéter 100 fois les choses qui doivent être réglées dès le départ, ça commence par un suivi que personne n'a le temps de faire."},"btp-industrie-high":{title:"Vous avez digitalisé les processus. L'IA peut les piloter.",socle:["Briefing consolidé multi-sites : un seul point de situation au lieu de 5 appels","Suivi des tâches déléguées à travers toute l'organisation, avec escalade automatique des retards","Base documentaire intelligente : CCTP, CCAP, marchés publics résumés et consultables"],secteur:["Tableau de bord KPI automatisé (plus de consolidation Excel manuelle)","Coordination inter-équipes : l'IA détecte les dépendances et les blocages"],croissance:["Identification de prospects via LinkedIn et réseaux professionnels","Communication structurée : références chantiers et certifications mises en valeur"],cout:"Sans vision consolidée, chaque site vit en silo. Les problèmes remontent quand il est déjà trop tard pour agir."}};
+const AN_MSGS=["Analyse de votre profil en cours...","Croisement avec les données de votre secteur...","Identification des leviers à fort impact pour votre taille d'entreprise...","Estimation du potentiel de gain de temps...","Votre diagnostic est prêt."];
+
+let S={step:0,sector:null,size:null,tasks:[],tools:[],lostClient:null,blocker:null,name:"",company:"",fonction:"",email:"",whatsapp:"",source:"",challenge:""};
+const el=()=>document.getElementById('dg-content');
+const panel=()=>document.getElementById('dg-panel');
+
+function mat(){return S.tools.some(t=>HIGH_MAT.includes(t))?"high":"low"}
+function pk(){return S.sector?`${S.sector}-${mat()}`:null}
+
+function openDiagnostic(){S={step:0,sector:null,size:null,tasks:[],tools:[],lostClient:null,blocker:null,name:"",company:"",fonction:"",email:"",whatsapp:"",source:"",challenge:""};const m=document.getElementById('diagnostic-modal');m.classList.add('open');setTimeout(()=>m.style.opacity='1',10);render()}
+function closeDiagnostic(){const m=document.getElementById('diagnostic-modal');m.style.opacity='0';setTimeout(()=>{m.classList.remove('open');panel().classList.remove('analysis-mode')},300)}
+
+function goTo(n){const c=el();c.style.opacity='0';setTimeout(()=>{S.step=n;if(n===7){panel().classList.add('analysis-mode')}else{panel().classList.remove('analysis-mode')}render();c.style.opacity='1';panel().scrollTo({top:0,behavior:'smooth'});if(n===7)startAnalysis()},250)}
+
+function startAnalysis(){const intervals=[0,1200,2400,3400,4400];const start=Date.now();intervals.forEach((d,i)=>{setTimeout(()=>{const e=document.getElementById('an-msg');const s=document.getElementById('an-sym');const sp=document.getElementById('an-spin');if(e)e.textContent=AN_MSGS[i];if(i===AN_MSGS.length-1){if(s){s.textContent='✓';s.classList.add('done')}if(sp)sp.classList.add('done')}},d)});const pi=setInterval(()=>{const pct=Math.min(((Date.now()-start)/5000)*100,100);const b=document.getElementById('an-bar-f');if(b)b.style.width=pct+'%';if(pct>=100)clearInterval(pi)},50);setTimeout(()=>{clearInterval(pi);goTo(8)},5400)}
+
+function ob(id,label,sub,sel,radio,fn){return`<button class="opt ${sel?'sel':''}" onclick="${fn}"><div class="opt-row"><div class="chk ${radio?'r':'c'} ${sel?'sel':''}"><span class="tk">✓</span></div><div><div class="opt-lbl">${label}</div>${sub?`<div class="opt-sub">${sub}</div>`:''}</div></div></button>`}
+function pb(){const q=S.step>=1&&S.step<=6?S.step:0;if(!q)return'';return`<div class="progress-bar"><div class="progress-fill" style="width:${(q/6)*100}%"></div></div>`}
+function dgNav(q,ok,last){const b=q>1?`<button class="gbtn" onclick="goTo(${S.step-1})">← Retour</button>`:'';return`<div class="btn-row">${b}<button class="pbtn" ${ok?'':'disabled'} onclick="goTo(${S.step+1})">${last?'Voir mon diagnostic →':'Continuer'}</button></div>`}
+function items(arr,dc){return arr.map(i=>`<div class="ri"><div class="dot ${dc}"></div><span>${i}</span></div>`).join('')}
+function singleQ(q,title,opts,key,last){return`${pb()}<div class="step-ind">QUESTION ${q} / 6</div><h2>${title}</h2>${opts.map(o=>ob(o.id,o.label,o.sub,S[key]===o.id,true,`S.${key}='${o.id}';render()`)).join('')}${dgNav(q,!!S[key],last)}`}
+function tasksQ(){return`${pb()}<div class="step-ind">QUESTION 3 / 6</div><h2>Quelles tâches mobilisent le plus vos équipes au quotidien ?</h2><p class="muted" style="margin-bottom:14px">Sélectionnez jusqu'à 3 réponses</p>${TASKS.map(o=>ob(o.id,o.label,null,S.tasks.includes(o.id),false,`tgTask('${o.id}')`)).join('')}<div class="btn-row"><button class="gbtn" onclick="goTo(2)">← Retour</button><button class="pbtn" ${S.tasks.length?'':'disabled'} onclick="goTo(4)">Continuer</button></div>`}
+function toolsQ(){let h=`${pb()}<div class="step-ind">QUESTION 4 / 6</div><h2>Quels outils utilisez-vous au quotidien ?</h2><p class="muted" style="margin-bottom:18px">Cochez tous ceux qui s'appliquent</p>`;TOOL_CATS.forEach(c=>{h+=`<div class="cat-grp"><div class="cat-lbl">${c.label}</div>`;c.tools.forEach(t=>{h+=ob(t.id,t.label,null,S.tools.includes(t.id),false,`tgTool('${t.id}')`)});h+='</div>'});h+=`<div class="btn-row"><button class="gbtn" onclick="goTo(3)">← Retour</button><button class="pbtn" ${S.tools.length?'':'disabled'} onclick="goTo(5)">Continuer</button></div>`;return h}
+function analysisScreen(){return`<div class="an-wrap"><div class="an-icon"><div class="an-spin" id="an-spin"></div><span class="an-sym" id="an-sym">◈</span></div><p class="an-msg" id="an-msg">${AN_MSGS[0]}</p><div class="an-bar"><div class="an-bar-f" id="an-bar-f" style="width:0%"></div></div><p class="an-brand">ORI7ON Advisory</p></div>`}
+function resultScreen(){const p=PROFILES[pk()];if(!p)return'<p>Erreur.</p>';const tl=S.tasks.map(t=>TASKS.find(x=>x.id===t)?.label).filter(Boolean);const tols=S.tools.map(tid=>{for(const c of TOOL_CATS){const f=c.tools.find(t=>t.id===tid);if(f)return f.label}return null}).filter(Boolean);
+let intro='';if(tl.length){intro=`<p class="muted" style="margin-bottom:22px">Vous avez identifié comme prioritaires : ${tl.join(', ').toLowerCase()}.`;if(tols.length)intro+=` Vous utilisez déjà ${tols.slice(0,4).join(', ')}${tols.length>4?'...':''}.`;intro+=' Voici ce que l\'IA peut changer concrètement.</p>'}
+let lostH='';if(S.lostClient&&LOST_R[S.lostClient]){const l=LOST_OPTS.find(o=>o.id===S.lostClient)?.label;lostH=`<div class="resp-block resp-lost"><div class="bl" style="color:#CE9E5E;font-style:normal">Perte de clients par oubli : « ${l} »</div><p class="bt">${LOST_R[S.lostClient]}</p></div>`}
+let blkH='';if(S.blocker&&BLOCKER_R[S.blocker]){const l=BLOCKERS.find(b=>b.id===S.blocker)?.label;blkH=`<div class="resp-block resp-blocker"><div class="bl" style="color:#00A6A6;font-style:normal">Vous avez mentionné : « ${l} »</div><p class="bt">${BLOCKER_R[S.blocker]}</p></div>`}
+const fo=FUNCS.map(f=>`<option value="${f.id}" ${S.fonction===f.id?'selected':''} style="color:#333;background:#fff">${f.label}</option>`).join('');
+const so=SRCS.map(s=>`<option value="${s.id}" ${S.source===s.id?'selected':''} style="color:#333;background:#fff">${s.label}</option>`).join('');
+const fv=S.name&&S.email&&S.company&&S.fonction;
+return`<div class="tag">VOTRE DIAGNOSTIC</div><h1>${p.title}</h1><div class="divider"></div>${intro}
+<div class="card"><div class="icon-box" style="background:rgba(0,166,166,.1)">⚡</div><div class="card-t">Arrêter de perdre du temps</div>${items(p.socle,'dt')}</div>
+<div class="card"><div class="icon-box" style="background:rgba(206,158,94,.12)">🎯</div><div class="card-t">Spécifique à votre métier</div>${items(p.secteur,'dg-gold')}</div>
+<div class="card"><div class="icon-box" style="background:rgba(0,45,26,.08)">📈</div><div class="card-t">Développer votre activité</div>${items(p.croissance,'dd')}</div>
+<div class="cout"><div class="cout-l">Le coût de ne rien faire</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#343e3a">${p.cout}</p></div>
+${lostH}${blkH}
+<div class="card card-dark"><h3>Recevez votre diagnostic complet</h3><p class="desc">Nous vous enverrons une synthèse personnalisée avec les prochaines étapes concrètes pour votre entreprise.</p>
+<input class="idark" type="text" placeholder="Votre prénom et nom *" value="${S.name}" oninput="S.name=this.value;chkF()">
+<input class="idark" type="text" placeholder="Nom de votre entreprise *" value="${S.company}" oninput="S.company=this.value;chkF()">
+<select class="idark" onchange="S.fonction=this.value;chkF()" style="color:${S.fonction?'#f7f2ea':'rgba(247,242,234,.45)'}"><option value="" disabled ${!S.fonction?'selected':''} style="color:#888">Votre fonction *</option>${fo}</select>
+<input class="idark" type="email" placeholder="Votre adresse email *" value="${S.email}" oninput="S.email=this.value;chkF()">
+<input class="idark" type="tel" placeholder="Numéro WhatsApp (+225 07 XX XX XX XX)" value="${S.whatsapp}" oninput="S.whatsapp=this.value">
+<div class="fsep"><p class="fsep-l">Optionnel</p></div>
+<select class="idark" onchange="S.source=this.value" style="color:${S.source?'#f7f2ea':'rgba(247,242,234,.45)'}"><option value="" disabled ${!S.source?'selected':''} style="color:#888">Comment avez-vous connu ORI7ON ?</option>${so}</select>
+<textarea class="idark" placeholder="Quel est votre principal défi en ce moment ?" oninput="S.challenge=this.value">${S.challenge}</textarea>
+<button class="pbtn gold full" id="sbtn" ${fv?'':'disabled'} onclick="submitLead()">Recevoir ma synthèse</button>
+<p class="ffine">Vos données restent confidentielles. Aucun spam. Juste votre diagnostic.</p></div>
+<button class="gbtn" style="margin-top:14px" onclick="openDiagnostic()">← Recommencer le diagnostic</button>`}
+
+function confirmScreen(){const fn=S.name?S.name.split(' ')[0]:'';return`<div style="text-align:center;padding:40px 0"><div class="confirm-icon">✓</div><h1 style="font-size:28px">Merci${fn?', '+fn:''}.</h1><div class="divider"></div><p style="color:#343e3a;font-size:15px;line-height:1.6;max-width:400px;margin:0 auto">Votre synthèse personnalisée sera envoyée à <strong>${S.email}</strong> dans les prochaines heures. Un consultant ORI7ON vous contactera pour discuter des prochaines étapes.</p><p class="muted" style="margin-top:22px">En attendant, découvrez nos autres services sur <a href="https://www.ori7on.com" style="color:#00A6A6;text-decoration:none">ori7on.com</a></p><button class="pbtn" style="margin-top:24px" onclick="closeDiagnostic()">Fermer</button></div>`}
+
+function tgTask(id){const i=S.tasks.indexOf(id);if(i>=0)S.tasks.splice(i,1);else if(S.tasks.length<3)S.tasks.push(id);render()}
+function tgTool(id){const i=S.tools.indexOf(id);if(i>=0)S.tools.splice(i,1);else S.tools.push(id);render()}
+function chkF(){const b=document.getElementById('sbtn');if(b)b.disabled=!(S.name&&S.email&&S.company&&S.fonction)}
+
+async function submitLead(){
+  const payload={
+    sector:S.sector,size:S.size,tasks:S.tasks,tools:S.tools,
+    lost_client:S.lostClient,blocker:S.blocker,
+    profile_key:pk(),maturity_level:mat(),
+    name:S.name,company:S.company,fonction:S.fonction,
+    email:S.email,whatsapp:S.whatsapp||null,
+    source:S.source||null,challenge:S.challenge||null
+  };
+  try{
+    const r=await fetch(`${SUPABASE_URL}/rest/v1/ori7on_diagnostic_leads`,{
+      method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`,'Prefer':'return=minimal'},
+      body:JSON.stringify(payload)
+    });
+    if(!r.ok)console.error('Supabase error:',r.status,await r.text());
+  }catch(e){console.error('Supabase fetch error:',e)}
+  goTo(9);
+}
+
+function render(){
+  const c=el();if(!c)return;
+  c.style.transition='opacity .2s ease';
+  switch(S.step){
+    case 0:c.innerHTML=`<div style="text-align:center;padding:20px 0"><div class="tag">DIAGNOSTIC</div><h1 style="font-size:28px;margin-bottom:14px">Où en est votre entreprise avec l'IA ?</h1><div class="divider"></div><p style="color:#343e3a;font-size:16px;line-height:1.6;max-width:440px;margin:0 auto 10px">6 questions. 2 minutes. Découvrez les leviers concrets que l'intelligence artificielle peut activer dans votre entreprise.</p><p class="muted" style="margin-bottom:28px">Pas de jargon technique. Des résultats adaptés à votre secteur et à votre réalité.</p><button class="pbtn" onclick="goTo(1)">Commencer le diagnostic <span style="margin-left:8px;font-size:17px">→</span></button></div>`;break;
+    case 1:c.innerHTML=singleQ(1,"Quel est votre secteur d'activité ?",SECTORS,"sector",false);break;
+    case 2:c.innerHTML=singleQ(2,"Quelle est la taille de votre équipe ?",SIZES,"size",false);break;
+    case 3:c.innerHTML=tasksQ();break;
+    case 4:c.innerHTML=toolsQ();break;
+    case 5:c.innerHTML=singleQ(5,"Avez-vous déjà perdu un client ou une opportunité par oubli ou retard de relance ?",LOST_OPTS,"lostClient",false);break;
+    case 6:c.innerHTML=singleQ(6,"Qu'est-ce qui vous freine le plus aujourd'hui ?",BLOCKERS,"blocker",true);break;
+    case 7:c.innerHTML=analysisScreen();break;
+    case 8:c.innerHTML=resultScreen();break;
+    case 9:c.innerHTML=confirmScreen();break;
+  }
+}
 </script>
 </body>
 </html>

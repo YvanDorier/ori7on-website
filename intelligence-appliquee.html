@@ -1163,24 +1163,24 @@ footer {
 }
 
 /* ─── CARROUSEL RÉFÉRENCES (IA) ─── */
-.cas { background: var(--green-deep); }
-.cas h2 { color: var(--cream); font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 2.8vw, 2.4rem); font-weight: 300; line-height: 1.2; margin-bottom: 48px; }
-.cas h2 em { font-style: italic; color: var(--gold); }
-.cas .section-label { color: rgba(206,158,94,0.7); }
+.cas { background: var(--page-bg); }
+.cas h2 { color: var(--text); font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 2.8vw, 2.4rem); font-weight: 300; line-height: 1.2; margin-bottom: 48px; }
+.cas h2 em { font-style: italic; color: var(--teal); }
+.cas .section-label { color: var(--teal); }
 .cas-carousel { position: relative; overflow: hidden; padding: 32px 0 48px; }
 .cas-track { display: flex; align-items: flex-start; will-change: transform; transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
-.cas-card { flex: 0 0 min(520px, 72vw); margin: 0 14px; background: var(--cream); border-radius: 2px; padding: 28px; position: relative; transform: scale(0.92); opacity: 0.5; filter: blur(0.5px); transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.cas-card { flex: 0 0 min(520px, 72vw); margin: 0 14px; background: var(--cream); border-radius: 2px; padding: 28px; position: relative; transform: scale(0.92); opacity: 0.5; filter: blur(0.5px); transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
 .cas-card.active { transform: scale(1); opacity: 1; filter: blur(0); }
-.cas-card.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
-.cas-sector { font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.cas-card.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--teal); }
+.cas-sector { font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
 .cas-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--green); margin-bottom: 12px; line-height: 1.3; }
-.cas-card .mission { font-size: 0.88rem; line-height: 1.75; color: var(--ink-muted); margin-bottom: 16px; }
-.cas-result { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); padding-top: 16px; border-top: 1px solid var(--cream-dark); }
+.cas-card .mission { font-size: 0.88rem; line-height: 1.75; color: var(--text-mid); margin-bottom: 16px; }
+.cas-result { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--teal-dark); padding-top: 16px; border-top: 1px solid var(--card-border); }
 .cas-dots { text-align: center; margin-top: 24px; }
-.cas-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(206,158,94,0.25); border: none; margin: 0 6px; cursor: pointer; transition: background 0.3s, transform 0.3s; padding: 0; }
-.cas-dot.active { background: var(--gold); transform: scale(1.4); }
-.cas-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(206,158,94,0.3); background: rgba(0,30,15,0.6); color: var(--gold); font-size: 1.5rem; cursor: pointer; z-index: 10; transition: background 0.3s, border-color 0.3s; backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; }
-.cas-arrow:hover { background: rgba(0,30,15,0.85); border-color: var(--gold); }
+.cas-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,166,166,0.25); border: none; margin: 0 6px; cursor: pointer; transition: background 0.3s, transform 0.3s; padding: 0; }
+.cas-dot.active { background: var(--teal); transform: scale(1.4); }
+.cas-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(0,166,166,0.3); background: rgba(0,166,166,0.08); color: var(--teal); font-size: 1.5rem; cursor: pointer; z-index: 10; transition: background 0.3s, border-color 0.3s; backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; }
+.cas-arrow:hover { background: rgba(0,166,166,0.15); border-color: var(--teal); }
 .cas-arrow--prev { left: 24px; }
 .cas-arrow--next { right: 24px; }
 @media (max-width: 900px) {

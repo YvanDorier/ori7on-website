@@ -61,7 +61,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 22px 48px;
-  background: rgba(247,242,234,0.93);
+  background: rgba(248,249,250,0.93);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,166,166,0.1);
   animation: fadeDown 0.8s ease both;
@@ -1163,13 +1163,13 @@ footer {
 }
 
 /* ─── CARROUSEL RÉFÉRENCES (IA) ─── */
-.cas { background: var(--page-bg); }
+.cas { background: var(--white); padding: 88px 80px 0; }
 .cas h2 { color: var(--text); font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 2.8vw, 2.4rem); font-weight: 300; line-height: 1.2; margin-bottom: 48px; }
 .cas h2 em { font-style: italic; color: var(--teal); }
 .cas .section-label { color: var(--teal); }
-.cas-carousel { position: relative; overflow: hidden; padding: 32px 0 48px; }
+.cas-carousel { position: relative; overflow: hidden; padding: 32px 0 48px; margin: 0 -80px; }
 .cas-track { display: flex; align-items: flex-start; will-change: transform; transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
-.cas-card { flex: 0 0 min(520px, 72vw); margin: 0 14px; background: var(--cream); border-radius: 2px; padding: 28px; position: relative; transform: scale(0.92); opacity: 0.5; filter: blur(0.5px); transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.cas-card { flex: 0 0 min(520px, 72vw); margin: 0 14px; background: var(--page-bg); border-radius: 2px; padding: 28px; position: relative; transform: scale(0.92); opacity: 0.5; filter: blur(0.5px); transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
 .cas-card.active { transform: scale(1); opacity: 1; filter: blur(0); }
 .cas-card.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--teal); }
 .cas-sector { font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
@@ -1184,6 +1184,8 @@ footer {
 .cas-arrow--prev { left: 24px; }
 .cas-arrow--next { right: 24px; }
 @media (max-width: 900px) {
+  .cas { padding: 56px 24px 0; }
+  .cas-carousel { margin: 0 -24px; }
   .cas-card { flex: 0 0 85vw; margin: 0 8px; padding: 22px; }
   .cas-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
   .cas-arrow--prev { left: 8px; }

@@ -166,8 +166,8 @@ nav {
 .hero-conseil-left {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 80px 64px 80px 80px;
+  justify-content: flex-start;
+  padding: 120px 64px 80px 80px;
   background: var(--cream);
   position: relative;
 }
@@ -206,22 +206,22 @@ nav {
 
 .hero-eyebrow {
   font-family: 'Jost', sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   font-weight: 400;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   animation: fadeUp 0.8s 0.2s ease both;
 }
 
 .hero-eyebrow::before {
   content: '';
   display: inline-block;
-  width: 32px;
+  width: 22px;
   height: 1px;
   background: var(--gold);
 }
@@ -229,12 +229,12 @@ nav {
 /* Word-by-word hero title */
 .hero-title-conseil {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 4vw, 4.6rem);
+  font-size: clamp(2.4rem, 4vw, 4.4rem);
   font-weight: 300;
-  line-height: 1.1;
+  line-height: 1.08;
   color: var(--green);
   max-width: 620px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   overflow: hidden;
 }
 
@@ -260,7 +260,7 @@ nav {
   width: 0;
   height: 2px;
   background: var(--gold);
-  margin-bottom: 36px;
+  margin-bottom: 20px;
   animation: lineGrow 0.8s 1.4s ease forwards;
 }
 
@@ -272,10 +272,10 @@ nav {
   font-family: 'Jost', sans-serif;
   font-size: 1.15rem;
   font-weight: 300;
-  line-height: 1.75;
+  line-height: 1.85;
   color: var(--ink-mid);
   max-width: 480px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   animation: fadeUp 0.8s 1.2s ease both;
 }
 
@@ -927,6 +927,34 @@ footer {
   }
   .lang-switch { margin-right: 8px; }
 }
+
+/* ─── CARROUSEL RÉFÉRENCES (Conseil) ─── */
+.cas { background: var(--green-deep); }
+.cas h2 { color: var(--cream); font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 2.8vw, 2.4rem); font-weight: 300; line-height: 1.2; margin-bottom: 48px; }
+.cas h2 em { font-style: italic; color: var(--gold); }
+.cas .section-label { color: rgba(206,158,94,0.7); }
+.cas-carousel { position: relative; overflow: hidden; padding: 32px 0 48px; }
+.cas-track { display: flex; align-items: flex-start; will-change: transform; transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.cas-card { flex: 0 0 min(520px, 72vw); margin: 0 14px; background: var(--cream); border-radius: 2px; padding: 28px; position: relative; transform: scale(0.92); opacity: 0.5; filter: blur(0.5px); transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.cas-card.active { transform: scale(1); opacity: 1; filter: blur(0); }
+.cas-card.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+.cas-sector { font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.cas-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--green); margin-bottom: 12px; line-height: 1.3; }
+.cas-card .mission { font-size: 0.88rem; line-height: 1.75; color: var(--ink-muted); margin-bottom: 16px; }
+.cas-result { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); padding-top: 16px; border-top: 1px solid var(--cream-dark); }
+.cas-dots { text-align: center; margin-top: 24px; }
+.cas-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(206,158,94,0.25); border: none; margin: 0 6px; cursor: pointer; transition: background 0.3s, transform 0.3s; padding: 0; }
+.cas-dot.active { background: var(--gold); transform: scale(1.4); }
+.cas-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(206,158,94,0.3); background: rgba(0,30,15,0.6); color: var(--gold); font-size: 1.5rem; cursor: pointer; z-index: 10; transition: background 0.3s, border-color 0.3s; backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; }
+.cas-arrow:hover { background: rgba(0,30,15,0.85); border-color: var(--gold); }
+.cas-arrow--prev { left: 24px; }
+.cas-arrow--next { right: 24px; }
+@media (max-width: 900px) {
+  .cas-card { flex: 0 0 85vw; margin: 0 8px; padding: 22px; }
+  .cas-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+  .cas-arrow--prev { left: 8px; }
+  .cas-arrow--next { right: 8px; }
+}
 </style>
 
 <!-- Privacy-friendly analytics by Plausible -->
@@ -1193,6 +1221,84 @@ footer {
   </div>
 </section>
 
+<!-- RÉFÉRENCES -->
+<section class="cas" id="references">
+  <div class="section-label reveal" data-i18n="cref-label">Références</div>
+  <h2 class="reveal" data-i18n-html="cref-heading">Des missions concrètes.<br><em>Des résultats nommés.</em></h2>
+  <div class="cas-carousel" id="cref-carousel">
+    <div class="cas-track" id="cref-track">
+
+      <div class="cas-card active">
+        <div class="cas-sector" data-i18n="cref-1-sector">FMCG · Afrique &amp; international</div>
+        <h3 data-i18n="cref-1-title">Diagnostic stratégique et plan de retour à la croissance d'une marque présente dans 34 pays</h3>
+        <p class="mission" data-i18n="cref-1-mission">Co-construction avec le CEO d'un diagnostic complet : identification de trois leviers de rentabilité, redéfinition du mix produit, résolution des problèmes de pricing et de marges distributeurs.</p>
+        <div class="cas-result" data-i18n="cref-1-result">11% de croissance l'année suivante.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cref-2-sector">Agro-industrie · Ghana / Afrique de l'Ouest</div>
+        <h3 data-i18n="cref-2-title">Relance commerciale d'un groupe en restructuration</h3>
+        <p class="mission" data-i18n="cref-2-mission">Remise en production d'une exploitation agricole irriguée (de 60 à 300 hectares). Relance complète d'une marque consommateur : repositionnement, nouveau branding, refonte du packaging, plan de distribution.</p>
+        <div class="cas-result" data-i18n="cref-2-result">Meilleur résultat opérationnel en 5 ans.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cref-3-sector">Agro-industrie · Côte d'Ivoire · 500M€ de CA</div>
+        <h3 data-i18n="cref-3-title">Mise en place d'une trésorerie haute fréquence</h3>
+        <p class="mission" data-i18n="cref-3-mission">Structuration des procédures de paiement pour 2,5M€/jour en période haute, 60 émissions quotidiennes. Procédures de contrôle et de sécurisation des flux.</p>
+        <div class="cas-result" data-i18n="cref-3-result">2,5M€/jour gérés, 60 émissions quotidiennes.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cref-4-sector">Agro-industrie · Côte d'Ivoire</div>
+        <h3 data-i18n="cref-4-title">Stratégie de réduction d'impact des contrôles fiscaux, douaniers et de change</h3>
+        <p class="mission" data-i18n="cref-4-mission">Élaboration et mise en œuvre de stratégies de préparation et de défense face aux contrôles sur 6 ans.</p>
+        <div class="cas-result" data-i18n="cref-4-result">90% de réduction d'impact. 15M€ de crédit TVA récupéré à 99%.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cref-5-sector">Agro-industrie · Côte d'Ivoire</div>
+        <h3 data-i18n="cref-5-title">Mise en place du suivi et de la comptabilisation des pertes en process industriel</h3>
+        <p class="mission" data-i18n="cref-5-mission">Systèmes d'enregistrement, de comptabilisation et de reporting des pertes en cours de transformation. Réduction et monitoring des déchets en usines.</p>
+        <div class="cas-result" data-i18n="cref-5-result">3% d'économies sur les coûts sous marge brute.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cref-6-sector">Agro-industrie · Afrique de l'Ouest</div>
+        <h3 data-i18n="cref-6-title">Restructuration financière d'un groupe surendetté</h3>
+        <p class="mission" data-i18n="cref-6-mission">Groupe de 17 entités dans 9 pays. Négociation avec les prêteurs. Définition et mise en œuvre du plan de restructuration financière. Cessation des activités déficitaires.</p>
+        <div class="cas-result" data-i18n="cref-6-result">Retour au meilleur résultat opérationnel en 5 ans.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cref-7-sector">Mines · Afrique de l'Est</div>
+        <h3 data-i18n="cref-7-title">Création d'une entité opérationnelle à partir de zéro</h3>
+        <p class="mission" data-i18n="cref-7-mission">Structure juridique, droit du travail, contrats, paie. Recrutement de 300 personnes en 3 jours. Organisation logistique pour 50 expatriés. Importation d'équipements lourds par voie maritime et lacustre.</p>
+        <div class="cas-result" data-i18n="cref-7-result">300 personnes recrutées et opérationnelles en 3 jours.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cref-8-sector">Agro-industrie · Côte d'Ivoire</div>
+        <h3 data-i18n="cref-8-title">Implémentation ERP sur un périmètre multi-sites en contexte de crise</h3>
+        <p class="mission" data-i18n="cref-8-mission">Déploiement SAP sur 6 sites et 3 entités juridiques. Go-live maintenu malgré une situation politique et sécuritaire dégradée. Double calendrier comptable opérationnel dès le premier mois.</p>
+        <div class="cas-result" data-i18n="cref-8-result">Go-live maintenu en contexte de crise politique.</div>
+      </div>
+
+      <div class="cas-card">
+        <div class="cas-sector" data-i18n="cref-9-sector">Zone industrielle · Côte d'Ivoire</div>
+        <h3 data-i18n="cref-9-title">Déblocage institutionnel et relance d'une concession PPP</h3>
+        <p class="mission" data-i18n="cref-9-mission">Obtention du titre foncier, du budget infrastructures, de l'entrée de l'État au capital. Développement de partenariats avec les chambres de commerce, le CEPICI et les ambassades. Sourcing de plus de 50 hectares de prospects.</p>
+        <div class="cas-result" data-i18n="cref-9-result">Crédibilité reconstruite auprès des ministères et des investisseurs étrangers.</div>
+      </div>
+
+
+    </div>
+    <button class="cas-arrow cas-arrow--prev" aria-label="Précédent">&#8249;</button>
+    <button class="cas-arrow cas-arrow--next" aria-label="Suivant">&#8250;</button>
+    <div class="cas-dots" id="cref-dots"></div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-conseil" id="contact">
   <h2 class="reveal" data-i18n-html="cta-heading">Prêt à avoir une conversation<br><em>qui compte ?</em></h2>
@@ -1289,6 +1395,44 @@ const T = {
     'diff-heading': 'Le sénior que vous rencontrez est le même qui travaille sur votre dossier.',
     'diff-text': 'Chez ORI7ON, il n\'y a pas de junior qui fait le travail pendant que le partner fait le pitch. Pas de consultant sorti d\'école envoyé sur le terrain. Le conseil que vous achetez, c\'est 20 ans de direction d\'entreprise en Afrique, appliqués directement à votre situation. Ce n\'est pas un modèle scalable. C\'est un choix. Le conseil de précision, c\'est exactement ça.',
     'diff-stat': 'Ans de direction<br>d\'entreprise en<br>Afrique',
+    'cref-label': 'Références',
+    'cref-heading': 'Des missions concrètes.<br><em>Des résultats nommés.</em>',
+    'cref-1-sector': 'FMCG · Afrique & international',
+    'cref-1-title': "Diagnostic stratégique et plan de retour à la croissance d'une marque présente dans 34 pays",
+    'cref-1-mission': "Co-construction avec le CEO d'un diagnostic complet : identification de trois leviers de rentabilité, redéfinition du mix produit, résolution des problèmes de pricing et de marges distributeurs.",
+    'cref-1-result': "11% de croissance l'année suivante.",
+    'cref-2-sector': "Agro-industrie · Ghana / Afrique de l'Ouest",
+    'cref-2-title': "Relance commerciale d'un groupe en restructuration",
+    'cref-2-mission': "Remise en production d'une exploitation agricole irriguée (de 60 à 300 hectares). Relance complète d'une marque consommateur : repositionnement, nouveau branding, refonte du packaging, plan de distribution.",
+    'cref-2-result': "Meilleur résultat opérationnel en 5 ans.",
+    'cref-3-sector': "Agro-industrie · Côte d'Ivoire · 500M€ de CA",
+    'cref-3-title': "Mise en place d'une trésorerie haute fréquence",
+    'cref-3-mission': "Structuration des procédures de paiement pour 2,5M€/jour en période haute, 60 émissions quotidiennes. Procédures de contrôle et de sécurisation des flux.",
+    'cref-3-result': "2,5M€/jour gérés, 60 émissions quotidiennes.",
+    'cref-4-sector': "Agro-industrie · Côte d'Ivoire",
+    'cref-4-title': "Stratégie de réduction d'impact des contrôles fiscaux, douaniers et de change",
+    'cref-4-mission': "Élaboration et mise en œuvre de stratégies de préparation et de défense face aux contrôles sur 6 ans.",
+    'cref-4-result': "90% de réduction d'impact. 15M€ de crédit TVA récupéré à 99%.",
+    'cref-5-sector': "Agro-industrie · Côte d'Ivoire",
+    'cref-5-title': "Mise en place du suivi et de la comptabilisation des pertes en process industriel",
+    'cref-5-mission': "Systèmes d'enregistrement, de comptabilisation et de reporting des pertes en cours de transformation. Réduction et monitoring des déchets en usines.",
+    'cref-5-result': "3% d'économies sur les coûts sous marge brute.",
+    'cref-6-sector': "Agro-industrie · Afrique de l'Ouest",
+    'cref-6-title': "Restructuration financière d'un groupe surendetté",
+    'cref-6-mission': "Groupe de 17 entités dans 9 pays. Négociation avec les prêteurs. Définition et mise en œuvre du plan de restructuration financière. Cessation des activités déficitaires.",
+    'cref-6-result': "Retour au meilleur résultat opérationnel en 5 ans.",
+    'cref-7-sector': "Mines · Afrique de l'Est",
+    'cref-7-title': "Création d'une entité opérationnelle à partir de zéro",
+    'cref-7-mission': "Structure juridique, droit du travail, contrats, paie. Recrutement de 300 personnes en 3 jours. Organisation logistique pour 50 expatriés. Importation d'équipements lourds par voie maritime et lacustre.",
+    'cref-7-result': "300 personnes recrutées et opérationnelles en 3 jours.",
+    'cref-8-sector': "Agro-industrie · Côte d'Ivoire",
+    'cref-8-title': "Implémentation ERP sur un périmètre multi-sites en contexte de crise",
+    'cref-8-mission': "Déploiement SAP sur 6 sites et 3 entités juridiques. Go-live maintenu malgré une situation politique et sécuritaire dégradée. Double calendrier comptable opérationnel dès le premier mois.",
+    'cref-8-result': "Go-live maintenu en contexte de crise politique.",
+    'cref-9-sector': "Zone industrielle · Côte d'Ivoire",
+    'cref-9-title': "Déblocage institutionnel et relance d'une concession PPP",
+    'cref-9-mission': "Obtention du titre foncier, du budget infrastructures, de l'entrée de l'État au capital. Développement de partenariats avec les chambres de commerce, le CEPICI et les ambassades. Sourcing de plus de 50 hectares de prospects.",
+    'cref-9-result': "Crédibilité reconstruite auprès des ministères et des investisseurs étrangers.",
     'cta-heading': 'Prêt à avoir une conversation<br><em>qui compte ?</em>',
     'cta-text': 'Premier échange de 30 minutes. Pour comprendre votre situation et voir si nous pouvons avancer ensemble.',
     'cta-button': 'Parlons-nous',
@@ -1372,6 +1516,44 @@ const T = {
     'diff-heading': 'The senior you meet is the same one working on your file.',
     'diff-text': 'At ORI7ON, there is no junior doing the work while the partner gives the pitch. No fresh-out-of-school consultant sent into the field. The advice you\'re buying is 20 years of running businesses in Africa, applied directly to your situation. This is not a scalable model. It\'s a choice. Precision consulting is exactly that.',
     'diff-stat': 'Years running<br>businesses in<br>Africa',
+    'cref-label': 'References',
+    'cref-heading': 'Concrete engagements.<br><em>Named results.</em>',
+    'cref-1-sector': 'FMCG · Africa & International',
+    'cref-1-title': 'Strategic diagnostic and growth recovery plan for a brand present in 34 countries',
+    'cref-1-mission': 'Co-construction with the CEO of a full diagnostic: identification of three profitability levers, product mix redefinition, resolution of pricing and distributor margin issues.',
+    'cref-1-result': '11% growth the following year.',
+    'cref-2-sector': 'Agro-industry · Ghana / West Africa',
+    'cref-2-title': 'Commercial relaunch of a group in restructuring',
+    'cref-2-mission': 'Restarting an irrigated agricultural operation (from 60 to 300 hectares). Full relaunch of a consumer brand: repositioning, new branding, packaging redesign, distribution plan.',
+    'cref-2-result': 'Best operating result in 5 years.',
+    'cref-3-sector': "Agro-industry · Côte d'Ivoire · €500M revenue",
+    'cref-3-title': 'High-frequency treasury implementation',
+    'cref-3-mission': 'Structuring payment procedures for €2.5M/day at peak, 60 daily transactions. Control and flow security procedures.',
+    'cref-3-result': '€2.5M/day managed, 60 daily transactions.',
+    'cref-4-sector': "Agro-industry · Côte d'Ivoire",
+    'cref-4-title': 'Impact reduction strategy for tax, customs and currency controls',
+    'cref-4-mission': 'Development and implementation of preparation and defense strategies against audits over 6 years.',
+    'cref-4-result': '90% impact reduction. €15M VAT credit recovered at 99%.',
+    'cref-5-sector': "Agro-industry · Côte d'Ivoire",
+    'cref-5-title': 'Tracking and accounting of industrial process losses',
+    'cref-5-mission': 'Systems for recording, accounting and reporting losses during transformation. Reduction and monitoring of plant waste.',
+    'cref-5-result': '3% savings on below-gross-margin costs.',
+    'cref-6-sector': 'Agro-industry · West Africa',
+    'cref-6-title': 'Financial restructuring of an over-indebted group',
+    'cref-6-mission': 'Group of 17 entities across 9 countries. Lender negotiations. Definition and implementation of the financial restructuring plan. Closure of loss-making operations.',
+    'cref-6-result': 'Best operating result in 5 years.',
+    'cref-7-sector': 'Mining · East Africa',
+    'cref-7-title': 'Creating an operational entity from scratch',
+    'cref-7-mission': 'Legal structure, labor law, contracts, payroll. Recruitment of 300 people in 3 days. Logistics organization for 50 expatriates. Import of heavy equipment by sea and lake.',
+    'cref-7-result': '300 people recruited and operational in 3 days.',
+    'cref-8-sector': "Agro-industry · Côte d'Ivoire",
+    'cref-8-title': 'ERP implementation across multi-site scope in crisis context',
+    'cref-8-mission': 'SAP deployment across 6 sites and 3 legal entities. Go-live maintained despite deteriorating political and security situation. Dual accounting calendar operational from month one.',
+    'cref-8-result': 'Go-live maintained in political crisis context.',
+    'cref-9-sector': "Industrial zone · Côte d'Ivoire",
+    'cref-9-title': 'Institutional unblocking and relaunch of a PPP concession',
+    'cref-9-mission': 'Obtaining land title, infrastructure budget, and state equity stake. Development of partnerships with chambers of commerce, CEPICI and embassies. Sourcing over 50 hectares of prospects.',
+    'cref-9-result': 'Credibility rebuilt with ministries and foreign investors.',
     'cta-heading': 'Ready for a conversation<br><em>that matters?</em>',
     'cta-text': '30-minute first call. To understand your situation and see if we can move forward together.',
     'cta-button': 'Let\'s talk',
@@ -1510,6 +1692,89 @@ function setLang(l) {
 
 // ── Init language from localStorage ──
 setLang(localStorage.getItem('ori7on_lang') || 'fr');
+
+// ── Carrousel Références ──
+(function() {
+  var track = document.getElementById('cref-track');
+  if (!track) return;
+  var carousel = track.parentElement;
+  var origCards = [].slice.call(track.children);
+  var n = origCards.length;
+  var dots = document.getElementById('cref-dots');
+  var prevBtn = carousel.querySelector('.cas-arrow--prev');
+  var nextBtn = carousel.querySelector('.cas-arrow--next');
+  var current = 0;
+  var autoTimer;
+  var isTransitioning = false;
+
+  origCards.forEach(function(card) {
+    var cl = card.cloneNode(true);
+    cl.classList.add('cas-clone');
+    cl.querySelectorAll('[data-i18n]').forEach(function(e) { e.removeAttribute('data-i18n'); });
+    cl.querySelectorAll('[data-i18n-html]').forEach(function(e) { e.removeAttribute('data-i18n-html'); });
+    track.appendChild(cl);
+  });
+  for (var i = origCards.length - 1; i >= 0; i--) {
+    var cl = origCards[i].cloneNode(true);
+    cl.classList.add('cas-clone');
+    cl.querySelectorAll('[data-i18n]').forEach(function(e) { e.removeAttribute('data-i18n'); });
+    cl.querySelectorAll('[data-i18n-html]').forEach(function(e) { e.removeAttribute('data-i18n-html'); });
+    track.insertBefore(cl, track.firstChild);
+  }
+
+  var allCards = [].slice.call(track.children);
+  var base = n;
+
+  origCards.forEach(function(_, i) {
+    var d = document.createElement('button');
+    d.className = 'cas-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Référence ' + (i + 1));
+    d.onclick = function() { snapTo(i); resetAuto(); };
+    dots.appendChild(d);
+  });
+
+  function positionAt(idx, animate) {
+    var card = allCards[idx];
+    var cw = carousel.offsetWidth;
+    var cardW = card.offsetWidth;
+    var pos = card.offsetLeft - (cw - cardW) / 2;
+    if (!animate) { track.style.transition = 'none'; }
+    track.style.transform = 'translateX(-' + pos + 'px)';
+    if (!animate) { track.offsetHeight; track.style.transition = ''; }
+    allCards.forEach(function(c) { c.classList.remove('active'); });
+    card.classList.add('active');
+  }
+
+  function updateDots() {
+    dots.querySelectorAll('.cas-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function snapTo(idx) { current = ((idx % n) + n) % n; positionAt(base + current, true); updateDots(); }
+  function next() { var t = base + current + 1; isTransitioning = true; positionAt(t, true); current = (current + 1) % n; updateDots(); }
+  function prev() { var t = base + current - 1; isTransitioning = true; positionAt(t, true); current = ((current - 1) + n) % n; updateDots(); }
+
+  track.addEventListener('transitionend', function(e) {
+    if (e.target !== track) return;
+    if (isTransitioning) { isTransitioning = false; positionAt(base + current, false); }
+  });
+
+  function startAuto() { clearInterval(autoTimer); autoTimer = setInterval(next, 10000); }
+  function stopAuto() { clearInterval(autoTimer); }
+  function resetAuto() { stopAuto(); startAuto(); }
+
+  prevBtn.onclick = function() { prev(); resetAuto(); };
+  nextBtn.onclick = function() { next(); resetAuto(); };
+
+  positionAt(base + 0, false);
+  startAuto();
+
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('touchstart', stopAuto, { passive: true });
+  carousel.addEventListener('touchend', resetAuto, { passive: true });
+})();
 </script>
 </body>
 </html>

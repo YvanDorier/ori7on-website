@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "ori7on-website.vercel.app"
+        }
+      ],
+      "destination": "https://www.ori7on.com/:path*",
+      "permanent": true
+    }
+  ]
+}

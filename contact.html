@@ -6,6 +6,18 @@
 <title data-i18n-title-fr="Parlons-nous - ORI7ON Advisory" data-i18n-title-en="Let's Talk - ORI7ON Advisory">Parlons-nous - ORI7ON Advisory</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* Anti-selection & anti-copy */
+*, *::before, *::after {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
 :root {
   --green: #343e3a;
   --green-deep: #002d1a;
@@ -688,7 +700,7 @@ body.ff .fw.fc    { opacity: 1 !important; }
 </script>
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
-<body>
+<body oncontextmenu="return false" oncopy="return false" ondragstart="return false">
 
 <!-- NAV -->
 <nav id="main-nav">

@@ -6,6 +6,18 @@
 <title>Qui sommes-nous - ORI7ON Advisory</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
+/* Anti-selection & anti-copy */
+*, *::before, *::after {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
 
@@ -305,7 +317,7 @@ body { font-family: var(--font-sans); background: var(--cream); color: var(--gre
 </style>
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
-<body>
+<body oncontextmenu="return false" oncopy="return false" ondragstart="return false">
 
 <!-- NAV -->
 <nav class="nav">
